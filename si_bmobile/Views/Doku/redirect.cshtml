@@ -1,0 +1,467 @@
+﻿@model bemobile.Models.DokuRDModel
+@{
+    ViewBag.Title = "Transaction Status";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+
+<div class="mid_margin">
+
+    <iframe id="ifrmPrint" src="" style="width: 0px; height: 0px;"></iframe>
+    @if (Model == null)
+    {
+        <div style="@ViewBag.dFail">
+            <h2>Sorry,</h2>
+            <div style="font-size: 25px;">
+                <img src="~/images/Close-2-icon.png" />&nbsp;
+                Your Transaction has Cancelled!
+            </div>
+            <div style="margin-top: 10px; font-size: 15px; padding-left: 70px; margin-bottom: 10px;">
+                <div>Please Contact Customer Care: 1555 </div>
+                <div><span>Click&nbsp;@Html.ActionLink("here", "RefreshACC", "Care")&nbsp;to go to Account Summary</span></div>
+            </div>
+        </div>
+    }
+    else
+    {
+        if (Model.dkuCare != null)
+        {
+        <div style="@ViewBag.dSuccess">
+
+            <div id="divOrderSummary">
+                <div style="float: left; width: 800px;">
+                    <div>
+                        <br />
+                        <strong>bmobile Limited</strong><br />
+                        <strong>PO Box 1055,</strong><br />
+                        <strong>Waigani</strong><br />
+                        <strong>National Capital District 131</strong><br />
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div style="float: left; width: 800px;">&nbsp</div>
+                <div style="float: left; font-size: 18px; font-weight: bold; padding-bottom: 10px; width: 800px;">
+                    <img src="~/images/Ok-icon.png" title="Process done" />
+                    THANK YOU FOR YOUR PAYMENT
+                </div>
+                <div style="clear: both;"></div>
+
+                <div style="float: left; font-size: 14px; width: 200px; font-weight: bold; padding-bottom: 10px;">
+                    YOUR TRANSACTION NO :
+                </div>
+                <div style="float: left; font-size: 14px; width: 200px; font-weight: bold; text-align: left;">
+                    @Html.DisplayFor(t => t.dkuCare.doku.transidmerchant)
+                </div>
+                <div style="clear: both;"></div>
+                <div style="float: left; font-size: 12px; width: 200px; text-align: left;">
+                    Payment date :
+                </div>
+                <div style="float: left; font-size: 12px; width: 200px; text-align: left;">
+                    @Html.DisplayFor(t => t.dkuCare.order.order_datetime)
+                </div>
+                <div style="clear: both;"></div>
+
+
+                @if (Model.dkuCare.orderitems.Count > 0)
+                {
+                    string sTokenNumber = Model.dkuCare.orderpayment.payment_receipt_no;
+                    decimal dtotal = 0;
+                    int sno = 0;
+                    long qty = 0;
+                    string tot_qty = "";
+                    for (int i = 0; i < Model.dkuCare.orderitems.Count; i++)
+                    {
+                        string description = "";
+
+                        if (i == 0)
+                        {
+                             
+                    <div style="border: solid 1px #808080; width: 800px;">
+                        <div style="float: left; width: 35px; font-size: 13px; font-weight: bold; text-align: left; padding: 5px;">
+                            SNO
+                        </div>
+                        <div style="float: left; width: 250px; font-size: 13px; font-weight: bold; text-align: center; padding: 5px;">
+                            Description
+                        </div>
+
+                        @if (Model.dkuCare.orderitems[i].purchase_desc == "GETPOWER")
+                        {
+                            <div style="float: left; width: 100px; font-size: 13px; font-weight: bold; text-align: center; padding: 5px;">
+                                Units
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="float: left; width: 100px; font-size: 13px; font-weight: bold; text-align: center; padding: 5px;">
+                                Quantity
+                            </div>
+                        }
+                        <div style="float: left; width: 150px; font-size: 13px; font-weight: bold; text-align: right; padding: 5px;">
+                            Price
+                        </div>
+                        <div style="float: left; width: 150px; font-size: 13px; font-weight: bold; text-align: right; padding: 5px;">
+                            Total Price
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                    
+                        }
+
+                        long quantity = Model.dkuCare.orderitems[i].product_qty;
+                        string sUnits = "";
+
+                        //qty = 0;
+
+
+                        if (Model.dkuCare.orderitems[i].purchase_desc == "TOPUP")
+                        {
+                            description = "RECHARGE DONE FOR " + Model.dkuCare.order.purchase_msisdn;
+                        }
+                        else if (Model.dkuCare.orderitems[i].purchase_desc == "Postpaid_Pdf_bill")
+                        {
+                            description = "POSTPAID ACCOUNT FOR " + Model.dkuCare.order.purchase_msisdn;
+                        }
+                        else if (Model.dkuCare.orderitems[i].purchase_desc == "GETPOWER")
+                        {
+                            description = "Easypay for meter no: " + Model.dkuCare.orderitems[i].product_name;
+                            sUnits = Model.dkuCare.orderpayment.payment_response;
+                            tot_qty = "";
+                        }
+                        else if (Model.dkuCare.orderitems[i].purchase_desc == "BYP" || Model.dkuCare.orderitems[i].purchase_desc == "PROMOTION")
+                        {
+                            description = Model.dkuCare.orderitems[i].product_name;
+                        }
+                        else if (Model.dkuCare.orderitems[i].purchase_desc == "SHOP")
+                        {
+                            description = Model.dkuCare.orderitems[i].product_name;
+                        }
+                        sno = i + 1;
+                        decimal ind_product_price = (quantity * @Model.dkuCare.orderitems[i].product_price);
+                       
+                        
+                    <div style="float: left; width: 35px; font-size: 13px; text-align: center; padding: 5px;">
+                        @sno
+                    </div>
+                    <div style="float: left; width: 250px; font-size: 13px; text-align: center; padding: 5px;">
+                        @description
+                    </div>
+                        if (Model.dkuCare.orderitems[i].purchase_desc == "GETPOWER")
+                        {
+                    <div style="float: left; width: 100px; font-size: 13px; text-align: center; padding: 5px;">
+                        @sUnits
+                    </div>
+                        }
+                        else
+                        {
+                    <div style="float: left; width: 100px; font-size: 13px; text-align: center; padding: 5px;">
+                        @quantity
+                    </div>
+                        }
+                    <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px;">
+                        K @Model.dkuCare.orderitems[i].product_price.ToString("#0.00")
+                    </div>
+                    <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px;">
+                        K @ind_product_price.ToString("#0.00")
+                    </div>
+                    <div style="clear: both;"></div>
+                        qty = qty + quantity;
+                        dtotal = @Model.dkuCare.order.order_product_total;
+                        if (tot_qty != "")
+                            tot_qty = qty.ToString();
+                    }
+
+                    <div style="float: left; width: 35px; font-size: 13px; text-align: center; padding: 5px;">
+                        &nbsp;
+                    </div>
+                    <div style="float: left; width: 250px; font-size: 13px; text-align: center; padding: 5px;">
+                        &nbsp;
+                    </div>
+                    <div style="float: left; width: 100px; font-size: 13px; text-align: center; padding: 5px; border-top: 1px solid;">
+                        @tot_qty
+                    </div>
+                    <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px; border-top: 1px solid;">
+                        Total Price
+                    </div>
+                    <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px; border-top: 1px solid;">
+                        K @dtotal.ToString("#0.00")
+                    </div>
+                    <div style="clear: both;"></div>
+                    
+                    
+                }
+            </div>
+            @if (Model.dkuCare.orderitems[0].purchase_desc == "GETPOWER")
+            {
+                <div style="float: left; font-size: 14px; width: 300px; font-weight: bold; padding-bottom: 10px;">
+                    YOUR RECHARGE VOUCHER :
+                </div>
+                <div style="float: left; font-size: 14px; width: 200px; font-weight: bold; text-align: left;">
+                    @Html.DisplayFor(t => t.dkuCare.orderpayment.payment_receipt_no)
+                </div>
+                <div style="clear: both;"></div>
+                <div style="float: left; width: 800px;">
+                    <b>Note: </b>A copy of your recharge voucher has been sent to your registered email address.
+                </div>
+                <div style="clear: both;"></div>
+            }
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div style="width: 800px; text-align: center;">
+                <button id="btnPrint" class="btn btn-success"><i class="fa fa-print "></i>&nbsp;Print</button>
+                <a href="@Url.Action("RefreshACC", "Care")" class="btn btn-success">Back</a>
+            </div>
+        </div>
+            
+        <div style="@ViewBag.dFail">
+            <h2>Sorry,</h2>
+            <div style="font-size: 25px;">
+                <img src="~/images/Close-2-icon.png" />&nbsp;
+                Your Transaction has Failed!
+            </div>
+            <div style="margin-top: 10px; font-size: 15px; padding-left: 70px; margin-bottom: 10px;">
+                <div>Please Contact Customer Care: 1555 </div>
+                <div><span>Click&nbsp;@Html.ActionLink("here", "RefreshACC", "Care")&nbsp;to go to Account Summary</span></div>
+            </div>
+        </div>
+        
+        }
+        else if (Model.dkuShop != null)
+        {
+        <div style="@ViewBag.dSuccess" >
+            <div id="divShopOrderSummary" style="padding-left: 20px;">
+                <div style="float: left; width: 800px;">
+                    <br />
+                    <div style="float: left; width: 200px;">
+                        <div>
+                            <strong>bmobile Limited</strong><br />
+                            <strong>PO Box 1055,</strong><br />
+                            <strong>Waigani</strong><br />
+                            <strong>National Capital District 131</strong><br />
+                        </div>
+                    </div>
+                    <div style="float: right;">
+                        @if (Model.dkuShop.suser != null)
+                        {
+                            <div style="float: left; width: 275px;">
+                                <div style="margin-bottom: 05px;"><strong>CUSTOMER INFORMATION:</strong></div>
+                                <div><strong>@Model.dkuShop.suser.first_name&nbsp;@Model.dkuShop.suser.last_name</strong></div>
+                                <div>Email:&nbsp;@Model.dkuShop.suser.email</div>
+                                <div>Mobile:&nbsp;@Model.dkuShop.suser.mobile_number</div>
+                            </div>
+                            <div style="float: left;">
+                                <div style="margin-bottom: 05px;"><strong>SHIPPING INFORMATION:</strong></div>
+                                <div><strong>@Model.dkuShop.suser.first_name&nbsp;@Model.dkuShop.suser.last_name</strong></div>
+                                <div style="max-width: 250px; text-overflow: ellipsis; overflow: hidden;">@Model.dkuShop.suser.address1</div>
+                                <div style="max-width: 250px; text-overflow: ellipsis; overflow: hidden;">@Model.dkuShop.suser.address2</div>
+                                <div>@Model.dkuShop.suser.city&nbsp;-&nbsp;@Model.dkuShop.suser.postcode</div>
+                                <div>Phone:&nbsp;@Model.dkuShop.suser.phone_number</div>
+                                <div>@Model.dkuShop.suser.country</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div style="float: left; width: 800px;">&nbsp</div>
+
+                <div style="float: left; font-size: 18px; font-weight: bold; padding-bottom: 10px; width: 800px;">
+                    <img src="~/images/Ok-icon.png" title="Process done" />
+                    THANK YOU FOR YOUR PAYMENT
+                </div>
+                <div style="clear: both;"></div>
+
+                <div style="float: left; font-size: 14px; width: 200px; font-weight: bold; padding-bottom: 10px;">
+                    YOUR TRANSACTION NO :
+                </div>
+                <div style="float: left; font-size: 14px; width: 200px; font-weight: bold; text-align: left;">
+                    @Html.DisplayFor(t => t.dkuShop.sdoku.transidmerchant)
+                </div>
+                <div style="clear: both;"></div>
+                <div style="float: left; font-size: 12px; width: 200px; text-align: left;">
+                    Payment date :
+                </div>
+                <div style="float: left; font-size: 12px; width: 200px; text-align: left;">
+                    @Html.DisplayFor(t => t.dkuShop.sorder.order_datetime)
+                </div>
+                <div style="clear: both;"></div>
+
+
+                @if (Model.dkuShop.sorderitems.Count > 0)
+                {
+                    int sno = 0;
+                    decimal dtotal = 0;
+                    long qty = 0;
+                    for (int i = 0; i < Model.dkuShop.sorderitems.Count; i++)
+                    {
+
+                        if (i == 0)
+                        {
+                             
+                    <div style="border: solid 1px #808080; width: 800px;">
+                        <div style="float: left; width: 35px; font-size: 13px; font-weight: bold; text-align: left; padding: 5px;">
+                            SNO
+                        </div>
+                        <div style="float: left; width: 250px; font-size: 13px; font-weight: bold; text-align: center; padding: 5px;">
+                            Product Name
+                        </div>
+                        <div style="float: left; width: 100px; font-size: 13px; font-weight: bold; text-align: center; padding: 5px;">
+                            Quantity
+                        </div>
+                        <div style="float: left; width: 150px; font-size: 13px; font-weight: bold; text-align: right; padding: 5px;">
+                            Price
+                        </div>
+                        <div style="float: left; width: 150px; font-size: 13px; font-weight: bold; text-align: right; padding: 5px;">
+                            Total Price
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                        }
+
+                        long quantity = Model.dkuShop.sorderitems[i].product_qty;
+                        //qty = 0;
+                        sno = sno + 1;
+
+                        decimal ind_product_price = (quantity * @Model.dkuShop.sorderitems[i].product_price);
+                        
+                    <div style="float: left; width: 35px; font-size: 13px; text-align: center; padding: 5px;">
+                        @sno
+                    </div>
+                    <div style="float: left; width: 250px; font-size: 13px; text-align: center; padding: 5px;">
+                        @Model.dkuShop.sorderitems[i].product_name
+                    </div>
+                    <div style="float: left; width: 100px; font-size: 13px; text-align: center; padding: 5px;">
+                        @quantity
+                    </div>
+                    <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px;">
+                        K @Model.dkuShop.sorderitems[i].product_price
+                    </div>
+                    <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px;">
+                        K @ind_product_price
+                    </div>
+                    
+                        qty = qty + quantity;
+                        dtotal = @Model.dkuShop.sorder.order_product_total;
+                    
+                    <div style="clear: both;"></div>
+                    }
+                    
+                    <div>&nbsp;</div>
+                    <div style="float: left; width: 35px; font-size: 13px; text-align: center; padding: 5px;">
+                        &nbsp;
+                    </div>
+                    <div style="float: left; width: 250px; font-size: 13px; text-align: center; padding: 5px;">
+                        &nbsp;
+                    </div>
+                    <div style="float: left; width: 100px; font-size: 13px; text-align: center; padding: 5px; border-top: 1px solid;">
+                        @qty
+                    </div>
+                    <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px; border-top: 1px solid;">
+                        Total Price
+                    </div>
+                    <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px; border-top: 1px solid;">
+                        K @dtotal.ToString("#0.00")
+                    </div>
+                    <div style="clear: both;"></div>
+                    <div><b>Note:</b> An email will be sent outlining pickup details.</div>
+                    <div style="clear: both;"></div>
+
+                }
+            </div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div style="width: 800px; text-align: center;">
+                <button id="btnShopPrint" class="btn btn-success"><i class="fa fa-print "></i>&nbsp;Print</button>
+                <a href="@Url.Action("Products", "Shop")" class="btn btn-success">Back</a>
+            </div>
+
+        </div> 
+        
+        <div style="@ViewBag.dFail">
+            <h2>Sorry,</h2>
+            <div style="font-size: 25px;">
+                <img src="~/images/Close-2-icon.png" />&nbsp;
+                Your Transaction has Failed!
+            </div>
+            <div style="margin-top: 10px; font-size: 15px; padding-left: 70px; margin-bottom: 10px;">
+                <div>Please Contact Customer Care: 1555 </div>
+                <div><span>Click&nbsp;@Html.ActionLink("here", "Products", "Shop")&nbsp;to go to Account Summary</span></div>
+            </div>
+        </div>
+        
+        }
+        else
+        {
+                
+        <div style="@ViewBag.dFail">
+            <h2>Sorry,</h2>
+            <div style="font-size: 25px;">
+                <img src="~/images/Close-2-icon.png" />&nbsp;
+                Your Transaction has Failed!
+            </div>
+            <div style="margin-top: 10px; font-size: 15px; padding-left: 70px; margin-bottom: 10px;">
+                <div>Please Contact Customer Care: 1555 </div>
+
+                <div><span>Click&nbsp;@Html.ActionLink("here", "RefreshACC", "Care")&nbsp;to go to Account Summary</span></div>
+            </div>
+        </div>
+        }
+    }
+
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#btnPrint').click(function () {
+                try {
+                    var oIframe = $('#ifrmPrint')[0];
+                    var oContent = $('#divOrderSummary').html();
+
+
+                    var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
+                    if (oDoc.document) oDoc = oDoc.document;
+                    oDoc.write("<html><head>");
+                    oDoc.write("</head><body onload='this.focus(); this.print();'>");
+                    oDoc.write(oContent + "</body></html>");
+                    oDoc.close();
+                    var ua = $.browser;
+                    if (ua.mozilla) {
+                        alert('Printing in progress..');
+                    }
+
+
+                }
+                catch (e) {
+                    // self.print();
+                }
+            });
+
+            $('#btnShopPrint').click(function () {
+                try {
+                    var oIframe = $('#ifrmPrint')[0];
+                    var oContent = $('#divShopOrderSummary').html();
+
+
+                    var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
+                    if (oDoc.document) oDoc = oDoc.document;
+                    oDoc.write("<html><head>");
+                    oDoc.write("</head><body onload='this.focus(); this.print();'>");
+                    oDoc.write(oContent + "</body></html>");
+                    oDoc.close();
+                    var ua = $.browser;
+                    if (ua.mozilla) {
+                        alert('Printing in progress..');
+                    }
+
+
+                }
+                catch (e) {
+                    // self.print();
+                }
+            });
+        });
+    </script>
+
+}

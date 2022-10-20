@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Confirm Product";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+
+}
+<div class="abt-main">
+    <div class="prm-tab-panel">
+        @using (Html.BeginForm("ConfirmProduct", "Care", FormMethod.Post, new { id = "frmConfirmProduct", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="mid_margin">
+                <h2>Confirm Product</h2>
+                <p>
+                    Your&nbsp;@ViewBag.bdata&nbsp;was Successfully Purchased.
+                </p>
+                <p>
+                    Please Click&nbsp;@Html.ActionLink("here", "RefreshACC")&nbsp;to return to Account Summary.
+                </p>
+            </div>
+        }
+    </div>
+    @Html.Partial("_cms_RightNav_Menu")
+</div>

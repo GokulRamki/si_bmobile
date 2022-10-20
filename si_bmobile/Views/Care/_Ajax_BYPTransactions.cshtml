@@ -1,0 +1,94 @@
+﻿@using MvcPaging
+@model IPagedList<bemobile.Models.DokuCareModel>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+
+            <th>Name
+            </th>
+            <th>TransactionID
+            </th>
+            <th>Transaction&nbsp;Date
+            </th>
+            <th>Amount
+            </th>
+@*            <th>Mobile&nbsp;Number
+            </th>*@
+            <th>Status
+            </th>
+            <th>Paid&nbsp;Type
+            </th>
+            <th>Email
+            </th>
+
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.order.cust_fname&nbsp;@item.order.cust_lname
+                </td>
+                <td>
+                    @item.order.order_number
+                </td>
+                <td>
+                    @item.order.order_datetime
+                </td>
+                <td>
+                    @item.order.order_product_total
+                </td>
+@*                <td>
+                    @item.order.purchase_msisdn
+                </td>*@
+                <td>
+                    @item.orderpayment.payment_status
+
+                </td>
+                <td>
+                    @item.orderpayment.payment_type
+                </td>
+                <td>
+                    @item.order.cust_email
+                </td>
+            </tr>
+            }
+
+        }
+    </tbody>
+</table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Care", action = "BYPTransactions",transmerchantid=  ViewData["transmerchantid"],email= ViewData["email"],ddlDokuStatus=ViewData["ddlDokuStatus"],sFrom=ViewData["sFrom"],sTo=ViewData["sTo"]}))
+
+
+
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>
+

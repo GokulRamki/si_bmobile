@@ -1,0 +1,245 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.all_orders_model>
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";   
+}
+
+<div class="mid_margin">
+    <br />
+    <div>
+        <h1>Orders</h1>
+
+    </div>
+    <br />
+    <div class="myacc_pan">
+
+        @if (Model != null)
+        {
+            using (Ajax.BeginForm("MyOrders", "Shop",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmMyOrders" }))
+            {
+            @Html.AntiForgeryToken()
+
+
+            <div class="dRowvlg">
+                <div style="text-align: center;">
+                    @if (ViewBag.Message != null)
+                    {
+                        @ViewBag.Message
+                    }
+                </div>
+            </div>
+            
+            <section id="widget-grid" style="margin: 0px auto;">
+                <!-- START ROW -->
+                <div class="row">
+
+                    <!-- NEW COL START -->
+                    <article class="col-sm-12 col-md-12 col-lg-6" style="float: none; margin: 5px auto; width: 100%;">
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                            <header>
+                                <span class="widget-icon"><i class="fa fa-edit"></i></span>
+                                <h2>Search</h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    <div class="smart-form">
+                                        <fieldset>
+                                            <div class="row">
+                                                <section class="col col-3">
+                                                    <b>Order Number:</b>
+                                                    <label class="input">
+                                                        @Html.TextBox("sOrderNo")
+                                                    </label>
+                                                </section>
+                                                <section class="col col-3">
+                                                    <b>From Order:</b>
+                                                    <label class="input">
+                                                        @Html.TextBox("sFromOrder")
+                                                    </label>
+                                                </section>
+                                                <section class="col col-3">
+                                                    <b>To Order:</b>
+                                                    <label class="input">
+                                                        @Html.TextBox("sToOrder")
+                                                    </label>
+                                                </section>
+                                                <section class="col col-3">
+                                                    <br />
+                                                    <button type="submit" id="btnsubmit" class="btn btn-primary" style="padding: 5px;">
+                                                        Search
+                                                    </button>
+                                                    &nbsp;&nbsp;
+                                                    <button type="button" class="btn btn-primary" style="padding: 5px;" onclick="window.location='../Shop/MyOrders'">
+                                                        Reset
+                                                    </button>
+                                                </section>
+                                                @*<section class="col col-3">
+                                                    <b>E-mail:</b>
+                                                    <label class="input">
+                                                        @Html.TextBox("sEmail")
+                                                    </label>
+                                                </section>
+                                                <section class="col col-3">
+                                                    <b>City:</b>
+                                                    <label class="input">
+                                                        @Html.TextBox("sCity")
+                                                    </label>
+                                                </section>*@
+                                            </div>
+                                            @*<div class="row">
+                                                <section class="col col-3">
+                                                    <b>From Order:</b>
+                                                    <label class="input">
+                                                        @Html.TextBox("sFromOrder")
+                                                    </label>
+                                                </section>
+                                                <section class="col col-3"></section>
+                                                <section class="col col-3">
+                                                    <b>To Order:</b>
+                                                    <label class="input">
+                                                        @Html.TextBox("sToOrder")
+                                                    </label>
+                                                </section>
+
+                                            </div>*@
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+                    </article>
+                    <!-- END COL -->
+                </div>
+                <!-- END ROW -->
+            </section>
+
+
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+                <header>
+                    <span class="widget-icon"><i class="fa fa-table"></i></span>
+                    <h2>Orders</h2>
+
+                </header>
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+
+                    <div id="grid-list">
+                        @{ Html.RenderPartial("_Ajax_MyOrders", Model); }
+                    </div>
+
+                </div>
+            </div>
+            <!-- end widget div -->
+
+            <div id="div_loading" class="div-btn">
+                <img src="~/images/slider/301.GIF" alt="Loading..." /><br />
+                <span style="font-weight: bold; color: gray;">Please Wait...</span>
+            </div>
+            }
+        }
+        else
+        {
+            <div>No records found</div>
+
+        }
+    </div>
+
+    @*        <div class="rig_pan">
+
+            @Html.Partial("_myacc_navpartial")
+
+        </div>*@
+</div>
+<style type="text/css">
+    .ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {
+        display: block;
+        position: absolute;
+        left: 22%;
+        margin-left: -8px;
+        top: 50%;
+        margin-top: -8px;
+    }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/themes/base/css")
+
+    @*    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>*@
+    <link href="@Url.Content("~/css/screen.css")" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#sFromOrder").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-104:+0",
+                beforeShow: function () {
+                    jQuery(this).datepicker('option', 'maxDate', jQuery('#sToOrder').val(), 'dd/mm/yy');
+                }
+            });
+
+            $("#sToOrder").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-104:+0",
+                beforeShow: function () {
+                    jQuery(this).datepicker('option', 'minDate', jQuery('#sFromOrder').val());
+                }
+            });
+        });
+
+    </script>
+
+}
+
+
+
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        $("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>

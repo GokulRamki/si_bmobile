@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Email>
+  <OrderSummary_Subj>
+    bmobile : Order Summary
+  </OrderSummary_Subj>
+  <OrderSummary_Body>
+    <![CDATA[
+        <div style="font-size:15px;font-weight:600;">
+          Thank you for your online purchase.  Your purchase will be available to pickup within 48hrs.  A member of our team will contact you to confirm details.
+    </div>
+    <br/>
+    <br/>
+    <table style="width:800px; border:1px solid #DDD;">
+        <tr style="height:35px; font-size:18px; font-weight:bold; background-color:#DDD; text-align:center;"><td colspan="4">Order Summary</td> </tr>
+        <tr style="height: 30px;">
+            <td style="width:150px;"><b>Transaction No:&nbsp;</b></td>
+            <td style="width:250px;">#TransactionNo#</td>
+            <td style="width:150px;"><b>Order Date:&nbsp;</b></td>
+            <td style="width:250px;">#OrderDate#</td>
+        </tr>
+        <tr style="height: 30px;">
+            <td><b>Name:&nbsp;</b></td>
+            <td>#Name#</td>
+            <td><b>Email:&nbsp;</b></td>
+            <td>#Email#</td>
+        </tr>       
+        <tr style="height: 30px;">
+             <td>
+                   <table>
+                    <tr> 
+                        <td><b>Mobile No:&nbsp;</b></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><b>Payment Status:&nbsp;</b></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                   <table>
+                    <tr> 
+                        <td>#MobileNo#</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>#Payment_status#</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                   <table>
+                    <tr> 
+                        <td><b>Shipping Address:&nbsp;</b></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            
+            <td>
+                <table>
+                    <tr> 
+                        <td>#Address1#&nbsp</td>
+                    </tr>
+                    <tr>
+                        <td>#Address2#&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>#CityPostCode#&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>#Country#&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>        
+        <tr>
+            <td colspan="4">
+            <table style="margin: 0px; border-collapse: collapse; width: 800px; background-color: #FCFCFC;">
+                <thead>
+                    <tr style="background: #262379;
+                        background: url(data:image/svg
+                        background: -moz-linear-gradient(top,  #262379 0%, #262379 100%);
+                        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#262379), color-stop(100%,#262379));
+                        background: -webkit-linear-gradient(top,  #262379 0%,#262379 100%);
+                        background: -o-linear-gradient(top,  #262379 0%,#262379 100%);
+                        background: -ms-linear-gradient(top,  #262379 0%,#262379 100%);
+                        background: linear-gradient(to bottom,  #262379 0%,#262379 100%);
+                        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#262379', endColorstr='#262379',GradientType=0 );
+
+                font-weight: bold;
+                color: #FFF;">
+                       <th style="text-align:left; padding-left:5px;">#
+                        </th>
+                        <th style="text-align:left;">Product Name
+                        </th>
+                        <!--<th style="text-align:left;">Payment Status
+                        </th>-->
+                        <th style="text-align:left;">Model No
+                        </th>
+                        <th style="text-align:right;">Unit Price
+                        </th>
+                        <th style="text-align:center;">Qty
+                        </th>
+                        <th style="text-align:right; padding-right:5px;">Sub Total
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>                              
+                    #OrderItems# 
+                </tbody>
+                <tfoot style="background-color: #fcfafa; border-top:2px solid orange;">
+                      <tr style="font-weight:bold; font-size:16px; height:35px; border-bottom:1px solid #DDD;">
+                        <td colspan="5" style="text-align: right; font-weight: bold;">Cart subtotal :&nbsp;</td>
+                        <td style="text-align:right; padding-right:5px;">K&nbsp;#CartSubtotal#</td>
+                    </tr> 
+                     <tr style="font-weight:bold; font-size:16px; height:35px; border-bottom:1px solid #DDD;">
+                        <td colspan="5" style="text-align: right; font-weight: bold;">Grand Total :&nbsp;</td>
+                        <td style="text-align:right; padding-right:5px;">K&nbsp;#CartSubtotal#</td>
+                    </tr>   
+                </tfoot>
+            </table>     
+                </td>
+        </tr>        
+    </table>
+
+    ]]>
+  </OrderSummary_Body>
+  <OrderSummary_Row>
+    <![CDATA[
+                  <tr style="height: 30px;">
+                        <td style="text-align:left; padding-left:5px;">#SNo#
+                        </td>
+                        <td style="text-align:left;">#ProductName#
+                        </td>
+                        <!--<td style="text-align:left;">#Payment_status#
+                        </td>-->                        
+                        <td style="text-align:left;">#ModelNo#
+                        </td>
+                        <td style="text-align:right;">#UnitPrice#
+                        </td>
+                        <td style="text-align:center;">#Qty#
+                        </td>
+                        <td style="text-align:right; padding-right:5px;">#SubTotal#
+                        </td>
+                    </tr>
+     ]]>
+  </OrderSummary_Row>
+  <forgotpwd_subject>bmobile : Password reset</forgotpwd_subject>
+  <forgotpwd_body>
+
+    <![CDATA[
+   <p>Hi,</p>
+    <p>Your Temporary Password is ##temppwd##</p>
+    <p>IMPORTANT - Please follow the URL to reset your account password <a href='##resetlink##'>##resetlink##</a></p><br/>
+    <p><b>Note: This password will be valid only for 24 Hrs</b></p>
+      ]]>
+  </forgotpwd_body>
+  <resetpwd_subj>bmobile : Password reset</resetpwd_subj>
+  <resetpwd_body>
+    <![CDATA[
+<div style="width:800px;">
+        <table cellpadding="4" cellspacing="2" width="100%">
+            <tr>
+                <td>      
+                Hi #Name#,
+                </td>
+            </tr>
+            <tr>
+                <td>      
+               <p>Your Temporary Password is: #Password# </p>
+               <p>IMPORTANT - Please follow the URL to reset your account password </p>
+               <p><a href="#ActivationURL#">#ActivationURL#</a></p>
+                </td>
+            </tr>              
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    </div>
+    ]]>
+  </resetpwd_body>
+
+  <SendConfirmationMail_Subj>bmobile : Confirmation email for account activation</SendConfirmationMail_Subj>
+  <SendConfirmationMail_body>
+    <![CDATA[
+<div style="width:800px;">
+        <table cellpadding="4" cellspacing="2" width="100%">
+            <tr>
+                <td>      
+                Hi #Name#,
+                </td>
+            </tr>
+            <tr>
+                <td>      
+               <p>Please follow the URL to activate your account password </p>
+               <p><a href="#ActivationURL#">#ActivationURL#</a></p>
+                </td>
+            </tr>              
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    </div>
+    ]]>
+  </SendConfirmationMail_body>
+
+  <ReminderEmail_Subj>
+    Bmobile - Recharged your MSISDN account
+  </ReminderEmail_Subj>
+  <ReminderEmail_Body>
+    <![CDATA[ 
+     Hi #StaffName#,    
+     <p>Your MSISDN Account has recharged amount <b>$ #Amount# </b></p>     
+      <p>Your MSISDN Number: #MSISDN# </p>   
+      <p>Topup Amount: $ #Amount# </p>  
+      <p>Topup Date: #Date# </p> 
+    <br><br>
+    <p>Thanks, <br> bmobile Admin Team</p>
+    ]]>
+  </ReminderEmail_Body>
+
+  <subj_ordersummary>
+    bmobile Order Summary
+  </subj_ordersummary>
+  <body_ordersummary>
+    <![CDATA[
+    <html>
+    <body>
+      <div id="divOrderSummary" style="padding-left: 20px;">
+                                    <div style="float:left; width:800px;">
+                                        <img src="#bmobile_url#/images/bmobilelogo.png" />
+                                        <div>
+                                            <br />
+                                            <strong>bmobile Limited</strong>
+                                            <strong>PO Box 1055,</strong><br />
+                                            <strong>Waigani</strong><br />
+                                            <strong>National Capital District 131</strong><br />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div style="float:left;width:800px;">&nbsp;</div>
+                                    <div style="float: left;font-size: 18px; font-weight: bold; padding-bottom: 10px; width: 500px;">
+                                        <img src="#bmobile_url#/images/Ok-icon.png" title="Process done" />
+                                        THANK YOU FOR YOUR PAYMENT
+                                    </div>
+                                    <div style="clear: both;"></div>
+                                    <table>
+                                    <tr>
+                                        <td style="float:left;font-size: 14px;font-weight: bold;padding-bottom: 10px;">
+                                            YOUR TRANSACTION NO :
+                                        </td>
+                                        <td style="float:left;font-size: 14px;font-weight: bold;text-align: left;">
+                                            #Trans_Merchant_Id#
+                                        </td>
+                                        <td style="clear:both;">
+                                        </td>
+                                    </tr>
+                                     <tr style='##gpshow##'>
+                                          <td style="float:left; font-size: 14px; font-weight: bold;padding-bottom: 10px;">
+                                              YOUR RECHARGE VOUCHER :
+                                          </td>
+                                          <td style="float:left;font-size: 14px; font-weight: bold; text-align: left;">
+                                              #token_num#
+                                          </td>
+                                          <td style="clear:both;">
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="float: left; font-size: 12px;  text-align: left;">
+                                            Payment date :
+                                        </td>
+                                        <td style="float: left; font-size: 12px;  text-align: left;">
+                                            #payment_date#
+                                        </td>
+                                        <td style="clear:both;"></td>
+                                    </tr>
+                                    </table>
+                                    <div style="clear: both;"></div>
+                             
+                                        <table>
+                                        <tr>
+                                            <td style="font-size: 13px; font-weight: bold; padding: 5px;">
+                                                SNO
+                                            </td>
+                                            <td style="font-size: 13px; font-weight: bold;padding: 5px;">
+                                                Description
+                                            </td>
+                                            <td style="font-size: 13px; font-weight: bold;padding: 5px;">
+                                                #Custom_txt#
+                                            </td>
+                                            <td style="font-size: 13px; font-weight: bold; text-align: right; padding: 5px;">
+                                                Price
+                                            </td>
+                                            <td style="font-size: 13px; font-weight: bold; text-align: right; padding: 5px;">
+                                                Total Price
+                                            </td>
+     
+                                        </tr>                       
+    
+    ]]>
+  </body_ordersummary>
+  <main_ordersummary>
+    <![CDATA[
+                        <tr>
+                                        <td style="font-size: 13px; padding: 5px;">
+                                            #sno#
+                                        </td>
+                                        <td style="font-size: 13px; padding: 5px;">
+                                            #description#
+                                        </td>
+                                        <td style="font-size: 13px; padding: 5px;">
+                                            #quantity#
+                                        </td>
+                                        <td style="font-size: 13px; padding: 5px;text-align: right;">
+                                            $ #product_price#
+                                        </td>
+                                        <td style="font-size: 13px; padding: 5px;text-align: right;">
+                                            $ #product_total#
+                                        </td>
+                       </tr>
+    ]]>
+  </main_ordersummary>
+  <main_total_ordersummary>
+    <![CDATA[
+                                      
+                            <tr>
+                                        <td style="width: 35px; font-size: 13px; padding: 5px;">
+                                            &nbsp;
+                                        </td>
+                                        <td style="font-size: 13px; padding: 5px;">
+                                            &nbsp;
+                                        </td>
+                                        <td style="font-size: 13px; padding: 5px;border-top: 1px solid;">
+                                            #total_qty#
+                                        </td>
+                                        <td style="font-size: 13px; text-align: right; padding: 5px; border-top: 1px solid;">
+                                            Total Price
+                                        </td>
+                                        <td style="font-size: 13px; text-align: right; padding: 5px;border-top: 1px solid;">
+                                            $ #Order_total#
+                                        </td>
+                            </tr>
+                                </table>    
+                                 </div>
+    </body>
+    </html>
+    ]]>
+  </main_total_ordersummary>
+
+
+  <subj_ACC_bal_ordersummary>
+    bmobile : Order Summary
+  </subj_ACC_bal_ordersummary>
+  <body_ACC_bal_ordersummary>
+    <![CDATA[
+    <html>
+    <body>
+      <div id="divAcc_Bal_OrderSummary" style="padding-left: 20px;">
+                                    <div style="float:left;width:800px;">
+                                        <img src="#bmobile_url#/images/bmobilelogo.png" />
+                                        <div>
+                                            <br />
+                                            <strong>bmobile Limited</strong>
+                                            <strong>PO Box 1055,</strong><br />
+                                            <strong>Waigani</strong><br />
+                                            <strong>National Capital District 131</strong><br />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div style="float:left;width:800px;">&nbsp;</div>
+                                    <div style="float: left; font-size: 18px; font-weight: bold; padding-bottom: 10px; width: 500px;">
+                                        <img src="#bmobile_url#/images/Ok-icon.png" title="Process done" />
+                                        THANK YOU FOR YOUR PAYMENT
+                                    </div>
+                                    <div style="clear: both; "></div>
+                                    <table>
+                                    <tr>
+                                    <td style="float: left; font-size: 12px;  text-align: left;">
+                                        Payment date :
+                                    </td>
+                                    <td style="float: left; font-size: 12px;  text-align: left;">
+                                        #payment_date#
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <div style="clear: both; "></div>
+                             
+                                        <table>
+                                        <tr  style="border: solid 1px #808080; ">
+                                            <td style="font-size: 13px; font-weight: bold; text-align: left; padding: 5px;">
+                                                SNO
+                                            </td>
+                                            <td style="width: 250px; font-size: 13px; text-align: center; padding: 5px;">
+                                                Plan
+                                            </td>
+                                            <td style="font-size: 13px; width:100px; text-align: right; padding: 5px;">
+                                                Price
+                                            </td>
+     
+                                        </tr>                       
+    
+    ]]>
+  </body_ACC_bal_ordersummary>
+  <main_ACC_bal_ordersummary>
+    <![CDATA[
+                        <tr>
+                                         <td style="font-size: 13px; font-weight: bold; text-align: left; padding: 5px;">
+                                            #sno#
+                                        </td>
+                                        <td style="width: 250px; font-size: 13px; text-align: center; padding: 5px;">
+                                            #plan_name#
+                                        </td>
+                                        <td style="font-size: 13px; width:100px; text-align: right; padding: 5px;">
+                                            $ #price#
+                                        </td>
+                       </tr>
+    ]]>
+  </main_ACC_bal_ordersummary>
+  <main_total_ACC_bal_ordersummary>
+    <![CDATA[
+                                       
+                            <tr>
+                                        <td style="font-size: 13px; font-weight: bold; text-align: left; padding: 5px;">
+                                            &nbsp;
+                                        </td>
+                                        <td style="width: 250px; font-size: 13px; text-align: center; padding: 5px;">
+                                            Total Price
+                                        </td>
+                                        <td style="font-size: 13px; width:100px; text-align: right; padding: 5px; border-top: 1px solid;">
+                                            $ #Order_total#
+                                        </td>
+                            </tr>
+                                </table>    </div>  
+    </body>
+    </html>
+    ]]>
+  </main_total_ACC_bal_ordersummary>
+
+  <CareUserEmail_Subj>
+    bmobile : Admin Login information
+  </CareUserEmail_Subj>
+  <CareUserEmail_Body>
+    <![CDATA[ 
+     Hi #Name#,    
+     <p> Please find the below details. </p>
+      <p>Your Username: #uname# </p>
+    <p>Your Password: #pwd# </p>
+    <br> 
+    <br>
+    <p>Login URL: <a href=#URL# target="_blank">#URL#</a> </p>
+    <br> 
+    <p>Thanks, <br> bmobile Team</p>
+    ]]>
+  </CareUserEmail_Body>
+  <GetPowerSMS>
+    <![CDATA[
+  Your ##gp_paidamt## Easipay re-charge voucher for meter ##gp_meterno## is:##gp_token## for ##gp_units## units.Reference No. ##trans_id##
+  ]]>
+  </GetPowerSMS>
+ 
+</Email>

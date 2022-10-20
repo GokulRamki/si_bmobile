@@ -1,0 +1,415 @@
+﻿@model si_bmobile.Models.BundlesModel
+<div id="pnlProgress" style="display: none;" class="modalDialogClear">
+    <div id="content" class="dRowlg" style="text-align: center;">
+        please wait...<br />
+        <img src="~/Content/themes/base/images/loading.gif" />
+
+    </div>
+</div>
+<div id="divplandetails">
+    <div class="dRowlg">
+        @Html.HiddenFor(x => x.q_msisdn)
+
+        <div class="dRowlblsm" style="width:auto !important;"><b>Mobile&nbsp;Number:&nbsp;</b></div>
+        @if (Model.MsisdnLst != null)
+        {
+            if (Model.MsisdnLst.Count > 0)
+            {
+                <div class="msisdn-div" style="width:auto !important;">
+                    @Html.DropDownListFor(x => x._sel_msisdn, Model.MsisdnLst, new { @id = "ddlMsisdn", @onchange = "LoadPlans()" })
+                </div>
+                if (ViewBag.AccountBalance != null)
+                {
+                    <div>&nbsp;<b>Account&nbsp;Balance:</b> @ViewBag.AccountBalance</div>
+                }
+                for (int f = 0; f < Model.MsisdnLst.Count; f++)
+                {
+                    @Html.HiddenFor(x => x.MsisdnLst[f].Text)
+                    @Html.HiddenFor(x => x.MsisdnLst[f].Value)
+                    @Html.HiddenFor(x => x.MsisdnLst[f].Selected)
+                }
+            }
+        }
+
+        <div class="clear"></div>
+    </div>
+    <div class="dRowlg">
+    </div>
+
+
+    <div class="dRowlg dErrMsg" style="@Model.dtopuptext">
+        You don't have Sufficient balance to Purchase new plan,&nbsp;@Html.ActionLink("Please Click here", "Topup")&nbsp;to
+        top up your account.
+    </div>
+    @Html.HiddenFor(b => b.dtopuptext)
+
+    @*<div class="dRowlg">
+            <div class="dRowlblsm">Prepaid</div>
+            <div class="dbundle-pan">
+                <div class="dbundle-box">
+                    <div class="dRowctrlmd dbgtitle">&nbsp;Data Bundles</div>
+                    <div class="dRowctrlmd dItems">
+                        @if (Model.DataPlan != null)
+                        {
+                            if (Model.DataPlan.Count > 0)
+                            {
+
+                                for (var i = 0; i < Model.DataPlan.Count; i++)
+                                {
+                                    <div>
+                                        @Html.HiddenFor(x => x.DataPlan[i].htmlAttributes)
+                                        @Html.RadioButtonFor(x => x._planId, Model.DataPlan[i].Id, Model.DataPlan[i].htmlAttributes == "disabled" ? new { disabled = "disabled" } : null)
+                                        @Html.DisplayFor(x => x.DataPlan[i].PlanName)<br />
+
+                                        <div style="padding-left: 25px;">
+                                            @Html.DisplayFor(x => x.DataPlan[i].Description)
+                                            @Html.HiddenFor(x => x.DataPlan[i].PlanName)
+                                            @Html.HiddenFor(x => x.DataPlan[i].Id)
+                                            @Html.HiddenFor(x => x.DataPlan[i].Description)
+                                            @Html.HiddenFor(x => x.DataPlan[i].Size)
+                                            @Html.HiddenFor(x => x.DataPlan[i].Validity)
+                                            @Html.HiddenFor(x => x.DataPlan[i].Price)
+                                        </div>
+                                    </div>
+                                    <br />
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="dbundle-box">
+                    <div class="dRowctrlmd dbgtitle">&nbsp;Voice Bundles</div>
+
+                    <div class="dRowctrlmd dItems">
+                        @if (Model.Voice != null)
+                        {
+                            if (Model.Voice.Count > 0)
+                            {
+                                for (var i = 0; i < Model.Voice.Count; i++)
+                                {
+                                    <div>
+                                        @Html.HiddenFor(x => x.Voice[i].htmlAttributes)
+                                        @Html.RadioButtonFor(x => x._planId, Model.Voice[i].Id, Model.Voice[i].htmlAttributes == "disabled" ? new { disabled = "disabled" } : null)
+                                        @Html.DisplayFor(x => x.Voice[i].PlanName)<br />
+
+                                        <div style="padding-left: 25px;">
+                                            @Html.DisplayFor(x => x.Voice[i].Description)
+                                            @Html.HiddenFor(x => x.Voice[i].PlanName)
+                                            @Html.HiddenFor(x => x.Voice[i].Id)
+                                            @Html.HiddenFor(x => x.Voice[i].Price)
+                                            @Html.HiddenFor(x => x.Voice[i].Size)
+                                            @Html.HiddenFor(x => x.Voice[i].Description)
+                                            @Html.HiddenFor(x => x.Voice[i].Validity)
+                                        </div>
+                                    </div>
+                                    <br />
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>*@
+
+    <div class="dRowlg">
+        <div id="tabs">
+            <ul>
+                <li><a href="#tab-1">Data Plans</a></li>
+                <li><a href="#tab-2">Voice+SMS+Data Plans</a></li>
+                <li><a href="#tab-3">International Calls</a></li>
+                <li><a href="#tab-4">Roaming Plans</a></li>
+            </ul>
+            <div id="tab-1">
+                <br />
+                @if (Model.DataPlan != null && Model.DataPlan.Count > 0)
+                {
+                    <table class="gridtable">
+                        <thead>
+                            <tr>
+                                <th>Bundle Name</th>
+                                <th>Subscription Fee</th>
+                                <th>Data</th>
+                                <th>Validity</th>
+                                <th>Buy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.DataPlan.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <span style="display:none;">Bundle Name:&nbsp;</span>@Model.DataPlan[i].PlanName
+                                        @Html.HiddenFor(x => x.DataPlan[i].Id)
+                                        @Html.HiddenFor(x => x.DataPlan[i].PlanName)
+                                        @Html.HiddenFor(x => x.DataPlan[i].Description)
+                                        @Html.HiddenFor(x => x.DataPlan[i].Size)
+                                        @Html.HiddenFor(x => x.DataPlan[i].Validity)
+                                        @Html.HiddenFor(x => x.DataPlan[i]._sPrice)
+                                    </td>
+                                    <td><span style="display:none;">Subscription Fee:&nbsp;</span>@Model.DataPlan[i]._sPrice</td>
+                                    <td><span style="display:none;">Data Amount:&nbsp;</span>@Model.DataPlan[i].Description</td>
+                                    @*<td><span style="display:none;">Validity:&nbsp;</span>@Model.DataPlan[i].Validity&nbsp;Days</td>*@
+                                    <td><span style="display:none;">Validity:&nbsp;</span>@Model.DataPlan[i].validity_txt</td>
+                                    <td>
+                                        @Html.HiddenFor(x => x.DataPlan[i].htmlAttributes)
+                                        <span style="display:none;">Buy:&nbsp;</span>@Html.RadioButtonFor(x => x._planId, Model.DataPlan[i].Id, Model.DataPlan[i].htmlAttributes == "disabled" ? new { disabled = "disabled" } : null)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div>Plans not available!</div>
+                }
+            </div>
+            <div id="tab-2">
+                <br />
+                @if (Model.VoiceSMSDataPlan != null && Model.VoiceSMSDataPlan.Count > 0)
+                {
+                    <table class="gridtable">
+                        <thead>
+                            <tr>
+                                <th>Bundle Name</th>
+                                <th>Subscription Fee</th>
+                                <th>Data</th>
+                                <th>Voice</th>
+                                <th>SMS</th>
+                                <th>Validity</th>
+                                <th>Buy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.VoiceSMSDataPlan.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <span style="display:none;">Bundle Name:&nbsp;</span>@Model.VoiceSMSDataPlan[i].PlanName
+                                        @Html.HiddenFor(x => x.VoiceSMSDataPlan[i].Id)
+                                        @Html.HiddenFor(x => x.VoiceSMSDataPlan[i].PlanName)
+                                        @Html.HiddenFor(x => x.VoiceSMSDataPlan[i].Description)
+                                        @Html.HiddenFor(x => x.VoiceSMSDataPlan[i].Size)
+                                        @Html.HiddenFor(x => x.VoiceSMSDataPlan[i].voiceSize)
+                                        @Html.HiddenFor(x => x.VoiceSMSDataPlan[i].smsCount)
+                                        @Html.HiddenFor(x => x.VoiceSMSDataPlan[i].Validity)
+                                        @Html.HiddenFor(x => x.VoiceSMSDataPlan[i]._sPrice)
+                                    </td>
+                                    <td><span style="display:none;">Subscription Fee:&nbsp;</span>@Model.VoiceSMSDataPlan[i]._sPrice</td>
+                                    <td><span style="display:none;">Data:&nbsp;</span>@Model.VoiceSMSDataPlan[i].Size</td>
+                                    @*<td><span style="display:none;">Voice:&nbsp;</span>@Model.VoiceSMSDataPlan[i].Description</td>*@
+                                    <td><span style="display:none;">Voice:&nbsp;</span>@Model.VoiceSMSDataPlan[i].voice_desc</td>
+                                    @*<td><span style="display:none;">SMS:&nbsp;</span>@Model.VoiceSMSDataPlan[i].smsCount</td>*@
+                                    <td><span style="display:none;">SMS:&nbsp;</span>@Model.VoiceSMSDataPlan[i].sms_desc</td>
+                                    @*<td><span style="display:none;">Validity:&nbsp;</span>@Model.VoiceSMSDataPlan[i].Validity&nbsp;Days</td>*@
+                                    <td><span style="display:none;">Validity:&nbsp;</span>@Model.VoiceSMSDataPlan[i].validity_txt</td>
+                                    <td>
+                                        @Html.HiddenFor(x => x.VoiceSMSDataPlan[i].htmlAttributes)
+                                        <span style="display:none;">Buy:&nbsp;</span>@Html.RadioButtonFor(x => x._planId, Model.VoiceSMSDataPlan[i].Id, Model.VoiceSMSDataPlan[i].htmlAttributes == "disabled" ? new { disabled = "disabled" } : null)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div>Plans not available!</div>
+                }
+            </div>
+            <div id="tab-3">
+                <br />
+                @if (Model.Voice != null && Model.Voice.Count > 0)
+                {
+                    <table class="gridtable">
+                        <thead>
+                            <tr>
+                                <th>Bundle Name</th>
+                                <th>Subscription Fee</th>
+                                <th>Data</th>
+                                <th>Voice</th>
+                                <th>SMS</th>
+                                <th>Validity</th>
+                                <th>Buy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.Voice.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <span style="display:none;">Bundle Name:&nbsp;</span>@Model.Voice[i].PlanName
+                                        @Html.HiddenFor(x => x.Voice[i].PlanName)
+                                        @Html.HiddenFor(x => x.Voice[i].Id)
+                                        @Html.HiddenFor(x => x.Voice[i]._sPrice)
+                                        @Html.HiddenFor(x => x.Voice[i].Size)
+                                        @Html.HiddenFor(x => x.Voice[i].Description)
+                                        @Html.HiddenFor(x => x.Voice[i].Validity)
+                                    </td>
+                                    <td><span style="display:none;">Subscription Fee:&nbsp;</span>@Model.Voice[i]._sPrice</td>
+                                    <td><span style="display:none;">Data:&nbsp;</span>n/a</td>
+                                    <td><span style="display:none;">Voice:&nbsp;</span>@Model.Voice[i].Description</td>
+                                    <td><span style="display:none;">SMS:&nbsp;</span>n/a</td>
+                                    @*<td><span style="display:none;">Validity:&nbsp;</span>@Model.Voice[i].Validity&nbsp;Days</td>*@
+                                    <td><span style="display:none;">Validity:&nbsp;</span>@Model.Voice[i].validity_txt</td>
+                                    <td>
+                                        @Html.HiddenFor(x => x.Voice[i].htmlAttributes)
+                                        <span style="display:none;">Buy:&nbsp;</span>@Html.RadioButtonFor(x => x._planId, Model.Voice[i].Id, Model.Voice[i].htmlAttributes == "disabled" ? new { disabled = "disabled" } : null)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <p>
+                        *The countries covered are Australia, Bangladesh, China, Hong&nbsp;Kong, India, Indonesia, Japan,Malaysia,New Zealand, Pakistan, Philipines, Solomon Islands, Singapore, South Africa, Thailand, UK and USA.
+                    </p>
+                }
+                else
+                {
+                    <div>Plans not available!</div>
+                }
+            </div>
+            <div id="tab-4">
+                <br />
+                @if (Model.RoamingPlan != null && Model.RoamingPlan.Count > 0)
+                {
+                    <table class="gridtable">
+                        <thead>
+                            <tr>
+                                <th>Bundle Name</th>
+                                <th>Subscription Fee</th>
+                                <th>Voice</th>
+                                <th>Validity</th>
+                                <th>Buy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.RoamingPlan.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <span style="display:none;">Bundle Name:&nbsp;</span>@Model.RoamingPlan[i].PlanName
+                                        @Html.HiddenFor(x => x.RoamingPlan[i].Id)
+                                        @Html.HiddenFor(x => x.RoamingPlan[i].PlanName)
+                                        @Html.HiddenFor(x => x.RoamingPlan[i].Description)
+                                        @Html.HiddenFor(x => x.RoamingPlan[i].Size)
+                                        @Html.HiddenFor(x => x.RoamingPlan[i].Validity)
+                                        @Html.HiddenFor(x => x.RoamingPlan[i]._sPrice)
+                                    </td>
+                                    <td><span style="display:none;">Subscription Fee:&nbsp;</span>@Model.RoamingPlan[i]._sPrice</td>
+                                    <td><span style="display:none;">Data Amount:&nbsp;</span>@Model.RoamingPlan[i].Description</td>
+                                    @*<td><span style="display:none;">Validity:&nbsp;</span>@Model.DataPlan[i].Validity&nbsp;Days</td>*@
+                                    <td><span style="display:none;">Validity:&nbsp;</span>@Model.RoamingPlan[i].validity_txt</td>
+                                    <td>
+                                        @Html.HiddenFor(x => x.RoamingPlan[i].htmlAttributes)
+                                        <span style="display:none;">Buy:&nbsp;</span>@Html.RadioButtonFor(x => x._planId, Model.RoamingPlan[i].Id, Model.RoamingPlan[i].htmlAttributes == "disabled" ? new { disabled = "disabled" } : null)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div>Plans not available!</div>
+                }
+            </div>
+            <br />
+            <div style="text-align:center;">
+                <input id="btnSubmit" type="submit" class="btn-submit" name="Command" @Model.btnMode value="Next" />&nbsp;@Html.ActionLink("Cancel", "RefreshACC", "Care")
+            </div>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+
+    <div class="dRow">
+        <div class="dRowlblsm">&nbsp;</div>
+        <div class="dRowctrlmd">@Html.ValidationMessageFor(x => x._planId)</div>
+        <div class="clear"></div>
+    </div>
+    <div class="dRowlg" style="display:none;">
+        <table class="gridtable">
+            <thead>
+                <tr>
+                    <th>Subscription Fee</th>
+                    <th>Included Data</th>
+                    @*<th>Bundle Rate per&nbsp;MB</th>*@
+                    <th>Validity</th>
+                    <th>How&nbsp;to&nbsp;subscribe?<br />Simply&nbsp;Dial</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>K3</td>
+                    <td>50 MB</td>
+                    @* <td>6t</td>*@
+                    <td>24hrs</td>
+                    <td>*123*3#</td>
+                </tr>
+                <tr>
+                    <td>K5</td>
+                    <td>70 MB</td>
+                    @*  <td>7t</td>*@
+                    <td>3 Days</td>
+                    <td>*123*5#</td>
+                </tr>
+                <tr>
+                    <td>K10</td>
+                    <td>150 MB</td>
+                    @*  <td>6t</td>*@
+                    <td>7 Days</td>
+                    <td>*123*10#</td>
+                </tr>
+                <tr>
+                    <td>K20</td>
+                    <td>350 MB</td>
+                    @*  <td>6t</td>*@
+                    <td>14 Days</td>
+                    <td>*123*20#</td>
+                </tr>
+                <tr>
+                    <td>K80</td>
+                    <td>1.5 GB</td>
+                    @*  <td>5t</td>*@
+                    <td>30 Days</td>
+                    <td>*123*80#</td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="float: right; width:auto;"><strong>Note: Non-Bundled data rate is <span><u>30t</u></span> per MB</strong></div>
+    </div>
+    <div id="div_Errdialog" style="display: none;">
+
+        @if (@Model.err_Msg != null)
+        {
+            @Model.err_Msg
+        }
+
+    </div>
+</div>
+@if (Model.err_Msg != null)
+{
+    <script type="text/javascript">
+        $("#div_Errdialog").dialog({
+            title: "Message",
+            buttons: {
+                Close: function () {
+                    $(this).dialog('close');
+                }
+            },
+            width: 300,
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            modal: true
+        });
+    </script>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+

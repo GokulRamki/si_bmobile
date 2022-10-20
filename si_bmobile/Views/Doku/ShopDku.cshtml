@@ -1,0 +1,49 @@
+﻿@model bemobile.Models.DokuPostModel
+
+@{
+    ViewBag.Title = "Redirecting..";
+    Layout = null; 
+  <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    
+   <script type="text/javascript">
+       
+
+        $(function () {
+         
+            $("#frmShopDku").submit();
+        });
+
+      
+    </script>
+  
+}
+
+<h2>Please wait..</h2>
+
+@using (Html.BeginForm("ShopDku", "Doku", FormMethod.Post, new { id = "frmShopDku", action = Model.ACTIONURL }))
+{
+    
+    @Html.HiddenFor(d => d.MALLID)
+    @Html.HiddenFor(d => d.CHAINMERCHANT)
+    @Html.HiddenFor(d => d.AMOUNT)
+    @Html.HiddenFor(d => d.PURCHASEAMOUNT)
+    @Html.HiddenFor(d => d.TRANSIDMERCHANT)
+    @Html.HiddenFor(d => d.WORDS)
+    @Html.HiddenFor(d => d.REQUESTDATETIME)
+    @Html.HiddenFor(d => d.CURRENCY)
+    @Html.HiddenFor(d => d.PURCHASECURRENCY)
+    @Html.HiddenFor(d => d.SESSIONID)
+    @Html.HiddenFor(d=>d.ADDITIONALDATA)
+    @Html.HiddenFor(d => d.NAME)
+    @Html.HiddenFor(d => d.EMAIL)
+    @Html.HiddenFor(d => d.BASKET)
+     
+    
+    
+    
+    
+    <input type="submit" name="action" value="One Moment Please - Redirecting.." />
+    
+    
+}
+

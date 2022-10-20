@@ -1,0 +1,57 @@
+﻿@using MvcPaging
+@model List<si_bmobile.Models.web_tbl_care_user>
+
+@{
+    ViewBag.Title = "CareUsers";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+
+
+
+<div class="divheader">
+    CARE USERS
+</div>
+@using (Ajax.BeginForm("CareUsers", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmCareUsers" }))
+{
+    <div class="dRowvlg dtopmenu">
+        <span>@Html.ActionLink("Create New", "CreateUser")</span>
+    </div>
+    <div class="dRowvlg">
+        <div class="input-append">
+            @Html.DropDownList("ddlRoles", new List<SelectListItem>(ViewBag.vroles), "--Select Role--")
+            @Html.DropDownList("ddlStatus", new List<SelectListItem>(ViewBag.vstatus), "--Select Status--")
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search</button>
+            <button class="btn" type="button" onclick="window.location.href='/Admin/CareUsers';">
+                <i class="icon-search"></i>&nbsp;Reset</button>
+        </div>
+    </div>
+    <div id="grid-list">
+        @{if (Model.Count > 0) { Html.RenderPartial("_Ajax_CareUsers", Model); } else {<span>No records found matching your search!</span> }
+}
+    </div>
+}
+
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        $("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>

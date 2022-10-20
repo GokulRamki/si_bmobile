@@ -1,0 +1,148 @@
+﻿@using MvcPaging
+@model IPagedList<bemobile.Models.DokuCareModel>
+
+
+@{
+        
+    double bspcomm = 0;
+    double acc_amount = 0;
+    double pg_total_amt = 0;
+    double pg_total_bspcomm = 0;
+    double pg_total_acc_amt = 0;
+            
+   
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+
+                <th>Name
+                </th>
+                <th>TransactionID
+                </th>
+                <th>Transaction&nbsp;Date
+                </th>
+                <th>Mobile&nbsp;Number
+                </th>
+                <th>Amount
+                </th>
+                <th>BSP&nbsp;Commision
+                </th>
+                <th>Deposit&nbsp;Amount
+                </th>
+                <th>Email
+                </th>
+
+        </thead>
+
+        <tbody>
+            @if (Model.Count > 0)
+            {
+
+                foreach (var item in Model)
+                {
+
+
+                    var @vColor = "";
+                    if (@item.doku.resultmsg == "FAILED")
+                        @vColor = "background-color:#FE642E;";
+                    else if (@item.doku.resultmsg == "SUCCESS")
+                        @vColor = "background-color:#82FA58;";
+
+
+                    bspcomm = (Convert.ToDouble(@item.order.order_product_total) * 4.9) / 100;
+                    acc_amount = (Convert.ToDouble(@item.order.order_product_total) - bspcomm);
+                    pg_total_amt += Convert.ToDouble(@item.order.order_product_total);
+                    pg_total_bspcomm += Convert.ToDouble(bspcomm);
+                    pg_total_acc_amt += Convert.ToDouble(acc_amount);
+                
+                
+                
+                
+                
+                <tr style="@vColor">
+                    <td>
+                        @item.order.cust_fname&nbsp;@item.order.cust_lname
+                    </td>
+                    <td>
+                        @item.order.order_number
+                    </td>
+                    <td>
+                        @item.order.order_datetime
+                    </td>
+                    <td>
+                        @item.order.purchase_msisdn
+                    </td>
+                    <td>
+                        @item.order.order_product_total
+                    </td>
+                    <td>
+                        @bspcomm.ToString("#0.0000")
+                    </td>
+                    <td>
+                        @acc_amount.ToString("#0.0000")
+                    </td>
+                    <td>
+                        @item.order.cust_email
+                    </td>
+
+                </tr>
+             
+                }
+
+            }
+
+
+        </tbody>
+
+     
+    </table>
+    }
+    <div style="float: right;">
+        <table>
+            <tr>
+                <td>Total Amount :</td>
+                <td>K @pg_total_amt</td>
+            </tr>
+            <tr>
+                <td>Total BSP Commision Amount :</td>
+                <td>K @pg_total_bspcomm</td>
+            </tr>
+            <tr>
+                <td>Total Deposit Amount :</td>
+                <td>K @pg_total_acc_amt</td>
+            </tr>
+        </table>
+    </div>
+<div style="clear:both;"></div>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Account", action = "TopupTransactions", transmerchantid = ViewData["transmerchantid"], mobile_no = ViewData["mobile_no"], sFrom = ViewData["sFrom"], sTo = ViewData["sTo"] }))
+
+
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>
+
+

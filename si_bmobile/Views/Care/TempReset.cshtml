@@ -1,0 +1,77 @@
+﻿@model si_bmobile.Models.TPModel
+@{
+    ViewBag.Title = "Reset Password";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+}
+
+<div class="abt-main">
+    @using (Html.BeginForm("TempReset", "Care", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmTempReset", @class = "smart-form", novalidate = "novalidate" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        <div class="login-main">
+            <div class="log-inn">
+                <div class="log-hed"> Temporary Password Reset </div>
+                <div class="log-mn">
+                    <div class="log-nm"> Temporary Password: </div>
+                    <div class="log-txt">
+                        @Html.PasswordFor(model => model.TempPwd, new { placeholder = "Temporary Password", autocomplete = "off" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.TempPwd)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm"> New Password: </div>
+                    <div class="log-txt">
+                        @Html.PasswordFor(model => model.NewPwd, new { placeholder = "New Password", autocomplete = "off" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.NewPwd)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm"> Confirm Password: </div>
+                    <div class="log-txt">
+                        @Html.PasswordFor(model => model.ConfirmPwd, new { placeholder = "Confirm Password", autocomplete = "off" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ConfirmPwd)
+                </div>
+                <div class="log-sbmt">
+                    <input type="button" class="btn-sbmt" onclick="window.location='/Care/Login'" value="Cancel">&nbsp;&nbsp;
+                    <input type="submit" class="btn-sbmt" value="Submit">
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div id="div_dialog" style="display: none;">
+    <p>@ViewBag.Message</p>
+</div>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        $("#div_dialog").dialog({
+            title: "Message",
+            buttons: {
+                Close: function () {
+                    $(this).dialog('close');
+                }
+            },
+            width: 300,
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            modal: true
+        });
+
+    </script>
+}
+
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $('button.close').click(function () {
+            $(this).parents('#msg_pan').fadeOut('slow');
+        });
+    </script>
+}

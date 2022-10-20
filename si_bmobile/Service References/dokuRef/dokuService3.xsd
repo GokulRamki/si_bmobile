@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/doku_payment.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/doku_payment.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="PaymentEntModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="lname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="order_items" nillable="true" type="tns:ArrayOftbl_doku_order_item" />
+      <xs:element minOccurs="0" name="paid_amount" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="paid_for_msisdn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="paid_userid" type="xs:long" />
+      <xs:element minOccurs="0" name="payment_gateway" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="payment_mode" type="xs:int" />
+      <xs:element minOccurs="0" name="payment_type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="primary_msisdn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="product_id" type="xs:long" />
+      <xs:element minOccurs="0" name="product_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="purchse_desc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="sess_id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="user_details" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PaymentEntModel" nillable="true" type="tns:PaymentEntModel" />
+  <xs:complexType name="ArrayOftbl_doku_order_item">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="tbl_doku_order_item" nillable="true" type="tns:tbl_doku_order_item" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOftbl_doku_order_item" nillable="true" type="tns:ArrayOftbl_doku_order_item" />
+  <xs:complexType name="tbl_doku_order_item">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="order_id" type="xs:long" />
+      <xs:element minOccurs="0" name="order_item_id" type="xs:long" />
+      <xs:element minOccurs="0" name="product_id" type="xs:long" />
+      <xs:element minOccurs="0" name="product_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="product_price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="product_qty" type="xs:long" />
+      <xs:element minOccurs="0" name="product_shipping_matrix_id" type="xs:long" />
+      <xs:element minOccurs="0" name="purchase_desc" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="tbl_doku_order_item" nillable="true" type="tns:tbl_doku_order_item" />
+</xs:schema>

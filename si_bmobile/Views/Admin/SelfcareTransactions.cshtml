@@ -1,0 +1,55 @@
+﻿@using MvcPaging
+@model List<si_bmobile.Models.DokuCareModel>
+@{
+    ViewBag.Title = "SelfcareTransactions";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+<h2>SelfcareTransactions</h2>
+@using (Ajax.BeginForm("SelfcareTransactions", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmSelfcareTransactions" }))
+{
+ 
+    <div class="dRowvlg">
+
+        <div class="input-append">
+
+            @Html.Editor("transmerchantid")
+
+            @Html.Editor("email")
+
+            @Html.DropDownList("ddlOrderStatus", (IEnumerable<SelectListItem>)ViewBag.Orderstatuslist, "--Select--")<br />
+
+            @Html.DropDownList("ddlDokuStatus", (IEnumerable<SelectListItem>)ViewBag.Dokustatuslist, "--Select--")
+
+         
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search</button>
+        </div>
+
+    </div>
+    
+    
+    <div id="grid-list">
+        @{ Html.RenderPartial("_Ajax_SelfcareTransactions", Model); }
+    </div>
+}
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>

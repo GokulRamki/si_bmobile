@@ -1,0 +1,698 @@
+﻿@model si_bmobile.Models.AccountModel
+
+<script> var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1"); </script>
+
+@if (Model != null && Model.Subr != null && Model.Subr.Count > 0)
+{
+    <div class="prm-slc-no" style="margin-top:0px; padding-top:0px;">
+        <div class="prm-prm-nm">
+            <span> @Model.Subr[0]._MSISDNNumber </span> - @(Model.Subr[0].isPrimary == true ? "is Primary Number" : Model.Subr[0].description)
+            <input id="hdn_reg_id" type="hidden" value="@Model.Reg.UserId" />
+            <input id="hdn_msisdn_no" type="hidden" value="@Model.Subr[0]._MSISDNNumber" />
+            <input id="hdn_msisdn_desc" type="hidden" value="@Model.Subr[0].description" />
+            @if (Model.Subr[0].isPrimary == false && string.IsNullOrEmpty(Model.Subr[0].description))
+            {
+                <span id="span_edit_desc" style="font-size:11px; color:black;">
+                    (<a href="#">Edit</a>)
+                </span>
+            }
+        </div>
+    </div>
+    <div class="prm-tab-panel">
+        <div class="cont-inn">
+            <div id="TabbedPanels1" class="TabbedPanels">
+                <ul class="TabbedPanelsTabGroup">
+                    @if (Model.Subr[0].paidtype != "502")
+                    {
+                        <li class="TabbedPanelsTab" tabindex="0">Balance</li>
+                    }
+                    @if (Model.Subr[0].paidtype == "502")
+                    {
+                        <li class="TabbedPanelsTab" tabindex="1">Bill</li>
+                    }
+                    @if (Model.Subr[0].planDetails != null)
+                    {
+                        <li class="TabbedPanelsTab" tabindex="2">Plans</li>
+                    }
+                    @*<li class="TabbedPanelsTab" tabindex="3">Services</li>
+                        <li class="TabbedPanelsTab" tabindex="4">Device and Sim</li>*@
+                </ul>
+                <div class="TabbedPanelsContentGroup">
+                    @if (Model.Subr[0].paidtype != "502")
+                    {
+                        <div class="TabbedPanelsContent">
+                            @*<div class="prm-big-cont">
+                                    <div class="prm-sm-hed"> Airtime balances </div>
+                                    <div class="prm-cont-lft">
+                                        <div class="prm-bal-hed"> <a href="my-balances.html"> Airtime </a> </div>
+                                    </div>
+                                    <div class="prm-cont-rgt">
+                                        <div class="prm-c-r-disc"> <span class="prm-c-r-big"> R350.00 </span> </div>
+                                    </div>
+                                    <div class="prm-big-btns">
+                                        <a href="my-balances.html"> View all airtime </a>
+                                        <a href="#" class="prm-big-buy"> Buy More </a>
+                                    </div>
+                                </div>*@
+
+                            <div class="prm-tbl-1">
+                                <div class="prm-c-rw">
+                                    <div class="prm-c-col"> Credit Balance </div>
+                                    <div class="prm-c-col-2"> @Model.Subr[0]._sbalance </div>
+                                </div>
+                                <div class="prm-c-rw">
+                                    <div class="prm-c-col"> Credit Balance Expiry </div>
+                                    <div class="prm-c-col-2"> @Model.Subr[0].sCreditExpirydate </div>
+                                </div>
+
+                                <div class="prm-tbl-cont-fluid">
+                                    <a href="@Url.Action("RefreshACC", "Care")" class="prm-rfrs"> Refresh </a>
+                                    @if (Model.Subr[0].isPrimary == false)
+                                    {
+                                        <a href="#" id="@Model.Subr[0]._MSISDNNumber" class="prm-rmv" onclick="return RemoveSim(this.id);"> Remove Mobile Number </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Subr[0].paidtype == "502")
+                    {
+                        <div class="TabbedPanelsContent">
+                            <div class="dRow">
+                                <div class="dRowlbl"><b>Current Account Details</b></div>
+                                <div class="dRowctrl">
+                                    <div>
+                                        <div class="postsumdiv">Account No:</div>
+                                        <div class="postsumdiv">@Model.Subr[0].accountNo</div>
+                                    </div>
+                                    <div>
+                                        <div class="postsumdiv">Invoice No:</div>
+                                        <div class="postsumdiv">@Model.Subr[0].transactionNo</div>
+                                    </div>
+                                    <div>
+                                        <div class="postsumdiv">Statement Date:</div>
+                                        <div class="postsumdiv">@Model.Subr[0].statementDate.ToString("dd-MMM-yyyy")</div>
+                                    </div>
+                                    <div>
+                                        <div class="postsumdiv">Total Current Charges Date:</div>
+                                        <div class="postsumdiv">@Model.Subr[0].paymentDueDate.ToString("dd-MMM-yyyy")</div>
+                                    </div>
+                                    <div>
+                                        <div class="postsumdiv">Invoice Amount:</div>
+                                        <div class="postsumdiv">@Model.Subr[0].totalAmount</div>
+                                    </div>
+                                    <div>
+                                        <div class="postsumdiv">Payment Due:</div>
+                                        <div class="postsumdiv">@Model.Subr[0].PaymentDue</div>
+                                    </div>
+                                    <div>
+                                        <div class="postsumdiv">
+                                            <input type="button" class="btn-submit" id="btnPayPP" value="Pay Now" onclick="ViewPayPP();" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="prm-tbl-cont-fluid">
+                                <a href="@Url.Action("RefreshACC", "Care")" class="prm-rfrs"> Refresh </a>
+                                @if (Model.Subr[0].isPrimary == false)
+                                {
+                                    <a href="#" id="@Model.Subr[0]._MSISDNNumber" class="prm-rmv" onclick="return RemoveSim(this.id);"> Remove Mobile Number </a>
+                                }
+                            </div>
+
+                            <!-- PostPaid Popup Begin -->
+                            <div id="divPostpaid_dialog" style="display: none;">
+                                <div class="postpaid-dialog-row">
+                                    <div class="postpaid-dialog-cell">
+                                        Postpaid Mobile Number :
+                                    </div>
+                                    <div class="postpaid-dialog-cell">
+                                        @if (Model.Reg != null)
+                                        {
+                                            @Html.DisplayFor(a => a.Subr[0]._MSISDNNumber)
+                                        }
+                                    </div>
+                                </div>
+                                <div class="postpaid-dialog-row">
+                                    <div class="postpaid-dialog-cell">
+                                        Amount (in Kina) :
+                                    </div>
+                                    <div class="postpaid-dialog-cell">
+                                        <input type="text" id="txtAmount" maxlength="5" style="width:99%;" />
+                                        <input type="hidden" id="hdninvoiceno" />
+                                    </div>
+                                </div>
+                                <div class="postpaid-dialog-row">
+                                    <div class="postpaid-dialog-cell">
+                                        Pay by :
+                                    </div>
+                                    <div class="postpaid-dialog-cell">
+                                        @Html.RadioButton("rbCreditCard", "CREDITCARD", true)
+                                        <label for="CreditCard">CreditCard</label>
+                                    </div>
+                                </div>
+                                <div class="postpaid-dialog-row">
+                                    <div class="postpaid-dialog-cell">
+                                        &nbsp;
+                                    </div>
+                                    <div class="postpaid-dialog-cell">
+                                        <div><span id="spValMsg" style="color: red;"></span></div>
+                                    </div>
+                                </div>
+                                <div class="postpaid-dialog-row">
+                                    <div class="postpaid-dialog-btn-cell">
+                                        <input type="button" class="btn-submit" id="btnPaybill" onclick="ViewPayContinue();" value="Pay" />&nbsp;<input type="button" class="btn-submit" onclick="clPPpay();" value="Cancel" />
+                                    </div>
+                                    <div id="divMProcess" class="postpaid-dialog-btn-cell" style="display: none;">
+                                        <img src="~/Content/themes/base/images/loading.gif" />please wait...
+                                    </div>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                            <!-- PostPaid Popup End -->
+                            <!-- PayConfirm Popup Begin -->
+                            <div id="divPayConfirm_dialog" style="display: none;">
+                                <div class="postpaid-dialog-row">
+                                    <span>
+                                        Would you like to Continue with Payment?
+                                    </span>
+                                </div>
+                                <div class="postpaid-dialog-row">
+                                    <div class="postpaid-dialog-btn-cell" id="divPayContinue">
+                                        <input type="button" id="btnPayContinue" class="btn-submit" onclick="postpaidBill('@Model.Subr[0]._MSISDNNumber','@Model.Subr[0].accountNo');" value="Continue" />&nbsp;<input type="button" class="btn-submit" onclick="clPPCancel();" value="Cancel" />
+                                    </div>
+                                    <div id="divPaymentProcess" class="postpaid-dialog-btn-cell" style="display: none;">
+                                        <img src="~/Content/themes/base/images/loading.gif" />please wait...
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- PayConfirm Popup End -->
+                            @if (Model.Subr[0].isExistAccountNo == false)
+                            {
+                                <div class="dRow" style="@Model.Subr[0].Disp_pbillStatus">
+                                    <div class="dRowlblsm">Postpaid&nbsp;bills</div>
+                                    <div class="dRowctrl">
+                                        <div class="dRowctrlmd dbgtitle">View&nbsp;Bills</div>
+                                        <div class="dRowctrlmd dItems">
+                                            @if (Model.Subr[0]._ppbills != null)
+                                            {
+                                                if (Model.Subr[0]._ppbills.Count > 0)
+                                                {
+                                                    foreach (var @item in Model.Subr[0]._ppbills)
+                                                    {
+                                                        <div>
+                                                            @Html.ActionLink(@item._doc_name, "Dwnld_bill", "Care", new { id = @item._file_name }, new { @style = "text-decoration:none;", @title = "Click to download" })
+
+                                                        </div>
+                                                        <br />
+                                                    }
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <div class="dRowlbl">&nbsp;</div>
+                                    <div class="dRowctrl" style="margin-bottom: 10px;">
+                                        "For Postpaid bill(s) please refer above"
+                                    </div>
+                                </div>
+                                <div class="dRow">
+                                    @if (Model.Subr[0].isPrimary == false)
+                                    {
+                                        <input type="hidden" id="hdnURL" value="@ViewBag.reURL" />
+                                        <div style="float: right; padding-right: 20px;">
+                                            <a id="@Model.Subr[0]._MSISDNNumber" href="#" onclick="return RemoveSim(this.id);">Remove Mobile Number</a>
+                                        </div>
+                                    }
+                                </div>
+                            }
+
+                            <div class="dRow" style="@Model.Subr[0].Disp_nbillStatus">
+                                <div class="dRowlbl">Postpaid&nbsp;bills</div>
+                                <div class="dRowctrl">None</div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.Subr[0].planDetails != null)
+                    {
+                        <div class="TabbedPanelsContent">
+                            <div class="prm-tbl-cont-fluid">
+                                <div class="prm-hed"> Prepaid Plans</div>
+                                <div class="prm-c-col-2">
+                                    <div class="prm-col-cl-3">
+                                        <div class="prm-col-hed">  Plan Name </div>
+                                        @if (Model.Subr[0].planDetails.Count > 0)
+                                        {
+                                            foreach (var item in Model.Subr[0].planDetails)
+                                            {
+                                                string plan_name = !string.IsNullOrEmpty(item.planName) ? item.planName.Replace("*", "") : string.Empty;
+                                                    <div class="prm-col-cont"> @plan_name </div>                                                
+                                            }
+                                        }
+                                    </div>
+
+                                    <div class="prm-col-cl-3">
+                                        <div class="prm-col-hed">  Subscription Date </div>
+                                        @if (Model.Subr[0].planDetails.Count > 0)
+                                        {
+                                            foreach (var item in Model.Subr[0].planDetails)
+                                            {
+                                                <div class="prm-col-cont"> @item.effectiveDate </div>
+                                            }
+                                        }
+                                    </div>
+
+                                    <div class="prm-col-cl-3">
+                                        <div class="prm-col-hed">  Expiry Date </div>
+                                        @if (Model.Subr[0].planDetails.Count > 0)
+                                        {
+                                            foreach (var item in Model.Subr[0].planDetails)
+                                            {
+                                                <div class="prm-col-cont"> @item.expiryDate </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(@Model.Subr[0].totDataSize))
+                            {
+                                <div class="prm-big-cont">
+                                    <div class="prm-cont-lft">
+                                        <div class="prm-bal-hed"> Data Balance Remaining</div>
+                                        @*<div class="prm-bal-disc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </div>*@
+                                    </div>
+                                    <div class="prm-cont-rgt">
+                                        <div class="prm-c-r-disc">
+                                            <span class="prm-c-r-big"> @Model.Subr[0]._sdataBalance </span> of @Model.Subr[0].totDataSize
+                                        </div>
+                                        <div class="prm-prgrs-wrap"> <div class="prm-prgrs" style="width: @Model.Subr[0].totDataPercentage%;"> &nbsp; </div> </div>
+                                        @*<div class="faq-tgl-p-1"> Total any network anytime </div>*@
+                                    </div>
+                                    <div class="prm-big-btns">
+                                        @*<a href="my-balances.html"> View all Data Balance </a>*@
+                                        <a href="@Url.Action("Plans","Care")" class="prm-big-buy"> Buy More </a>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrEmpty(Model.Subr[0].totVoiceSize))
+                            {
+                                <div class="prm-big-cont">
+                                    <div class="prm-cont-lft">
+                                        <div class="prm-bal-hed"> Voice Balance Remaining</div>
+                                        @*<div class="prm-bal-disc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. </div>*@
+                                    </div>
+                                    <div class="prm-cont-rgt">
+                                        <div class="prm-c-r-disc">
+                                            <span class="prm-c-r-big"> @Model.Subr[0].sVoicebalance </span> of @Model.Subr[0].totVoiceSize
+                                        </div>
+                                        <div class="prm-prgrs-wrap"> <div class="prm-prgrs" style="width: @Model.Subr[0].totVoicePercentage%;"> &nbsp; </div> </div>
+                                        @*<div class="faq-tgl-p-1"> Total any network anytime </div>*@
+                                    </div>
+                                    <div class="prm-big-btns">
+                                        @*<a href="my-balances.html"> View all Voice Balance </a>*@
+                                        <a href="@Url.Action("Plans","Care")" class="prm-big-buy"> Buy More </a>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrEmpty(Model.Subr[0].totSmsCount))
+                            {
+                                <div class="prm-big-cont">
+                                    <div class="prm-cont-lft">
+                                        <div class="prm-bal-hed"> SMS Balance Remaining</div>
+                                        @*<div class="prm-bal-disc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. </div>*@
+                                    </div>
+                                    <div class="prm-cont-rgt">
+                                        <div class="prm-c-r-disc">
+                                            <span class="prm-c-r-big"> @Model.Subr[0].sSMSbalance </span> of @Model.Subr[0].totSmsCount
+                                        </div>
+                                        <div class="prm-prgrs-wrap"> <div class="prm-prgrs" style="width: @Model.Subr[0].totSmsPercentage%;"> &nbsp; </div> </div>
+                                        @*<div class="faq-tgl-p-1"> Total any network anytime </div>*@
+                                    </div>
+                                    <div class="prm-big-btns">
+                                        @*<a href="my-balances.html"> View all SMS Balance </a>*@
+                                        <a href="@Url.Action("Plans","Care")" class="prm-big-buy"> Buy More </a>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrEmpty(Model.Subr[0].totIddSize))
+                            {
+                                <div class="prm-big-cont">
+                                    <div class="prm-cont-lft">
+                                        <div class="prm-bal-hed"> IDD Balance Remaining</div>
+                                        @*<div class="prm-bal-disc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. </div>*@
+                                    </div>
+                                    <div class="prm-cont-rgt">
+                                        <div class="prm-c-r-disc">
+                                            <span class="prm-c-r-big"> @Model.Subr[0].totIddBalance </span> of @Model.Subr[0].totIddSize
+                                        </div>
+                                        <div class="prm-prgrs-wrap"> <div class="prm-prgrs" style="width: @Model.Subr[0].totIddPercentage%;"> &nbsp; </div> </div>
+                                        @*<div class="faq-tgl-p-1"> Total any network anytime </div>*@
+                                    </div>
+                                    <div class="prm-big-btns">
+                                        @*<a href="my-balances.html"> View all SMS Balance </a>*@
+                                        <a href="@Url.Action("Plans","Care")" class="prm-big-buy"> Buy More </a>
+                                    </div>
+                                </div>
+                            }
+
+
+                            @if (!string.IsNullOrEmpty(@Model.Subr[0].totRoamingDataSize))
+                            {
+                                <div class="prm-big-cont">
+                                    <div class="prm-cont-lft">
+                                        <div class="prm-bal-hed">Roaming Data Balance Remaining</div>
+                                        @*<div class="prm-bal-disc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </div>*@
+                                    </div>
+                                    <div class="prm-cont-rgt">
+                                        <div class="prm-c-r-disc">
+                                            <span class="prm-c-r-big"> @Model.Subr[0].totRoamingDataBalance </span> of @Model.Subr[0].totRoamingDataSize
+                                        </div>
+                                        <div class="prm-prgrs-wrap"> <div class="prm-prgrs" style="width: @Model.Subr[0].totRoamingDataPercentage%;"> &nbsp; </div> </div>
+                                        @*<div class="faq-tgl-p-1"> Total any network anytime </div>*@
+                                    </div>
+                                    <div class="prm-big-btns">
+                                        @*<a href="my-balances.html"> View all Data Balance </a>*@
+                                        <a href="@Url.Action("Plans","Care")" class="prm-big-buy"> Buy More </a>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrEmpty(Model.Subr[0].totRoamingVoiceSize))
+                            {
+                                <div class="prm-big-cont">
+                                    <div class="prm-cont-lft">
+                                        <div class="prm-bal-hed">Roaming Voice Balance Remaining</div>
+                                        @*<div class="prm-bal-disc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. </div>*@
+                                    </div>
+                                    <div class="prm-cont-rgt">
+                                        <div class="prm-c-r-disc">
+                                            <span class="prm-c-r-big"> @Model.Subr[0].totRoamingVoiceBalance </span> of @Model.Subr[0].totRoamingVoiceSize
+                                        </div>
+                                        <div class="prm-prgrs-wrap"> <div class="prm-prgrs" style="width: @Model.Subr[0].totRoamingVoicePercentage%;"> &nbsp; </div> </div>
+                                        @*<div class="faq-tgl-p-1"> Total any network anytime </div>*@
+                                    </div>
+                                    <div class="prm-big-btns">
+                                        @*<a href="my-balances.html"> View all Voice Balance </a>*@
+                                        <a href="@Url.Action("Plans","Care")" class="prm-big-buy"> Buy More </a>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrEmpty(Model.Subr[0].totRoamingSmsSize))
+                            {
+                                <div class="prm-big-cont">
+                                    <div class="prm-cont-lft">
+                                        <div class="prm-bal-hed">Roaming SMS Balance Remaining</div>
+                                        @*<div class="prm-bal-disc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. </div>*@
+                                    </div>
+                                    <div class="prm-cont-rgt">
+                                        <div class="prm-c-r-disc">
+                                            <span class="prm-c-r-big"> @Model.Subr[0].totRoamingSmsBalance </span> of @Model.Subr[0].totRoamingSmsSize
+                                        </div>
+                                        <div class="prm-prgrs-wrap"> <div class="prm-prgrs" style="width: @Model.Subr[0].totRoamingSmsPercentage%;"> &nbsp; </div> </div>
+                                        @*<div class="faq-tgl-p-1"> Total any network anytime </div>*@
+                                    </div>
+                                    <div class="prm-big-btns">
+                                        @*<a href="my-balances.html"> View all SMS Balance </a>*@
+                                        <a href="@Url.Action("Plans","Care")" class="prm-big-buy"> Buy More </a>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+
+                    }
+                    @*<div class="TabbedPanelsContent">Content 4</div>
+                        <div class="TabbedPanelsContent">Content 5</div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Edit Description Popup Begin-->
+    <div id="Edit_Desc_Dialog" style="display: none; overflow: hidden;">
+        <div>
+            <div class="postpaid-dialog-row">
+                <div class="postpaid-dialog-cell">
+                    Mobile Number:
+                </div>
+                <div class="postpaid-dialog-cell">
+                    <span id="span_edit_desc_msisdnno"></span>
+                </div>
+            </div>
+            <div class="postpaid-dialog-row">
+                <div class="postpaid-dialog-cell">
+                    Description:
+                </div>
+                <div class="postpaid-dialog-cell">
+                    <input type="text" id="txt_edit_desc" style="height:30px; width:100%;" />
+                    <span id="span_desc_valid_msg" style="color:red; font-size:12px;"></span>
+                </div>
+            </div>
+            <div class="postpaid-dialog-btn-cell" id="edit_desc_btn_pnl">
+                <input type="button" class="btn-submit" onclick="update_msisdn_desc();" value="Submit" />&nbsp;
+                <input type="button" class="btn-submit" onclick="close_msisdn_desc();" value="Cancel" />
+            </div>
+            <div id="edit_desc_progress_pnl" class="postpaid-dialog-btn-cell" style="display:none;">
+                <img src="~/Content/themes/base/images/loading.gif" />please wait...
+            </div>
+        </div>
+    </div>
+            <!-- Edit Description Popup Close-->
+
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function () {
+
+            $('#divPostpaid_dialog').dialog({
+                autoOpen: false,
+                width: 410,
+                //height: 150,
+                dialogClass: 'dialog_css',
+                resizable: false,
+                title: 'Postpaid Payment',
+                modal: true
+            });
+            //Search
+        });
+
+        function ViewPayPP() {
+            $("#divPostpaid_dialog").dialog('open');
+
+            $("#txtAmount").val('@ViewBag.postpaidBal');
+            $("#hdninvoiceno").val('@ViewBag.pptransno');
+
+        }
+        function clPPpay() {
+            $("#divPostpaid_dialog").dialog('close');
+        }
+        //]]>
+    </script>
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function () {
+
+            $('#divPayConfirm_dialog').dialog({
+                autoOpen: false,
+                width: 410,
+                //height: 150,
+                dialogClass: 'dialog_css',
+                resizable: false,
+                title: 'Payment Confirmation',
+                modal: true
+            });
+
+
+            $('#divPromoIB').dialog({
+                autoOpen: true,
+                width: 650,
+                dialogClass: 'dialog_css',
+                resizable: true,
+                title: 'Internet Banking',
+                buttons: {
+                    Close: function () {
+                        $(this).dialog('close');
+                        return false;
+                    }
+                },
+                closeOnEscape: true,
+                draggable: true,
+                modal: true
+
+            });
+
+            //Search
+
+            $('#promoIB').click(function () {
+
+
+                $('#divIB').dialog({
+                    autoOpen: true,
+                    width: 650,
+                    dialogClass: 'dialog_css',
+                    resizable: true,
+                    title: 'Internet Banking',
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            return false;
+                        }
+                    },
+                    closeOnEscape: true,
+                    draggable: true,
+                    modal: true
+
+                });
+            });
+
+        });
+
+        function ViewPayContinue() {
+
+            if ($("#txtAmount").val() != "0") {
+                $("#spValMsg").html("");
+                $("#divPostpaid_dialog").dialog('close');
+                $("#divPayConfirm_dialog").dialog('open');
+
+            }
+            else {
+                $("#spValMsg").html("Amount Required!");
+                return false;
+            }
+        }
+        function clPPCancel() {
+            $("#divPostpaid_dialog").dialog('close');
+            $("#divPayConfirm_dialog").dialog('close');
+        }
+        function DisplayProgress() {
+            $("#divPaymentProcess").css("display", "block");
+            $("#divPayContinue").css("display", "none");
+        }
+
+        function HideProgressPanel() {
+            $("#divPaymentProcess").css("display", "none");
+            $("#divPayContinue").css("display", "block");
+        }
+
+        function postpaidBill(msisdn, account_no) {
+
+            DisplayProgress();
+            var v_invoiceno = $("#hdninvoiceno").val();
+            var vbillamount = $("#txtAmount").val();
+            var vPtype = $("#rbCreditCard").val();
+            if (v_invoiceno != null && vbillamount != null) {
+                $.ajax({
+                    url: "@Url.Action("PostpaidBillpay", "Care")",
+                    data: { sAmount: vbillamount, sPaymentType: vPtype, invoiceno: v_invoiceno, paid_msisdn: msisdn, ac_no: account_no },
+                    type: "POST",
+                    success: function (response) {
+
+                        HideProgressPanel();
+                        if (response.rmsg == "success") {
+                            window.location = response.rurl;
+                        }
+                        else {
+                            $("#spValMsg").html(response.res);
+                            return false;
+                        }
+
+                    },
+                    error: function (response) {
+                        //alert("ppbill " + response.d);
+                    }
+                });
+            }
+            else {
+                HideProgressPanel();
+                $("#spValMsg").html("failed to proceed further!");
+                return false;
+            }
+        }
+
+
+        //]]>
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Edit_Desc_Dialog').dialog({
+                autoOpen: false,
+                width: 450,
+                dialogClass: 'dialog_css',
+                resizable: false,
+                title: 'EDIT DESCRIPTION',
+                modal: true,
+                autoReposition: true
+            });
+        });
+
+        $('#span_edit_desc').live("click", function () {
+            $('#edit_desc_btn_pnl').show();
+            $('#edit_desc_progress_pnl').hide();
+            $('#span_desc_valid_msg').html('');
+
+            var msisdn_no = $('#hdn_msisdn_no').val();
+            var msisdn_desc = $('#hdn_msisdn_desc').val();
+
+            $('#span_edit_desc_msisdnno').html(msisdn_no);
+            $('#txt_edit_desc').val(msisdn_desc);
+
+            $('#Edit_Desc_Dialog').dialog('open');
+        });
+
+        function update_msisdn_desc() {
+
+            var reg_id = $('#hdn_reg_id').val();
+            var msdnno = $('#hdn_msisdn_no').val();
+            var desc = $('#txt_edit_desc').val();
+            if (desc == '') {
+                $('#span_desc_valid_msg').html('Description Required!');
+                $('#txt_edit_desc').focus();
+                return false;
+            }
+
+            $('#edit_desc_btn_pnl').hide();
+            $('#edit_desc_progress_pnl').show();
+
+            $.ajax({
+                url: "/Care/UpdateMSISDN_Description",
+                data: { sRegId: reg_id, sMsisdn: msdnno, sDesc: desc },
+                type: "POST",
+                success: function (response) {
+                    HideProgressPanel();
+                    if (response == "0")
+                        ShowAlertAndRedirect('Success', 'Description updated successfully for the MSISDN No - ' + msdnno, '/Care/RefreshACC');
+                    else
+                        ShowAlert('Message', 'Failed to Update Description!');
+
+                    $('#Edit_Desc_Dialog').dialog('close');
+                },
+                error: function (response) {
+                    //alert("SendVerification: " + response.d);
+                    $('#Edit_Desc_Dialog').dialog('close');
+
+                    ShowAlert('Message', 'Failed to update description please try later');
+                }
+            });
+        }
+
+        function close_msisdn_desc() {
+            $('#Edit_Desc_Dialog').dialog('close');
+        }
+    </script>
+}

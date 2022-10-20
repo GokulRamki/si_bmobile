@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f29c18c8-6bc8-4e9a-89dd-65aa26a196dd" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://bm.twinkletech.com/Service3/GetPower.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GetPower.disco" MetadataType="Disco" ID="334cce03-991a-403a-89b9-d3e0a5f0ae93" SourceId="1" SourceUrl="http://bm.twinkletech.com/Service3/GetPower.svc?disco" />
+    <MetadataFile FileName="GetPower.wsdl" MetadataType="Wsdl" ID="62aa1294-e2d8-447f-8834-01a8c9f13581" SourceId="1" SourceUrl="http://bm.twinkletech.com/Service3/GetPower.svc?wsdl" />
+    <MetadataFile FileName="GetPower.xsd" MetadataType="Schema" ID="762f0d40-033e-4490-baea-3b5231798158" SourceId="1" SourceUrl="http://bm.twinkletech.com/Service3/GetPower.svc?xsd=xsd0" />
+    <MetadataFile FileName="GetPower1.xsd" MetadataType="Schema" ID="71e00d67-a9e8-4f5d-bcdd-19bb5a3ee339" SourceId="1" SourceUrl="http://bm.twinkletech.com/Service3/GetPower.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,115 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.DokuCareModel>
+  <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+              
+                <th>
+                   First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                  <th>
+                    TransactionID
+                </th>
+                <th>
+                   Payment Date
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Mobile Number
+                </th>
+                <th>
+                    Billed For
+                </th>
+                <th>
+                   Doku Status
+                </th>
+                <th>
+                    Order Status
+                </th>
+                <th>
+                    Payment Type
+                </th>
+               <th>
+                   Email Address
+               </th>
+              
+                </thead>
+        <tbody>
+                @if (Model.Count > 0)
+                {
+
+                    foreach (var item in Model)
+                    {
+                     <tr>
+                    <td>
+                        @item.order.cust_fname
+                    </td>
+                    <td class="dAColhead dItems md">
+                        @item.order.cust_lname
+                    </td>
+                    <td>
+                        @item.doku.transidmerchant
+                    </td>
+                    <td>
+                        @item.doku.created_on
+                    </td>
+                    <td>
+                        @item.doku.totalamount
+                    </td>
+                    <td>
+                        @item.orderitem.product_id
+                    </td>
+                    <td>
+                        @item.orderitem.product_name
+                    </td>
+                    <td>
+                        @item.doku.resultmsg
+                    </td>
+                    <td>
+                        @item.orderpayment.payment_status
+                    </td>
+                   <td>
+                       @item.orderpayment.payment_type
+                   </td>
+                         <td>
+                             @item.order.cust_email
+                         </td>
+                    </tr>
+                    }
+
+                }
+            </tbody>
+    </table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "Bundles" }))
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries</div>
+</div>
+<script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>

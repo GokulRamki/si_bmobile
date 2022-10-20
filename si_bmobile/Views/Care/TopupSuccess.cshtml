@@ -1,0 +1,23 @@
+﻿@model si_bmobile.Models.RegistrationModel
+
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+
+<div class="mid_margin">
+<h2>Top up Success</h2>
+@using (Html.BeginForm("TopupSuccess", "Care", FormMethod.Post, new { id = "frmtopSuccess", enctype = "multipart/form-data" }))
+{
+      @Html.AntiForgeryToken()
+    <div class="lef-pan">
+        <p>
+            <strong>You have Successfully topped up your account @Html.ActionLink("Click here", "Topup")&nbsp;to add another voucher if needed</strong>
+        </p>
+        <p>
+            @Html.ActionLink("Click here to go back to Account Summary", "RefreshACC")
+        </p>
+    </div>
+        @Html.Partial("RightNav_PartialView")    
+}
+</div>

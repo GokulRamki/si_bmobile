@@ -1,0 +1,302 @@
+﻿@model si_bmobile.Models.web_tbl_shopping_user_contact
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+
+<div class="steps_pan" style="@ViewBag.StepsView">
+    <ul class="steps">
+        <li class="start first"><span></span><a href="#">Email Login</a></li>
+        <li class="next"><span></span>Confirm Order</li>        
+        <li class="empty last"><span></span>Order Summary</li>
+    </ul>
+    <div class="clear"></div>
+</div>
+
+
+<div class="mid_margin">
+    <div class="choose_box remov_padd wrapper">       
+        <section class="content-wrapper content-pan clear-fix">
+            <section id="widget-grid" style="margin: 50px auto;">
+                <!-- START ROW -->
+                <div class="row">
+                    <!-- NEW COL START -->
+                    <article class="col-sm-12 col-md-12 col-lg-6" style="float:none; margin: 5px auto;">
+
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                            <header>
+                                <span class="widget-icon"><i class="fa fa-user"></i></span>
+                                <h2>Registration </h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    @using (Html.BeginForm("Register", "Shop", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmReg", @class = "smart-form", novalidate = "novalidate" }))
+                                    {	    
+                                        @Html.AntiForgeryToken()                             
+                           
+                                        if (ViewBag.Message != null)
+                                        {
+                                        <fieldset id="msg_pan">
+                                            <div class="alert alert-warning fade in">
+                                                <button class="close" data-dismiss="alert">
+                                                    ×
+                                                </button>
+                                                <i class="fa-fw fa fa-warning"></i>
+                                                <strong>Warning</strong> @ViewBag.Message
+                                            </div>
+                                        </fieldset>
+                                        }                       
+                                        <fieldset>
+                                            <section>
+                                                <b>First Name:&nbsp;</b>
+                                                <label for="first_name" class="input">
+                                                    @Html.TextBoxFor(model => model.first_name, new { placeholder = "First Name" })
+                                                    @Html.ValidationMessageFor(model => model.first_name)
+                                                </label>
+                                            </section> 
+                                            
+                                              <section>
+                                                <b>Last Name:&nbsp;</b>
+                                                <label for="LastName" class="input">
+                                                    @Html.TextBoxFor(model => model.last_name, new { placeholder = "Last Name" })
+                                                    @Html.ValidationMessageFor(model => model.last_name)
+                                                </label>
+                                            </section>  
+                                             <section>
+                                                <b>E-mail:&nbsp;</b>
+                                                <label for="E-mail" class="input">
+                                                    @Html.TextBoxFor(model => model.email, new { placeholder = "E-mail" })
+                                                    @Html.ValidationMessageFor(model => model.email)
+                                                </label>
+                                            </section>    
+                                             <section>
+                                                <b>Password:&nbsp;</b>
+                                                <label for="Password" class="input">
+                                                    @Html.PasswordFor(model => model.pwd, new { placeholder = "Password" })
+                                                    @Html.ValidationMessageFor(model => model.pwd)
+                                                </label>
+                                            </section>    
+                                             <section>
+                                                <b>Phone Number:&nbsp;</b>
+                                                <label for="phone_number" class="input">
+                                                    @Html.TextBoxFor(model => model.phone_number, new { placeholder = "Phone Number" })
+                                                    @Html.ValidationMessageFor(model => model.phone_number)
+                                                </label>
+                                            </section> 
+                                             <section>
+                                                <b>Mobile Number:&nbsp;</b>
+                                                <label for="mobile_number" class="input">
+                                                    @Html.TextBoxFor(model => model.mobile_number, new { placeholder = "Mobile Number" })
+                                                    @Html.ValidationMessageFor(model => model.mobile_number)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <b>Address Line-1:&nbsp;</b>
+                                                <label for="mobile_number" class="input">
+                                                    @Html.TextBoxFor(model => model.address1, new { placeholder = "Address Line-1" })
+                                                    @Html.ValidationMessageFor(model => model.address1)
+                                                </label>
+                                            </section>  
+                                            <section>
+                                                <b>Address Line-2:&nbsp;</b>
+                                                <label for="address2" class="input">
+                                                    @Html.TextBoxFor(model => model.address2, new { placeholder = "Address Line-2" })
+                                                    @Html.ValidationMessageFor(model => model.address2)
+                                                </label>
+                                            </section> 
+                                             <section>
+                                                <b>City:&nbsp;</b>
+                                                <label for="city" class="input">
+                                                    @Html.TextBoxFor(model => model.city, new { placeholder = "City" })
+                                                    @Html.ValidationMessageFor(model => model.city)
+                                                </label>
+                                            </section> 
+                                             <section>
+                                                <b>Country:&nbsp;</b>
+                                                <label for="country" class="input">
+                                                    @Html.TextBoxFor(model => model.country, new { placeholder = "Country" })
+                                                    @Html.ValidationMessageFor(model => model.country)
+                                                </label>
+                                            </section> 
+                                             <section>
+                                                <b>Post Code:&nbsp;</b>
+                                                <label for="PostCode" class="input">
+                                                    @Html.TextBoxFor(model => model.postcode, new { placeholder = "Post Code" })
+                                                    @Html.ValidationMessageFor(model => model.postcode)
+                                                </label>
+                                            </section>                                              
+                                        </fieldset>  
+                                        <footer>
+                                            <button id="btnCancel" value="Cancel" class="btn btn-mini top_btn" type="button" onclick="window.location = '/Shop/Login'">Cancel</button>
+                                            <button id="btnSubmit" class="btn btn-mini top_btn" type="submit">Submit</button>
+                                        </footer>
+                                    }
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+                    </article>
+                    <!-- END COL -->
+                </div>
+                <!-- END ROW -->
+            </section>
+        </section>  
+    </div>   
+</div>
+
+@*<div class="reg_pan box_shadow">
+    <div class="title">Registration</div>
+    @using (Html.BeginForm("Register", "Shop", FormMethod.Post, new { id = "frmShopReg", enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+       
+        <div class="div-row">            
+            <div class="editor-label">
+                First name:
+                <div class="DivMant">*</div>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.first_name, new {maxlenth=50, @class = "Txtbox" })
+                <br />@Html.ValidationMessageFor(model => model.first_name)
+            </div>
+        </div>
+        <div class="div-row">            
+            <div class="editor-label">
+                Last name:
+                <div class="DivMant">*</div>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.last_name, new {maxlength=100, @class = "Txtbox" })
+            </div>
+        </div>
+        <div class="div-row">            
+            <div class="editor-label">
+                Email:
+                <div class="DivMant">*</div>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.email, new {maxlength=50, @class = "Txtbox" })
+                <br />@Html.ValidationMessageFor(model => model.email)
+            </div>
+        </div>
+        <div class="div-row">            
+            <div class="editor-label">
+                Password:
+                <div class="DivMant">*</div>
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.pwd, new {maxlength=15, @class = "Txtbox" })
+                <br />@Html.ValidationMessageFor(model => model.pwd)
+            </div>
+        </div>
+        <div class="div-row">            
+            <div class="editor-label">
+                Phone number:
+                <div class="DivMant">*</div>
+            </div>
+            <div class="editor-field">
+                677  @Html.TextBoxFor(model => model.phone_number, new {maxlength=15, @style = "width: 224px !important; height:20px;"  })
+                <br />@Html.ValidationMessageFor(model => model.phone_number)
+            </div>
+        </div>
+        <div class="div-row">           
+            <div class="editor-label">
+                Mobile number:
+                 <div class="DivMant">*</div>
+            </div>
+            <div class="editor-field">
+                677  @Html.TextBoxFor(model => model.mobile_number, new {maxlength=15, @style = "width: 224px; height:20px;"  })
+                <br />@Html.ValidationMessageFor(model => model.mobile_number)
+            </div>
+        </div>
+        <div class="div-row">           
+            <div class="editor-label">
+                Address line 1:
+                 <div class="DivMant">*</div>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.address1, new {maxlength=250, @class = "Txtbox" })
+                <br />@Html.ValidationMessageFor(model => model.address1)
+            </div>
+        </div>
+        <div class="div-row">            
+            <div class="editor-label">
+                Address line 2:
+                <div class="DivMant">&nbsp;</div>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.address2, new {maxlength=250, @class = "Txtbox" })
+            </div>
+        </div>
+        <div class="div-row">            
+            <div class="editor-label">
+                City:
+                <div class="DivMant">*</div>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.city, new {maxlength=50, @class = "Txtbox" })
+                <br />@Html.ValidationMessageFor(model => model.city)
+            </div>
+        </div>
+        <div class="div-row">            
+            <div class="editor-label">
+                Country:
+                <div class="DivMant">*</div>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.country, new {maxlength=50, @class = "Txtbox" })
+                <br />@Html.ValidationMessageFor(model => model.country)
+            </div>
+        </div>
+        <div class="div-row">            
+            <div class="editor-label">
+                Post code:
+                <div class="DivMant">*</div>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.postcode, new {maxlength=15, @class = "Txtbox" })
+                <br />@Html.ValidationMessageFor(model => model.postcode)
+            </div>
+        </div>
+        <div class="div-row">
+            <div class="editor-label">
+                &nbsp;
+            </div>
+            <div class="editor-field">
+                <input type="submit" value="Register" />&nbsp;
+                 <input type="button" value="Cancel" onclick="window.location='/Shop/Login'" />
+            </div>
+        </div>
+        <div id="LoginFailMeg" class="div-row" style="display: none;">
+            <p>@ViewBag.Message</p>
+        </div>
+    }
+    <div class="clr"></div>
+</div>*@
+@*@Html.Partial("RightNav_PartialView")*@
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">   
+        $(document).ready(function () {
+            $('#phone_number,#mobile_number,#postcode').keypress(function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {                    
+                    return false;
+                }
+            });
+
+        });       
+    </script>
+}

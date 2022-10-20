@@ -1,0 +1,114 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.web_tbl_care_user>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Role
+            </th>
+            <th>Username
+            </th>
+            <th>Firstname
+            </th>
+            <th>Lastname
+            </th>
+            <th>Email
+            </th>
+            <th>Contact&nbsp;Number
+            </th>
+            <th>Status
+            </th>
+            <th>CreatedOn
+            </th>
+            <th>ModifiedOn
+            </th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+
+            foreach (var item in Model)
+            {
+                var @rolename = "";
+                var @status = "";
+                if (@item.role_id == 3)
+                    @rolename = "Accounts";
+                else if (@item.role_id == 4)
+                    @rolename = "CustomerCare";
+
+                if (@item.is_active == true)
+                    @status = "Active";
+                else
+                    @status = "Inactive";
+                
+            <tr>
+                <td>
+                     @rolename
+                </td>
+                <td>
+                    @item.user_name
+                </td>
+                <td>
+                    @item.first_name
+                </td>
+                <td>
+                    @item.last_name
+                </td>
+                <td>
+                    @item.email_id
+                </td>
+                <td>
+                    @item.contact_number
+                </td>
+                <td>
+                  @status 
+                </td>
+                <td>
+                    @item.creadted_on
+                </td>
+                <td>
+                    @item.modified_on
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditUser", new { id = item.id }) 
+                </td>
+                <td>@Html.ActionLink("Delete", "DelUser", new { id=item.id })</td>
+            </tr>
+            }
+
+        }
+    </tbody>
+</table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "CareUsers", ddlRoles = ViewData["ddlRoles"], ddlStatus = ViewData["ddlStatus"] }))
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>
+
+

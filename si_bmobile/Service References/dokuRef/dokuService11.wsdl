@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="dokuService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:51319/Service/dokuService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:51319/Service/dokuService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:51319/Service/dokuService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/doku_payment.Models" />
+      <xsd:import schemaLocation="http://localhost:51319/Service/dokuService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IdokuService_save_selfcare_order_InputMessage">
+    <wsdl:part name="parameters" element="tns:save_selfcare_order" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_selfcare_order_OutputMessage">
+    <wsdl:part name="parameters" element="tns:save_selfcare_orderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_doku_order_payment_InputMessage">
+    <wsdl:part name="parameters" element="tns:save_doku_order_payment" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_doku_order_payment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:save_doku_order_paymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_doku_order_transactions_InputMessage">
+    <wsdl:part name="parameters" element="tns:get_doku_order_transactions" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_doku_order_transactions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:get_doku_order_transactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_doku_order_transactionsBySite_InputMessage">
+    <wsdl:part name="parameters" element="tns:get_doku_order_transactionsBySite" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_doku_order_transactionsBySite_OutputMessage">
+    <wsdl:part name="parameters" element="tns:get_doku_order_transactionsBySiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_doku_order_transactionsByPurchase_InputMessage">
+    <wsdl:part name="parameters" element="tns:get_doku_order_transactionsByPurchase" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_doku_order_transactionsByPurchase_OutputMessage">
+    <wsdl:part name="parameters" element="tns:get_doku_order_transactionsByPurchaseResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_doku_order_byid_InputMessage">
+    <wsdl:part name="parameters" element="tns:get_doku_order_byid" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_doku_order_byid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:get_doku_order_byidResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_temp_order_InputMessage">
+    <wsdl:part name="parameters" element="tns:save_temp_order" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_temp_order_OutputMessage">
+    <wsdl:part name="parameters" element="tns:save_temp_orderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_temp_order_byid_InputMessage">
+    <wsdl:part name="parameters" element="tns:get_temp_order_byid" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_temp_order_byid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:get_temp_order_byidResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_shopping_orderby_userid_InputMessage">
+    <wsdl:part name="parameters" element="tns:get_shopping_orderby_userid" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_shopping_orderby_userid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:get_shopping_orderby_useridResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_OrderStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:OrderStatus" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_OrderStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OrderStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_DokuOrderStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:DokuOrderStatus" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_DokuOrderStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DokuOrderStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_selfcare_order_App_InputMessage">
+    <wsdl:part name="parameters" element="tns:save_selfcare_order_App" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_selfcare_order_App_OutputMessage">
+    <wsdl:part name="parameters" element="tns:save_selfcare_order_AppResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_doku_order_payment_App_InputMessage">
+    <wsdl:part name="parameters" element="tns:save_doku_order_payment_App" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_doku_order_payment_App_OutputMessage">
+    <wsdl:part name="parameters" element="tns:save_doku_order_payment_AppResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_temp_order_App_InputMessage">
+    <wsdl:part name="parameters" element="tns:save_temp_order_App" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_temp_order_App_OutputMessage">
+    <wsdl:part name="parameters" element="tns:save_temp_order_AppResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_doku_order_byid_App_InputMessage">
+    <wsdl:part name="parameters" element="tns:get_doku_order_byid_App" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_doku_order_byid_App_OutputMessage">
+    <wsdl:part name="parameters" element="tns:get_doku_order_byid_AppResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_order_transactionsByGateway_InputMessage">
+    <wsdl:part name="parameters" element="tns:get_order_transactionsByGateway" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_get_order_transactionsByGateway_OutputMessage">
+    <wsdl:part name="parameters" element="tns:get_order_transactionsByGatewayResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_doku_gui_access_InputMessage">
+    <wsdl:part name="parameters" element="tns:save_doku_gui_access" />
+  </wsdl:message>
+  <wsdl:message name="IdokuService_save_doku_gui_access_OutputMessage">
+    <wsdl:part name="parameters" element="tns:save_doku_gui_accessResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IdokuService">
+    <wsdl:operation name="save_selfcare_order">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/save_selfcare_order" message="tns:IdokuService_save_selfcare_order_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/save_selfcare_orderResponse" message="tns:IdokuService_save_selfcare_order_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="save_doku_order_payment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/save_doku_order_payment" message="tns:IdokuService_save_doku_order_payment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/save_doku_order_paymentResponse" message="tns:IdokuService_save_doku_order_payment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="get_doku_order_transactions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/get_doku_order_transactions" message="tns:IdokuService_get_doku_order_transactions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/get_doku_order_transactionsResponse" message="tns:IdokuService_get_doku_order_transactions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="get_doku_order_transactionsBySite">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/get_doku_order_transactionsBySite" message="tns:IdokuService_get_doku_order_transactionsBySite_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/get_doku_order_transactionsBySiteResponse" message="tns:IdokuService_get_doku_order_transactionsBySite_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="get_doku_order_transactionsByPurchase">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/get_doku_order_transactionsByPurchase" message="tns:IdokuService_get_doku_order_transactionsByPurchase_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/get_doku_order_transactionsByPurchaseResponse" message="tns:IdokuService_get_doku_order_transactionsByPurchase_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="get_doku_order_byid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/get_doku_order_byid" message="tns:IdokuService_get_doku_order_byid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/get_doku_order_byidResponse" message="tns:IdokuService_get_doku_order_byid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="save_temp_order">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/save_temp_order" message="tns:IdokuService_save_temp_order_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/save_temp_orderResponse" message="tns:IdokuService_save_temp_order_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="get_temp_order_byid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/get_temp_order_byid" message="tns:IdokuService_get_temp_order_byid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/get_temp_order_byidResponse" message="tns:IdokuService_get_temp_order_byid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="get_shopping_orderby_userid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/get_shopping_orderby_userid" message="tns:IdokuService_get_shopping_orderby_userid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/get_shopping_orderby_useridResponse" message="tns:IdokuService_get_shopping_orderby_userid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/OrderStatus" message="tns:IdokuService_OrderStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/OrderStatusResponse" message="tns:IdokuService_OrderStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DokuOrderStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/DokuOrderStatus" message="tns:IdokuService_DokuOrderStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/DokuOrderStatusResponse" message="tns:IdokuService_DokuOrderStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="save_selfcare_order_App">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/save_selfcare_order_App" message="tns:IdokuService_save_selfcare_order_App_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/save_selfcare_order_AppResponse" message="tns:IdokuService_save_selfcare_order_App_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="save_doku_order_payment_App">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/save_doku_order_payment_App" message="tns:IdokuService_save_doku_order_payment_App_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/save_doku_order_payment_AppResponse" message="tns:IdokuService_save_doku_order_payment_App_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="save_temp_order_App">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/save_temp_order_App" message="tns:IdokuService_save_temp_order_App_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/save_temp_order_AppResponse" message="tns:IdokuService_save_temp_order_App_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="get_doku_order_byid_App">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/get_doku_order_byid_App" message="tns:IdokuService_get_doku_order_byid_App_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/get_doku_order_byid_AppResponse" message="tns:IdokuService_get_doku_order_byid_App_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="get_order_transactionsByGateway">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/get_order_transactionsByGateway" message="tns:IdokuService_get_order_transactionsByGateway_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/get_order_transactionsByGatewayResponse" message="tns:IdokuService_get_order_transactionsByGateway_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="save_doku_gui_access">
+      <wsdl:input wsaw:Action="http://tempuri.org/IdokuService/save_doku_gui_access" message="tns:IdokuService_save_doku_gui_access_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IdokuService/save_doku_gui_accessResponse" message="tns:IdokuService_save_doku_gui_access_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IdokuService" type="tns:IdokuService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="save_selfcare_order">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/save_selfcare_order" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="save_doku_order_payment">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/save_doku_order_payment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_doku_order_transactions">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/get_doku_order_transactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_doku_order_transactionsBySite">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/get_doku_order_transactionsBySite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_doku_order_transactionsByPurchase">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/get_doku_order_transactionsByPurchase" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_doku_order_byid">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/get_doku_order_byid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="save_temp_order">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/save_temp_order" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_temp_order_byid">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/get_temp_order_byid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_shopping_orderby_userid">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/get_shopping_orderby_userid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderStatus">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/OrderStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DokuOrderStatus">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/DokuOrderStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="save_selfcare_order_App">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/save_selfcare_order_App" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="save_doku_order_payment_App">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/save_doku_order_payment_App" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="save_temp_order_App">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/save_temp_order_App" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_doku_order_byid_App">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/get_doku_order_byid_App" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_order_transactionsByGateway">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/get_order_transactionsByGateway" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="save_doku_gui_access">
+      <soap:operation soapAction="http://tempuri.org/IdokuService/save_doku_gui_access" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="dokuService">
+    <wsdl:port name="BasicHttpBinding_IdokuService" binding="tns:BasicHttpBinding_IdokuService">
+      <soap:address location="http://localhost:51319/Service/dokuService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

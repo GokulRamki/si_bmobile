@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Thank you";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+    
+}
+
+
+<div class="mid_margin">
+    @if (Session["ShoppingUserID"] != null)
+    {
+        <div class="top_nav_pan">
+            <a href="@Url.Action("Logout", "Shop")">Logout</a>
+        </div>
+    }
+    <div class="choose_box remov_padd wrapper" style="padding: 10px;">
+        <h1>Thanks....</h1>
+        <br />
+        @if (ViewBag.Message == "Register")
+        {
+            <div class="DivRow">
+                <p class="ThankMessage">
+                    You have been Registered Successfully....
+                </p>
+                <p>
+                    Check your E-mail to activate your account and enjoy our service . Please click&nbsp;@Html.ActionLink("Login", "login", "Shop")&nbsp;to login your account
+                </p>
+            </div>
+        }
+        else if (ViewBag.Message == "AccountConfirmation")
+        {
+            <div class="DivRow">
+                <p class="ThankMessage">
+                    Your account have been activated Successfully....
+                </p>
+                <p>
+                    Please click&nbsp;@Html.ActionLink("Login", "login", "Shop")&nbsp;to login your account
+                </p>
+            </div>
+        }
+        else if (ViewBag.Message == "Update")
+        {
+            <div class="DivRow">
+                <p class="ThankMessage">
+                    Your profile updated Successfully....
+                </p>
+                <p>
+                    Please click&nbsp;@Html.ActionLink("here", "Products", "Shop")&nbsp;to go home
+                </p>
+            </div>
+        }
+        else if (ViewBag.Message == "ResetPassword")
+        {
+            <div class="DivRow">
+                <p class="ThankMessage">
+                    Password Changed Successfully....
+                </p>
+                <p>
+                    Please click&nbsp;@Html.ActionLink("Login", "login", "Shop")&nbsp;to login your account
+                </p>
+            </div>
+        }
+        else if (ViewBag.Message == "ForgotPassword")
+        {
+            <div class="DivRow">
+                <p class="ThankMessage">
+                    Your Password has been sent....
+                </p>
+                <p>
+                    Please click&nbsp;@Html.ActionLink("Login", "login", "Shop")&nbsp;to login your account
+                </p>
+            </div>
+        }
+        else if (ViewBag.Message == "Error")
+        {
+            <div class="DivRow">
+                <p class="ThankMessage">
+                    Error found....
+                </p>
+                <p>
+                </p>
+            </div>
+    
+        }
+        else if (ViewBag.Message == "ActivationFailed")
+        {
+            <div class="DivRow">
+                <p class="ThankMessage">
+                    Failed to activate your account....
+                </p>
+                <p>
+                </p>
+            </div>
+    
+        }
+    </div>
+</div>
+
+
+

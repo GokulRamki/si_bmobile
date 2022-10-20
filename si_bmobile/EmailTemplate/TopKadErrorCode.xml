@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ErrorCode>
+  <E0>
+    Serial number permanently locked and recharge successful to MSISDN for the amount of K
+  </E0>
+  <E1>
+    Card Verified Failure
+  </E1>
+  <E101>Invalid Input</E101>
+  <E102>Invalid Merchant </E102>
+  <E601>Unsuccessful - This Serial Number Already Used</E601>
+  <E602>Unsuccessful - This Serial Number Recharging</E602>
+  <E603>Unsuccessful - This Serial Number Already Loaded</E603>
+  <E604>Unsuccessful - This Serial Number Locked</E604>
+  <E605>Unsuccessful - This Serial Number Issued</E605>
+  <E606>Unsuccessful - This serial number is already locked</E606>  
+</ErrorCode>

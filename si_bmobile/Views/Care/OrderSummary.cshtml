@@ -1,0 +1,320 @@
+﻿@model si_bmobile.Models.DokuCareModel
+@{
+    ViewBag.Title = "OrderSummary";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+}
+
+<div class="abt-main">
+    <iframe id="ifrmPrint" src="" style="width: 0px; height: 0px;"></iframe>
+    @if (Model == null)
+    {
+        <div style="@ViewBag.dFail">
+            <h2>Sorry,</h2>
+            <div style="font-size: 25px;">
+                <img src="~/images/Close-2-icon.png" style="max-height:25px;" />&nbsp;
+                Your Transaction has Cancelled!
+            </div>
+            <div style="margin-top: 10px; font-size: 15px; padding-left: 70px; margin-bottom: 10px;">
+                <div>Please Contact Customer Care: 1555 </div>
+                <div><span>Click&nbsp;@Html.ActionLink("here", "RefreshACC", "Care")&nbsp;to go to Account Summary</span></div>
+            </div>
+        </div>
+    }
+    else
+    {
+        if (Model.doku != null)
+        {
+            <div style="overflow-x:auto; @ViewBag.dSuccess">
+
+                <div id="divOrderSummary">
+                    <div style="width: 100%">
+                        <br />
+                        <strong>Bmobile Solomon Islands </strong><br />
+                        <strong>P.O Box 2134,</strong><br />
+                        <strong>Honiara</strong><br />
+                    </div>
+                    <br />
+                    <br />
+                    <div class="o-lbl-1">
+                        <img src="~/images/Ok-icon.png" title="Process done" style="max-height:25px;" />
+                        THANK YOU FOR YOUR PAYMENT
+                    </div>
+                    <div style="clear: both;"></div>
+
+                    <div class="o-lbl-4" style="">
+                        YOUR TRANSACTION NO :
+                    </div>
+                    <div class="o-lbl-4">
+                        @Html.DisplayFor(t => t.doku.request_id)
+                    </div>
+                    <div class="o-lbl-4">
+                        Payment date :
+                    </div>
+                    <div class="o-lbl-4">
+                        @Html.DisplayFor(t => t.order.order_datetime)
+                    </div>
+                    <div style="clear: both;"></div>
+
+                    @if (Model.orderitems != null)
+                    {
+                        if (Model.orderitems.Count > 0)
+                        {
+
+                            decimal dtotal = 0;
+                            int sno = 0;
+                            long qty = 0;
+                            string tot_qty = "";
+                            for (int i = 0; i < Model.orderitems.Count; i++)
+                            {
+                                string description = "";
+
+                                if (i == 0)
+                                {
+                                    <div class="tbl-head">
+
+                                        <div class="tbl-th-1">
+                                            SNO
+                                        </div>
+                                        <div class="tbl-th-2">
+                                            Description
+                                        </div>
+                                        @if (Model.orderitems[i].purchase_desc == "GETPOWER")
+                                        {
+                                            <div class="tbl-th-1">
+                                                Units
+                                            </div>
+                                            <div class="tbl-th-1">
+                                                Trans. Fee
+                                            </div>
+                                            <div class="tbl-th-1">
+                                                Get Pawa Amount
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="tbl-th-1">
+                                                Quantity
+                                            </div>
+
+                                            <div class="tbl-th-1">
+                                                Price
+                                            </div>
+                                        }
+
+                                        <div class="tbl-th-1">
+                                            Total Price
+                                        </div>
+                                        <div style="clear: both;"></div>
+                                    </div>
+                                }
+                                <div class="tbl-row">
+                                    @{long quantity = Model.orderitems[i].product_qty;
+                                        string sUnits = "";
+                                        string sTransFee = "";
+                                        //qty = 0;
+
+                                        if (Model.orderitems[i].purchase_desc == "SITOPUP")
+                                        {
+                                            description = "RECHARGE DONE FOR " + Model.order.purchase_msisdn;
+                                        }
+                                        else if (Model.orderitems[i].purchase_desc == "Postpaid_Pdf_bill")
+                                        {
+                                            description = "POST PAID ACCOUNT PAYMENT FOR SERVICE " + Model.order.purchase_msisdn;
+                                        }
+                                        else if (Model.orderitems[i].purchase_desc == "GETPOWER")
+                                        {
+                                            description = "Get Pawa for meter no: " + Model.orderitems[i].product_name;
+                                            sUnits = Model.orderpayment.payment_response;
+                                            sTransFee = Model.order.order_surcharge.ToString("#0.00");
+                                            tot_qty = "";
+                                        }
+                                        else if (Model.orderitems[i].purchase_desc == "BYP" || Model.orderitems[i].purchase_desc == "PROMOTION")
+                                        {
+                                            description = Model.orderitems[i].product_name;
+                                        }
+                                        sno = i + 1;
+                                        decimal ind_product_price = (quantity * Model.orderitems[i].product_price);
+
+                                        decimal gp_ind_product_price = (quantity * Model.orderitems[i].product_price) + Model.order.order_surcharge; }
+                                    <div class="tbl-td-1">
+                                        <span class="span-th">SNO:&nbsp;</span> @sno
+                                    </div>
+                                    <div class="tbl-td-2">
+                                        <span class="span-th">Description:&nbsp;</span> @description
+                                    </div>
+                                    @if (Model.orderitems[i].purchase_desc == "GETPOWER")
+                                    {
+                                        <div class="tbl-td-1">
+                                            <span class="span-th">Units:&nbsp;</span>@sUnits
+                                        </div>
+                                        <div class="tbl-td-1">
+                                            <span class="span-th">Trans.Fee:&nbsp;</span>@sTransFee
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="tbl-td-1">
+                                            <span class="span-th">Qty:&nbsp;</span>@quantity
+                                        </div>
+                                    }
+
+                                    <div class="tbl-td-1">
+                                        <span class="span-th">Price:&nbsp;</span>$ @Model.orderitems[i].product_price.ToString("#0.00")
+                                    </div>
+                                    @if (@Model.orderitems[i].purchase_desc == "GETPOWER")
+                                    {
+                                        <div class="tbl-td-1">
+                                            <span class="span-th">Get Pawa Amt:&nbsp;</span>$ @gp_ind_product_price.ToString("#0.00")
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="tbl-td-1">
+                                            <span class="span-th">Total:&nbsp;</span>$ @ind_product_price.ToString("#0.00")
+                                        </div>
+                                    }
+                                    <div style="clear: both;"></div>
+                                </div>
+                                            { qty = qty + quantity; }
+                                            if (Model.orderitems[i].purchase_desc == "GETPOWER")
+                                            {
+                                                dtotal = Model.order.order_product_total + Model.order.order_surcharge;
+                                            }
+                                            else
+                                            {
+                                                dtotal = Model.order.order_product_total;
+                                            }
+
+                                            if (tot_qty != "")
+                                            {
+                                                tot_qty = qty.ToString();
+                                            }
+                                        }
+
+                                        <div class="tbl-row">
+                                            <div class="tbl-td-1">
+                                                &nbsp;
+                                            </div>
+                                            @if (Model.orderitems[0].purchase_desc == "GETPOWER")
+                                            {
+                                                <div class="tbl-td-1">
+                                                    @tot_qty
+                                                </div>
+                                                <div class="tbl-td-1">
+
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="tbl-td-1">
+                                                    @tot_qty
+                                                </div>
+                                            }
+                                            <div class="tbl-td-1">
+                                                &nbsp;
+                                            </div>
+
+                                            <div class="tbl-td-2">
+                                                <b>Total Price</b>
+                                            </div>
+
+                                            <div class="tbl-td-1">
+                                                $ @dtotal.ToString("#0.00")
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                        </div>
+                                            }
+                                        }
+                </div>
+                @if (Model.orderitems[0].purchase_desc == "GETPOWER")
+                {
+                    <div style="float: left; font-size: 14px; width: 300px; font-weight: bold; padding-bottom: 10px;">
+                        YOUR GET PAWA VOUCHER :
+                    </div>
+                    <div style="float: left; font-size: 14px; width: 200px; font-weight: bold; text-align: left;">
+                        @Html.DisplayFor(t => t.orderpayment.payment_receipt_no)
+                    </div>
+                    <div style="clear: both;"></div>
+                    <div style="float: left; width: 800px;">
+                        <b>Note: </b>A copy of your Get Pawa voucher has been sent to your registered email address.
+                    </div>
+                    <div style="clear: both;"></div>
+                }
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div class="btn-row-1">
+                    <button id="btnPrint" class="btn-sbmt"><i class="fa fa-print "></i>&nbsp;Print</button>
+                    <a href="@Url.Action("RefreshACC", "Care")" class="btn btn-success">Back</a>
+                </div>
+
+
+            </div>
+
+            <div style="@ViewBag.dFail">
+                <h2>Sorry,</h2>
+                <div style="font-size: 25px;">
+                    <img src="~/images/Close-2-icon.png" style="max-height:25px;" />&nbsp;
+                    Your Transaction has Failed!
+                </div>
+                <div style="margin-top: 10px; font-size: 15px; padding-left: 70px; margin-bottom: 10px;">
+                    @*<div>Please Contact Customer Care: 1555 </div>*@
+                    <div><span>Click&nbsp;@Html.ActionLink("here", "RefreshACC", "Care")&nbsp;to go to Account Summary</span></div>
+                </div>
+            </div>
+
+                                        }
+                                        else
+                                        {
+
+                                            <div style="@ViewBag.dFail">
+                                                <h2>Sorry,</h2>
+                                                <div style="font-size: 25px;">
+                                                    <img src="~/images/Close-2-icon.png" style="max-height:25px;" />&nbsp;
+                                                    Your Transaction has Failed!
+                                                </div>
+                                                <div style="margin-top: 10px; font-size: 15px; padding-left: 70px; margin-bottom: 10px;">
+                                                    @*<div>Please Contact Customer Care: 1555 </div>*@
+
+                                                    <div><span>Click&nbsp;@Html.ActionLink("here", "RefreshACC", "Care")&nbsp;to go to Account Summary</span></div>
+                                                </div>
+                                            </div>
+
+                                            }
+                                        }
+
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnPrint').click(function () {
+                try {
+                    var oIframe = $('#ifrmPrint')[0];
+                    var oContent = $('#divOrderSummary').html();
+
+
+                    var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
+                    if (oDoc.document) oDoc = oDoc.document;
+                    oDoc.write("<html><head>");
+                    oDoc.write("<link rel='stylesheet' type='text/css' href='@Url.Content("~/Content/bmobile/css/style.css")'>");
+                    oDoc.write("</head><body onload='this.focus(); this.print();'>");
+                    oDoc.write(oContent + "</body></html>");
+                    oDoc.close();
+                    var ua = $.browser;
+                    if (ua.mozilla) {
+                      //  alert('Printing in progress..');
+                    }
+
+
+                }
+                catch (e) {
+                    // self.print();
+                }
+            });
+
+
+        });
+    </script>
+
+}

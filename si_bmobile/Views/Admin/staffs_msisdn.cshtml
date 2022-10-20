@@ -1,0 +1,71 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.bm_staffs_topup>
+
+@{
+    ViewBag.Title = "Staffs MSISDN";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+<div class="divheader">
+    Staffs MSISDN 
+</div>
+
+@using (Html.BeginForm("staffs_msisdn", "Admin", FormMethod.Post, new { id = "frm_staffs_msisdn", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="dRowvlg">
+        <div style="text-align: center;">
+            @if (ViewBag.Message != null)
+            {
+                @ViewBag.Message
+            }
+        </div>
+    </div>
+    <div id="div_loading" class="div-btn">
+        <img src="~/images/slider/301.GIF" alt="Loading..." /><br />
+        <span style="font-weight: bold; color: gray;">Please Wait...</span>
+    </div>
+   
+    <div class="dRowvlg">
+        <div class="input-append">
+            @Html.TextBox("staffs", null, new { @placeholder = "Staff Name", @style = "width:150px" })
+            @Html.TextBox("msisdn", "", new { @placeholder = "MSISDN Number", @style = "width:150px" })
+            @Html.TextBox("invoice", null, new { @placeholder = "Invoice No", @style = "width:150px" })            
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search</button>&nbsp;
+                 <button class="btn" type="button" onclick="window.location.href='@Url.Action("staffs_msisdn", "Admin")'" >
+                     <i class="icon-search"></i>&nbsp;Reset</button>
+        </div>
+    </div>
+    if (Model.Count() > 0)
+    {
+    <div id="grid-list">
+        @{ Html.RenderPartial("_Ajax_StaffsMSISDN", Model); }
+    </div>
+}
+ else
+ {
+    <div style="text-align:center; font-weight:bold; padding:5px;">Records Not Found!</div>
+ }
+}
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        $("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>

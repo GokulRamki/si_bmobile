@@ -1,0 +1,35 @@
+﻿img {
+        max-width: 100%;
+    }
+    .well {
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        display:none;
+        margin:1em;
+    }
+    pre.prettyprint {
+        padding: 9px 14px;
+    }
+    .fulltable {
+        max-width: 100%;
+        overflow: auto;
+    }
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .lineheight {
+        line-height: 3em;
+    }
+    .pagetop {
+        background: url(http://subtlepatterns.com/patterns/congruent_outline.png) #333;
+        background-attachment: fixed;
+        color: #fff;
+    }
+    .page-header {
+        border-bottom: none;
+    }
+    .initialism {
+        font-weight: bold;
+        letter-spacing: 1px;
+        font-size: 12px;
+    }

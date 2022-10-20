@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:51319/Service/dokuService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/doku_payment.Models" />
+  <xs:import schemaLocation="http://localhost:51319/Service/dokuService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="save_selfcare_order">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/doku_payment.Models" minOccurs="0" name="obj_sc_order" nillable="true" type="q1:PaymentEntModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_selfcare_orderResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="save_selfcare_orderResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_doku_order_payment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/doku_payment.Models" minOccurs="0" name="obj_order_pay" nillable="true" type="q2:PaymentEntModel" />
+        <xs:element minOccurs="0" name="order_id" type="xs:long" />
+        <xs:element minOccurs="0" name="site_id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_doku_order_paymentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="save_doku_order_paymentResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_doku_order_transactions">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_doku_order_transactionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="get_doku_order_transactionsResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_doku_order_transactionsBySite">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="iSiteId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_doku_order_transactionsBySiteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="get_doku_order_transactionsBySiteResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_doku_order_transactionsByPurchase">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="iSiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="purchase_desc" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sdate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="edate" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_doku_order_transactionsByPurchaseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="get_doku_order_transactionsByPurchaseResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_doku_order_byid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="order_id" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_doku_order_byidResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="get_doku_order_byidResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_temp_order">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="jstemp_order" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_temp_orderResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="save_temp_orderResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_temp_order_byid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="session_id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_temp_order_byidResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="get_temp_order_byidResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_shopping_orderby_userid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user_id" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_shopping_orderby_useridResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="get_shopping_orderby_useridResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OrderStatus">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OrderStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="OrderStatusResult" nillable="true" type="q3:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DokuOrderStatus">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DokuOrderStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DokuOrderStatusResult" nillable="true" type="q4:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_selfcare_order_App">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="svcUname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="svcPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sOrder" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_selfcare_order_AppResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="save_selfcare_order_AppResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_doku_order_payment_App">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="svcUname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="svcPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sOrderpay" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="order_id" type="xs:long" />
+        <xs:element minOccurs="0" name="site_id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_doku_order_payment_AppResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="save_doku_order_payment_AppResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_temp_order_App">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="svcUname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="svcPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="jstemp_order" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_temp_order_AppResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="save_temp_order_AppResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_doku_order_byid_App">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="svcUname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="svcPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="order_id" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_doku_order_byid_AppResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="get_doku_order_byid_AppResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_order_transactionsByGateway">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="iSiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="purchase_desc" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sdate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="edate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="spgw" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="get_order_transactionsByGatewayResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="get_order_transactionsByGatewayResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_doku_gui_access">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="svcUname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="svcPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user_id" type="xs:long" />
+        <xs:element minOccurs="0" name="gui_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="menu_id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="save_doku_gui_accessResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="save_doku_gui_accessResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

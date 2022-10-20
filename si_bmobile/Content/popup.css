@@ -1,0 +1,128 @@
+﻿.ui-widget {font-size:0.8em;}
+
+    .ui-widget-header {border: 2px solid rgb(170, 170, 170);background: #333333;font-weight: 600;color: rgb(211, 123, 67);}
+
+    .cell .ui-widget {font-size:0.6em;}
+
+    .bmob-ui-dialog {}
+
+    .bmob-ui-dialog .shield {background:none repeat scroll 0 0 #333333;height:100%;left:0;opacity:0.5;position:fixed;top:0;width:100%;z-index:1000;}
+
+    .bmob-ui-dialog .window-absolute {position:absolute}
+
+    .bmob-ui-dialog .window {padding:10px;text-align:left;z-index:1001;}
+
+    .bmob-ui-dialog .content {background:none repeat scroll 0 0 #FFFFFF;height:100%;}
+
+    .cart-head {background:linear-gradient(to bottom, rgb(247, 114, 25) 1%, rgb(254, 198, 167) 3%, rgb(247, 114, 25) 7%, rgb(247, 91, 22) 100%) repeat scroll 0px 0px transparent;color:white;}
+
+    .bmob-uppercase {text-transform:uppercase }
+
+    .newvd.cart-dialog .dialog-header {background-color:#FFFFFF;height:auto;padding:5px 5px 0 12px;color:#333333;font-size:16px;font-weight:bold;}
+
+    .newvd #shopping-cart-header {height:40px;}
+
+    .bmobclear, .cls {clear:both;}
+
+    .newvd.cart-dialog .dialog-body {border-top:1px solid #333333;height:100%;}
+
+    .newvd.cart-dialog #panelsh {padding:0 0 15px;height:100%;overflow:hidden;}
+
+    .newvd.cart-dialog .dialog-body .container {position:relative;}
+
+    .bmob-height-full {height:100%;}
+
+    .bmob-hidden, .hidden {display:none;}
+
+    .cart_contents {padding:0;}
+
+    .cart_contents.newvd {color:#565656}
+
+    .newvd #panelsh .main-body-internal {height:auto;padding:0 0;}
+
+    #panelsh .main-body-internal {overflow-y:auto;}
+
+    table {border-collapse:collapse;border-spacing:0;}
+
+    .cart_contents.newvd .cart-table .image-cell {width:17%;}
+
+    .cart_contents.newvd .cart-table .item-cell {width:59%;}
+
+    .cart_contents.newvd .cart-table .qty-cell {width:10%;}
+
+    .cart_contents.newvd .cart-table .price-cell {width:31%;}
+
+    .cart_contents.newvd .cart-table .subtotal-cell {width:12%;}
+
+    .cart_contents.newvd .head-cell {padding:10px 0 7px;}
+
+    .cart_contents.newvd .cart-body .image-cell {padding:15px 10px 10px;}
+
+    .cart_contents.newvd .cart-body .cell {padding:30px 10px 10px;vertical-align:top;}
+
+    .cart_contents.newvd .cart-body .qty-cell {background:none repeat scroll 0 0 #FCFCFC;}
+
+    .cart_contents.newvd .cart-table .cell {border-bottom:1px dotted #C0C0C0;vertical-align:top;}
+
+    .cart-dialog .close-icon {top: 16px;right: 16px;}
+
+    .bmob-ui-dialog .close-icon {position: absolute;cursor: pointer;}
+
+    .bmob-ui-dialog .header-close-icon {height: 28px;width:28px;background :url("")}
+
+    .newvd .seller-orders {border-bottom:none;border-top:2px solid #565656;position:relative;}
+
+    .newvd .seller-orders .seller-name {background:none repeat scroll 0 0 #FFFFFF;margin:-10px;padding:0 10px 0 0;position:absolute;}
+
+    .line, .lastUnit {overflow: hidden;}
+
+    .bmob-font-11 {font-size: 11px;}
+
+    .bmob-fontlight, .font-color-medium {color:#848484}
+
+    .bmargin5 {margin-bottom:5px}
+
+    #cart-tab-content .cart-footer {padding:0 15px;}
+
+    .bmob-border-top {border-top:2px solid #333333;}
+
+    .newvd.cart-dialog .cart-footer.fixed .price-bar {box-shadow:0 -5px 8px -6px #888888;}
+
+    .cart_contents.newvd .cart-footer .price-bar {background:none repeat scroll 0 0 #F9F9F9;border-bottom:1px solid #F2F2F2;color:#333333;padding:10px 0;}
+
+    .size1of2 {width:50%;}
+
+    .unit {float:left;}
+
+    .unitExt {float: right;}
+
+    .unitExt a {color:#333333;}
+
+    .text_right {text-align:right;}
+
+    .lastUnit {float:none;width:auto;}
+
+    .boldtext, .bmob-font-bold, .bold_text {font-weight:bold;}
+
+    .rpadding10 {padding-right:10px;}
+
+    .bmob-font-verybig {font-size:22px;}
+
+    .bmob-font-26 {font-size:26px;}
+
+    .btn {display:inline-block;line-height:1.3;text-align:center;text-transform:uppercase;}
+
+    .btn.btn-medium{font-size:13px;padding:8px 12px;}
+
+    .btn.btn-white {background:linear-gradient(to bottom, #F9F9F9 1%, #FFFFFF 3%, #F9F9F9 7%, #F2F2F2 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);border:1px solid #C9C9C9;color:#333333;}
+
+    .btn.btn-buy-big {font-size:18px;padding:8px 0;width:232px;}
+
+    .btn.btn-orange {background:linear-gradient(to bottom, #F77219 1%, #FEC6A7 3%, #F77219 7%, #F75B16 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);border:1px solid #EC6723; }
+
+    tbody tr td {font-size:14px;font-weight:600;font:Arial,Helvetica,sans-serif;}
+
+    .ui-dialog .ui-dialog-content  {padding:0px;font:Arial,Helvetica,sans-serif;}
+
+    .ui-widget-content {border: 2px solid rgb(170, 170, 170);}
+

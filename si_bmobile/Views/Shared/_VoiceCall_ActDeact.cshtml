@@ -1,0 +1,38 @@
+﻿@model si_bmobile.Models.VoiceCallActDeactModel
+    <div id="popup_box" class="vc_popup">
+        <div class="div-br"></div>
+        <div class="div-tr">
+            <div class="div-td1">
+                Mobile Number:
+            </div>
+            <div class="div-td2">
+                @Html.DropDownListFor(m => m.msisdn_no, Model.msisdn_list, "- Choose Mobile No -", new { @id = "ddlMsisdn", @class="ddl_vc_msisdn" })<br />
+                <span id="span_msisdn" style="color: red; text-align: right; font-size: 14px;"></span>
+                @Html.HiddenFor(m => m.msisdn_no)
+            </div>
+        </div>
+        <div id="Div_VC_Msg" class="div-tr" style="color: red; text-align:center; font-size:14px; padding:3px;">
+
+        </div>
+        <div id="vc_btn_pan" class="div-tr" style="text-align:center;">
+            <input type="button" id="btnVCActivation" class="btn-submit" value="Activate" />&nbsp;
+            <input type="button" id="btnVCDeactivation" class="btn-submit" value="Deactivate" />&nbsp;
+            <input type="button" id="btnVCClose" class="btn-submit" value="Cancel" />
+        </div>
+
+        <div class="div-tr" style="text-align: center; min-height:1px;">
+            <div id="divVoiceCallProcess" class="DivTxt" style="display: none; width:100%; text-align:center;">
+                <img src="~/Content/themes/base/images/loading.gif" />please wait...
+            </div>
+        </div>
+    </div>
+    <div id="div_vc_success" class="div-tr" style="display: none;">
+        <div id="div_VC_Success_Msg" style="text-align:center; color:green; font-weight:bold; font-size:14px; padding:10px;"> </div>
+        <div style="text-align:center;">
+            <input type="button" value="OK" id="btnVCClose2" class="btn-submit"  />
+        </div>
+    </div>
+
+<style>
+    .ddl_vc_msisdn { height:30px;}
+</style>

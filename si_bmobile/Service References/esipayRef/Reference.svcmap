@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="621081a2-e2bb-4ae0-97a0-5f9b112b2055" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://shopbm.twinkletech.com/Service/esipayService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="esipayService.xsd" MetadataType="Schema" ID="dd8ca29a-b434-47b5-b544-8d8669266fea" SourceId="1" SourceUrl="http://shopbm.twinkletech.com/Service/esipayService.svc?xsd=xsd1" />
+    <MetadataFile FileName="esipayService.disco" MetadataType="Disco" ID="568b2861-9bb0-4cf0-8660-58c1042b80c2" SourceId="1" SourceUrl="http://shopbm.twinkletech.com/Service/esipayService.svc?disco" />
+    <MetadataFile FileName="esipayService.wsdl" MetadataType="Wsdl" ID="743e38b1-6ee7-4d36-89ba-17798870d5d0" SourceId="1" SourceUrl="http://shopbm.twinkletech.com/Service/esipayService.svc?wsdl" />
+    <MetadataFile FileName="esipayService1.xsd" MetadataType="Schema" ID="ae4bb9ca-8322-4eea-90d1-2ce1446ee04e" SourceId="1" SourceUrl="http://shopbm.twinkletech.com/Service/esipayService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

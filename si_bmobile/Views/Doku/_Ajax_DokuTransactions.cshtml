@@ -1,0 +1,82 @@
+﻿@using MvcPaging
+@model IPagedList<bemobile.Models.doku_selfcare>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Transaction Id
+            </th>
+            <th>Message
+            </th>
+            <th>Payment Channel
+            </th>
+            <th>Site Name
+            </th>
+            <th>Payment Date
+            </th>
+
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.transidmerchant
+                </td>
+                <td>
+                    @item.resultmsg
+                </td>
+                <td>
+                    @item.payment_channel
+                </td>
+                @if (item.site_id == 1)
+                {
+                    <td>Selfcare
+                    </td>
+                }
+                else if (item.site_id == 2)
+                {
+                    <td>Shopping</td>
+                }
+                <td>
+                    @item.created_on
+                </td>
+
+            </tr>
+            }
+
+        }
+    </tbody>
+</table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Doku", action = "DokuTransactions", ddlDokuSite = ViewData["ddlDokuSite"], sFromOrder = ViewData["sFromOrder"], sToOrder = ViewData["sToOrder"] }))
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>
+@*<script src="~/Scripts/bootstrap.min.js"></script>*@
+

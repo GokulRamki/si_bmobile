@@ -1,0 +1,15 @@
+﻿@model si_bmobile.Models.TotalPriceModel
+    
+<div class="result_panel">
+                    <div class="div-title">Your Plan</div>
+                    <div class="div-price"><span style="font-size: 29px">K</span>&nbsp;<span class="span-price" id="totalprice" style="font-size: 28px">@Model.tot_amt</span>/30days</div>
+                    <div class="div-btn">
+                        <input type="submit" value="Buy Now" class="btn" id="btnSubmit" />
+                    </div>
+                    <div id="valid-message">
+                    </div>
+                    @* <div id="div_loading" class="div-btn" style="display: none;">
+                        <img src="~/images/slider/301.GIF" alt="Loading.." /><br />
+                        <span style="font-weight: bold; color: gray;">Please Wait..</span>
+                    </div>*@
+                </div>

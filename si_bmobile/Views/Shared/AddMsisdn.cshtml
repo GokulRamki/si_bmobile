@@ -1,0 +1,50 @@
+﻿@using (Html.BeginForm("AddMsisdn", "Care"))
+{
+
+    <div style="width:100%; max-width:450px;">
+        <div class="postpaid-dialog-row">
+            <div class="postpaid-dialog-cell">
+                Mobile Number:<span style="float:right;">677</span>
+            </div>
+            <div class="postpaid-dialog-cell">
+                <input type="text" id="txtMSISDN" maxlength="10" style="height:30px; width:100%;" />
+            </div>
+        </div>
+        <div class="postpaid-dialog-row">
+            <div class="postpaid-dialog-cell">
+                Description:
+            </div>
+            <div class="postpaid-dialog-cell">
+                <input type="text" id="txtDescription" style="height:30px; width:100%;" />
+            </div>
+        </div>
+        <div class="postpaid-dialog-row">
+            <span style="font-size:11px; color:gray; padding:2px 5px 2px 0px;">
+                Verification code will be sent to your added Mobile Number. <br />Please enter this code in next screen.
+            </span>
+        </div>
+        <div class="postpaid-dialog-row">
+            <div class="postpaid-dialog-cell">
+                &nbsp;
+            </div>
+            <div class="postpaid-dialog-cell">
+                <div style="color:red;">@ViewBag.Message</div>
+            </div>
+        </div>
+
+
+        <div class="postpaid-dialog-row">
+            <div class="postpaid-dialog-btn-cell" id="divMSubmit">
+                <input type="button" id="btnMSDNsubmit" class="btn-submit" onclick="SendVerif();" value="Submit" />&nbsp;<input type="button" class="btn-submit" onclick="clmsisdn();" value="Cancel" />
+            </div>
+
+            <div id="divMProcess" class="postpaid-dialog-btn-cell" style="display:none;">
+                <img src="~/Content/themes/base/images/loading.gif" />please wait...
+            </div>
+
+
+        </div>
+
+
+    </div>
+}

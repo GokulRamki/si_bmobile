@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "testZoom";
+    Layout = "~/Views/Shared/bm_Layout.cshtml";
+}
+
+<h2>testZoom</h2>
+
+ @using (Html.BeginForm("testZoom", "Shop", FormMethod.Post, new { id = "frmProductInfo", enctype = "multipart/form-data" }))
+    {
+<br />
+<br />
+<br />
+  <img id="ImgProduct" src="http://bmshop.twinkletech.com/pro_images/30_img_medium.jpg" /> 
+                 <input id="ImgLarge" type="hidden" value="http://bmshop.twinkletech.com/pro_images/30_img_large.jpg" /> 
+    }
+@section scripts{
+   
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script type='text/javascript' src="@Url.Content("~/Scripts/multizoom.js")"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+
+            $('#ImgProduct').addimagezoom({ // single image zoom
+                zoomrange: [3, 3],
+                magnifiersize: [300, 300],
+                magnifierpos: 'right',
+                cursorshade: false,
+                largeimage: $('#ImgLarge').val()
+                //<-- No comma after last option!
+            });
+        });
+    </script>
+
+}

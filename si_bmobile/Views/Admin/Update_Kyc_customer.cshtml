@@ -1,0 +1,617 @@
+﻿@model si_bmobile.Models.kyc_Custome_Detail_Model
+@{
+    ViewBag.Title = "Update_Kyc_customer";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+<style>
+    .nav .dropdown-toggle .caret {
+  margin-top: 0px;
+  border-top-color: #0088cc;
+  border-bottom-color: #0088cc;
+}
+    a{
+       font-size: 15px;
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    }
+</style>
+
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/font-awesome.min.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/smartadmin-production.css")">  
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        
+  <section class="content-wrapper content-pan clear-fix">
+    <section id="widget-grid" style="margin: 50px auto;">
+
+        <!-- START ROW -->
+        <div class="row">
+
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-8" style="float:none; margin: 5px auto;">
+
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                    @*<header>
+                        <span class="widget-icon"><i class="fa fa-user"></i></span>
+                        <h2>IDENTIFICATION FORM for PREPAID MOBILE SERVICES </h2>
+                    </header>*@
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("Update_Kyc_customer", "Admin", FormMethod.Post, new { id = "frmUpdateKYCcustomer", enctype = "multipart/form-data" }))
+                            {
+                                @Html.HiddenFor(m => m.kyc_cust_Details.cust_id)
+                              
+                                @Html.HiddenFor(m => m.kyc_cust_ack.ack_id)
+                                @Html.HiddenFor(m => m.kyc_cust_identification.cust_identity_id)
+                                @Html.HiddenFor(m => m.kyc_cust_purchase.cust_pur_id)
+                           
+
+                                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                                    <header>
+                                        <h2>Customer Details<span style="padding-left:250px;color:white;"></span></h2>
+                                    </header>
+                                </div>
+
+                                <fieldset class="smart-form" style="margin: 0px 20px;">
+
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            Name:
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                               @Html.TextBoxFor(m => m.kyc_cust_Details.name)
+               
+                                        </section>
+                                        <section class="col col-3">
+                                            Surname:
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                               @Html.TextBoxFor(m=>m.kyc_cust_Details.surname, new {})
+                                        </section>
+                                    </div>
+
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            Sex:
+                                        </section>
+                                        <section class="col col-3">
+                                            <div class="inline-group" >
+                                                <label class="radio"  style=  "margin-top: -1px;">
+                                                    @Html.RadioButtonFor(m => m.kyc_cust_Details.sex, "Male")
+                                                    <i></i>Male
+                                                </label>
+                                                <label class="radio">
+                                                    @Html.RadioButtonFor(model => model.kyc_cust_Details.sex, "Female")
+                                                    <i></i>Female
+                                                </label>
+                                            </div>
+                                        </section>
+                                        @if (Model.kyc_cust_Details!=null && Model.kyc_cust_Details.photo_image!=null)
+                                        {
+                                         <section class="col col-3">
+                                            Photo:
+                                        </section>
+                                        <section class="col col-3">  
+                                            <div id="gallery" class="div-tr" style="text-align: center;">
+                                            <a href='@Url.Action("Get_KYC_Customer_Photo_By_ID", "Admin", new { id = Model.kyc_cust_Details.cust_id })' title="Customer Photo">                                         
+                                               <img src='data:image/jpg;base64,@(Convert.ToBase64String(Model.kyc_cust_Details.photo_image))' border="0" alt="photos" />
+                                                </a>
+                                                </div>
+                                        </section>
+                                        }
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            Employed:
+                                        </section>
+                                         <section class="col col-3">
+                                            <div class="inline-group">
+                                                <label class="radio"  style=  "margin-top: -1px;">
+                                                    @Html.RadioButtonFor(m => m.kyc_cust_Details.is_employed, true) 
+                                                    <i></i>Yes 
+                                                </label>
+                                                <label class="radio" >
+                                                    @Html.RadioButtonFor(model => model.kyc_cust_Details.is_employed, false, new {  })
+                                                    <i></i>No
+                                                </label>
+                                            </div>
+                                          
+                                        </section>
+                                         <section class="col col-3">
+                                            Date of Birth:
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                             @Html.TextBoxFor( m => m.kyc_cust_Details.dob, "{0:dd/MM/yyyy}")
+                                              </label>
+                                        </section>
+                                    </div>
+
+                                     <div class="row">
+                                        <section class="col col-3">
+                                            PO Box:
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                               @Html.TextBoxFor(m => m.kyc_cust_Details.pobox)
+               </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            Province:
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                                 @Html.DropDownListFor(m => m.kyc_cust_Details.province, new SelectList((IEnumerable<si_bmobile.Models.PROVINCIAL_CODES>)ViewBag.ProvincialList, "CODE", "PROVINCE"), "-- Choose Province Name --", new { @style="width:100%"}) &nbsp;
+                                              </label>
+                                        </section>
+                                    </div>
+
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            Town:
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                                @Html.DropDownListFor(m=>m.kyc_cust_Details.town, new SelectList((List<SelectListItem>)ViewBag.District, "Value", "Text"), "-- Choose District --",new { @style="width:100%"}) &nbsp;
+                                               </label>
+               
+                                        </section>
+                                        <section class="col col-3">
+                                            Suburb:
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                              @Html.TextBoxFor(m=>m.kyc_cust_Details.suburb, new {})
+                                                </label>
+                                        </section>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            Email:
+                                        </section>
+                                        <section class="col col-9">
+                                            <label class="input">
+                                                @Html.TextBoxFor(m => m.kyc_cust_Details.email, new { @placeholder = "Email" })
+                                                @Html.ValidationMessageFor(m => m.kyc_cust_Details.email)
+                                            </label>
+                                        </section>
+                                    </div>
+
+                                   
+
+                           
+
+                                </fieldset>
+
+                                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" style="margin-bottom:0px;">
+                                    <header>
+                                        <h2>Customer Identification<span style="padding-left:250px;color:white;"></span></h2>
+                                    </header>
+                                </div>
+
+                                <fieldset class="smart-form" style="margin: 0px 20px;">
+                                   @* <header>  Individual    (please present two (2) of the following, tick the appropriate boxes and write identification number)</header>*@
+                                    <br />
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            
+                                            @Html.CheckBoxFor(m => m.kyc_cust_identification.is_drv_lic, new { @class = "identitycheckboxs" }) License Number
+                                          </section>
+                                        <section class="col col-6">
+                                            
+                                            <label class="input">
+                                                @Html.TextBoxFor(m => m.kyc_cust_identification.drv_lic, new { @placeholder = "License No" })
+                                              
+                                            </label>
+                                        </section>
+                                        </div>
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            
+                                            @Html.CheckBoxFor(m => m.kyc_cust_identification.is_student_id, new { @class = "identitycheckboxs" }) Student ID
+                                          </section>
+                                        <section class="col col-6">
+                                            
+                                            <label class="input">
+                                                @Html.TextBoxFor(m => m.kyc_cust_identification.student_id, new { @placeholder = "Student ID" })
+                                              
+                                            </label>
+                                        </section>
+                                       
+                                    </div>
+
+                                  <div class="row">
+                                        <section class="col col-3">
+                                            
+                                            @Html.CheckBoxFor(m => m.kyc_cust_identification.is_emp_id, new { @class = "identitycheckboxs" }) Employment ID
+                                          </section>
+                                        <section class="col col-6">
+                                            
+                                            <label class="input">
+                                                @Html.TextBoxFor(m => m.kyc_cust_identification.emp_id, new { @placeholder = "Employment ID" })
+                                              
+                                            </label>
+                                        </section>
+                                       
+                                    </div>
+                                     <div class="row">
+                                        <section class="col col-3">
+                                            
+                                            @Html.CheckBoxFor(m => m.kyc_cust_identification.is_nasfund_id, new { @class = "identitycheckboxs" }) Nasfund ID
+                                          </section>
+                                        <section class="col col-6">
+                                            
+                                            <label class="input">
+                                                @Html.TextBoxFor(m => m.kyc_cust_identification.nasfund_id, new { @placeholder = "Nasfund ID" })
+                                              
+                                            </label>
+                                        </section>
+                                       
+                                    </div>
+                                     <div class="row">
+                                        <section class="col col-3">
+                                            
+                                            @Html.CheckBoxFor(m => m.kyc_cust_identification.is_nbw_super_id, new { @class = "identitycheckboxs" }) Nambawan ID
+                                          </section>
+                                        <section class="col col-6">
+                                            
+                                            <label class="input">
+                                                @Html.TextBoxFor(m => m.kyc_cust_identification.nbw_super_id, new { @placeholder = "Nambawan ID" })
+                                              
+                                            </label>
+                                        </section>
+                                       
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-6">
+                                            
+                                            @Html.TextBoxFor(m => m.kyc_cust_identification.other_id, new { @placeholder = "Other ID Name" }) Other ID
+                                          </section>
+                                        <section class="col col-6">
+                                            
+                                            <label class="input">
+                                                @Html.TextBoxFor(m => m.kyc_cust_identification.other_id, new { @placeholder = "Other ID" })
+                                              
+                                            </label>
+                                        </section>
+                                       
+                                    </div>
+
+                                    <div class="row">
+                                        <section id="valid-identity-checkbox"></section>
+                                    </div>
+
+                                </fieldset>
+
+                                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                                    <header>
+                                        <h2>Purchase Details<span style="padding-left:250px;color:white;"></span></h2>
+                                    </header>
+                                </div>
+
+                                <fieldset class="smart-form" style="margin: 0px 20px;">
+                                    <div class="row">
+                                        <section class="col col-3">Customer Type:</section>
+                                        <section class="col col-9">
+                                            <div class="inline-group">
+                                                <label class="radio"  style=  "margin-top: -1px;">
+                                                    @Html.RadioButtonFor(m => m.kyc_cust_purchase.cust_status, "New Customer", new { })
+                                                    <i></i>New Customer
+                                                </label>
+                                                <label class="radio">
+                                                    @Html.RadioButtonFor(model => model.kyc_cust_purchase.cust_status, "Existing Customer", new { })
+                                                    <i></i>Existing Customer
+                                                </label>
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.kyc_cust_purchase.cust_status)
+                                        </section>
+                                    </div>
+                                    <div class="row subtitle" style="margin-bottom: 15px;">
+                                             <section class="col col-3" style="margin-bottom:0px;">Phone Number</section>
+                                        <section class="col col-3" style="margin-bottom:0px;">Handset Model</section>
+                                   
+                                        <section class="col col-6" style="margin-bottom:0px;">IMEI Number</section>
+                                        @*<section class="col col-3">&nbsp;</section>*@
+                                    </div>
+                                    <div class="row">
+                                         <section class="col col-3">
+                                            <label class="input">
+                                                @Html.EditorFor(m => m.kyc_cust_purchase.cust_mobile_no1)
+                                                @Html.ValidationMessageFor(m => m.kyc_cust_purchase.cust_mobile_no1)
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                                @Html.EditorFor(m => m.kyc_cust_purchase.cust_handset_model1)
+                                                @Html.ValidationMessageFor(m => m.kyc_cust_purchase.cust_handset_model1)
+                                            </label>
+                                        </section>
+                                       
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                @Html.EditorFor(m => m.kyc_cust_purchase.cust_imei_no1)
+                                                @Html.ValidationMessageFor(m => m.kyc_cust_purchase.cust_imei_no1)
+                                            </label>
+                                        </section>
+                                    
+                                    </div>
+
+                                    <div class="row" id="2ndHandSetModels">
+                                           <section class="col col-3">
+                                            <label class="input">
+                                                @Html.EditorFor(m => m.kyc_cust_purchase.cust_mobile_no2)
+                                                @Html.ValidationMessageFor(m => m.kyc_cust_purchase.cust_mobile_no2)
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                                @Html.EditorFor(m => m.kyc_cust_purchase.cust_handset_model2)
+                                                @Html.ValidationMessageFor(m => m.kyc_cust_purchase.cust_handset_model2)
+                                            </label>
+                                        </section>
+                                     
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                @Html.EditorFor(m => m.kyc_cust_purchase.cust_imei_no2)
+                                                @Html.ValidationMessageFor(m => m.kyc_cust_purchase.cust_imei_no2)
+                                            </label>
+                                        </section>
+                                      
+                                    </div>
+
+                                    <div class="row" id="3rdHandSetModels">
+                                        <section class="col col-3">
+                                            <label class="input">
+                                                @Html.EditorFor(m => m.kyc_cust_purchase.cust_mobile_no3)
+                                                @Html.ValidationMessageFor(m => m.kyc_cust_purchase.cust_mobile_no3)
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                                @Html.EditorFor(m => m.kyc_cust_purchase.cust_handset_model3)
+                                                @Html.ValidationMessageFor(m => m.kyc_cust_purchase.cust_handset_model3)
+                                            </label>
+                                        </section>
+                                        
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                @Html.EditorFor(m => m.kyc_cust_purchase.cust_imei_no3)
+                                                @Html.ValidationMessageFor(m => m.kyc_cust_purchase.cust_imei_no3)
+                                            </label>
+                                        </section>
+                                     
+                                    </div>
+
+
+                                </fieldset>
+
+                                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" style="margin-bottom:0px;">
+                                    <header>
+                                        <h2>Customer Acknowledgement<span style="padding-left:250px;color:white;"></span></h2>
+                                    </header>
+                                </div>
+
+                                <fieldset class="smart-form" style="margin: 0px 20px;">
+                                     <section class="col col-12">
+                                         <label class="input">
+                                   <br /> By signing this form I declare that all information contained in this application is true and correct.&nbsp&nbsp;&nbsp; 
+                                             </label>
+                                         </section>
+                                    <br /><br />
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            Date:
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                                @Html.TextBoxFor(m => m.kyc_cust_Details.kycdate, "{0:dd/MM/yyyy}")
+                                             
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            I Accept:&nbsp;&nbsp;@Html.CheckBoxFor(m => m.kyc_cust_Details.signature)
+                                        </section>
+
+                                    </div>
+                                </fieldset>
+                                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" style="margin-bottom:0px;">
+                                    <header>
+                                        <h2>Official use only<span style="padding-left:250px;color:white;"></span></h2>
+                                    </header>
+                                </div>
+                              <fieldset class="smart-form" style="margin: 0px 20px;">
+                                  <section class="col col-12">
+                                      <label class="input">
+                                   <br /> I have sighted the original identification document listed in section 2 and checked that ;
+                                          </label>
+                                      </section>
+                                    <br /><br />
+                                    <div class="row">
+                                        <section class="col col-12">
+                                            
+                                            @Html.CheckBoxFor(m => m.kyc_cust_ack.is_name_matched) The name on the form matched the ID shown <br />
+                                            @Html.CheckBoxFor(m => m.kyc_cust_ack.is_doc_genuine) The document provided are geniune and have not expired
+                                                
+                                        </section>
+                                        </div>
+                                        <div class="row">
+                                        <section class="col col-3">
+                                             Date:
+                                            </section>
+                                            <section class="col col-3">
+                                            <label class="input">
+                                                @Html.TextBoxFor(m => m.kyc_cust_ack.ack_date, "{0:dd/MM/yyyy}")
+                                             
+                                            </label>
+                                        </section>
+                                        <section class="col col-6">
+                                            Signature:&nbsp;&nbsp;@Html.CheckBoxFor(m => m.kyc_cust_ack.is_officer_sign)
+                                        </section>
+
+                                    </div>
+                                </fieldset>
+                                 
+
+                                <div class="smart-form">
+                                    <section style="text-align:center">
+                                        <footer>
+                                            <button id="btnSubmit" class="btn btn-mini top_btn" type="submit" style="width: 100px;">Submit</button> &nbsp;&nbsp;
+                                             <button id="btncancel" class="btn btn-mini top_btn" type="button" style="width: 100px;" onclick="window.location.href = '@Url.Action("KYC_customers_List", "Admin")    '">Cancel</button>
+                                        </footer>
+                                    </section>
+                                </div>
+
+                            }
+
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- END COL -->
+        </div>
+        <!-- END ROW -->
+    </section>
+</section>
+      <div style="clear: both;"></div>
+
+<div id="div_KYC_Dialog" style="display: none;">
+    <p>@ViewBag.Msg</p>
+</div>
+
+
+
+
+@section Scripts {
+ <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#kyc_cust_Details_kycdate").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-104:+0"
+            });
+            $("#kyc_cust_ack_ack_date").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-104:+0"
+            });
+            $("#kyc_cust_Details_dob").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-104:+0"
+            });
+
+
+        });
+        $(document).ready(function () {
+            var province = $("#kyc_cust_Details_province").val();
+            var town = $("#kyc_cust_Details_town").val();
+            if (province != 0) {
+                $("#kyc_cust_Details_town").val("");
+
+                var url = '@Url.Content("~/")' + "Admin/DistrictByProvinceID";
+                var ddlsource = "#kyc_cust_Details_province";
+                var ddltarget = "#kyc_cust_Details_town";
+                if ($(ddlsource).val() == "")
+                    return false;
+
+                $.getJSON(url, { id: parseInt($(ddlsource).val()) }, function (data) {
+                    $(ddltarget).empty();
+                    $.each(data, function (index, optionData) {
+                        $(ddltarget).append("<option value='" + optionData.Text + "'>" + optionData.Value + "</option>");
+                        $("#kyc_cust_Details_town").removeAttr('disabled');
+
+                        $("#kyc_cust_Details_town").val(town);
+                    });
+
+                });
+            }
+        });
+
+
+        //$("#kyc_cust_Details_suburb").attr("disabled", true);
+        $("#kyc_cust_Details_province").change(function () {
+
+            $("#kyc_cust_Details_town").val("");
+
+            var url = '@Url.Content("~/")' + "Admin/DistrictByProvinceID";
+            var ddlsource = "#kyc_cust_Details_province";
+            var ddltarget = "#kyc_cust_Details_town";
+            if ($(ddlsource).val() == "")
+                return false;
+
+            $.getJSON(url, { id: parseInt($(ddlsource).val()) }, function (data) {
+                $(ddltarget).empty();
+                $.each(data, function (index, optionData) {
+                    $(ddltarget).append("<option value='" + optionData.Text + "'>" + optionData.Value + "</option>");
+
+                    $("#kyc_cust_Details_town").removeAttr('disabled')
+                    ;
+                });
+                $(ddltarget).append("<option value='0'> -- Select District-- </option>");
+                $("#kyc_cust_Details_town").val(0);
+            });
+        });
+
+
+
+        </script>
+
+      @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    @if (ViewBag.Msg != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#div_KYC_Dialog").dialog({
+                    title: "Message",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            window.location.href = '@Url.Action("KYC_Customers_List", "Admin")';
+                        }
+                    },
+                    dialogClass: 'dialog_css',
+                    width: 350,
+                    autoOpen: true,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });
+            });
+        </script>   
+   
+    }
+ <link href="@Url.Content("~/JQueryLightBox/jquery.lightbox-0.5.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/JQueryLightBox/jquery.lightbox-0.5.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#gallery a').lightBox();
+        });
+         
+    </script>
+    }

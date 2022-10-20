@@ -1,0 +1,39 @@
+﻿@using (Html.BeginForm("GetPower", "Care"))
+{
+    <div style="width:100%; max-width:450px;">
+        <div class="dRow">
+            <div class="postsumdiv">
+                Meter Number:
+            </div>
+            <div class="postsumdiv">
+                <input type="text" id="txt_MeterNo" maxlength="12" style="height: 30px; width: 99%;" />
+                <span id="span_meterno" style="color:red;"></span>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="dRow">
+            <div class="postsumdiv">
+                Amount:
+            </div>
+            <div class="postsumdiv">
+                <input type="text" id="txt_Amt" maxlength="10" style="height: 30px; width: 99%;" />
+                <span id="span_amt" style="color:red;"></span>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="dRow" style="text-align:center;">
+            <input type="button" id="btnMSDNsubmit" class="btn-submit" onclick="submitBuyPower();" value="Submit" />&nbsp;<input type="button" class="btn-submit" onclick="closeBuyPower();" value="Cancel" />
+        </div>
+
+        <div id="divGetPowerProcess" class="dRowvsm" style="display: none; text-align:center;">
+            <img src="~/Content/themes/base/images/loading.gif" />please wait...
+        </div>
+
+
+
+    </div>
+
+
+}

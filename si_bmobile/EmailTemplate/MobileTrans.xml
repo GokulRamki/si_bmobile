@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mobileModel>
+  <osType>
+    <Type>Android</Type>
+    <Value>8</Value>
+  </osType>
+  <osType>
+    <Type>Iphone</Type>
+    <Value>9</Value>
+  </osType>
+</mobileModel>

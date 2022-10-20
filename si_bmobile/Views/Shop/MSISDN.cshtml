@@ -1,0 +1,57 @@
+﻿@model bemobile.Models.ShopModel
+@{
+    ViewBag.Title = "MSISDN";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Verify MSISDN</h2>
+  @using (Html.BeginForm("MSISDN", "Shop", FormMethod.Post, new { id = "frmMSISDN", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+         <div class="DivRow">
+            <div class="DivLabel">
+                MSISDN
+            </div>
+            <div class="DivTxt">
+               675 @Html.TextBoxFor(model => model.MSISDN, null, new { @class = "Txtbox" })&nbsp;
+                @Html.ValidationMessageFor(model => model.MSISDN)
+            </div>
+        </div>
+     
+     <div class="DivRow">
+            <div class="DivLabel">&nbsp;</div>
+            <div class="DivTxt">
+                <input type="submit" value="Submit" />
+            </div>
+         
+        </div>
+      <div id="div_dialog" style="display: none;">
+            <p>@ViewBag.Message</p>
+        </div>
+    }
+
+@if (ViewBag.Message != null)
+{ 
+    <script type="text/javascript">
+        $("#div_dialog").dialog({
+            title: "Message",
+            buttons: {
+                Close: function () {
+                    $(this).dialog('close');
+                }
+            },
+            dialogClass: 'dialog_css',
+            width: 300,
+
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            modal: true
+        });
+
+    </script>
+}
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,69 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.TransactionReportModel>
+
+@if(Model.Count>0)
+{ 
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Transaction Number</th>
+            <th>MSISDN</th>
+            <th>Plans</th>
+            <th>Total Price</th>
+            <th>Transaction Initiated Date</th>
+            <th>Transaction Purchase Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model.Count>0)
+        {
+            foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.user_name</td>
+                    <td>@item.trans_number</td>
+                    <td>@item.msisdn</td>
+                    <td>@item.plans</td>
+                    <td>@item.total_price</td>
+                    <td>@item.trans_initiated</td>
+                    <td>@item.trans_purchase</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "SISubscriptionplan", ddlUsers = ViewData["ddlUsers"], ddlStatus = ViewData["ddlStatus"], transanumber = ViewData["transanumber"], msisdn = ViewData["msisdn"], dFrom = ViewData["dFrom"], dTo = ViewData["dTo"] }))
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>
+}
+else
+{
+    <div style="width: 100%; text-align: center; padding: 10px 0px 10px 0px;">Records Not found!</div>
+
+}

@@ -1,0 +1,144 @@
+﻿@model si_bmobile.Models.RegistrationModel
+@{
+    ViewBag.Title = "Update Profile";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+}
+
+<div class="abt-main">
+    <div class="prm-tab-panel">
+        <div class="login-main" style="margin: 0px;">
+            @using (Html.BeginForm("EditPro", "Care", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmEditPro", @class = "smart-form", novalidate = "novalidate" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="log-inn">
+                    <div class="log-hed"> Update Profile </div>                   
+                    <div class="log-mn">
+                        <div class="log-nm"> E-Mail: </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.Email, new { placeholder = "E-mail" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm"> First Name: </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.FirstName, new { placeholder = "First Name" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm"> Middle Name: </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.MiddleName, new { placeholder = "Middle Name" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.MiddleName)
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm"> Last Name: </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.LastName, new { placeholder = "Last Name" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm"> Company Name: </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.Company, new { placeholder = "Company Name" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Company)
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm"> Address Line 1: </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.Address1, new { placeholder = "Address Line 1" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Address1)
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm"> Address Line 2: </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.Address2, new { placeholder = "Address Line 2" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Address2)
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm"> Mobile Number: </div>
+                        <div class="log-txt">
+                           @Html.DisplayFor(model => model.BroadBandNo, new { placeholder = "Mobile Number" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.BroadBandNo)
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm"> Account Number:&nbsp;(For Postpaid users only): </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.account_number, new { placeholder = "Account Number" })
+                            @Html.HiddenFor(model => model.BroadBandNo)
+                            @Html.HiddenFor(model => model.account_number)
+                            @Html.HiddenFor(model => model._rd_action)
+                            @Html.HiddenFor(model => model.UserId)
+                            @Html.HiddenFor(model => model.paidType)
+                        </div>
+                        @Html.ValidationMessageFor(model => model.account_number)
+                    </div>
+                    <div class="log-mn">
+                        <h5>Account Verification Questions</h5>
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm">What is your mother’s maiden name?<span style="color:red">&nbsp;*</span> </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.mother_maiden_name, new { placeholder = "Your mother’s maiden name", maxlength = "50" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.mother_maiden_name)
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm">What is your favourite colour?<span style="color:red">&nbsp;*</span> </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.favourite_color, new { placeholder = "Your favourite colour", maxlength = "50" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.favourite_color)
+                    </div>
+                    <div class="log-mn">
+                        <div class="log-nm">What is your pets name?<span style="color:red">&nbsp;*</span> </div>
+                        <div class="log-txt">
+                            @Html.TextBoxFor(model => model.pets_name, new { placeholder = "Your pets name", maxlength = "50" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.pets_name)
+                    </div>
+                    <div class="log-sbmt">
+                        <input type="button" class="btn-sbmt" value="Cancel" onclick="window.location='/Care/RefreshACC'">&nbsp;&nbsp;
+                        <input type="submit" class="btn-sbmt" value="Submit">
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+        @Html.Partial("_cms_RightNav_Menu")
+        <div style="clear:both;"></div>
+    </div>
+
+
+<div id="div_dialog" style="display: none;">
+    <p>@ViewBag.Message</p>
+</div>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        $("#div_dialog").dialog({
+            title: "Message",
+            buttons: {
+                Close: function () {
+                    $(this).dialog('close');
+                    var url = "@Url.Action(ViewBag.rdAction, "Care")";
+                    window.location = url;
+                }
+            },
+            width: 300,
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            modal: true
+        });
+
+    </script>
+}

@@ -1,0 +1,227 @@
+﻿@model si_bmobile.Models.NewPurchasePriceModel
+
+<div id="divSliderpane">
+    @Html.HiddenFor(model => model.plan_denominations)
+    @Html.HiddenFor(model => model.tot_amt)
+    @Html.HiddenFor(model => model.from_msisdn)
+    @Html.HiddenFor(model => model.purchase_msisdn)
+    @Html.HiddenFor(model => model.type_id)
+    @Html.HiddenFor(model => model.UserId)
+    @Html.HiddenFor(model => model.bfav)
+    @Html.HiddenFor(model => model.jsonallplans)
+    @Html.HiddenFor(model => model.ptype)
+   @Html.HiddenFor(model => model.isFixedbuy)
+
+    <div class="tabs-container">
+        @if (Model.isFixedbuy == true)
+        {
+            <div style="padding-left:10px;font-weight:bold;">Topup Bundles</div> 
+        }
+        <div id="sliderpane_complete">
+            <div class="slider_panel">
+
+                <div class="alert-message warning" style="display: none; width: 96%; text-align: center; margin-left: 0.7%;">
+                    <div class="box-icon"></div>
+                    <p><span id="warning_msg"></span><a href="#" class="close">&times;</a></p>
+                </div>
+
+                <div id="div_loading" class="div-btn">
+                    <img src="~/images/slider/301.GIF" alt="Loading..." /><br />
+                    <span style="font-weight: bold; color: gray;">Please Wait...</span>
+                </div>
+
+                @if (Model.denomination_ids != null)
+                {
+                    int i = 0;
+                    foreach (var plan in Model.denomination_ids)
+                    {   
+                    @Html.HiddenFor(model => model.denomination_ids[i].deno_id)
+                    @Html.HiddenFor(model => model.denomination_ids[i].denomination)
+                    @Html.HiddenFor(model => model.denomination_ids[i].denomination_name)
+                    @Html.HiddenFor(model => model.denomination_ids[i].plan_name)
+                    @Html.HiddenFor(model => model.denomination_ids[i].plan_id)
+                    @Html.HiddenFor(model => model.denomination_ids[i].plan_type_id)
+                    
+                        <div id="div_plan_pan" class="div-pn">
+                            <div class="div-tr">
+                                <div class="div-lef">
+                                    <div class="img-pan pi_@i">
+                                        &nbsp;
+                                    </div>
+                                    <div class="plan-txt-pan">
+                                        <b>@plan.plan_name Pack</b><br />
+                                    </div>
+                                </div>
+                                @{ViewBag.plan = (SelectList)ViewData["ddlPLAN_" + i];}
+                                @if (ViewBag.plan != null)
+                                {
+                                    <div class="div-rig">
+                                        @if (Model.isFixedbuy == false)
+                                        {
+                                       @Html.DropDownList("plan", null, new { @id = "ddlPLAN_" + i, @class = "generalplan", @name = "ddlPLAN_" + i })
+                                       <div style="font-size:10px;font-weight:bold;" id="std_@i"></div>
+                                        <div id='slider_@i' data-="ddlPLAN_@i"  class="sliderContext sc_@i"></div>
+                                        <div class="clr-fx"></div>
+                                        }
+                                        else
+                                        {
+                                        @Html.DropDownList("plan", null, new { @id = "ddlPLAN_" + i, @class = "generalplan", @name = "ddlPLAN_" + i,@style="display:block;",@disabled="disabled" })
+                                             
+                                        }
+                                    </div>
+                                }
+                            </div>
+                            <div class="div-br"></div>
+                      
+                    </div>
+                                i++;
+                    }
+                }
+                <div class="clr-fx"></div>
+
+            </div>
+
+
+            <div class="result_panel">
+                <div class="div-title">Your Plan</div>
+                <div class="div-price"><span style="font-size: 18px; color: #0000E0;">K</span>&nbsp;<span class="span-price" id="totalprice" style="font-size: 18px; color: #0000E0;">@Model.tot_amt.ToString("#0.00")</span>/30days</div>
+                <div class="div-btn">
+                    <input type="submit" style="background-image: linear-gradient(to bottom, #0000E0, #000094); cursor: pointer; font-weight: bold;" value="Buy Now" class="btn" id="btnSubmit" />
+                </div>
+                <div id="valid-message">
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+
+        </div>
+
+
+
+        <div style="color: gray; margin: 10px 0px 0px 10px;">
+            <span style="font-weight: 900; color: gray;">How it works :</span>Simply choose your Packs based on what you prefer to use each month. Select Buy to continue with payment using your credit/debit card, your prepaid credit or voucher.<br />
+            <b>Don’t forget to renew your plan every 30 days</b>
+        </div>
+
+    </div>
+
+
+    <div style="clear: both;" class="clr-fx"></div>
+    <div id="div_balancedialog" style="display: none;">
+        <p>@ViewBag.Message</p>
+    </div>
+
+
+    <div id="div_favourite_dialog" style="display: none;">
+        <p>Are you sure want to add this combo pack as your favourite?</p>
+        <div id="load_image" style="display: none; float: right">
+            <img src="~/Content/themes/base/images/loading.gif" alt="Loading..." />
+            <span style="font-weight: bold; color: gray;">Please Wait...</span>
+        </div>
+    </div>
+
+
+</div>
+
+@if (Session["subscriber"] != null)
+{
+    <script type="text/javascript">
+      
+       @* $('#btnSubmit').click(function () {
+          
+         
+            var res = false;
+        
+            var denom_ids = $("#plan_denominations").val();
+           
+            var v_allplans = $("#jsonallplans").val();
+
+            $("#div_favourite_dialog").dialog({
+                    title: "ADD FAVOURITE",
+                    buttons: {
+                        Yes: function () {
+                            $("#div_favourite_dialog").dialog('close');
+                            $('.ui-slider').slider('disable');
+                            $("#div_loading").css({ "display": "block" });
+                            $(".btn").css({ 'background-color': 'lightgray', 'background-image': 'none', 'color': 'black' });
+                            $('input[type=submit]').attr('disabled', true);
+                          
+                          $.ajax({
+                                type: "POST",
+                                url: "@Url.Action("AddFavouritePlanPack","Care")",
+                                //contentType: 'application/json',
+                              data: ({ denm_ids: denom_ids, jallplans: v_allplans }),
+                                success: function (data) {
+                                   
+                                    if (data.Status == "0") {
+
+
+                                        
+
+                                       // $('input[type=submit]').attr('disabled', false);
+                                        $(".btn").removeAttr('style');
+                                        $('form').submit();
+                                        $("#div_favourite_dialog").dialog('close');
+                                        $('.ui-slider').slider('disable');
+                                        $("#div_loading").css({ "display": "block" });
+                                        $(".btn").css({ 'background-color': 'lightgray', 'background-image': 'none', 'color': 'black' });
+                                        $('input[type=submit]').attr('disabled', true);
+                                        res = true;
+                                    }
+                                    else if (data.Status == "111")
+                                        window.location = '@Url.Action("login", "Care")';
+                                    else if (data.Status == "951") {
+                                       
+                                        show_warning_notification('Plan denomination not found!');
+                                    }
+                                    else {
+                                        $('input[type=submit]').attr('disabled', false);
+                                        $(".btn").removeAttr('style');
+                                        show_warning_notification('Failed to add favourite plan!');
+                                    }
+
+                                    //}
+                                },
+                                error: function (response) {
+                                    //alert("PlanPrice: " + response.d);
+                                }
+                            });
+                        },
+                        No: function () {
+                            $("#div_favourite_dialog").dialog('close');
+                            $('.ui-slider').slider('disable');
+                            $("#div_loading").css({ "display": "block" });
+                            $(".btn").css({ 'background-color': 'lightgray', 'background-image': 'none', 'color': 'black' });
+                            $('input[type=submit]').attr('disabled', true);
+
+                            $('form').submit();
+                            
+                            res = true;
+                        }
+                    },
+                    dialogClass: 'dialog_css',
+                    width: 350,
+                    top: 439.5,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });
+          
+
+            return res;
+        });*@
+
+
+        function show_success_notification(msg) {
+            $("#success_msg").html(msg);
+            $(".alert-message.success").show();
+            $(".plans_pan").hide();
+        }
+
+        function show_warning_notification(msg) {
+            $("#warning_msg").html(msg);
+            $(".alert-message.warning").show();
+        }
+    </script>
+
+}

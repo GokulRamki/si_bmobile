@@ -1,0 +1,185 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<!-- Mobile Specific Metas ================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--[if lt IE 8]>
+       <div style=' clear: both; text-align:center; position: relative;'>
+         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+        </a>
+      </div>
+    <![endif]-->
+<!--[if lt IE 9]>
+		<script src="js/html5.js"></script>
+	<![endif]-->
+<!--[if lt IE 7]>
+	<link rel="stylesheet" href="ie6.css" type="text/css" />
+<![endif]-->
+<title>Welcome to</title>
+<link href="~/css/style-new.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="~/css/flexslider.css" type="text/css" media="screen" />
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/jquery.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        /* prepend menu icon */
+        $('#nav-wrap').prepend('<div id="menu-icon">BROWSE</div>');
+
+        /* toggle nav */
+        $("#menu-icon").on("click", function () {
+            $("#nav").slideToggle();
+            $(this).toggleClass("active");
+        });
+    });
+</script>
+<script defer src="~/js/jquery.flexslider.js"></script>
+<script type="text/javascript">
+    $(function () {
+        SyntaxHighlighter.all();
+    });
+    $(window).load(function () {
+        $('.flexslider').flexslider({
+            animation: "slide",
+            slideshow: true,
+            start: function (slider) {
+                $('body').removeClass('loading');
+            }
+        });
+    });
+</script>
+</head>
+<body>
+<div class="header">
+  <div class="header_next">
+    <div class="margin">
+      <div class="head_top">
+          <div class="logo">
+            <div class="logo_img"><a href="#"><img src="images/logo_new.jpg" title="logo" alt=""></a></div>
+          </div>
+          <div class="header_right">
+            <div class="header_top_menu">
+              <!--<div class="hed_logo"><img src="images/hed_logo.png" title="" alt=""></div>-->
+              <div class="hed_menu">
+                <div class="hed_menu_box ext_width">
+                    <div class="hed_login"><a href="#" class="bor_rght">My Account Login</a></div>
+                    <div class="hed_login"><a href="#">Register</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><img src="images/pay_your_bill.png" title="" alt=""></div>
+                  <div class="hed_menu_box_text"><a href="#">Pay Your Bill</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><img src="images/check_bill.png" title="" alt=""></div>
+                  <div class="hed_menu_box_text"><a href="#">Check Bill</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><img src="images/recharge_now.png" title="" alt=""></div>
+                  <div class="hed_menu_box_text"><a href="#">Recharge Now</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><img src="images/check_usage.png" title="" alt=""></div>
+                  <div class="hed_menu_box_text"><a href="#">Check Usage</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><img src="images/activate_a_sim.png" title="" alt=""></div>
+                  <div class="hed_menu_box_text"><a href="#">Activate A Sim</a></div>
+                </div>
+              </div>
+              <div class="social_icon"><a href="#"><img src="images/fb_icon.png"></a><a href="#"><img src="images/twitt_icon.png"></a></div>
+            </div>
+            <div class="nav_menu">
+              <nav id="nav-wrap">
+                <ul style="display: none;" id="nav">
+                  <li class="first"><a href="#" >Home</a></li>
+                  <li><a href="#">Price Plans</a></li>
+                  <li><a href="#">Products</a></li>
+                  <li><a href="#">Value Added Services</a></li>
+                  <li><a href="#">Promotions</a></li>
+                  <li><a href="#" >Support</a></li>
+                  <li class="last last_bg"><a href="#" >News</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="header_top">
+    <div class="margin">
+      <div class="header_top_text">
+        <div class="top_bo"><img src="images/top_bo.png" title="" alt=""></div>
+        <p>Post Paid customers can now view invoices online….login or register on self-care to view details</p>
+      </div>
+      <div class="header_top_text">
+        <div class="top_bo"><img src="images/top_bo.png" title="" alt=""></div>
+        <p>Download the bmobile</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mid">
+  <div class="mid_margin">
+    <div class="choose_box remov_padd">
+      <div class="sub_page">
+        <h1>CUG</h1>
+        <p>With bemobile CUG you can now make and receive unlimited calls and SMS from members within a group for minimal monthly fee. The group can be a company, organization, family members or a group of friends.</p>
+        <p>CUG is available to both bemobile Prepaid and Postpaid customers. A minimum of 2 connections are required to be registered under the same billing account and there are no maximum limitations.</p>
+        <p>For more information, call the bemobile Customer Care on 1555 or email support@bemobile.com.pg</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer_bg">
+    <div class="footer_margin">
+      <div class="footer_top">
+        <div class="footer_menu_top">
+          <div class="footer_menu">
+            <h1>Our company </h1>
+            <ul>
+              <li><a href="#">About bmobile</a></li>
+              <li><a href="#">Why Choose bmobile</a></li>
+              <li><a href="#">Board of Directors</a></li>
+              <li><a href="#">Senior Management</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Tenders</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer_menu_next">
+          <div class="footer_menu">
+            <div class="footer_menu">
+              <h1>Useful Links</h1>
+              <ul>
+                <li><a href="#">Get on the Web</a></li>
+                <li><a href="#">Network Coverage</a></li>
+                <li><a href="#">Store Locations</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer_menu_top">
+          <div class="footer_menu">
+            <div class="footer_menu">
+              <h1>Help Me</h1>
+              <ul>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Sitemap</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

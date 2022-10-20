@@ -1,0 +1,61 @@
+﻿ @using bemobile;
+
+<div class="DivRight">
+    <div>
+        <div class="dNavTitle">User Profile</div>
+        @if (@ViewBag.preType == "501" && @ViewBag.posType == null)
+        {
+            <div class="dSubNav">@Html.MenuLink("Account Summary", "Prepaid", "Care")</div>
+        }
+        @if (@ViewBag.preType == "501" && @ViewBag.posType == "502")
+        {
+            <div class="dSubNav">@Html.MenuLink("Account Summary", "Postpaid", "Care")</div>
+        }
+        @if (@ViewBag.posType == "502" && @ViewBag.preType == null)
+        {
+            <div class="dSubNav">@Html.MenuLink("Account Summary", "Postpaid", "Care")</div>
+        }
+        @if (Session["subscriber"] != null)
+        {
+            <div class="dSubNav"><a href="#" onclick="ViewAddMSISDN()">Add Additional Mobile No</a></div>
+        }
+        <div class="dSubNav"><a href="#" id="lnkActivateSIM">Activate your SIM</a></div>
+        <div class="dSubNav"><a href="#" id="lnkBuyPower">Get Power</a></div>
+        <div class="dSubNav">@Html.MenuLink("Update Profile", "EditPro", "Care")</div>
+        <div class="dSubNav">@Html.MenuLink("Change Password", "ResetPassword", "Care")</div>
+    </div>
+    @if (@ViewBag.preType == "501" && @ViewBag.posType == null) 
+    {
+        <div>
+            <div class="dNavTitle">Top up your account</div>
+            
+            <div class="dSubNav">@Html.MenuLink("Purchase promotions", "Plans", "Care")</div>
+              
+            <div class="dSubNav">@Html.MenuLink("Click here to Top Up", "Topup", "Care")</div>
+               
+            <div class="dSubNav">@Html.MenuLink("Build Your Plan", "PlanPricing", "Care")</div>
+
+            <div class="dSubNav"><a href="#" onclick="RedeemFBVoucher()">Redeem FB Voucher</a></div>
+        </div>   
+    }
+    @if (@ViewBag.preType == "501" && @ViewBag.posType == "502")
+    {
+        <div>
+            <div class="dNavTitle">Top up your account</div>
+            
+           <div class="dSubNav">@Html.MenuLink("Purchase promotions", "Plans", "Care")</div>
+              
+            <div class="dSubNav">@Html.MenuLink("Click here to Top Up", "Topup", "Care")</div>
+               
+            <div class="dSubNav">@Html.MenuLink("Build Your Plan", "PlanPricing", "Care")</div>
+
+            <div class="dSubNav"><a href="#" onclick="RedeemFBVoucher()">Redeem FB Voucher</a></div>
+        </div>   
+    }
+    <div>
+
+        <div class="dSubNav">@Html.ActionLink("Logout", "Logout")</div>
+
+    </div>
+</div>
+    

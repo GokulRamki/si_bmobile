@@ -1,0 +1,98 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.YPriceModel>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>Plan Type</th>
+            <th>
+                Plan Name
+            </th>
+            <th>
+                Plan Denomination
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Active Status
+            </th>
+            
+            <th>
+                Edit
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+            <tr>
+                 <td>
+                        @item.id
+                    </td>
+                <td>@item.play_type_name</td>
+                    <td>
+                        @item.planName
+                    </td>
+                    <td>
+                        @item.denomination
+                    </td>
+                    <td>
+                        @item.price&nbsp;toea
+
+                    </td>
+                    
+                      @if(item.isActive==true)
+                      {<td>Active</td>}
+                      else
+                      {<td>InActive</td>}
+              
+                   
+               
+                    <td>
+                        @Html.ActionLink("Edit", "Edit_yplan_price", new { id = @item.id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete_plan_price", new { id = @item.id }, new { @onclick = "return confirm('Are you sure, want to delete this plan price?');" })
+                    </td>
+            </tr>                
+            }
+        }
+    </tbody>
+</table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "Yplan_price",ddlType=ViewData["ddlType"],ddlPlans=ViewData["ddlPlans"],sPlanDenomination=ViewData["sPlanDenomination"],ddlStatus=ViewData["ddlStatus"] }))
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries</div>
+</div>
+@*<script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>*@

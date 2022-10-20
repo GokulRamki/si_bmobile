@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b97a8a1a5d0a461397c1cede6741d2a3" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="bemobileselfcareModel.accountprofile" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.api_logs" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.application_transaction" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.application_transaction_log" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.bundle_tarrif" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.bundleprice" Width="1.5" PointX="5.75" PointY="9.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.bundle" Width="1.5" PointX="7.75" PointY="9.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.datacard_bundles" Width="1.5" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.denomination_type" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.errormessage" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.favorite_plans" Width="1.5" PointX="5.25" PointY="2.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.gprs_det" Width="1.5" PointX="11.75" PointY="6.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.mon_det" Width="1.5" PointX="11.75" PointY="11.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.multiplesim" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.plan_denomination" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.plan_price" Width="1.5" PointX="8.25" PointY="3" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.plan_type" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.plandetail" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.plan" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.qlink" Width="1.5" PointX="13.75" PointY="6.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.recharge_det" Width="1.5" PointX="13.75" PointY="9.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.recommend" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.registration" Width="1.5" PointX="3" PointY="12.125" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.respons" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.service" Width="1.5" PointX="13.75" PointY="14.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.sim_activation" Width="1.5" PointX="15.75" PointY="3.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.simverificationcode" Width="1.5" PointX="15.75" PointY="7.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.sms_app_tx" Width="1.5" PointX="15.75" PointY="10.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.sms_det" Width="1.5" PointX="15.75" PointY="14.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.sms_in_log" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.sms_out_log" Width="1.5" PointX="9.75" PointY="16.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.smsout" Width="1.5" PointX="17.75" PointY="3.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.topup_transactions" Width="1.5" PointX="5.75" PointY="17.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.topupplan" Width="1.5" PointX="17.75" PointY="6.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.transaction" Width="1.5" PointX="17.75" PointY="9.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.transfer_det" Width="1.5" PointX="17.75" PointY="14.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.userhistory" Width="1.5" PointX="17.75" PointY="17.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.user" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.validity" Width="1.5" PointX="11.75" PointY="18.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.voice_det" Width="1.5" PointX="19.75" PointY="3.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.voucher_blocklist" Width="1.5" PointX="5.25" PointY="14.875" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.your_plan_transaction_denominations" Width="1.5" PointX="7.75" PointY="19.75" />
+        <EntityTypeShape EntityType="bemobileselfcareModel.your_plan_transactions" Width="1.5" PointX="19.75" PointY="8.75" />
+        <AssociationConnector Association="bemobileselfcareModel.denom_fkey" />
+        <AssociationConnector Association="bemobileselfcareModel.reg_fkey" />
+        <AssociationConnector Association="bemobileselfcareModel.plan_denom_fkey" />
+        <AssociationConnector Association="bemobileselfcareModel.plan_fkey" />
+        <AssociationConnector Association="bemobileselfcareModel.plan_id_fkey" />
+        <AssociationConnector Association="bemobileselfcareModel.reg_fkeyd" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

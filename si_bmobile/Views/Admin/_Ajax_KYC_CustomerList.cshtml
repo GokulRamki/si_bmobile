@@ -1,0 +1,181 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.kyc_grid_list>
+
+@if (Model != null)
+{
+    if (Model.Count() > 0)
+    {
+    <table class="table table-bordered table-hover">
+
+        <thead>
+            <tr>
+                <th>Name </th>
+                <th>Surname</th>
+                <th>Sex  </th>
+                <th>POBOX</th>
+                <th>Province</th>
+                <th>Town </th>
+                <th>Suburb  </th>
+                <th>Email   </th>
+                <th>Mobile Number</th>
+                <th>Edit         </th>
+                <th>More         </th>
+                <th>Log         </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name </td>
+                    <td>@item.Surname</td>
+                    <td>@item.Sex  </td>
+                    <td>@item.pobox</td>
+                    <td>@item.province</td>
+                    <td>@item.town </td>
+                    <td>@item.suburb </td>
+                    <td>@item.email </td>
+                    <td>@item.mobile_no</td>
+                    <td><a href="@Url.Action("Update_Kyc_customer", "Admin", new { @item.id })">Edit</a></td>
+                    <td><a onclick="showmore(@item.id)" style="cursor:pointer">More</a>    </td>
+                    <td><a onclick="showlog(@item.id)" style="cursor:pointer">Log</a>    </td>
+                </tr>
+                <tr class="kychidden" id="id_@item.id"  style="display:none">
+                    <td colspan="12">
+                        <div style="color: #8B3778; float: right; font-weight: bold; font-style: italic; padding: 0px" class="innerdivclass">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Purchase Date</th>
+                                        <th>Authenticate Date</th>
+                                        <th>LT Reference Number</th>
+                                    </tr>
+                                    <tr>
+                                        <td>@item.Purchase_date</td>
+                                        <td>@item.Acknowledge_date</td>
+                                        <td>@item.lt_ref</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                
+          
+                <tr class="kycloghidden" id="log_@item.id"  style="display:none">
+                    <td colspan="12">
+                        <div style="color: #8B3778; float: right; font-weight: bold; font-style: italic; padding: 0px" class="innerdivclass">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>MSISDN Number </th>
+                                        <th>PUK Code  </th>
+                                        <th>SIM Number</th>
+
+                                        <th>Reference Number </th>
+                                        <th>SIM Status  </th>
+                                        <th>Recorded on</th>
+                                        <th>Activation Date   </th>
+                                    </tr>
+                                    @if (item.kyc_sim_log_list != null)
+                                    {
+                                        if (item.kyc_sim_log_list.Count > 0)
+                                        {
+                                            foreach (var loglist in item.kyc_sim_log_list)
+                                            {
+                                        <tr>
+                                            <td>@loglist.msisdn_no</td>
+                                            <td>@loglist.puk_code</td>
+                                            <td>@loglist.sim_no</td>
+
+                                            <td>@loglist.ref_no</td>
+                                            @if (@loglist.is_sim_active == true)
+                                            {
+                                                <td>Active</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Inactive</td>
+                                            }
+                                            <td>@loglist.created_on</td>
+                                            <td>@loglist.activated_on</td>
+
+                                        </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                        <tr>
+                                            <td colspan="7" style="text-align:center">
+                                                <h6>No Record Found</h6>
+                                            </td>
+                                        </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td>
+                                                <h4>No Record Found</h4>
+                                            </td>
+                                        </tr>
+                                    }
+                                </thead>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+    
+    <div class="pager1">
+        @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "KYC_customers_List", Mobile_no = ViewData["Mobile_no"], ddlProvince = ViewData["ddlProvince"], ddlDistrict = ViewData["ddlDistrict"] })) @*,bundle_id=ViewData["bundle_id"],plan_name=ViewData["plan_name"],ddlStatus=ViewData["ddlStatus"],ddlType=ViewData["ddlType"]*@
+        <div class="well">
+            Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+            of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+        </div>
+    </div>
+    
+    }
+    else
+    {
+    
+       
+    <div style="margin-left: 35%">
+        <h3>No Record Found</h3>
+    </div>   
+           
+    
+          
+        
+      
+    }
+}
+
+
+
+

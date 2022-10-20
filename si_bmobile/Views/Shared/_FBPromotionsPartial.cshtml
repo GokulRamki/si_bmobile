@@ -1,0 +1,39 @@
+﻿@model si_bmobile.Models.RedeemFBPromotionsModel
+<div id="popup_box" class="fb_popup">
+    <div class="div-br"></div>
+    <div class="div-tr">
+        <div class="div-td1">
+            Mobile Number:
+        </div>
+        <div class="div-td2">
+            @Html.DropDownListFor(m => m.msisdn_no, Model.msisdn_list, "-Choose Mobile No -", new { @id = "ddlMsisdn", @class = "ddl_fb_msisdn" })<br />
+            <span id="span_msisdn" style="color: red; text-align: right; font-size: 14px;"></span>
+            @Html.HiddenFor(m => m.msisdn_no)
+        </div>
+    </div>
+    <div class="div-tr">
+        <div class="div-td1">
+            FB Voucher:
+        </div>
+        <div class="div-td2">
+            @Html.TextBoxFor(m => m.fb_voucher, new { @maxlength = "20" })<br />
+            <span id="span_fbvoucher" style="color: red; font-size:14px;"></span>
+        </div>
+    </div>
+    <div id="Div_Msg" class="div-tr" style="padding: 3px; color: red; font-size: 14px; text-align:center;">
+    </div>
+    <div id="fb_btn_pan" class="div-tr" style="text-align:center;">
+        <input type="button" id="btnSubmitRedeemFBVoucher" class="btn-submit" value="Submit" />&nbsp;
+        <input type="button" id="btnCancelRedeemFBVoucher" class="btn-submit" value="Cancel" />
+    </div>
+
+    <div id="divFBProcess" class="div-tr" style="text-align: center; display: none; padding:3px;">
+        <img src="~/Content/themes/base/images/loading.gif" />please wait...
+    </div>
+</div>
+<div id="div_Success" class="fb_success" style="display: none;">
+    <div id="div_Success_Msg" style="text-align:center; color:green; font-weight:bold; font-size:14px; padding:10px;"> </div>
+    <div style="text-align:center;">
+        <input type="button" value="OK" id="btnOK" class="btn-submit" onclick="CloseFBPopup();" />
+    </div>
+</div>

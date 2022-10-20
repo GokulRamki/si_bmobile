@@ -1,0 +1,125 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.BundleModel>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Bundle Id
+            </th>
+            <th>Plan Name
+            </th>
+            <th>Description
+            </th>
+            <th>Price
+            </th>
+            <th>Size
+            </th>
+            <th>Validity
+            </th>
+            <th>Status
+            </th>
+            <th>Type
+            </th>
+            <th>Orderby
+            </th>
+            <th>Edit
+            </th>
+            <th>Delete
+            </th>
+
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.PlanName
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                @if (item.Price > 0)
+                {
+                    <td>$ @item.Price.ToString("#0.00")
+
+                    </td>
+                }
+                else
+                {
+                     <td>@item.Price</td>
+                }
+                <td>
+                    @item.Size
+                </td>
+                <td>
+                    @item.validity_txt
+                </td>
+                @if (item.isActive == true)
+                {
+                    <td>Active
+                    </td>
+                }
+                else
+                {
+                    <td>InActive
+                    </td>
+                }
+                @if (item.isVoice == true)
+                {
+                    <td>Voice
+                    </td>
+                }
+                else
+                {
+                    <td>Data
+                    </td>
+                }
+                <td>
+                    @item.orderby
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditBundle", new { id = @item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DelBundle", new { id = @item.Id }, new { @onclick = "return confirm('Are you sure, want to delete this bundle?');" })
+                </td>
+            </tr>
+            }
+
+        }
+    </tbody>
+</table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "Bundles",bundle_id=ViewData["bundle_id"],plan_name=ViewData["plan_name"],ddlStatus=ViewData["ddlStatus"],ddlType=ViewData["ddlType"]}))
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries</div>
+</div>
+@*<script src="~/Scripts/bootstrap.min.js"></script>*@
+

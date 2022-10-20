@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Staff Process";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+@using (Html.BeginForm("staff_process", "Admin", FormMethod.Post, new { id = "frmstaff_process", enctype = "multipart/form-data" }))
+{
+    
+    <div class="cont_pan box_shadow" style="background-color: #FFF !important;">
+
+
+
+        <div id="loading_dialog_fullpage" style="display: none;">
+            <img src="~/images/slider/301.GIF" alt="Loading.." />
+            <h3><b>Please Wait..</b></h3>
+        </div>
+
+        <div class="title">Staff Process</div>
+
+        <div style="margin-bottom: 10px;">
+
+            <div class="divprocess">
+                PROCESS
+            </div>
+            <div style="float: left;">
+                <input type="submit" value="Go" id="SubmitBtn" />
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+
+        @if (ViewBag.Msg != null)
+        {
+            <div class="alertsuccessMsg">
+                @ViewBag.Msg
+            </div>
+            <div class="clear"></div>
+        }
+
+    </div>
+}
+<style type="text/css">
+    #loading_dialog_fullpage {
+        color: #000;
+        position: absolute;
+        z-index: 1000;
+        padding-left: 380px;
+        width: 520px;
+        /*background-color: #CCC;*/
+        -khtml-opacity: 0.6;
+        -moz-opacity: 0.6;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+        filter: alpha(opacity=80);
+        opacity: .60;
+    }
+
+    .divprocess {
+        width: 180px;
+        float: left;
+        margin-left: 300px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .alertsuccessMsg {
+        background-color: #C6FFD4;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid gray;
+        margin-bottom: 10px;
+        text-align: center;
+        font-weight: 600;
+        -khtml-opacity: 0.6;
+        -moz-opacity: 0.6;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+        filter: alpha(opacity=80);
+        opacity: .60;
+    }
+</style>
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $(function () {
+            setTimeout(function () {
+                $(".alertsuccessMsg").fadeOut(function (event) {
+                    $(".alertsuccessMsg").remove();
+                });
+            }, 1500)
+        });
+
+        $("#SubmitBtn").click(function () {
+
+            //alert("Hi");
+            $('#loading_dialog_fullpage').css('display', 'block');
+            $("#SubmitBtn").hide();
+        });
+
+    </script>
+}

@@ -1,0 +1,43 @@
+﻿@model  List<si_bmobile.Models.all_products_model>
+
+<p style="color: #1b2877">
+    <b>Please check with nearest bmobile Retail Shop for availability</b><br />
+</p>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+    <div class="pbox box_shadow">
+        @if (item.product.PromoFront == true)
+        {
+            <span class="diag">HOT</span>
+        }
+        <div class="divimg">
+            <a href="javascript:void(0)" class="view_detail">
+                <img class="imgicon"  src="~/pro_images/@item.product_img.img_medium" border="0" style="min-height: 140px;"/></a>
+        </div>
+        <div class="subtitle">
+            <label>@item.product.Product_Name</label>
+        </div>
+        <br />
+        <div class="divlnk">
+            <b><a href="javascript:void(0)" class="view_detail">More Info</a></b>
+        </div>
+        <div class="subtitle">
+            @if(item.product.Offer_Price > 0)
+            {
+            <label style="text-decoration: line-through;">K&nbsp;@item.product.Product_Price</label><label style="color:#A50909;">&nbsp;K&nbsp;@item.product.Offer_Price</label>
+            }else
+            {
+            <label>K&nbsp;@item.product.Product_Price</label>      
+            }
+        </div>
+        <div class="divbtn">
+
+            <input type="button" value="Add to Cart" class="CartImg" style="padding: 2px 4px 2px 4px;" />
+
+            <input type="hidden" id="Prd_id" value="@item.product.Product_ID" />
+        </div>
+    </div>
+    }
+}

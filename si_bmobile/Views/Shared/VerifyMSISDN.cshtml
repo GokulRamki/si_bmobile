@@ -1,0 +1,46 @@
+﻿@using (Html.BeginForm("VerifyMSISDN", "Care"))
+{
+        <div class="DivRow">
+            Enter the Verification Code sent to the Mobile Number
+        </div>
+        <div class="DivRow">
+            <div class="DivLabel">
+                Verification code:
+            </div>
+            <div class="DivTxt">
+                <input type="text" id="txtVCode" maxlength="8" />
+            </div>
+        </div>
+        <div class="DivRow">
+            <div class="DivLabel">
+                &nbsp;
+            </div>
+            <div class="DivTxt">
+                <div style="color:red;">@ViewBag.Message</div>
+                
+            </div>
+        </div>    
+           
+
+         <div class="DivRow">
+             <div class="DivRow" id="divVSubmit" style="text-align:center;">
+                 <input type="button" onclick="Multisim();" value="Submit" />&nbsp;<input type="button" onclick="clvcode();" value="Cancel" />
+             </div>
+             <div id="divVProcess" class="DivRow" style="display:none;">
+
+                 <img src="~/Content/themes/base/images/loading.gif" />please wait...
+
+             </div>
+        </div>         
+    <div id="di_msisdn_Success" style="display:none;">
+      
+           <div class="DivRow" style="text-align:center;">
+             <p> Mobile Number Successfully Added</p>
+                <p><input type="button" value="OK"  id="btnOKMSISDN"/></p>
+            
+             
+        </div>      
+    </div>
+
+
+}

@@ -1,0 +1,239 @@
+﻿@model si_bmobile.Models.plan_denominationModel
+@{
+    ViewBag.Title = "Create your plan denomination";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+@*<h2>Create Plan Denomination</h2>*@
+
+@using (Html.BeginForm("Create_yplan_denomination", "Admin", FormMethod.Post, new { id = "frmCreateyplandenomination", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+       <div class="divheader">
+        ADD YOUR PLAN DENOMINATION
+    </div>
+    <div class="maindivlayout">
+ 
+         
+   <div >
+        <div class="divlabel">
+            Plan Type <span class="mandiv">*</span>
+        </div>
+        <div class="divtxt">
+            @if(Model.lstPlantypes!=null)
+            {
+                if(Model.lstPlantypes.Count>0)
+                {
+                    for(var i=0;i<Model.lstPlantypes.Count;i++)
+                    {
+                        @Html.RadioButtonFor(x => x.plan_type_id, Model.lstPlantypes[i].Value, new { @onchange="LoadPlans();" } )
+                        @Html.DisplayFor(x => x.lstPlantypes[i].Text) <span>&nbsp;</span>
+                    }
+                }
+            }
+            @Html.ValidationMessageFor(model => model.plan_type_id)
+               
+        </div>
+        <div class="clear"></div>
+    </div> 
+    <div >
+        <div class="divlabel">
+            Plan Name  <span class="mandiv">*</span>
+        </div>
+        <div class="divtxt">
+            @Html.DropDownListFor(model => model.plan_id, new List<SelectListItem>(), "-- Select plan --", new { @onchange="LoadDenominationType()", @style="width:220px" })
+            @Html.ValidationMessageFor(model => model.plan_id)
+             
+        </div>
+        <div class="clear"></div>
+    </div>  
+    
+    <div >
+        <div class="divlabel">
+            Plan Denomination Type <span class="mandiv">*</span>
+        </div>
+        <div class="divtxt">
+            @Html.DropDownListFor(model => model.denomination_type_id, new List<SelectListItem>(), "-- Select DenominationType --", new { @style="width:220px" })
+            @Html.ValidationMessageFor(model => model.denomination_type_id)
+               
+        </div>
+        <div class="clear"></div>
+    </div>   
+  
+        
+           
+    <div >
+
+        <div class="divlabel">
+            Plan Denomination <span class="mandiv">*</span>
+        </div>
+        <div class="divtxt">
+            @Html.TextBoxFor(model => model.denomination)
+            @Html.ValidationMessageFor(model => model.denomination)
+                       
+        </div>
+        <div class="clear"></div>
+    </div> 
+         
+    <div >
+        <div class="divlabel">
+            Active
+        </div>
+        <div class="divtxt">
+            @Html.CheckBoxFor(model => model.isActive)
+        </div>
+        <div class="clear"></div>
+    </div>   
+    
+   
+    <div style="padding-top:10px;">
+        <div class="divlabel">&nbsp;</div>
+        <div class="divtxt">
+            <input type="submit" value="Create" />&nbsp;<input type="button" onclick=" window.location.href = '/Admin/Yplan_denomination';" value="Cancel" />
+        </div>
+        <div class="clear"></div>
+    </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div id="div_dialog" style="display: none;">
+
+        <p>@ViewBag.Message</p>
+    </div>   
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    { 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#div_dialog").dialog({
+                    title: "Message",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            window.location.href='@Url.Action("Yplan_denomination", "Admin")';
+                        },
+                        AddMore: function () {
+                            $(this).dialog('close');
+                            window.location.href = '@Url.Action("Create_yplan_denomination", "Admin")';
+                        }
+                    },
+                    width: 350,
+                    dialogClass: 'dialog_css',
+                    autoOpen: true,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });
+            });
+        </script>
+    }
+
+    <script type="text/javascript">
+
+
+        function LoadPlans()
+        {
+            var vplan_type_id =  $('input[name=plan_type_id]:checked').val();;
+       
+            if(vplan_type_id != null && vplan_type_id != "")
+            {
+
+                $.post("/Admin/GetPlansbyTypeId",
+                  { plan_type_id: vplan_type_id },
+                   function (data) {
+                  
+                       var result=$.parseJSON(data);
+                       if(result.length>0)
+                       {
+                           $("#plan_id").empty();
+                           $("#plan_id").prop("disabled", false);
+                           $("#plan_id").append($("<option></option>").val("").html("-- Select Plan --"));
+                           $.each(result, function (key, value) {
+                               
+                               $("#plan_id").append($("<option></option>").val(value.Id).html(value.name));
+                           });
+                           
+                       }
+                       else
+                       {
+                           $("#plan_id").empty();
+                           $("#plan_id").append($("<option></option>").val("").html("-- Select Plan --"));
+                           $("#plan_id").prop("disabled", true);
+                       }
+                   
+
+                   });
+            }
+            else{
+                $("#plan_id").empty();
+                $("#plan_id").append($("<option></option>").val("").html("-- Select Plan --"));
+                $("#plan_id").prop("disabled", true);
+            }
+            
+        }
+
+
+        function LoadDenominationType()
+        {
+           
+            var vplan_id = $("#plan_id :selected").val();
+            if(vplan_id != null && vplan_id != "")
+            {
+                $.post("/Admin/GetDenominationTypebyPlanId",
+                  { plan_id: vplan_id },
+                   function (data) {
+                    
+                       var result=$.parseJSON(data);
+                       if(result.length>0)
+                       {
+                           $("#denomination_type_id").empty();
+                           $("#denomination_type_id").prop("disabled", false);
+                           $.each(result, function (key, value) {
+                               $("#denomination_type_id").append($("<option></option>").val(value.Id).html(value.type));
+                           });
+                       }
+                       else
+                       {
+                           $("#denomination_type_id").empty();
+                           $("#denomination_type_id").append($("<option></option>").val("").html("-- Select DenominationType --"));
+                           $("#denomination_type_id").prop("disabled", true);
+                       }
+                   });
+            }
+            else{
+                $("#denomination_type_id").empty();
+                $("#denomination_type_id").append($("<option></option>").val("").html("-- Select DenominationType --"));
+                $("#denomination_type_id").prop("disabled", true);
+            }
+        }
+
+
+
+       $(document).ready(function () {
+
+            $("#denomination_type_id").prop("disabled", true);
+            $("#plan_id").prop("disabled", true);
+
+         
+        });
+
+
+        $("#denomination").keypress(function (e) {
+            //if the letter is not digit then display error and don't type anything
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                return false;
+            }
+        });
+    </script>
+
+}

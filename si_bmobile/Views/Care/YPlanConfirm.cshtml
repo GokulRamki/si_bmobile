@@ -1,0 +1,308 @@
+﻿@model si_bmobile.Models.NewPurchasePriceModel
+@{
+    ViewBag.Title = "Confirm";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+    var i = 0;
+}
+
+<div class="mid_margin">
+    @using (Html.BeginForm("YPlanConfirm", "Care", FormMethod.Post, new { id = "frmYPlanConfirm", enctype = "multipart/form-data" }))
+    {
+        <h2>Plan Purchase</h2>
+        <div class="lef-pan">
+            <div class="alert-message warning" style="display: none; width: 96%; text-align: center; margin-left: 0.7%;">
+                <div class="box-icon"></div>
+                <p><span id="warning_msg"></span><a href="#" class="close">&times;</a></p>
+            </div>
+            @Html.HiddenFor(c => c.type_id)
+            @Html.HiddenFor(c => c.from_msisdn)
+            @Html.HiddenFor(c => c.tot_amt)
+            @Html.HiddenFor(c => c.jsonallmsisdn)
+            @Html.HiddenFor(c => c.jsonallplans)
+            @Html.HiddenFor(c => c.plan_denominations)
+            @Html.HiddenFor(c => c.po_type)
+            @Html.HiddenFor(c => c.pr_type)
+            @Html.HiddenFor(c => c.purchase_msisdn)
+            @Html.HiddenFor(c => c.pay.email)
+            @Html.HiddenFor(c => c.pay.fname)
+            @Html.HiddenFor(c => c.pay.lname)
+            @Html.HiddenFor(c => c.pay.primary_msisdn)
+            @Html.HiddenFor(c => c.isFixedbuy)
+            @Html.HiddenFor(c => c.UserId)
+            <div class="dRow">
+                <div>
+                    You are about to buy the following plans for mobile number&nbsp;@Html.DisplayFor(x => x.purchase_msisdn)
+                    <br />
+                    <span>Account Balance:&nbsp;<span id="span_ACBal"></span></span>
+                    @Html.HiddenFor(c => c.purchase_msisdn)
+                </div>
+                <div style="border-bottom: 1px dashed #ddd; margin: 10px 0px; padding-bottom: 5px;">
+                    <b>BYPlans:</b>
+
+                    @if (Model.isFixedbuy == true)
+                    {
+                        <span>&nbsp;(additional topup)</span>
+                    }
+                    
+                </div>
+
+                @foreach (var item in Model.denomination_ids)
+                {
+                    @Html.HiddenFor(m => m.denomination_ids[i].deno_id)
+                    @Html.HiddenFor(m => m.denomination_ids[i].plan_name)
+                    @Html.HiddenFor(m => m.denomination_ids[i].denomination)
+                    @Html.HiddenFor(m => m.denomination_ids[i].denomination_name)
+                    @Html.HiddenFor(m => m.denomination_ids[i].price)
+                    <div class="byplan-tr">
+                        <div class="l-td @item.plan_name">&nbsp;</div>
+                        <div class="r-td">@item.plan_name : @item.denomination @item.denomination_name</div>
+                        <div class="clr"></div>
+                    </div>
+                    i++;
+                }
+                <p><b>Total Cost: K&nbsp;<span id="totalamountdisplay">@Model.tot_amt </span></b></p>
+                @Html.HiddenFor(c => c.tot_amt)
+
+                <div style="border-bottom: 1px dashed #ddd; margin: 10px 0px; padding-bottom: 5px;"><b>Select one of the payment options:</b></div>
+                <div style="padding-left: 10px;">
+                    <p>@Html.RadioButtonFor(m => m.Payment_Id, 1, new { @id = "pmode1" })&nbsp;Use your existing account balance</p>
+                    <p>@Html.RadioButtonFor(m => m.Payment_Id, 2, new { @id = "pmode2" })&nbsp;Use topup voucher</p>
+                    <p>@Html.RadioButtonFor(m => m.Payment_Id, 3, new { @id = "pmode3" })&nbsp;Use your credit card</p>
+                </div>
+            </div>
+
+            <div class="dRow">
+                <div class="dRowlbl">
+                    &nbsp;
+                </div>
+                <div class="dRowctrl">
+                    <input id="btnSubmit" type="submit" name="Command" value="Confirm" />&nbsp;
+                @Html.ActionLink("Cancel", "RefreshACC", "Care")
+                </div>
+                <div class="clear">
+                </div>
+
+            </div>
+
+            <div id="div_DialogPlans" style="display: none;">
+                <p>@ViewBag.Message</p>
+            </div>
+
+            <div id="confirm_dialog" style="display: none;">
+                <p>Are you sure want to continue?</p>
+            </div>
+
+            <div id="div_paymentvalid_dialog" style="display: none;">
+                <p>Please select payment mode</p>
+            </div>
+
+            <div id="div_favourite_dialog" style="display: none;">
+                <p>Do you want to add this combo pack as your favourite?</p>
+                <div style="float: left; margin: 5px;">
+                    @foreach (var item in Model.denomination_ids)
+                    {               
+                        <div class="sbox" style="margin-bottom: 10px;">
+                            <div class="simg-pan @item.plan_name">
+                                &nbsp;
+                            </div>
+                            <div class="stxt-pan">
+                                <div class="stxt">
+                                    <span style="font-size: 20px; font-weight: bold; color: #0E0E51;">@item.denomination&nbsp;</span><span style="font-size: 20px; font-weight: bold; color: gray;">@item.denomination_name</span>
+                                </div>
+                            </div>
+                        </div>  
+               
+                    }
+                </div>
+            </div>
+
+        </div>
+        @Html.Partial("RightNav_PartialView")
+        
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.Message != null)
+    { 
+        <script type="text/javascript">
+            $("#div_DialogPlans").dialog({
+                title: "Message",
+                buttons: {
+                    Close: function () {
+                        $(this).dialog('close');
+
+                    }
+                },
+                width: 300,
+                top: 450,
+                left: 10,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+
+        </script>
+    }
+
+    <script type="text/javascript">
+
+
+        $('#btnSubmit').click(function () {
+            var res = false;
+            $("#confirm_dialog").dialog({
+                title: "Confirmation",
+                buttons: {
+                    Yes: function () {
+                        $(this).dialog('close');
+                        res = true;
+                        if ($("input[id=pmode1]:checked").length > 0) {
+                            //$('form').submit();
+                            if ($("#isFixedbuy").val() == "False")
+                                add_favourite();
+                            else
+                                $('form').submit();
+                        }
+                        else if ($("input[id=pmode2]:checked").length > 0) {
+                            //$('form').submit();
+                            if ($("#isFixedbuy").val() == "False")
+                                add_favourite();
+                            else
+                                $('form').submit();
+                        }
+                        else if ($("input[id=pmode3]:checked").length > 0) {
+                            //$('form').submit();
+                            if ($("#isFixedbuy").val() == "False")
+                                add_favourite();
+                            else
+                                $('form').submit();
+                        }
+                        else {
+                            show_paymentvalid_dialog();
+                        }
+                    },
+                    No: function () {
+                        $(this).dialog('close');
+                    }
+                },
+                dialogClass: 'dialog_css',
+                width: 350,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+
+            return res;
+        });
+
+        function show_paymentvalid_dialog() {
+            $("#div_paymentvalid_dialog").dialog({
+                title: "Message",
+                buttons: {
+                    Close: function () {
+                        $(this).dialog('close');
+                    }
+                },
+                width: 300,
+                top: 450,
+                left: 10,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+        }
+
+        $(document).ready(function () {
+
+            Bind_MSISDN_Bal();
+            var _p_tot = parseFloat($("#tot_amt").val());
+            var _bal = parseFloat($("#span_ACBal").text().replace('K', '').replace(' ', ''));
+            if (_p_tot > _bal) {
+                $("#pmode1").attr('disabled', 'disabled');
+            }
+        });
+
+        $("#purchase_msisdn").change(function () {
+            Bind_MSISDN_Bal();
+        });
+
+        function Bind_MSISDN_Bal() {
+            var msisdnlist = $.parseJSON($("#jsonallmsisdn").val());
+            var msisdn_no = $("#purchase_msisdn").val();
+
+            $.each(msisdnlist, function () {
+                if (this['msisdn_no'] == msisdn_no) {
+                    $("#span_ACBal").html(this['balance'])
+                }
+            });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function add_favourite() {
+            var res = false;
+
+            var denom_ids = $("#plan_denominations").val();
+
+            var v_allplans = $("#jsonallplans").val();
+
+            $("#div_favourite_dialog").dialog({
+                title: "ADD FAVOURITE",
+                buttons: {
+                    Yes: function () {
+                        $("#div_favourite_dialog").dialog('close');
+
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("AddFavouritePlanPack", "Care")",
+                            //contentType: 'application/json',
+                            data: ({ denm_ids: denom_ids, jallplans: v_allplans }),
+                            success: function (data) {
+
+                                if (data.Status == "0") {
+                                    $('form').submit();
+                                    res = true;
+                                }
+                                else if (data.Status == "111")
+                                    window.location = '@Url.Action("login", "Care")';
+                                else if (data.Status == "951") {
+                                    show_warning_notification('Plan denomination not found!');
+                                }
+                                else {
+                                    show_warning_notification('Failed to add favourite plan!');
+                                }
+                            },
+                            error: function (response) {
+                                //alert("PlanPrice: " + response.d);
+                            }
+                        });
+                    },
+                    No: function () {
+                        $("#div_favourite_dialog").dialog('close');
+                        $('form').submit();
+                        res = true;
+                    }
+                },
+                dialogClass: 'dialog_css',
+                width: 710,
+                top: 439.5,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+
+        return res;
+    }
+
+    function show_warning_notification(msg) {
+        $("#warning_msg").html(msg);
+        $(".alert-message.warning").show();
+    }
+    </script>
+}

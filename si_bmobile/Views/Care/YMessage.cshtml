@@ -1,0 +1,94 @@
+﻿@model si_bmobile.Models.NewPurchasePriceModel
+@{
+    ViewBag.Title = "YMessage";
+    var i = 0;
+}
+
+<div class="mid_margin">
+@*    <h2>Message</h2>*@
+
+    @using (Html.BeginForm("YMessage", "Care", FormMethod.Post, new { id = "frmYMessage", enctype = "multipart/form-data" }))
+    {
+        <iframe id="ifrmPrint" src="#" style="width: 0px; height: 0px;"></iframe>
+        <div class="lef-pan">
+            <h1>@ViewBag.SMessage</h1>
+
+            @if (Model != null)
+            {
+                <div style="float: right">
+                    <button id="btnPrint" onclick="printsummary();" class="btn btn-success"><i class="fa fa-print "></i>&nbsp;Print</button>
+                </div>
+                
+                @Html.HiddenFor(m => m.denomination_ids[i].deno_id)
+                @Html.HiddenFor(m => m.denomination_ids[i].plan_name)
+                @Html.HiddenFor(m => m.denomination_ids[i].denomination)
+                @Html.HiddenFor(m => m.denomination_ids[i].denomination_name)
+                @Html.HiddenFor(m => m.denomination_ids[i].price)
+                
+                <div id="divOrderSummary">
+
+                    <div style="float: left; font-size: 18px; font-weight: bold; padding-bottom: 10px;">
+                        PAYMENT SUMMARY
+                    </div>
+                     <div style="clear: both;"></div>
+                    <div style="float: left; font-size: 12px; width: 200px; text-align: left;font-weight:600; padding-bottom: 10px;">
+                        Payment date :&nbsp;@DateTime.Now.ToLongDateString()
+                    </div>
+                    <div style="clear: both;"></div>
+                    @if (!string.IsNullOrEmpty(ViewBag.ExpyDate))
+                    {
+                    <div style="float: left; font-size: 12px; width: 200px; text-align: left;font-weight:600; padding-bottom: 10px;">
+                        Expiry date:  on&nbsp;@ViewBag.ExpyDate
+                    </div>
+                    <div style="clear: both;"></div>
+                    }
+                    @foreach (var item in Model.denomination_ids)
+                    {
+                        <div class="byplan-tr">
+                            <div class="l-td @item.plan_name">&nbsp;</div>
+                            <div class="r-td">@item.plan_name </div>
+                            <div class="clr"></div>
+                        </div>
+                        i++;
+                    }
+
+                    <p><b>Total Cost: K&nbsp;<span id="totalamountdisplay">@Model.tot_amt </span></b></p>
+
+                </div>
+                
+                <p><span>Plan Purchased Successfully to display &nbsp;@Html.ActionLink("Click here to return to Account Summary", "RefreshACC", "Care")</span></p>
+            }
+
+        </div>
+        @Html.Partial("RightNav_PartialView")
+    }
+</div>
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        function printsummary() {
+
+            try {
+                var oIframe = $('#ifrmPrint')[0];
+                var oContent = $('#divOrderSummary').html();
+
+                var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
+                if (oDoc.document) oDoc = oDoc.document;
+                oDoc.write("<html><head>");
+                oDoc.write("</head><body onload='this.focus(); this.print();'>");
+                oDoc.write(oContent + "</body></html>");
+                oDoc.close();
+                var ua = $.browser;
+                if (ua.mozilla) {
+                    alert('Printing in progress..');
+                }
+            }
+            catch (e) {
+                // self.print();
+            }
+        }
+    </script>
+
+}

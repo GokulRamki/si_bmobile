@@ -1,0 +1,56 @@
+﻿@using MvcPaging
+@model List<si_bmobile.Models.UserHistoryLogs>
+
+@{
+    ViewBag.Title = "User History Logs";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+<div class="divheader">
+    USER HISTORY LOGS
+</div>
+@using (Ajax.BeginForm("UserHistory", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmAppUserHistoryLogs" }))
+{
+    <div class="dRowvlg">
+        <div class="input-append">
+            @Html.TextBox("user_name", null, new { @placeholder = "User Name", @style = "width:150px" })
+            @Html.TextBox("plan_name", "", new { @placeholder = "Plan Name", @style = "width:150px" })
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search</button>&nbsp;
+                 <button class="btn" type="button"  onclick="window.location.href='@Url.Action("UserHistory", "Admin")'" >
+                     <i class="icon-search"></i>&nbsp;Reset</button>
+        </div>
+    </div>
+
+    
+    <div id="div_loading" class="div-btn" style="top: 50%;">
+        <img src="~/images/slider/301.GIF" alt="Loading..." /><br />
+        <span style="font-weight: bold; color: gray;">Please Wait...</span>
+    </div>
+    
+    <div id="grid-list">
+        @{ Html.RenderPartial("_Ajax_UserHistoryLogs", Model); }
+    </div>  
+}
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        $("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>

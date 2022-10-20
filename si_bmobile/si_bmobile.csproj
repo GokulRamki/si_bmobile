@@ -1,0 +1,1241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3678B4A3-9E55-485F-AC18-5FCF4BB401E6}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>si_bmobile</RootNamespace>
+    <AssemblyName>si_bmobile</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="DelegateDecompiler">
+      <HintPath>..\packages\DelegateDecompiler.0.8.3.0\lib\net40-Client\DelegateDecompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcPaging">
+      <HintPath>..\packages\MVC4.Paging.3.1.0\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.2\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="bkService\downloadbkup.svc.cs">
+      <DependentUpon>downloadbkup.svc</DependentUpon>
+    </Compile>
+    <Compile Include="bkService\Idownloadbkup.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\bmapiController.cs" />
+    <Compile Include="Controllers\CareController.cs" />
+    <Compile Include="Controllers\demoController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\EzyController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="DAL\careRepository.cs" />
+    <Compile Include="DAL\GenericRepository.cs" />
+    <Compile Include="DAL\IcareRepository.cs" />
+    <Compile Include="DAL\IKYCRepository.cs" />
+    <Compile Include="DAL\IPlanRepository.cs" />
+    <Compile Include="DAL\IShopRepository.cs" />
+    <Compile Include="DAL\ISimRepository.cs" />
+    <Compile Include="DAL\IStaffsTopup_Repo.cs" />
+    <Compile Include="DAL\IUserRepository.cs" />
+    <Compile Include="DAL\KYCRepository.cs" />
+    <Compile Include="DAL\PlanRepository.cs" />
+    <Compile Include="DAL\ShopRepository.cs" />
+    <Compile Include="DAL\SimRepository.cs" />
+    <Compile Include="DAL\StaffsTopup_Repo.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
+    <Compile Include="Filters\SessionExpireFilterAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\accountprofile.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActiveSimModel.cs" />
+    <Compile Include="Models\AdminMenuModel.cs" />
+    <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\api_logs.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\application_transaction.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\application_transaction_log.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\bundle.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\bundleprice.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BundlesModel.cs" />
+    <Compile Include="Models\bundle_tarrif.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BuyPowerModel.cs" />
+    <Compile Include="Models\ChangeTypeModel.cs" />
+    <Compile Include="Models\bmtestshopDBEntities.cs" />
+    <Compile Include="Models\CreditMeModel.cs" />
+    <Compile Include="Models\datacard_bundles.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\denomination_type.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DokuCareModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\errormessage.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EzyModel.cs" />
+    <Compile Include="Models\favorite_plans.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FilesModel.cs" />
+    <Compile Include="Models\FPModel.cs" />
+    <Compile Include="Models\gprs_det.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KYCModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MenuModel.cs" />
+    <Compile Include="Models\mon_det.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\multiplesim.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PaymentModel.cs" />
+    <Compile Include="Models\plan.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\plandetail.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlanModel.cs" />
+    <Compile Include="Models\plan_denomination.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\plan_price.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\plan_type.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\qlink.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RechargeModel.cs" />
+    <Compile Include="Models\recharge_det.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\recommend.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\registration.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegistrationModel.cs" />
+    <Compile Include="Models\ResetModel.cs" />
+    <Compile Include="Models\respons.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\selfcare.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>selfcare.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\selfcare.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\selfcare.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>selfcare.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\service.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ServicesModel.cs" />
+    <Compile Include="Models\ShoppingModel.cs" />
+    <Compile Include="Models\SimRegModel.cs" />
+    <Compile Include="Models\simverificationcode.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sim_activation.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\smsout.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sms_app_tx.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sms_det.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sms_in_log.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sms_out_log.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffModel.cs" />
+    <Compile Include="Models\TopupModel.cs" />
+    <Compile Include="Models\topupplan.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\topup_transactions.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\transaction.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\transfer_det.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\userhistory.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\validity.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\voice_det.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\voucher_blocklist.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\YourPlanModel.cs" />
+    <Compile Include="Models\your_plan_transactions.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\your_plan_transaction_denominations.cs">
+      <DependentUpon>selfcare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\dokuRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\esipayRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\GetPowerRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\siCCBundleRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service1\BundlePlan.svc.cs">
+      <DependentUpon>BundlePlan.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Service1\IBundlePlan.cs" />
+    <Compile Include="Service\IsiEasyrecharge.cs" />
+    <Compile Include="Service\siEasyrecharge.svc.cs">
+      <DependentUpon>siEasyrecharge.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\AesEncryptor.cs" />
+    <Compile Include="Utils\Encryptor.cs" />
+    <Compile Include="Utils\General.cs" />
+    <Compile Include="Utils\HtmlHelpers.cs" />
+    <Compile Include="Utils\IUtilityRepository.cs" />
+    <Compile Include="Utils\TripleDESImplementation.cs" />
+    <Compile Include="Utils\UtilityRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="bkService\downloadbkup.svc" />
+    <Content Include="cat_images\1_img_cat.jpg" />
+    <Content Include="Content\Admin\bootstrap.css" />
+    <Content Include="Content\Admin\bootstrap.min.css" />
+    <Content Include="Content\Admin\Site.css" />
+    <Content Include="Content\bmobile\css.bak\component.css" />
+    <Content Include="Content\bmobile\css.bak\custom.css" />
+    <Content Include="Content\bmobile\css.bak\default.css" />
+    <Content Include="Content\bmobile\css.bak\flexslider.css" />
+    <Content Include="Content\bmobile\css.bak\fonts\VodafoneRg.svg" />
+    <Content Include="Content\bmobile\css.bak\fonts\Vodafone_Rg_Bold.svg" />
+    <Content Include="Content\bmobile\css.bak\modernizr.css" />
+    <Content Include="Content\bmobile\css.bak\SpryAccordion.css" />
+    <Content Include="Content\bmobile\css.bak\SpryTabbedPanels.css" />
+    <Content Include="Content\bmobile\css.bak\style.css" />
+    <Content Include="Content\bmobile\css.bak\W3.css" />
+    <Content Include="Content\bmobile\css\component.css" />
+    <Content Include="Content\bmobile\css\custom.css" />
+    <Content Include="Content\bmobile\css\default.css" />
+    <Content Include="Content\bmobile\css\flexslider.css" />
+    <Content Include="Content\bmobile\css\fonts\VodafoneRg.svg" />
+    <Content Include="Content\bmobile\css\fonts\Vodafone_Rg_Bold.svg" />
+    <Content Include="Content\bmobile\css\modernizr.css" />
+    <Content Include="Content\bmobile\css\SpryAccordion.css" />
+    <Content Include="Content\bmobile\css\SpryTabbedPanels-2.css" />
+    <Content Include="Content\bmobile\css\SpryTabbedPanels.css" />
+    <Content Include="Content\bmobile\css\style--.css" />
+    <Content Include="Content\bmobile\css\style.css" />
+    <Content Include="Content\bmobile\css\W3.css" />
+    <Content Include="Content\bmobile\images\09fbd51f-49fa-4861-86ed-805de42b0baa.png" />
+    <Content Include="Content\bmobile\images\101Lighthouse.jpg" />
+    <Content Include="Content\bmobile\images\240fb98f-315f-4ee7-9245-a387eb9ff186 %281%29.jpg" />
+    <Content Include="Content\bmobile\images\240fb98f-315f-4ee7-9245-a387eb9ff186.jpg" />
+    <Content Include="Content\bmobile\images\244Hydrangeas.jpg" />
+    <Content Include="Content\bmobile\images\34bb2b37-3116-4c1a-9f8f-c77b5d3e738a.png" />
+    <Content Include="Content\bmobile\images\arr-dn.png" />
+    <Content Include="Content\bmobile\images\be_your_own_boss.jpg" />
+    <Content Include="Content\bmobile\images\bg_direction_nav.png" />
+    <Content Include="Content\bmobile\images\bvf_main_dropdown_72.png" />
+    <Content Include="Content\bmobile\images\cart_img.png" />
+    <Content Include="Content\bmobile\images\ctc_img_1.png" />
+    <Content Include="Content\bmobile\images\ctc_img_2.png" />
+    <Content Include="Content\bmobile\images\ctc_img_3.png" />
+    <Content Include="Content\bmobile\images\Edit-Prop-icon.png" />
+    <Content Include="Content\bmobile\images\faq_arr.png" />
+    <Content Include="Content\bmobile\images\faq_print.png" />
+    <Content Include="Content\bmobile\images\faq_shr.png" />
+    <Content Include="Content\bmobile\images\fe0ee320-0e4c-4213-b0e2-1f7812721847.png" />
+    <Content Include="Content\bmobile\images\internet.png" />
+    <Content Include="Content\bmobile\images\iphn.png" />
+    <Content Include="Content\bmobile\images\iphone6.jpg" />
+    <Content Include="Content\bmobile\images\k15.jpg" />
+    <Content Include="Content\bmobile\images\lft-mn-bg-2.png" />
+    <Content Include="Content\bmobile\images\lft-mn-bg.png" />
+    <Content Include="Content\bmobile\images\logo.jpg" />
+    <Content Include="Content\bmobile\images\logo.png" />
+    <Content Include="Content\bmobile\images\logo1.png" />
+    <Content Include="Content\bmobile\images\mbl-1.png" />
+    <Content Include="Content\bmobile\images\mbl-10.png" />
+    <Content Include="Content\bmobile\images\mbl-11.png" />
+    <Content Include="Content\bmobile\images\mbl-12.png" />
+    <Content Include="Content\bmobile\images\mbl-13.png" />
+    <Content Include="Content\bmobile\images\mbl-14.png" />
+    <Content Include="Content\bmobile\images\mbl-15.png" />
+    <Content Include="Content\bmobile\images\mbl-2.png" />
+    <Content Include="Content\bmobile\images\mbl-3.png" />
+    <Content Include="Content\bmobile\images\mbl-4.png" />
+    <Content Include="Content\bmobile\images\mbl-5.png" />
+    <Content Include="Content\bmobile\images\mbl-6.png" />
+    <Content Include="Content\bmobile\images\mbl-7.png" />
+    <Content Include="Content\bmobile\images\mbl-8.png" />
+    <Content Include="Content\bmobile\images\mbl-9.png" />
+    <Content Include="Content\bmobile\images\mdp-img-1.png" />
+    <Content Include="Content\bmobile\images\mdp-img-2.png" />
+    <Content Include="Content\bmobile\images\mdp-img-3.png" />
+    <Content Include="Content\bmobile\images\mdp-sld-img.png" />
+    <Content Include="Content\bmobile\images\mdp-sld-up-arr-2.png" />
+    <Content Include="Content\bmobile\images\mdp-sld-up-arr.png" />
+    <Content Include="Content\bmobile\images\menu.png" />
+    <Content Include="Content\bmobile\images\menu_hover.png" />
+    <Content Include="Content\bmobile\images\nasfund.jpg" />
+    <Content Include="Content\bmobile\images\phne.png" />
+    <Content Include="Content\bmobile\images\prpd_img_1.png" />
+    <Content Include="Content\bmobile\images\prpd_img_2.png" />
+    <Content Include="Content\bmobile\images\prpd_img_3.png" />
+    <Content Include="Content\bmobile\images\prpd_img_4.png" />
+    <Content Include="Content\bmobile\images\prpd_img_5.png" />
+    <Content Include="Content\bmobile\images\prpd_img_6.png" />
+    <Content Include="Content\bmobile\images\rhm-mbl.png" />
+    <Content Include="Content\bmobile\images\rohumbus.png" />
+    <Content Include="Content\bmobile\images\samsung-s5.jpg" />
+    <Content Include="Content\bmobile\images\scl-fb.png" />
+    <Content Include="Content\bmobile\images\scl-ggl.png" />
+    <Content Include="Content\bmobile\images\scl-lnkin.png" />
+    <Content Include="Content\bmobile\images\scl-twtr.png" />
+    <Content Include="Content\bmobile\images\sld-buy.png" />
+    <Content Include="Content\bmobile\images\sld-img.png" />
+    <Content Include="Content\bmobile\images\sld-lrn.png" />
+    <Content Include="Content\bmobile\images\srch-go.png" />
+    <Content Include="Content\bmobile\images\srch-img.png" />
+    <Content Include="Content\bmobile\images\srch_img.png" />
+    <Content Include="Content\bmobile\images\thumbs_up.png" />
+    <Content Include="Content\bmobile\images\usr-icn.png" />
+    <Content Include="Content\bmobile\images\vodafone-prime-6.jpg" />
+    <Content Include="Content\bmobile\js\firstslide.js" />
+    <Content Include="Content\bmobile\js\html5shiv.js" />
+    <Content Include="Content\bmobile\js\jquery.cbpContentSlider.js" />
+    <Content Include="Content\bmobile\js\jquery.cbpContentSlider.min.js" />
+    <Content Include="Content\bmobile\js\jquery.flexslider.js" />
+    <Content Include="Content\bmobile\js\jquery.js" />
+    <Content Include="Content\bmobile\js\modernizr.custom.js" />
+    <Content Include="Content\bmobile\js\SpryAccordion.js" />
+    <Content Include="Content\bmobile\js\SpryTabbedPanels.js" />
+    <Content Include="Content\body.css" />
+    <Content Include="Content\bootstrap-mvc-validation.css" />
+    <Content Include="Content\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSS\BMob_Template.css" />
+    <Content Include="Content\CSS\BMob_Templete.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\icon-bootstrap.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\paging.css" />
+    <Content Include="Content\smartadmin-production.css" />
+    <Content Include="Content\themes\base\images\icon_pdf.gif" />
+    <Content Include="Content\themes\base\images\PDF-Document-icon.png" />
+    <Content Include="Content\themes\base\images\steps.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\zoom.css" />
+    <Content Include="Content\popup.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\images\loading.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\Admin\style.css" />
+    <Content Include="css\ezytrans-popup.css" />
+    <Content Include="css\flexslider.css" />
+    <Content Include="css\font\ubuntu-r_0.svg" />
+    <Content Include="css\mobile-style.css" />
+    <Content Include="css\ResponsiveStyle.css" />
+    <Content Include="css\screen.css" />
+    <Content Include="css\style-new.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\tab-style.css" />
+    <Content Include="css\web-style.css" />
+    <Content Include="EmailTemplate\customer.xml" />
+    <Content Include="EmailTemplate\email_template.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="EmailTemplate\gettoken.xml" />
+    <Content Include="EmailTemplate\MobileTrans.xml" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="images\1.jpg" />
+    <Content Include="images\11.jpg" />
+    <Content Include="images\activate_a_sim.png" />
+    <Content Include="images\addtocart.gif" />
+    <Content Include="images\ajax-loader.gif" />
+    <Content Include="images\aro.png" />
+    <Content Include="images\barcode.png" />
+    <Content Include="images\bg_direction_nav.png" />
+    <Content Include="images\bmobilelogo.png" />
+    <Content Include="images\border.jpg" />
+    <Content Include="images\box_bg.png" />
+    <Content Include="images\box_img1.png" />
+    <Content Include="images\box_img2.png" />
+    <Content Include="images\box_img3.png" />
+    <Content Include="images\checkout.jpg" />
+    <Content Include="images\check_bill.png" />
+    <Content Include="images\check_usage.png" />
+    <Content Include="images\choose.png" />
+    <Content Include="images\Close-2-icon.png" />
+    <Content Include="images\coming-soon.jpg" />
+    <Content Include="images\confirm.jpg" />
+    <Content Include="images\continue.jpg" />
+    <Content Include="images\continue2.jpg" />
+    <Content Include="images\Csv-icon.png" />
+    <Content Include="images\cug.png" />
+    <Content Include="images\customer_care.png" />
+    <Content Include="images\facbook.png" />
+    <Content Include="images\failure-icon.gif" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\fb.png" />
+    <Content Include="images\fb_icon.png" />
+    <Content Include="images\foot_logo.png" />
+    <Content Include="images\fot_code.png" />
+    <Content Include="images\fot_logo.png" />
+    <Content Include="images\hed_bg.png" />
+    <Content Include="images\hed_logo.png" />
+    <Content Include="images\icon-search.png" />
+    <Content Include="images\index2.png" />
+    <Content Include="images\logo_new.jpg" />
+    <Content Include="images\logo_new.png" />
+    <Content Include="images\mega-menu-up-arrow.png" />
+    <Content Include="images\more.png" />
+    <Content Include="images\my_bmobile_app.png" />
+    <Content Include="images\notification-icon.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\menu.png" />
+    <Content Include="images\menu_hover.png" />
+    <Content Include="images\minus_icon_20x20.png" />
+    <Content Include="images\nav_bg.png" />
+    <Content Include="images\Ok-icon.png" />
+    <Content Include="images\page-on.png" />
+    <Content Include="images\pay_your_bill.png" />
+    <Content Include="images\plus_icon_20x20.png" />
+    <Content Include="images\popup-close-2.png" />
+    <Content Include="images\postpay.png" />
+    <Content Include="images\prepay.png" />
+    <Content Include="images\recharge_now.png" />
+    <Content Include="images\search.png" />
+    <Content Include="images\shopping-cart-icon.png" />
+    <Content Include="images\shopping-cart-icon2.png" />
+    <Content Include="images\sicon.png" />
+    <Content Include="images\sim_demo\sim.jpg" />
+    <Content Include="images\sim_demo\bm_sim_msidn_no.jpg" />
+    <Content Include="images\sim_demo\bm_sim_no.jpg" />
+    <Content Include="images\sim_demo\bm_sim_puk_code.jpg" />
+    <Content Include="images\slider\301.GIF" />
+    <Content Include="images\slider\Csv-icon.png" />
+    <Content Include="images\slider\data-icon.png" />
+    <Content Include="images\slider\mobile.png" />
+    <Content Include="images\slider\notification-icon.png" />
+    <Content Include="images\slider\sms-icon.png" />
+    <Content Include="images\slider\tablet.png" />
+    <Content Include="images\slider\voice-icon.png" />
+    <Content Include="images\slides.jpg" />
+    <Content Include="images\success-icon.png" />
+    <Content Include="images\text.png" />
+    <Content Include="images\to.png" />
+    <Content Include="images\topup.png" />
+    <Content Include="images\topup_img.png" />
+    <Content Include="images\top_bo.png" />
+    <Content Include="images\track_order.png" />
+    <Content Include="images\tweet_icon.png" />
+    <Content Include="images\twit.png" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="images\twitt_icon.png" />
+    <Content Include="images\value_added_services.png" />
+    <Content Include="images\zoomloader.gif" />
+    <Content Include="js\jquery-1.4.2.min.js" />
+    <Content Include="js\jquery-latest.js" />
+    <Content Include="js\jquery-ui.js" />
+    <Content Include="js\jquery.dlmenu.js" />
+    <Content Include="js\jquery.flexslider-min.js" />
+    <Content Include="js\jquery.flexslider.js" />
+    <Content Include="js\jquery.jcarousel.min.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\jquerya.js" />
+    <Content Include="js\jquery_menu.js" />
+    <Content Include="js\modernizr.custom.js" />
+    <Content Include="js\stepcarousel.js" />
+    <Content Include="js\stepcarousel_002.js" />
+    <Content Include="Scripts\active-sim-script.js" />
+    <Content Include="Scripts\bm-care-script.js" />
+    <Content Include="Scripts\bmobile-script.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\get-power-script.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="css\fonts\arial_3.eot" />
+    <Content Include="css\fonts\arial_3.ttf" />
+    <Content Include="css\fonts\arial_3.woff" />
+    <Content Include="css\fonts\myriadpro-regular_0.eot" />
+    <Content Include="css\fonts\myriadpro-regular_0.ttf" />
+    <Content Include="css\fonts\myriadpro-regular_0.woff" />
+    <Content Include="css\fonts\pts55f_0.eot" />
+    <Content Include="css\fonts\pts55f_0.ttf" />
+    <Content Include="css\fonts\pts55f_0.woff" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\bmobile\css.bak\fonts\VodafoneRg.eot" />
+    <Content Include="Content\bmobile\css.bak\fonts\VodafoneRg.ttf" />
+    <Content Include="Content\bmobile\css.bak\fonts\VodafoneRg.woff" />
+    <Content Include="Content\bmobile\css.bak\fonts\VodafoneRg.woff2" />
+    <Content Include="Content\bmobile\css.bak\fonts\Vodafone_Rg_Bold.eot" />
+    <Content Include="Content\bmobile\css.bak\fonts\Vodafone_Rg_Bold.ttf" />
+    <Content Include="Content\bmobile\css.bak\fonts\Vodafone_Rg_Bold.woff" />
+    <Content Include="Content\bmobile\css.bak\fonts\Vodafone_Rg_Bold.woff2" />
+    <Content Include="Content\bmobile\css\fonts\VodafoneRg.eot" />
+    <Content Include="Content\bmobile\css\fonts\VodafoneRg.ttf" />
+    <Content Include="Content\bmobile\css\fonts\VodafoneRg.woff" />
+    <Content Include="Content\bmobile\css\fonts\VodafoneRg.woff2" />
+    <Content Include="Content\bmobile\css\fonts\Vodafone_Rg_Bold.eot" />
+    <Content Include="Content\bmobile\css\fonts\Vodafone_Rg_Bold.ttf" />
+    <Content Include="Content\bmobile\css\fonts\Vodafone_Rg_Bold.woff" />
+    <Content Include="Content\bmobile\css\fonts\Vodafone_Rg_Bold.woff2" />
+    <Content Include="FB_Reedem_Voucher.csv" />
+    <EntityDeploy Include="Models\selfcare.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>selfcare.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\selfcare.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>selfcare.edmx</DependentUpon>
+      <LastGenOutput>selfcare.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\selfcare.edmx.diagram">
+      <DependentUpon>selfcare.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\selfcare.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>selfcare.edmx</DependentUpon>
+      <LastGenOutput>selfcare.cs</LastGenOutput>
+    </Content>
+    <None Include="Properties\PublishProfiles\Pub.pubxml" />
+    <None Include="Scripts\jquery-1.8.3-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.8.3.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive-custom-for-bootstrap.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery1.js" />
+    <Content Include="Scripts\knockout-2.3.0.js" />
+    <Content Include="Scripts\knockout-3.0.0.debug.js" />
+    <Content Include="Scripts\knockout-3.0.0.js" />
+    <Content Include="Scripts\knockout-jqueryui.min.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\knockout.validation.debug.js" />
+    <Content Include="Scripts\knockout.validation.js" />
+    <Content Include="Scripts\magnific\jquery.magnific-popup.js" />
+    <Content Include="Scripts\magnific\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\magnific\magnific-popup.css" />
+    <Content Include="Scripts\multizoom.js" />
+    <Content Include="Scripts\popupoverlay\css-overlaybox.css" />
+    <Content Include="Scripts\popupoverlay\jquery.popupoverlay.js" />
+    <Content Include="Scripts\pricing-script.js" />
+    <Content Include="Scripts\redeem-fb-voucher.js" />
+    <Content Include="Scripts\slider\jquery-ui-slider-pips.css" />
+    <Content Include="Scripts\slider\jquery-ui-slider-pips.js" />
+    <Content Include="Scripts\slider\jquery-ui-slider-pips.min.js" />
+    <Content Include="Scripts\Twinkle.Knockout.js" />
+    <Content Include="Scripts\voicecall-act-deact.js" />
+    <Content Include="Scripts\zoom\jquery-1.6.js" />
+    <Content Include="Scripts\zoom\jquery.jqzoom-core-pack.js" />
+    <Content Include="Scripts\zoom\jquery.jqzoom-core.js" />
+    <Content Include="Scripts\zoom\jquery.jqzoom.css" />
+    <Content Include="Scripts\zoom\triumph_big1.jpg" />
+    <Content Include="Scripts\zoom\triumph_small1.jpg" />
+    <None Include="Service References\dokuRef\dokuService11.wsdl" />
+    <None Include="Service References\dokuRef\dokuService33.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\dokuRef\dokuService34.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\dokuRef\dokuService35.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\dokuRef\dokuService36.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\esipayRef\esipayService.wsdl" />
+    <None Include="Service References\esipayRef\esipayService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\esipayRef\esipayService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetPowerRef\configuration91.svcinfo" />
+    <None Include="Service References\GetPowerRef\configuration.svcinfo" />
+    <None Include="Service References\dokuRef\configuration91.svcinfo" />
+    <None Include="Service References\dokuRef\configuration.svcinfo" />
+    <None Include="Service References\dokuRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\GetPowerRef\GetPower.wsdl" />
+    <None Include="Service References\GetPowerRef\GetPower.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetPowerRef\GetPower1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetPowerRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\esipayRef\esipayService.disco" />
+    <None Include="Service References\esipayRef\configuration91.svcinfo" />
+    <None Include="Service References\esipayRef\configuration.svcinfo" />
+    <None Include="Service References\esipayRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\GetPowerRef\GetPower.disco" />
+    <None Include="Service References\siCCBundleRef\BundlePlanSI.disco" />
+    <None Include="Service References\siCCBundleRef\configuration91.svcinfo" />
+    <None Include="Service References\siCCBundleRef\configuration.svcinfo" />
+    <None Include="Service References\siCCBundleRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service1\BundlePlan.svc" />
+    <Content Include="Service\siEasyrecharge.svc" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Error\TechIssue.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Shared\AddMsisdn.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_bm_PlanDetails.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\VerifyMSISDN.cshtml" />
+    <Content Include="Views\Shared\_ActivateSIM_Partial.cshtml" />
+    <Content Include="Views\Care\Activate_Sim.cshtml" />
+    <Content Include="Views\Care\PlanPricing.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Care\YPlanConfirm.cshtml" />
+    <Content Include="Views\Care\YMessage.cshtml" />
+    <Content Include="Views\Shared\_bm_yplans.cshtml" />
+    <Content Include="Views\Shared\_bm_ytprice.cshtml" />
+    <Content Include="Views\Ezy\ShopEzy.cshtml" />
+    <Content Include="Views\Shared\_bm_yplan_usage.cshtml" />
+    <Content Include="Views\Care\LockAccount.cshtml" />
+    <Content Include="Views\Home\CallForwarding.cshtml" />
+    <Content Include="Views\Home\Contactus.cshtml" />
+    <Content Include="Views\Home\CUG.cshtml" />
+    <Content Include="Views\Home\Data.cshtml" />
+    <Content Include="Views\Home\FAQs.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Messaging.cshtml" />
+    <Content Include="Views\Home\Prepaid.cshtml" />
+    <Content Include="Views\Home\Roming.cshtml" />
+    <Content Include="Views\Home\SimRegistration.cshtml" />
+    <Content Include="Views\Home\SimReplaceRegistration.cshtml" />
+    <Content Include="Views\Home\SMSBanking.cshtml" />
+    <Content Include="Views\Home\WebBrowsing.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
+    <Content Include="Views\Shop\_Ajax_MyOrders.cshtml" />
+    <Content Include="Views\Shared\bm_Layout_Shopping.cshtml" />
+    <Content Include="Views\Shared\bm_HeaderLayout_Shopping.cshtml" />
+    <Content Include="Views\Shop\_Ajax_Product.cshtml" />
+    <Content Include="Views\Shared\_FBPromotionsPartial.cshtml" />
+    <Content Include="Views\Shared\_ProductsListView.cshtml" />
+    <Content Include="Views\Shared\_SIM_ActivationPartial.cshtml" />
+    <Content Include="Views\Shared\_TransLogDetailPartial.cshtml" />
+    <Content Include="Views\Shop\Products.cshtml" />
+    <Content Include="Views\Care\TermsConditions.cshtml" />
+    <Content Include="Views\Shared\bm_Layout_SCareUser.cshtml" />
+    <Content Include="Views\Shared\_GetPower.cshtml" />
+    <Content Include="Views\Shared\_CreditMe_Partial.cshtml" />
+    <Content Include="Views\Care\VodafoneLogin.cshtml" />
+    <Content Include="Views\Shared\bm_yplans_show.cshtml" />
+    <Content Include="Views\Care\OrderSummary_o.cshtml" />
+    <Content Include="Views\Ezy\OrderSummary.cshtml" />
+    <Content Include="Views\Shared\_InternetBanking_Partial.cshtml" />
+    <Content Include="Views\Shared\_PromonetBank_Partial.cshtml" />
+    <Content Include="Views\Shared\_cms_FooterMenu.cshtml" />
+    <Content Include="Views\Shared\_cms_HeaderMenu.cshtml" />
+    <Content Include="Views\Shared\_cms_Layout.cshtml" />
+    <Content Include="Views\Shared\_cms_MSISDN_Details.cshtml" />
+    <Content Include="Views\Shared\_cms_RightNav_Menu.cshtml" />
+    <Content Include="Views\Care\Login_Bak.cshtml" />
+    <Content Include="Views\Care\Prepaid_o.cshtml" />
+    <Content Include="Views\Care\Register_Bak.cshtml" />
+    <Content Include="Views\Care\ForgotPassword_Bak.cshtml" />
+    <Content Include="Views\Care\Postpaid_bak.cshtml" />
+    <Content Include="Views\Care\EditPro.cshtml" />
+    <Content Include="Views\Care\TempReset.cshtml" />
+    <Content Include="Views\Care\ResetPassword.cshtml" />
+    <Content Include="Views\Shared\_cms_LoginPartial.cshtml" />
+    <Content Include="Views\Care\Plans.cshtml" />
+    <Content Include="Views\Care\ChangeType.cshtml" />
+    <Content Include="Views\Care\Topup.cshtml" />
+    <Content Include="Views\Care\OrderSummary.cshtml" />
+    <Content Include="Views\Shared\_VoiceCall_ActDeact.cshtml" />
+    <Content Include="Views\Admin\AddBrand.cshtml" />
+    <Content Include="Views\Admin\AddCategory.cshtml" />
+    <Content Include="Views\Admin\AddProduct.cshtml" />
+    <Content Include="Views\Admin\AppTransactionLogs.cshtml" />
+    <Content Include="Views\Admin\Brands.cshtml" />
+    <Content Include="Views\Admin\Bundles.cshtml" />
+    <Content Include="Views\Admin\BYPTransactions.cshtml" />
+    <Content Include="Views\Admin\CareUsers.cshtml" />
+    <Content Include="Views\Admin\Category.cshtml" />
+    <Content Include="Views\Admin\CreateBundle.cshtml" />
+    <Content Include="Views\Admin\CreateKYCVersion.cshtml" />
+    <Content Include="Views\Admin\CreatePrice.cshtml" />
+    <Content Include="Views\Admin\CreatePromotion.cshtml" />
+    <Content Include="Views\Admin\CreateUser.cshtml" />
+    <Content Include="Views\Admin\create_menu.cshtml" />
+    <Content Include="Views\Admin\Create_yplan.cshtml" />
+    <Content Include="Views\Admin\Create_yplan_denomination.cshtml" />
+    <Content Include="Views\Admin\Create_yplan_denominationType.cshtml" />
+    <Content Include="Views\Admin\Create_yplan_price.cshtml" />
+    <Content Include="Views\Admin\CugTransactions.cshtml" />
+    <Content Include="Views\Admin\DeductStaffsTopup.cshtml" />
+    <Content Include="Views\Admin\EditBrand.cshtml" />
+    <Content Include="Views\Admin\EditBundle.cshtml" />
+    <Content Include="Views\Admin\EditCategory.cshtml" />
+    <Content Include="Views\Admin\EditPrice.cshtml" />
+    <Content Include="Views\Admin\EditProduct.cshtml" />
+    <Content Include="Views\Admin\EditPromotion.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Admin\Edit_yplan.cshtml" />
+    <Content Include="Views\Admin\Edit_yplan_denomination.cshtml" />
+    <Content Include="Views\Admin\Edit_yplan_denominationType.cshtml" />
+    <Content Include="Views\Admin\Edit_yplan_price.cshtml" />
+    <Content Include="Views\Admin\History.cshtml" />
+    <Content Include="Views\Admin\ImportStaffsTopup.cshtml" />
+    <Content Include="Views\Admin\KYC_customers_List.cshtml" />
+    <Content Include="Views\Admin\KYC_SIM_Activation_Log.cshtml" />
+    <Content Include="Views\Admin\KYC_Version_List.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\menus.cshtml" />
+    <Content Include="Views\Admin\Orders.cshtml" />
+    <Content Include="Views\Admin\OrderSummary.cshtml" />
+    <Content Include="Views\Admin\PlanPurchaseHistory.cshtml" />
+    <Content Include="Views\Admin\Price.cshtml" />
+    <Content Include="Views\Admin\Products.cshtml" />
+    <Content Include="Views\Admin\Promotions.cshtml" />
+    <Content Include="Views\Admin\RelatedProducts.cshtml" />
+    <Content Include="Views\Admin\SelfcareTransactions.cshtml" />
+    <Content Include="Views\Admin\SimRegCustomers.cshtml" />
+    <Content Include="Views\Admin\staffs_msisdn.cshtml" />
+    <Content Include="Views\Admin\staffs_transactions.cshtml" />
+    <Content Include="Views\Admin\staff_process.cshtml" />
+    <Content Include="Views\Admin\TOPKADHistory.cshtml" />
+    <Content Include="Views\Admin\TransactionLogs.cshtml" />
+    <Content Include="Views\Admin\UpdateKYCVersion.cshtml" />
+    <Content Include="Views\Admin\UpdateSimReg.cshtml" />
+    <Content Include="Views\Admin\UpdateSimReplaceReg.cshtml" />
+    <Content Include="Views\Admin\Update_Kyc_customer.cshtml" />
+    <Content Include="Views\Admin\update_menu.cshtml" />
+    <Content Include="Views\Admin\UserHistory.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\VerifyTOPKAD.cshtml" />
+    <Content Include="Views\Admin\Yplans.cshtml" />
+    <Content Include="Views\Admin\YPlanTransactionLogs.cshtml" />
+    <Content Include="Views\Admin\Yplan_denomination.cshtml" />
+    <Content Include="Views\Admin\Yplan_denominationType.cshtml" />
+    <Content Include="Views\Admin\Yplan_price.cshtml" />
+    <Content Include="Views\Admin\_Ajax_AppTransactionLogs.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Brands.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Bundles.cshtml" />
+    <Content Include="Views\Admin\_Ajax_BYPTransactions.cshtml" />
+    <Content Include="Views\Admin\_Ajax_CareUsers.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Category.cshtml" />
+    <Content Include="Views\Admin\_Ajax_CugTransactions.cshtml" />
+    <Content Include="Views\Admin\_Ajax_ImportStaffsTopup.cshtml" />
+    <Content Include="Views\Admin\_Ajax_KYC_CustomerList.cshtml" />
+    <Content Include="Views\Admin\_Ajax_KYC_SimActivation_Log.cshtml" />
+    <Content Include="Views\Admin\_Ajax_kyc_version_List.cshtml" />
+    <Content Include="Views\Admin\_Ajax_menus.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Orders.cshtml" />
+    <Content Include="Views\Admin\_Ajax_PlanPurchaseHistory.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Products.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Promotions.cshtml" />
+    <Content Include="Views\Admin\_Ajax_SelfcareTransactions.cshtml" />
+    <Content Include="Views\Admin\_Ajax_SimRegCustomers.cshtml" />
+    <Content Include="Views\Admin\_Ajax_StaffsMSISDN.cshtml" />
+    <Content Include="Views\Admin\_Ajax_staffs_transactions.cshtml" />
+    <Content Include="Views\Admin\_Ajax_TOPKAD_Log.cshtml" />
+    <Content Include="Views\Admin\_Ajax_UserHistoryLogs.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Users.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Yplans.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Yplans_price.cshtml" />
+    <Content Include="Views\Admin\_Ajax_YPlanTransactionLogs.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Yplan_denomination.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Yplan_denominationType.cshtml" />
+    <Content Include="Views\Admin\_bm_Admin_Color_Hint.cshtml" />
+    <Content Include="Views\Admin\FB_Vouchers.cshtml" />
+    <Content Include="Views\Admin\_Ajax_FB_Vouchers.cshtml" />
+    <Content Include="Views\Admin\Import_FB_Vouchers.cshtml" />
+    <Content Include="Views\Care\Confirm_o.cshtml" />
+    <Content Include="Views\Care\devicesettings.cshtml" />
+    <Content Include="Views\Admin\Check_Msisdn.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Registration.cshtml" />
+    <Content Include="Views\Admin\Registration.cshtml" />
+    <Content Include="Views\Admin\SpecialPromotion.cshtml" />
+    <Content Include="Views\Admin\_AjaxSpecialPromotion.cshtml" />
+    <Content Include="Views\Admin\SISubscriptionplan.cshtml" />
+    <Content Include="Views\Admin\_Ajax_SISubscriptionplan.cshtml" />
+    <Content Include="Views\Admin\SF_PlanPurchaseTransHistory.cshtml" />
+    <Content Include="Views\Admin\_Ajax_SF_PlanPurchaseTransHistory.cshtml" />
+    <Content Include="Views\Admin\_Ajax_Registration1.cshtml" />
+    <Content Include="Views\Care\wcinfo.cshtml" />
+    <None Include="Service References\siCCBundleRef\BundlePlanSI.wsdl" />
+    <None Include="Service References\siCCBundleRef\BundlePlanSI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\siCCBundleRef\BundlePlanSI1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Admin\ProfileView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="ErrorLog\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Care\Prepaid.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Care\Register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Care\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\RightNav_PartialView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Care\Confirm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Care\ResetPassword_o.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Care\Thankyou.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Care\Plans_o.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Care\ChangeType_o.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Care\ConfirmProduct.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shop\ProductInfo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shop\Confirm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shop\login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shop\OrderSummary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ProductPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ProductInfoPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_CartSummaryPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Breadcrumb.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shop\ForgotPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shop\ResetPassword.cshtml" />
+    <Content Include="Views\Shop\Thankyou.cshtml" />
+    <Content Include="Views\Shop\UserProfile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Care\EditPro_o.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Care\Topup_o.cshtml" />
+    <Content Include="Views\Care\TopupSuccess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shop\ChangePwd.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shop\Register.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\font\ubuntu-r_0.eot" />
+    <Content Include="css\font\ubuntu-r_0.ttf" />
+    <Content Include="css\font\ubuntu-r_0.woff" />
+    <Content Include="Views\Care\ForgotPassword.cshtml" />
+    <Content Include="Views\Care\TempReset_o.cshtml" />
+    <Content Include="Views\Care\CCTopup.cshtml" />
+    <Content Include="Views\Shop\MyOrderSummary.cshtml" />
+    <Content Include="Views\Shop\testZoom.cshtml" />
+    <Content Include="Views\Shared\bm_Layout.cshtml" />
+    <Content Include="Views\Shared\bm_HeaderLayout.cshtml" />
+    <Content Include="Views\Shared\bm_FooterLayout.cshtml" />
+    <Content Include="Views\Shared\bm_Layout_Care.cshtml" />
+    <Content Include="Views\Shared\bm_HeaderLayout_Care.cshtml" />
+    <Content Include="Views\Error\SessionTimeout.cshtml" />
+    <Content Include="Views\Shared\bm_Layout_Admin.cshtml" />
+    <Content Include="Views\Shared\bm_Admin_TopNav_PartialView.cshtml" />
+    <Content Include="Views\Care\Postpaid_o.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_myacc_navpartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shop\MyOrders.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shop\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\dokuRef\" />
+    <WCFMetadataStorage Include="Service References\esipayRef\" />
+    <WCFMetadataStorage Include="Service References\GetPowerRef\" />
+    <WCFMetadataStorage Include="Service References\siCCBundleRef\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\beLib\beLib.csproj">
+      <Project>{7688c845-baf5-4fba-93cf-765c8dd9f44c}</Project>
+      <Name>beLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\bmdoku\bmdoku.csproj">
+      <Project>{cd50c159-3e5d-4192-81d5-92d31f8ab51c}</Project>
+      <Name>bmdoku</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>50161</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50162/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

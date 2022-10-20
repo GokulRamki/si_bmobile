@@ -1,0 +1,2362 @@
+@font-face {
+    font-family: 'VodafoneRg';
+    src: url('fonts/VodafoneRg.eot');
+    src: url('fonts/VodafoneRg.eot') format('embedded-opentype'),
+         url('fonts/VodafoneRg.woff2') format('woff2'),
+         url('fonts/VodafoneRg.woff') format('woff'),
+         url('fonts/VodafoneRg.ttf') format('truetype'),
+         url('fonts/VodafoneRg.svg#VodafoneRg') format('svg');
+}
+
+@font-face {
+    font-family: 'Vodafone_Rg_Bold';
+    src: url('fonts/Vodafone_Rg_Bold.eot');
+    src: url('fonts/Vodafone_Rg_Bold.eot') format('embedded-opentype'),
+         url('fonts/Vodafone_Rg_Bold.woff2') format('woff2'),
+         url('fonts/Vodafone_Rg_Bold.woff') format('woff'),
+         url('fonts/Vodafone_Rg_Bold.ttf') format('truetype'),
+         url('fonts/Vodafone_Rg_Bold.svg#Vodafone_Rg_Bold') format('svg');
+}
+
+*{box-sizing:border-box;}
+a{text-decoration: none;}
+img{border: 0;	outline: none;}
+
+body{ /*font-family: 'VodafoneRg';*/ font-family: Arial !important; font-size:1.05em !important;line-height:18px !important;letter-spacing:0px !important;color:#333333 !important; padding: 0;	margin: 0;}
+
+.main{width: 100%;	background: #fff;	/*background: url(../images/lft-mn-bg.png) no-repeat top left;*/	float: left;  position: relative; z-index: 9999999;}
+.main-inn{width: 100%;	float: left;}
+.margin{width: 1000px;	margin: 0 auto;}
+/*header{width: 100%;	float: left;	padding: 15px 0;   position: fixed;    z-index: 999999; background: #fff;}*/
+.main-inn > header{width: 100%;   float: none;    padding: 15px 0 0;   position: fixed;    z-index: 99999; background: #fff; margin: 0 auto;    background: #fff;}
+.head{width: 100%;  float: left;}
+.rohumbus{display: block;    height: 600px;    margin-left: -980px;    overflow: hidden;    position: fixed;    top: -7px;
+    width: 973px;    z-index: 999999;}
+.head-logo{width: 18%;	float: left;	margin-top: 12px;}
+.head-logo a img{width: auto;	max-width: 100%;}
+.head-rgt{width: 80%;	float: right;}
+.log-reg{width: 100%;	float: left;	text-align: right;	color: #808080;	font-size: 18px;	padding: 5px 0;	margin-bottom: 10px;}
+.log-reg a{color: #666766;	display:inline-block;	font-size: 17px;}
+.log-reg a img{width: auto;	margin-right: 5px;}
+.nav-srch{width: 100%;	float: left;	background: #ed1c24;	border-radius: 5px;	box-shadow: 0px 0px 10px #bbb;}
+.nav-mn{width: 81%;	float: left;}
+.srch{width: 18%;	float: left;	background: #fff;	border-radius: 5px;	padding: 2px 0;	margin-top: 4px;	position: relative;	z-index: 99999;	box-shadow: 0px 0px 4px #959595 inset;}
+.srch-inn{width: 125px;	padding-left: 28px;	background: url(../images/srch_img.png) no-repeat 4px;	float: left;}
+.srch span{width: 18px;	float: left;	height: 25px;	overflow: hidden;}
+.srch input{width: 100%;	padding: 0;	margin: 0;	border: none;	outline: none;	background: transparent;	text-align: left;	height: 28px;	font-size: 15px;	color: #000;}
+.srch a{width: auto;	display: inline-block;	margin-top: 5px;	width: 12px;	float: left;	height: 20px;}
+.srch span img, .srch a img{width: auto;	height: auto;	max-height: 20px;	height: 20px;}
+
+.brd-crm{width: 100%;	float: left;	margin-top: 18px;	margin-bottom: 15px;}
+.brd-crm ul{width: 100%;	float: left;	padding: 0;	margin: 0;	list-style: none;}
+.brd-crm ul li{width: auto;	float: left;	display: inline;	margin-right: 10px;	color: #919191;	font-size: 16px;}
+.brd-crm ul li span{margin-right: 3px;	color: #919191;}
+.brd-crm ul li a{color: #919191;}
+
+.lnd-cat-content-1{width: 100%;	float: left;	margin-top: 165px;}
+.ind-cat-content-2{width: 100%;	float: left;	margin:0 0 60px;}
+.view-cat-hed{width: 100%;	float: left;}
+.view-cats-cols{width: 33.33%;	float: left;}
+.vw-by-ctgr{width: 90%;	float: left;}
+.vw-by-brnd{width: 90%;	float: none;	margin: 0 auto;}
+.vw-by-price{width: 90%;	float: right;}
+.view-cats-cols select{width: 100%;	float: left;	padding: 3px 7px;	text-align: center;	background: url(../images/arr-dn.png) no-repeat right 50%;	border: 2px solid #8b8b8b;	outline: none;	appearance:none; -moz-appearance:none; -webkit-appearance:none; -o-appearance:none;	border-radius: 5px;	color: #666;	cursor: pointer;}
+
+.ind-cat-content-3{width: 100%;	float: left;	margin-bottom: 50px;}
+.ind-cat-cont-3{width: 100%;	float: left;}
+.ind-prd-lst-rw{width: 100%;	float: left;}
+.ind-prd-box-1{width: 28%;	float: left;}
+.ind-cat-prd-bx{width: 100%;	float: left;	padding: 25px 35px 15px;	border: 1px solid #aaa;	border-radius: 8px;	box-shadow: 0px 0px 10px #bbb;	margin-bottom: 20px;}
+.ind-cat-prd-img{width: 100%;	float: left;	text-align: center;	height: 170px;}
+.ind-cat-prd-img img{width: auto; max-height: 95%;}
+.ind-cat-prd-sm-nm{width: 100%;	float: left;	font-size: 20px;	color: #00b0ca;}
+.ind-cat-prd-nm{width: 60%;	float: left;	padding-right: 10px;	font-size: 44px;	font-weight: bold;	color: #00b0ca;	line-height: 46px;}
+.ind-cat-prd-lnmr{width: 40%;	float: left;	text-align: right;	margin-top: 20px;}
+.ind-cat-prd-lnmr a{color: #a3a3a3;		text-decoration: underline;}
+
+.ind-prd-box-2{width: 28%;	margin: 0 auto;	float: none;}
+.ind-prd-box-3{width: 28%;	float: right;}
+
+.sp-slide{background: url(../images/mdp-sld-up-arr-2.png) no-repeat center 7px;}
+.sp-slide span{background: #666766 !important;}
+
+
+/*footer*/
+.main-inn > footer{width: 100%;	float: left;	font-family: 'VodafoneRg';	background: #231f20}
+.main-inn > .footer{width: 100%;	float: left;	background: transparent;}
+.ftr-rw{width: 100%;	float: left;	text-align: left;	background: transparent;	padding: 20px 0;}
+.ftr-big-col{width: 30%;	float: left;	background: transparent;}
+.ftr-col{width: 23.33%;	float: left;	background: transparent;}
+.ftr-col-hed{width: 100%;	float: left;	margin-bottom: 20px;	color: #fff;	font-size: 16px;	background: transparent;	font-weight: bold;}
+ul.ftr-ul{width: 100%;	float: left;	margin: 0;	padding: 0;	list-style: none;	background: transparent;}
+ul.ftr-ul li{width: 100%;	float: left;	padding: 0 0 8px;	background: transparent;}
+ul.ftr-ul li a{color: #fff;	font-size: 16px;}
+
+.ftrsocial{width: 100%;	float: left;}
+.ftr-scl-rw{width: 100%;	float: left;}
+.ftr-scl-rw a{width: auto;}
+
+.ftr-lst{width: 100%;	float: left;	color: #fff;	font-size: 15px;	border-top: 1px solid #626262;	padding: 20px 0;}
+.ftr-lst-lt{width: auto;	float: left;}
+.ftr-lst-rgt{width: auto;	float: right;}
+.ftr-lst-rgt a{color: #fff;}
+
+
+.sld-li{width: 100%;	float: left;	background: #e6e6e6 !important;	border: 1px solid #fff;	box-shadow: 0px 0px 15px #000;	border-radius: 10px;}
+.sld-lft{width: 50%;	float: left;	text-align: center;}
+.sld-lft img{width: 100% !important;	max-width: 360px;	display: inline !important;	padding: 20px;}
+.sld-rgt{width: 50%;	float: left;	margin-top: 70px;	max-width: 345px;}
+.sld-hed{width: 100%;	float: left;	text-align: left;	font-size: 32px;	color: #666766;}
+.sld-hed span{color: #e41e26;}
+.sld-p{width: 100%;	float: left;	font-size: 17px;	color: #666766;	line-height: 20.76px;	margin-top: 30px;}
+.sld-btns{width: 100%;	float: left;	margin-top: 30px;}
+.sld-btns a{width: auto;	float: left;	display: inline;	margin-right: 20px;	max-width: 150px;}
+.sld-btns a img{width: 100%;}
+
+
+
+.lpn-main{width: 100%;	float: left;	background: #fff;	padding: 0 100px 60px;	margin: 100px 0;	border-bottom: 1px solid #e6e6e6;}
+.lpn-left{width: 50%;	float: left;	text-align: center;	padding-right: 20px;}
+.lpn-lt-img{width: 50%;	float: left;}
+.lpn-lt-img img{width: auto;	max-width: 100%;}
+.lpn-lt-txt{width: 50%;	float: left;	color: #ec1c24;	font-size: 28px;	margin-top: 30px;}
+.lpn-rgt{width: 50%;	float: left;	padding-left: 10px;}
+.lpn-rgt p{width: 100%;	float: left;	font-size: 21px;	line-height: 24px;	color: #666766;	}
+.lpn-rgt a{width: 100%;	display: block;	float: left;	font-size: 18px;	color: #666766;	margin-top: 0px;	text-decoration: underline;}
+
+
+
+/*main dropdown*/
+.mdp-main{width: 100%;	float: left;	margin-top: 110px;}
+.mdp-content-1{width: 100%;	float: left;}
+.mdp-c-1-lft{width: 19%;	float: left;	background: #666766;	border: 1px solid #666766;	border-radius: 8px;}
+.mdp-c-1-lft .mdp-c-1-dv:first-child{border-top-left-radius: 8px;	border-top-right-radius: 8px;}
+.mdp-c-1-lft .mdp-c-1-dv:last-child{border-bottom-left-radius: 8px;	border-bottom-right-radius: 8px;}
+.mdp-c-1-dv{width: 100%;	float: left;	font-size: 16px;	line-height: 43px;	height: 43px;	padding: 0 20px;	background: #fff;
+			border: 1px solid #666766;}
+.mdp-c-1-dv a{color: #666766;	display: block;	line-height: 41px;}
+.mdp-cls-a{color: #a0a0a0;	display: block;}
+.mdp-cls{border-radius: 8px;	color: #ED2024 !important;}
+.mdp-cls-a-2{color: #ED2024 !important; font-size: 17px !important;	display: block;}
+
+.mdp-c-1-trgr{cursor: pointer;}
+.mdp-c-1-drpdwn{width: 100%;	float: left;	padding: 15px 5px;}
+.mdp-c-1-drpdwn button{border: none;	outline: none;	margin-bottom: 10px;	border-radius:7px;	cursor: pointer;}
+.mdp-drp-hed{width: 100%;	float: left;	color: #fff;	font-size: 15px;	padding-left: 10px;	margin-bottom: 10px;}
+button.mdp-drp-log{width: 100%;	text-align: center;	color: #fff;	background: #963795;	font-size: 15px;	padding: 5px 0;}
+button.mdp-drp-reg{width: 100%;	text-align: center;	color: #666766;	background: #fff;	font-size: 15px;	padding: 5px 0;	border: 1px solid #666;}
+
+
+
+
+
+/*.mn-dvs{width: 300px;	float: left;	background: #F2F2F2;	position: absolute;	box-shadow: 0px 5px 15px #555;	text-align: left;	color: #666766;	display: none;	margin-left: 0;	z-index: 9999999;	border-bottom-right-radius: 8px;border-bottom-left-radius: 8px;	font-weight: normal;	padding: 0 10px;}*/
+.mn-dvs{width: 800px;	float: left;	background: #f2f2f2;	position: absolute;	box-shadow: 0px 5px 15px #555;	text-align: left;	color: #666766;	z-index: 99999999;	border-bottom-right-radius: 8px;	border-bottom-left-radius: 8px;	font-weight: normal; left: 0;    font-family: 'VodafoneRg';}
+
+.mn-li-a{font-family: 'Vodafone_Rg_Bold';}
+.mn-li-a:hover{text-decoration: underline;}
+.mn-li-a-2:hover{background: #F2F2F2 !important;}
+.mn-li-a-2:hover a{color: #666766 !important;}
+.mn-li-a-2:hover ul li a{color: #5E2750 !important;}
+
+.mn-li-a-2:hover ul.sub-mnu li a:hover{color: #000 !important; text-decoration:underline;}
+
+.mn-trgr-1, .mn-trgr-2, .mn-trgr-3, .mn-trgr-4, .mn-trgr-5{display: none;}
+
+.mn-dvs:hover{display: block;}
+
+
+ul.sub-mnu{display: block !important;	width: 100% !important;	float: left !important;	background: transparent !important;   position: relative;	z-index: 9999999;   font-family: 'VodafoneRg' !important;}
+ul.sub-mnu li{width: 33% !important;	float: left !important;	text-align: left !important;	color: #ccc;   margin: 0 !important;	border-left: 1px solid #ccc;	padding: 0 15px !important;	height: 175px;}
+ul.sub-mnu li:first-child{border-left: none;}
+ul.sub-mnu li a{color: #000 !important; font-size: 16px; background: #F2F2F2 !important; text-align: center; transition: 0.4s;   transition-duration: 0.4s;  -webkit-transition: 0.4s;   -webkit-transition-duration: 0.4s;}
+ul.sub-mnu li a.has-sub{color: #333 !important; text-align: left;}
+
+ul.sub-sub-mnu{display: block;	width: 100% !important;	float: left;	background: transparent !important;}
+ul.sub-sub-mnu li{	width: 100% !important;float: left;	text-align: left !important;	color: #666766;    border: none !important; padding: 0 !important;   height: auto !important;}
+ul.sub-sub-mnu li:not(*:root){}
+ul.sub-sub-mnu li a{ font-size: 14px !important;    border-bottom: none;   font-weight: normal !important;  text-align: left !important;       border-right: none !important;   color: #5E2750 !important;  padding: 4px 0 !important;}
+
+ul.sub-sub-sub-mnu{display: block;   width: 95% !important;  float: right !important;    background: transparent !important;    font-family: 'VodafoneRg' !important;}
+ul.sub-sub-sub-mnu li{text-indent: 10px !important;	width: 100%;	padding: 0 !important;	border-bottom: 1px solid #666766;		min-height: auto !important;}
+ul.sub-sub-sub-mnu li a{color: #5E2750 !important; font-size: 14px; background: #F2F2F2 !important;     font-weight: normal !important;      text-align: left !important;   border-right: none !important;}
+
+ul.sub-sub-mnu:hover, ul.sub-sub-sub-mnu:hover{display: block;}
+
+ul.sub-mnu li:hover + ul.sub-sub-mnu{display: block;}
+ul.sub-sub-mnu li a:hover{/*background: #666766 !important;*/   color: #000 !important;}
+
+ul.sub-sub-mnu li:hover + ul.sub-sub-sub-mnu{display: block;}
+
+/*a.has-sub{background: url(../images/mdp-sld-dwn-arr.png) no-repeat	35% center;}*/
+/*a.has-sub:after{content: url(../images/mdp-sld-dwn-arr.png);	margin-left: 5px;	top: -5px;	position: relative;}*/
+a.has-sub{font-size: 18px !important;   font-family: 'Vodafone_Rg_Bold' !important;    color: #000 !important; text-decoration: none !important;   cursor: default;}
+
+li.fst-nv a{font-family: 'Vodafone_Rg_Bold';}
+
+
+.mnu-c-fluid{width: 100%;   float: left;}
+.mnu-c-fluid a{width: 100%; float: left;    text-align: left;   display: block; color: #5E2750;  font-size: 14px;   padding: 4px 0px;   background: #F2F2F2;}
+
+
+
+
+.mn-bx-rws{width: 100%;	float: left;	padding: 10px 0px 20px;}
+.dv-bxs{width: 25%;	float: left;	border-right: 2px solid #666766;	padding: 0 25px;	min-height: 192px;}
+.dv-bxs p{width: 100%;	float: left;	text-align: left;	font-size: 15px;	line-height: 18px;	padding: 0;	margin: 0 0 15px;}
+.mn-bx-rws .dv-bxs:nth-child(4){border-right: none;}
+.dv-bxs-hed{width: 100%;	float: left;	font-size: 15px;	color: #666766;	font-weight: bold !important;	margin: 0 0 15px;	line-height: 20px;}
+.dv-bxs-hed a{font-size: 15px !important;	color: #666766 !important;	font-weight: bold;	margin: 0;	line-height: 20px;	padding: 0 !important;	border: none !important;}
+.dv-bxs-hed:not(*:root){font-weight: bold !important;}
+.dv-bxs-hed a:not(*:root){font-weight: bold !important;}
+
+.dv-bxs-ul{width: 100% !important;	float: left;	display: block !important;	padding: 0 !important;	margin: 0;	position: relative !important;	background: transparent !important;	border: none !important;}
+.dv-bxs-ul li{width: 100% !important;	float: left !important;	text-align: left;	padding: 0;	margin: 0 0 5px !important;}
+.dv-bxs-ul li a{margin:0; font-family: 'VodafoneRg'; font-size:15px !important; line-height:17px !important; color:#666766 !important; text-decoration:none;	border-right: none !important;	text-align: left;	padding: 4px 0 !important;	font-weight: normal !important;}
+.dv-dxs-rw{width: 100%;	float: left;	margin-bottom: 8px;}
+.dv-bxs-col-lt{width: 70%;	float: left;	font-weight: normal;}
+.dv-bxs-col-lt a, .dv-bxs-col-lt-2 a{display: block; color: #666766 !important;	font-size: 15px !important;	line-height: 17px !important;	border: none !important;	padding: 0 !important;	font-weight: normal !important;}
+.dv-bxs-col-rgt{width: 30%;	float: left;	color: #666766;	font-size: 15px;	font-weight: bold;		padding:0;	line-height: 17px;}
+.dv-bxs-col-lt-2{width: 50%;	float: left;	color: #fff;	font-weight: normal;}
+.dv-bxs-col-rgt-2{width: 50%;	float: left;	color: #666766;	font-size: 15px;	font-weight: bold !important;	padding:0;}
+.dv-bxs-col-rgt-2:not(*:root){font-weight: bolder;}
+.dv-strt-buy{width: 100%;	float: left;	background: transparent;	padding-left: 20px;	margin-top: 15px;	position: relative;	z-index: 999999999;}
+.dv-strt-buy button{width: auto;	float: left;	font-size: 18px;	color: #FFF;	line-height: 22px;	background: #963795;	border-radius: 6px;	box-shadow: 0px 0px 10px #333;	border: medium none;	outline: medium none;	padding: 7px 20px 10px;	cursor: pointer;   letter-spacing: 1px;}
+.dv-strt-buy button:not(*:root){padding: 7px 20px;}
+
+/*other Menus*/
+.mn-dvs-col-3{width: 33%;   float: left;    font-family: 'VodafoneRg';  transition: all 0.4s ease 0s;   border-left: 1px solid #ccc;    padding: 0 12px;}
+.mn-bx-rws .mn-dvs-col-3:first-child{border-left: none;}
+.mn-dvs-hed{width: 100%;    float: left;    font-family: 'Vodafone_Rg_Bold';    color: #333;    padding: 9px 0px;   margin: 0px;    background: #f2f2f2;    font-size: 18px;    text-decoration: none !important;   text-align: left;}
+.mn-dvs-hed:hover{color: #000;}
+.mn-dvs-wrap{width: 100%;   float: left;    font-size: 14px !important;    line-height: 18px;  text-align: left;   padding: 2px;}
+.mn-dvs-conts{width: 100%;  float: left;    color: #5E2750;}
+.mn-dvs-conts a{padding: 4px 0 !important; color: #5E2750 !important;  font-size: 14px !important;}
+.mn-li-a-2:hover .mn-dvs-conts a{color: #5E2750 !important;}
+.mn-dvs-conts a:hover{color: #000 !important;  text-decoration: underline;}
+.mn-li-a-2:hover .mn-dvs-conts a:hover{color: #000 !important;}
+
+
+.mn-dvs-col-4{width: 25%;   float: left;    font-family: 'VodafoneRg';  transition: all 0.4s ease 0s;   border-left: 1px solid #ccc;    padding: 0 15px; height: 125px;}
+.mn-bx-rws .mn-dvs-col-4:first-child{border-left: none;}
+
+.mn-dvs-col-fluid{width: 100%;  float: left;    font-family: 'VodafoneRg';  transition: all 0.4s ease 0s;   border-left: 1px solid #ccc;    padding: 0 15px;}
+.mn-dvs-col-2{width: 50%;   float: left;    font-family: 'VodafoneRg';  transition: all 0.4s ease 0s;   border-right: 1px solid #ccc;    padding: 0 15px;}
+
+
+
+
+
+
+
+
+
+
+
+.cont-inn{width: 100%;	float: left;}
+.mdp-c-ftr{width: 100%;	float: left;	background: #fff;	border-bottom: 2px solid #666766;	padding: 5px 0;	margin-top: 15px;	color: #666766;	font-size: 20px;}
+
+.mdp-c-rw{width: 100%;	float: left;}
+.mdp-c-cols{width: 29%;	float: left;	margin-right: 6.4%;}
+.mdp-c-rw .mdp-c-cols:last-child{margin-right: 0;}
+.mdp-c-bx-hed{width: 100%;	float: left;	text-align: center;	background: transparent;	color: #666766;	font-size: 18px;}
+.mdp-c-bx-wrapper{width: 100%;	float:left;	margin-top: 30px;}
+.mdp-c-bx-img{width: 100%;	float: left;	border-top-left-radius: 1px solid #666766;	border-top-right-radius: 1px solid #666766;}
+.mdp-c-bx-img img{width: 100%;	border-top-left-radius: 8px;	border-top-right-radius: 8px;	border-top: 2px solid #666766;	border-left: 2px solid #666766;	border-right: 2px solid #666766;}
+.mdp-c-bx-disc{width: 100%;	float: left;	margin-top: -10px;	background: #666766;	color: #fff;	border-radius: 8px;	padding:0 10px 5px 10px;}
+.mdp-c-bx-disc p{width: 100%;	float: left;	padding: 10px 0 0;	margin: 0;	font-size: 17px;}
+.mdp-c-bx-disc p a{color: #fff;	font-size: 15px;}
+
+.mdp-c-1-rgt{width: 81%;	float: left;	padding-left: 10px;	height: 354px;}
+.mdp-c-1-rgt-inn{width: 100%;	float: left;}
+
+
+.agile_carousel{width: 100%;}
+.slide_inner{width: 100%;	float: left;	height: 100%;	overflow: hidden;}
+.slide{width: 100%;	float: left;	height: 100% !important;}
+.agile_carousel img{width: 100%;	height: 88%;}
+#flavor_2 .control_set_2{width: 100% !important;	float: left;}
+#flavor_2 .content_button{width: 25% !important;}
+
+.slide_number_1 .content_button_inner p{border-bottom-left-radius: 8px;}
+.slide_number_4 .content_button_inner p{border-bottom-right-radius: 8px;	border-right: none;}
+
+.mdp-v-all{width: 100%;	float: left;	margin: 35px 0 30px;}
+.mdp-v-all button{background: #fff;	font-size: 15px;	color: #666766;	padding: 5px 10px;	border-radius: 8px;	border: 2px solid #d1d3d4;	font-family: 'VodafoneRg';	cursor: pointer;}
+
+/*Navigation*/
+
+#nav-wrap { float:left; width:auto; margin:0; padding:0px; position: relative;}
+#menu-icon {display: none;}
+#nav, #nav li {margin: 0; padding: 0;}
+#nav li {list-style: none; float:left; width:auto; padding:0; margin:0px;	width: 107px;	text-align: center;}
+#nav li a {padding: 9px 0; margin:0; font-size:18px;	color:#FFF; display:block;	/*border-right: 1px solid rgba(255,255,255,0.3);*/}
+#nav li a:not(*:root){padding: 11px 0;}
+/*#nav li a:hover {color:#000 !important;}*/
+#nav li a.act {color:#96ec00; background:url(../images/nav_hover.jpg) left bottom repeat-x;}
+
+#nav ul {background: #fff; padding: 2px;	/*width: 200px;*/}
+#nav ul li {float: none; margin: 0; padding: 0; font-family: 'VodafoneRg' !important;}
+#nav li:hover > ul {display: block;}
+
+.slide-1{border-bottom-left-radius: 8px; -webkit-border-bottom-left-radius:8px; -moz-border-radius-bottomleft:8px;}
+.slide-4{border-bottom-right-radius: 8px; -webkit-border-bottom-right-radius:8px; -moz-border-radius-bottomright:8px;}
+
+.cbp-contentslider nav a span{border-right: 1px solid #fff;}
+.mdp-content-main{float: left;	width: 100%;	background: #F2F2F2;}
+.mn-hovr{background: #F2F2F2;	color: #666766 !important;}
+
+
+
+
+/*faq*/
+
+.faq-main{width: 100%;  float: left;    margin: 160px 0 50px;}
+.faq-head{width: 100%;  float: left;    text-align: left;   font-family: 'VodafoneRg';    font-size: 46px;    line-height: 50px;  letter-spacing: 1px;    margin-bottom: 10px;}
+.faq-disc{width: 100%;  float: left;    text-align: left;   font-family: 'VodafoneRg';  font-size: 16px;    line-height: 20px;  margin-bottom: 10px; color: #000;}
+.faq-lft{width: 25%;    float: left;}
+.faq-rw-mn{width: 100%; float: left;    margin: 0;}
+.faq-hovr{background: #666766;  color: #fff !important; display: block; padding-left: 5px;}
+.faq-disp{width: 100%;  float: left;    border-bottom: 2px solid #666766;   padding: 10px 0;    color: #ED1C24; font-size: 18px;    line-height: 22px;  font-family: 'Vodafone_Rg_Bold'; }
+.faq-disp a{color: #666766; font-size: 18px;    line-height: 22px;}
+.faq-disp span{cursor: pointer;}
+.faq-togl{width: 75%;  float: left; margin-bottom: 20px;    font-size: 15px;    line-height: 20px;  font-family: 'VodafoneRg';   padding-left: 20px; box-shadow: -3px 3px 6px -2px #666766; padding-bottom: 20px;   min-height: 1050px;}
+.faq-mn-a{color: #ED1C24 !important;}
+.faq-tgl-head{width: 100%;  float: left; color: #ed1c24;  font-size: 18px;  line-height: 20px;  font-family: 'Vodafone_Rg_Bold';    margin-bottom: 10px;}
+.faq-tgl-img-1{width: 100%; float: left;}
+.faq-tgl-img-1 img{width: auto; max-width: 100%;}
+
+.faq-tgl-ul{width: 100%;    float: left;}
+.faq-tgl-ul ul{width: 100%; float: left;    list-style: none;  margin: 0 0 10px;}
+.ul-blt{list-style: disc !important;}
+.faq-tgl-ul ul li{width: 100%;  float: left;    font-size: 16px;    line-height: 20px;  color: #000;    padding: 5px 0;}
+.faq-tgl-cstm-1{width: 100%;    float: left;    font-size: 16px;    line-height: 20px;  color: #000;    padding: 15px 0 20px;}
+.faq-tgl-p-1{width: 100%;   float: left;    margin: 5px 0 10px; padding: 0; color: #000;}
+
+.faq-spn-red{color: #ED1C24;    font-style: italic; font-family: 'Vodafone_Rg_Bold';    margin: 0 2px;}
+.faq-li-spn{font-style: italic; font-family: 'Vodafone_Rg_Bold';    margin: 0 2px;}
+.faq-tgl-table{width: 100%; float: left;    max-width: 600px;   margin-bottom: 20px;}
+.faq-tbl-hed{width: 100%;   float: left;    font-family: 'Vodafone_Rg_Bold';    background: #ED1C24;    color: #fff;    font-size: 20px;    line-height: 24px;  text-align: center;}
+.faq-tbl-hd-col-1{width: 65%;   float: left;    padding: 5px 0;}
+.faq-tbl-hd-col-2{width: 35%;   float: left;    padding: 5px 0;}
+
+.faq-tbl-rw{width: 100%;    float: left;    font-family: 'VodafoneRg';  font-size: 15px;    line-height: 20px;  color: #000;    border-bottom: 1px solid #ccc;}
+.faq-tbl-col-1{width: 65%;  float: left;    padding: 5px 0 5px 5px;}
+.faq-tbl-col-2{width: 35%;  float: left;    padding: 5px 0 5px 5px;}
+.faq-tgl-chrg{width: 100%;  float: left;    margin-top: -17px;  margin-bottom: 30px;    color: #ED1C24; font-family: 'Vodafone_Rg_Bold';}
+.faq-tgl-bld{font-family: 'Vodafone_Rg_Bold';}
+.faq-tgl-red-bld{font-family: 'Vodafone_Rg_Bold';   color: #ED1C24;}
+.faq-tgl-box{max-width: 600px;  float: left;    font-size: 15px;    line-height: 18px;  font-family: 'VodafoneRg';  width: 100%;}
+.faq-tgl-rw{width: 100%;    float: left;    padding: 5px 0;}
+.faq-tgl-bx-col-1{width: 50%;   float: left;    text-align: left;}
+.faq-tgl-bx-col-2{width: 50%;   float: left;    text-align: left;   font-family: 'Vodafone_Rg_Bold';}
+.faq-tgl-p-1 a{color: #000; margin-right: 3px;}
+.faq-tgl-p-1 a:hover{text-decoration: underline;}
+
+ul.ul-nmbr{list-style: decimal;}
+
+.faq-tgl-tbl-2{width: 100%;    float: left;    margin-bottom: 20px;}
+.brdr-full{border-bottom: 1px solid #ccc;}
+.dv-mn-1{display: none;}
+.faq-tgl-hd-rws{width: 100%;    float: left;    font-size: 15px;    line-height: 18px; color: #fff; font-family: 'Vodafone_Rg_Bold';    background: #ED1C24;}
+.faq-tgl-tbl-col-1{width: 31%;  float: left;    padding: 5px 0 5px 5px; border-top: 1px solid #ccc;}
+.faq-tgl-tbl-col-2{width: 15%;  float: left;    padding: 5px 0 5px 5px; border-top: 1px solid #ccc;}
+.faq-tgl-tbl-col-3{width: 54%;  float: left;    padding: 5px 0 5px 5px; border-top: 1px solid #ccc;}
+.faq-tgl-rws{width: 100%;   float: left;    font-size: 15px;    line-height: 18px; color: #666766; font-family: 'VodafoneRg';}
+
+
+.faq-tgl-tbl-3{max-width: 812px;    float: left;    border-top: 1px solid #ccc;  margin-bottom: 20px;    width: 100%;}
+.faq-tbl-3-rw{width: 100%;  float: left;}
+.faq-tbl-3-hed-rw{width: 100%;  float: left;    color: #FFf;    background: #ED1C24;}
+.faq-tbl-3-col-1{width: 20%;  float: left;    padding: 0px 0 0px 5px;}
+.faq-tbl-3-col-2{width: 30%;  float: left;    padding: 0px 0 0px 5px;}
+.faq-tbl-3-part-2{width: 50%; float: left;}
+.faq-tbl-3-col-3{width: 100%;   float: left;    padding: 5px 0 5px 5px; border-bottom: 1px solid #ccc;}
+.faq-tbl-3-col-4{width: 50%;    float: left;    padding: 5px 0 5px 5px;}
+
+.faq-tgl-tbl-3-col-1{width: 20%;  float: left;}
+.faq-tgl-tbl-3-col-2{width: 30%;  float: left;}
+.faq-t-3-col-1, .faq-t-3-col-2{width: 267%; float: left;    border-top: 1px solid #ccc;  padding: 2px 0 2px 5px;}
+.faq-tbl-3-box{width: 100%; float: left;}
+.faq-tgl-tbl-3-col-3{width: 25%;  float: left;    padding-left: 5px;  border-top: 1px solid #ccc;}
+
+.faq-tgl-tbl-4{max-width: 610px;    float: left;    font-size: 14px;    line-height: 18px;  margin-bottom: 30px;    width: 100%;}
+.f-tbl-4-rw{width: 100%; float: left;    text-align: center;}
+.f-t-4-cols{width: 20%; float: left;    text-align: center; border-top: 1px solid #ccc; padding: 3px 0;}
+
+
+.faq-tbl-5{width: 100%; float: left;    text-align: left; font-size: 14px;    line-height: 18px;    border-bottom: 1px solid #ccc;   margin-bottom: 30px;    }
+.f-t-5-rw{width: 100%;  float: left;}
+.f-t-5-col-1{width: 31%;    float: left;    padding: 3px 5px;  border-top: 1px solid #ccc;}
+.f-t-5-col-2{width: 23%;    float: left;    padding: 3px 5px;  border-top: 1px solid #ccc;}
+.col-eq-1{height: 125px;}
+.f-t-5-col-1 ul li{font-size: 14px;}
+
+.brd-rgt{border-right: 1px solid #ccc;}
+.brd-btm{border-bottom: 1px solid #ccc;}
+
+.faq-tbl-6{max-width: 700px;    float: left;    margin: 20px 0 30px;    width: 100%;}
+.f-t-6-rw{width: 100%;  float: left;}
+.f-t-6-col-1{width: 25%;    float: left;    border-top: 1px solid #ccc;   padding: 5px;}
+.f-t-6-col-2{width: 75%;    float: left;    border-top: 1px solid #ccc;   padding: 5px;}
+.txt-cntr{text-align: center;}
+/*.col-eq-2{height: 90px;}*/
+.txt-undln{text-decoration: underline;  color: #000;}
+
+.faq-tbl-7{max-width: 400px;    float: left;    text-align: center; margin: 20px 0 30px;    width: 100%;}
+.f-t-7-rw{width: 100%;  float: left;}
+.f-t-7-cols{width: 50%; float: left;    border-top: 1px solid #ccc;   padding: 5px;}
+
+ul.ul-disc{list-style: circle;}
+
+.faq-tbl-8{max-width: 700px;    float: left;    margin: 20px 0 30px;    width: 100%;}
+.faq-t-8-rw{width: 100%;    float: left;}
+.f-t-8-c-fluid{width: 100%; float: left;    border-top: 1px solid #ccc;     padding: 5px;    height: 50px;}
+.faq-t-8-col-1{width: 15%;  float: left;}
+.faq-t-8-col-2{width: 23%;  float: left;}
+.faq-t-8-col-3{width: 12%;  float: left;}
+.faq-t-8-col-4{width: 15%;  float: left;}
+.faq-dv-mn{display: none;}
+.ul-none{padding: 0;    margin: 0;}
+
+/*Faq Comment Section*/
+
+.faq-cmnt{width: 100%;  float: left;    margin-top: 50px;}
+.faq-cmnt-hlp{width: 100%;  float: left;}
+.fq-ct-lt{width: 50%;   float: left;    font-family: 'Vodafone_Rg_Bold';    font-size: 16px;    line-height: 18px;  color: #333;    margin-top: 17px;}
+.fq-ct-lt span{text-align: center;  float: left;    width: 50%; display: block; padding: 8px 5px 0 0;}
+.fq-tgl-btn{width: 50%; float: left;}
+.fq-tgl-btn a{color: #333;  display: inline-block;  padding: 7px 17px;   background: #FFF; text-shadow: 0px 1px #FFF;    box-shadow: 0px 1px 3px rgba(50, 50, 50, 0.75);    margin-left: -3px;}
+.fq-ct-rgt{width: 50%;  float: left;    text-align: center;}
+.fq-ct-rgt div{width: 50%; float: left;    display: block; font-size: 18px;    line-height: 22px;  font-family: 'VodafoneRg';   color: #333;    cursor: pointer;}
+.fq-ct-rgt div:hover span{text-decoration: underline;}
+.fq-ct-rgt div img{width: auto;    padding: 5px 0px 10px;  height: 40px;}
+.fq-ct-rgt div span{width: 100%;    float: left;    text-align: center; }
+.faq-cmnt-main{width: 100%; float: left;    margin-bottom: 20px;    display: none;  background: #f4f4f4;    padding: 5px;}
+.faq-cmnt-hed, .faq-cmnt-hed-2{font-family: 'Vodafone_Rg_Bold';    font-size: 18px;    line-height: 22px;  color: #333;  margin-bottom: 10px;    margin-top: 20px;}
+.faq-cnt-us{width: 100%;   float: left;    font-family: 'Vodafone_Rg_Bold';    font-size: 28px;    line-height: 32px;  color: #333;    margin-top: 30px;   display: none;   background: #f4f4f4;    padding: 5px;}
+.faq-cnt-us a{color: #ED1C24;}
+.faq-cmnts{width: 100%; float: left;    margin-top: 30px;   max-width: 500px;}
+.fq-c-hd{width: 100%;   float: left;    font-family: 'Vodafone_Rg_Bold';    font-size: 18px;    line-height: 22px;  color: #000;}
+.faq-cmnts textarea{width: 100%;    float: left;    height: 250px;  border: none;   outline: none;  margin-bottom: 20px;  border-radius: 8px; margin-top: 5px;    padding: 10px 5px;   text-indent: 10px; font-size: 16px;    line-height: 20px;  font-family: 'VodafoneRg';  color: #000;    box-shadow:0px 1px 3px rgba(50, 50, 50, 0.75) inset;}
+.faq-cmnt-btn{width: 100%;  float: left;    font-family: 'Vodafone_Rg_Bold';}
+a.faq-btn-1{width: auto;  -moz-appearance: none;    background: #9C2AA0;   border-radius: 3px; box-shadow: 0px 1px 3px rgba(50, 50, 50, 0.75);  color: #FFF;    display: inline-block;  font-size: 17px;    margin: 0px 5px 5px 0;   padding: 10px 20px 11px;    text-align: center; text-shadow: 0px -1px #222; line-height: 1;}
+.faq-btn-2{outline: 0px none;   text-decoration: none;  cursor: pointer;    background: #F4F4F4;    color: #000;    margin-right: 0px;  border: 1px solid #999;     width: auto;    box-shadow: none;   margin: 0px 0px 5px;    font-size: 17px;    padding: 7px 17px 9px;    text-shadow: 0px 1px #FFF;  border-radius: 3px; line-height: 1;}
+
+
+
+
+
+
+/*.faq-rgt-arr-1  {background: url(../images/faq_arr.png) no-repeat left top;   background-size: 15px 44px;}
+.faq-rgt-arr-2  {background: url(../images/faq_arr.png) no-repeat left 42px;  background-size: 15px 88px;}
+.faq-rgt-arr-3 {background: url(../images/faq_arr.png) no-repeat left 130px;  background-size: 15px 46px;}
+.faq-rgt-arr-4 {background: url(../images/faq_arr.png) no-repeat left 218px;  background-size: 15px 68px;}
+.faq-rgt-arr-5 {background: url(../images/faq_arr.png) no-repeat left 283px;  background-size: 15px 46px;}
+.faq-rgt-arr-6 {background: url(../images/faq_arr.png) no-repeat left 327px;  background-size: 15px 45px;}
+.faq-rgt-arr-7 {background: url(../images/faq_arr.png) no-repeat left 371px;  background-size: 15px 46px;}
+.faq-rgt-arr-8 {background: url(../images/faq_arr.png) no-repeat left 415px;  background-size: 15px 46px;}
+.faq-rgt-arr-9 {background: url(../images/faq_arr.png) no-repeat left 459px;  background-size: 15px 46px;}
+.faq-rgt-arr-10{background: url(../images/faq_arr.png) no-repeat left 503px;  background-size: 15px 46px;}
+.faq-rgt-arr-11{background: url(../images/faq_arr.png) no-repeat left 547px;  background-size: 15px 46px;}
+.faq-rgt-arr-12{background: url(../images/faq_arr.png) no-repeat left 592px;  background-size: 15px 45px;}
+.faq-rgt-arr-13{background: url(../images/faq_arr.png) no-repeat left 635px;  background-size: 15px 45px;}
+.faq-rgt-arr-14{background: url(../images/faq_arr.png) no-repeat left 680px;  background-size: 15px 46px;}
+.faq-rgt-arr-15{background: url(../images/faq_arr.png) no-repeat left 724px;  background-size: 15px 46px;}
+.faq-rgt-arr-16{background: url(../images/faq_arr.png) no-repeat left 768px;  background-size: 15px 67px;}
+.faq-rgt-arr-17{background: url(../images/faq_arr.png) no-repeat left 834px;  background-size: 15px 67px;}
+.faq-rgt-arr-18{background: url(../images/faq_arr.png) no-repeat left 899px;  background-size: 15px 46px;}
+.faq-rgt-arr-19{background: url(../images/faq_arr.png) no-repeat left 944px;  background-size: 15px 45px;}
+.faq-rgt-arr-20{background: url(../images/faq_arr.png) no-repeat left 988px;  background-size: 15px 45px;}*/
+
+.faq-rgt-arr-1  {background: url(../images/faq_arr.png) no-repeat left top;   background-size: 15px 44px;}
+.faq-rgt-arr-2  {background: url(../images/faq_arr.png) no-repeat left 42px;  background-size: 15px 88px;}
+.faq-rgt-arr-3 {background: url(../images/faq_arr.png) no-repeat left 130px;  background-size: 15px 46px;}
+.faq-rgt-arr-4 {background: url(../images/faq_arr.png) no-repeat left 218px;  background-size: 15px 68px;}
+.faq-rgt-arr-5 {background: url(../images/faq_arr.png) no-repeat left 283px;  background-size: 15px 46px;}
+.faq-rgt-arr-6 {background: url(../images/faq_arr.png) no-repeat left 327px;  background-size: 15px 45px;}
+.faq-rgt-arr-7 {background: url(../images/faq_arr.png) no-repeat left 371px;  background-size: 15px 46px;}
+.faq-rgt-arr-8 {background: url(../images/faq_arr.png) no-repeat left 415px;  background-size: 15px 46px;}
+.faq-rgt-arr-9 {background: url(../images/faq_arr.png) no-repeat left 459px;  background-size: 15px 46px;}
+.faq-rgt-arr-10{background: url(../images/faq_arr.png) no-repeat left 503px;  background-size: 15px 46px;}
+.faq-rgt-arr-11{background: url(../images/faq_arr.png) no-repeat left 547px;  background-size: 15px 46px;}
+.faq-rgt-arr-12{background: url(../images/faq_arr.png) no-repeat left 592px;  background-size: 15px 45px;}
+.faq-rgt-arr-13{background: url(../images/faq_arr.png) no-repeat left 635px;  background-size: 15px 45px;}
+.faq-rgt-arr-14{background: url(../images/faq_arr.png) no-repeat left 680px;  background-size: 15px 46px;}
+.faq-rgt-arr-15{background: url(../images/faq_arr.png) no-repeat left 724px;  background-size: 15px 65px;}
+.faq-rgt-arr-16{background: url(../images/faq_arr.png) no-repeat left 790px;  background-size: 15px 67px;}
+.faq-rgt-arr-17{background: url(../images/faq_arr.png) no-repeat left 856px;  background-size: 15px 45px;}
+.faq-rgt-arr-18{background: url(../images/faq_arr.png) no-repeat left 899px;  background-size: 15px 46px;}
+.faq-rgt-arr-19{background: url(../images/faq_arr.png) no-repeat left 944px;  background-size: 15px 45px;}
+.faq-rgt-arr-20{background: url(../images/faq_arr.png) no-repeat left 988px;  background-size: 15px 45px;}
+
+
+/*faq-cug*/
+.faq-cug-dv{width: 100%;    float: left;    margin: 20px 0;}
+.faq-cug-dv p{width: 100%;  float: left;    text-align: left;   color: #000;    font-size: 16px ;line-height: 30px; font-family: 'VodafoneRg';  padding: 10px 0; margin: 0;  vertical-align: middle;}
+.faq-cug-dv p img{margin: -15px 0;}
+
+
+
+
+
+/*vas - Value Added Service*/
+.vas-main{width: 100%;  float: left;    font-family: 'VodafoneRg';  font-size: 13px;    line-height: 16px;}
+.vas-head{width: 100%;  float: left;    font-family: 'VodafoneRg';    font-size: 38px;    line-height: 42px;  color: #000;  margin-bottom: 20px;}
+.vas-tbl-1{width: 100%;    float: left;    margin-bottom: 60px;    text-align: center; font-size: 15px;    line-height: 18px;}
+.vas-t-1-hed-rw{width: 100%;    float: left;    border-top: 1px solid #ccc;  background: #ED1C24;    color: #fff;}
+.vas-t-1-rw{width: 100%;    float: left;    border-top: 1px solid #ccc;}
+.v-t-1-col-1{width: 30%;    float: left;    padding: 10px 0;}
+.v-t-1-col-2{width: 43%;    float: left;    padding: 10px 0;}
+.v-t-1-col-3{width: 27%;    float: left;    padding: 10px 0;}
+ul.vas-ul{width: 100%;  float: left;    text-align: center; padding: 0;  margin: 0;}
+ul.vas-ul li{width: 100%;    text-align: center; float: left;    list-style: none;   padding: 3px 5px;  font-size: 15px;    line-height: 18px;}
+
+.vas-tbl-2{width: 100%;    float: left;    margin-bottom: 20px;    text-align: center; font-size: 15px;    line-height: 18px;}
+.vas-t-2-hed-rw{width: 100%;    float: left;    border-top: 1px solid #ccc;  background: #ED1C24;    color: #fff;}
+.v-t-2-col-1{width: 35%;    float: left;    padding: 10px 0;}
+.v-t-2-col-2{width: 30%;    float: left;    padding: 10px 0;}
+.v-t-2-col-3{width: 20%;    float: left;    padding: 10px 0;}
+.v-t-2-col-4{width: 15%;    float: left;    padding: 10px 0;}
+
+.vas-tbl-3{width: 100%;    float: left;    margin-bottom: 30px;    text-align: center; font-size: 15px;    line-height: 18px;}
+.vas-t-3-hed-rw{width: 100%;    float: left;    border-top: 1px solid #ccc;  background: #ED1C24;    color: #fff;}
+.v-t-3-col-1{width: 15%;    float: left;    padding: 10px 0 10px 5px;}
+.v-t-3-col-2{width: 27%;    float: left;    padding: 10px 0 10px 5px;  /*word-break:break-all;*/}
+.v-t-3-col-3{width: 43%;    float: left;    padding: 10px 0 10px 5px; text-align: left;}
+.vas-t-3-rw{width: 100%;    float: left;    border-top: 1px solid #ccc;}
+ul.vas-ul-2{width: 100%;  float: left;    text-align: left; padding: 0;  margin: 0;}
+ul.vas-ul-2 li{width: 100%;    text-align: left; float: left;    list-style: none;   padding: 3px 0;}
+.v-t-3-col-4{width: 15%;    float: left;    padding: 5px 0;}
+
+.vas-t-4-hed-rw{width: 100%;    float: left;    border-top: 1px solid #ccc;  background: #ED1C24;    color: #fff;}
+.v-t-4-col-1{width: 13%;    float: left;    padding: 10px 0 10px 5px;}
+.v-t-4-col-2{width: 10%;    float: left;    padding: 10px 0 10px 5px; }
+.v-t-4-col-3{width: 69%;    float: left;    padding: 10px 0 10px 5px; text-align: left;}
+.v-t-4-col-4{width: 8%;    float: left;    padding: 10px 0 10px 5px;}
+.vas-t-4-rw{width: 100%;    float: left;    border-top: 1px solid #ccc;}
+ul.vas-ul-2{width: 100%;  float: left;    text-align: left; padding: 0;  margin: 0;}
+ul.vas-ul-2 li{width: 100%;    text-align: left; float: left;    list-style: none;   padding: 3px 5px;}
+
+
+
+
+/*about us*/
+.abt-main{width: 96%;  float: left;    text-align: left;   /*font-family: 'VodafoneRg';*/  margin-bottom: 50px; padding: 37px 2% 0px;   margin-top: 125px;}
+.abt-head{font-size: 40px;    width: 100%;    float: left;   text-align: left;    margin-bottom: 20px;    color: #333;}
+h1 {
+    font-size: 40px;
+    width: 100%;
+    float: left;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight:normal;
+}
+.abt-disc{width: 100%;  float: left;    font-size: 15px;    line-height: 25px;  margin-bottom: 40px;}
+.abt-lnk{width: 100%;   float: left;    font-size: 15px;    line-height: 25px;  margin-bottom: 15px;}
+.abt-lnk a{color: #ED1C24;  font-family: 'Vodafone_Rg_Bold';    text-transform: uppercase;}
+.abt-lnk a:hover{text-decoration: underline;}
+
+/*prepaid*/
+
+.prpd-main{width: 100%; float: left;    margin-top: 160px;}
+.prpd-tbl-1{width: 100%;    float: left;   margin: 20px 0 30px;}
+.prpd-t-1-hed-rw{width: 100%;    float: left;     background: #ED1C24;    color: #fff;  border-bottom: 1px solid #666766;}
+.prpd-t-1-rw{width: 100%;   float: left;    font-size: 16px;    line-height: 18px;  border-bottom: 1px solid #666766;}
+.prpd-cols{width: 25%;  float: left;    text-align: center; padding: 5px;}
+.prpd-t-1-c{width: 100%;    float: left;}
+.prpd-t-1-c-1{width: 100%;    float: left;  font-size: 14px;}
+.hgt-eq{height: 65px;}
+.prpd-disp{width: 100%; float: left;    font-size: 18px;    line-height: 22px;  color: #666766;}
+
+.prpd-tbl-2{width: 750px;    float: left;   margin: 20px 0 30px;}
+.prpd-t-2-rw{width: 100%;   float: left;    font-size: 16px;    line-height: 18px;  border-bottom: 1px solid #666766;}
+.prpd-t-2-cols{width: 33.33%;  float: left;    text-align: center;  padding: 5px;}
+.prpd-slct{width: 100%; float: left;    margin-bottom: 20px;}
+.prpd-slct select{width: 100%;  border: 1px solid #b1b1b1;  padding: 5px 5px 7px;   font-size: 15px;    line-height: 18px;  color: #000; height: 35px;   background: url(../images/prpd_slct_bg.png) no-repeat right 5px center;    appearance: none;   -moz-appearance: none;
+  -webkit-appearance: none; border-radius: 5px; color: #666766; max-width: 280px;}
+.prpd-slct select option{color: #666766;}
+.hgt-eq-2{height: 65px !important;}
+
+.prpd-table{width: 100%;    float: left;    margin: 20px 0 30px;}
+.prpd-t-rw{width: 100%; float: left;    font-size: 16px;    line-height: 18px;  text-align: center; border-bottom: 1px solid #666766;}
+.prpd-tbl-rw-col-1{width: 45%;  float: left;    padding: 5px;}
+.prpd-tbl-rw-col-2{width: 40%;  float: left;    padding: 5px;}
+.prpd-tbl-rw-col-3{width: 15%;  float: left;    padding: 5px;}
+
+.prpd-p-1{width: 100%;  float: left;    margin: 20px 0;   padding: 0px; color: #666766;}
+.prpd-spn-hed{width: auto;  float: left;    display: inline-block;  padding: 0 5px 0px 0;   margin-top: -7px;}
+.prpd-spn-hed img{width: 50px;}
+.tt-caps{text-transform: uppercase;}
+
+.prpd-net-rw{width: 75%;    float: left;    margin-top: 90px;   margin-bottom: 30px;}
+.prpd-nt-col{width: 30%;    float: left;    padding: 0px 5px;   min-height: 210px}
+.col-clr-1{background: #ddead7; border: 7px solid #009739;  border-radius: 20px;    margin-right: 26px;}
+.col-clr-2{background: #efefd7; border: 7px solid #aeb516;  border-radius: 20px;    margin-right: 26px;}
+.col-clr-3{background: #dfeef6; border: 7px solid #07acc9;  border-radius: 20px;}
+.col-clr-4{background: #dfdfdf; border: 7px solid #666;  border-radius: 20px;   margin-right: 26px;}
+.prpd-col-img{width: 100%;  float: left;    text-align: center; margin-top: -70px;}
+.prpd-col-img img{width: auto;  max-width: 100px;}
+
+.prpd-col-img-2{width: 100%;  float: left;    text-align: center; margin-top: -75px;}
+.prpd-col-img-2 img{width: auto;  max-width: 100px;}
+.prpd-mrg{width: 145px; float: none;    margin: 0 auto;}
+
+.prpd-col-box{width: 100%;  float: left;    padding-bottom: 14px;    color: #666766;    margin: 7px 0;}
+.prpd-col-big{width: 100%;  float: left;    font-family: 'Vodafone_Rg_Bold';    font-size: 18px;    line-height: 22px;}
+.prpd-col-lt{width: auto;   float: left;    text-align: left;}
+.prpd-col-rgt{width: auto;  float: right;   text-align: right;}
+.prpd-col-sml{width: 100%;  float: left;    text-align: left;   font-size: 16px;    line-height: 20px;  font-family: 'VodafoneRg';}
+.brd-btm-2{border-bottom: 1px solid #b1b1b1;}
+
+.prpd-cont-fluid{width: 100%;   float: left;}
+.prpd-lst-lt{width: 25%;    float: left;    padding-right: 20px;    margin-top: 80px;}
+.prpd-int-txt{width: 100%;  float: left;    text-align: center; margin: 40px 0 0;   font-size: 18px;    line-height: 22px;  color: #666766; font-family: 'Vodafone_Rg_Bold';}
+.prpd-int-ans{width: 100%;  float: left;    text-align: center; font-size: 16px;    line-height: 20px;  color: #666766; font-family: 'Vodafone_Rg_Bold';  margin-top: 10px;}
+
+.cmplmt-hed {
+        width: 100%;
+        float: left;
+        text-align: left;
+        font-size: 40px;
+        line-height: 44px;
+        font-family: "Vodafone_Rg_Bold";
+        color: #ED1C24;
+        margin-bottom: 15px;
+    }
+
+.field-validation-error { color:red; font-weight:bold; }
+
+.btn-submit {width: auto; display: inline-block; padding: 8px 8px;   border-radius: 5px;    background: #ED1C24; /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold; color: #fff; font-size: 16px;    line-height: 22px; margin-bottom: 5px;}
+
+.dRow { width: 100%; max-width: 620px; padding: 2px; float: left; }
+.dRowlbl { width: 25%; float: left; text-align: left; padding: 2px;}
+.dRowctrl { width: 74%; float: right; text-align: left; }
+.postsumdiv { width:49%; float:left; padding:3px 0px 3px 0px;}
+
+.dRowvsm { width: 99.5%; padding: 2px;}
+.dRowvsmlbl { width: 24.5%; float: left; text-align: left; padding: 5px;}
+.dRowvsmctrl { width: 74%; float: left; text-align: left; overflow: hidden; padding: 5px;}
+
+.postpaid-dialog-row {  width: 99.5%; padding: 2px; float:left; }
+.postpaid-dialog-cell {  width: 49.5%; float: left; text-align: left; padding: 5px; }
+.postpaid-dialog-btn-cell {  width: 99.5%; text-align: center; padding: 5px; float:left; }
+
+.DivRow {  width: 99.5%; padding: 2px; float:left; }
+.DivLabel {  width: 49.5%; float: left; text-align: left; padding: 5px; }
+.DivTxt {  width: 49.5%; float: left; text-align: left; padding: 5px; }
+
+
+.active_sim_popup {  max-width: 700px; width:100%; }  
+#popup_box {  width:100%; float: left;}  
+    #popup_box .div-br { float: left; height: 15px; width: 100%;     }
+    #popup_box .div-tr { float: left; min-height: 35px; width: 100%;  }
+    #popup_box .div-td1 { float: left; width: 45%; }
+    #popup_box .div-td1 a { color:#43c8d5; }
+    #popup_box .div-td1 span { margin-left: 3%;}
+    #popup_box .div-td2 { float: left; width: 53%; }
+    #popup_box input[type='text'] { width: 95%; height: 30px;  -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
+    #popup_box .div-btn {  float: left; min-height: 30px; width: 100%;  text-align: center; }
+.img_box {  width: 39.5%; float: left; display: none; text-align:center; }
+    .img_box img {  max-width: 280px; max-height:280px; }
+
+/* Plans */
+
+.modalDialogClear {
+            position: absolute;
+            background-color: #ccc;
+            display: none;
+            text-align: left;
+            border: 0px solid #333;
+            opacity: 0.8;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            -moz-box-shadow: 0 0 50px #ccc;
+            -webkit-box-shadow: 0 0 50px #ccc;
+        }
+
+        .mid_margin {
+            margin: 0 auto 0;
+            max-width: 990px;
+            width: 100%;
+        }
+
+        .dRowlg {
+            width: 99%;
+            padding: 2px;
+            float: left;
+        }
+
+        .dRowlblsm {
+            float: left;
+            width: 20%;
+        }
+
+        .msisdn-div {
+            width: 78%;
+            float: left;
+        }
+
+        .dErrMsg {
+            background-color: #EBCCD1;
+            padding: 3px;
+            text-align: center;
+        }
+
+        .dbundle-pan {
+            width: 78%;
+            float: left;
+        }
+
+        .dbundle-box {
+            width: 48%;
+            float: left;
+        }       
+
+        .dbgtitle {
+            background-color: #ED1C24;
+            padding: 3px 0px 3px 0px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;           
+        }
+
+        .gridtable {
+            /*font-family: verdana,arial,sans-serif;*/
+            width: 100%;
+            margin: 10px auto;
+            font-size: 12px;
+            color: #333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+            font-size: 16px;
+            font-family: 'VodafoneRg';
+        }
+
+        .gridtable th { border-width: 0px; padding: 8px; border-style: solid; color: #FFF; border-color: #666666; background-color: #ED1C24; }
+        .gridtable td { border-width: 1px; padding: 8px; border-style: solid; border-color: #ccc; background-color: #ffffff; }
+        .dItems{ font-size:14px; }
+
+@media screen and (max-width:599px) {
+      .dbundle-pan { width: 99%; }
+        .dbundle-box { width: 98% !important; }
+        .dRowctrlmd { width: auto;}
+
+    .btn-submit { font-size: 14px; }  
+}
+
+@media (max-width:600px) and (max-width:800px){
+     .dRowctrlmd { float: left; width: 100%; }
+}
+
+
+/*login*/
+.login-main{max-width: 550px;  margin: 50px auto 0; width: 100%;}
+.log-inn{width: 100%;    float: left;   border: 1px solid #666766; margin-bottom: 50px;    border-radius: 10px;    overflow: hidden;}
+.log-hed{width: 100%;   float: left;    text-align: left;   color: #fff;    background: #ED1C24 url(../images/usr-icn.png) no-repeat left 8px center;    /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;    /*font-size: 22px;*/ font-size: 18px;    line-height: 26px;  padding: 5px 0 5px 35px;    margin-bottom: 20px;}
+.log-txt{width: 100%;   float: left;    margin-bottom: 0px;}
+.log-txt span{width: 10%;   text-align: center; float: left;    font-size: 16px;    line-height: 20px;  color: #666766; /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;    margin-top: 5px;}
+.log-txt input{width: 90%;  float: left;    height: 30px;   text-indent: 10px;  /*font-family: 'VodafoneRg';*/  color: #000;    border: 1px solid #666766;  outline: none;  font-size: 16px;    line-height: 18px;}
+.log-mn{width: 100%;    float: left;    text-align: left;   padding: 0 15px 15px}
+.log-nm{width: 100%;    float: left;    text-align: left;   padding-bottom: 5px;    font-size: 16px;    line-height: 20px;  color: #666766; /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;}
+.log-lnk{width: 100%;   float: left;    padding-bottom: 10px;   border-bottom: 1px solid #666766;}
+.log-lnk a{width: 50%; text-align: center;  float: left;    display: inline-block;  color: #ED1C24; /*font-family: 'VodafoneRg';*/  text-decoration: underline;}
+.log-sbmt{width: 100%;  float: left;    text-align: right;  padding: 20px;  background: #f0f0f0;}
+.log-sbmt a{width: auto;    display: inline-block;    padding: 8px 25px; border-radius: 8px; color: #fff;    background: #ED1C24;    /*font-family: 'VodafoneRg';*/    font-size: 18px;    line-height: 22px;}
+
+
+
+/*data*/
+.dt-main{width: 100%;   float: left;    margin: 160px 0 30px;}
+.dt-disp{width: 100%;   float: left;    font-size: 20px;    line-height: 24px;  color: #000;    margin-bottom: 20px;}
+.dt-tbl{width: 100%;   float: left;    text-align: center; margin: 20px 0 60px;  font-size: 16px;    line-height: 27px;}
+.dt-rw{width: 100%; float: left;    border-bottom: 1px solid #aaa;}
+.dt-cols{width: 24%;    float: left;    /*border-left: 1px solid #666766; border-top: 1px solid #666766;*/  padding: 6px 5px;}
+.dt-cols-2{width: 28%;  float: left;    padding: 6px 5px;}
+.dt-cols span{width: 100%;  display: block;}
+.hgt-eql{height: 40px;}
+.dt-h-line{width: 100%; float: left;    font-family: 'Vodafone_Rg_Bold';    font-size: 26px;    line-height: 30px;  color: #ED1C24; margin-bottom: 20px;}
+.dt-p{width: 100%;  float: left;}
+
+/*contact-us*/
+.ctc-ht{height: 31px;}
+.dt-p-1{width: 100%;    float: left;    margin: 0;  padding: 3px 0;}
+.dt-p-2{width: 100%;    float: left;    margin: 20px 0;  padding: 3px 0;}
+.dt-tbl-2{width: 400px; float: left;    text-align: center;}
+.dt-col{width: 50%; float: left;    height: 28px;   border-left: 1px solid #666766; border-top: 1px solid #666766;  padding: 5px;}
+.dt-col a{color: #ED1C24;}
+
+/*promotion*/
+.prmsn-boxes{width: 100%;   float: left;    font-size: 16px;    line-height: 20px;  border-bottom: 1px solid #ccc;   padding-bottom: 50px;   margin-bottom: 30px;}
+.prmsn-lft{width: 25%; float: left;}
+.prmsn-lft img{width: auto; max-width: 85%;}
+.prmsn-rgt{width: 75%;  float: right;}
+/*.prmsn-bx-hed{width: 100%;  float: left;    font-size: 22px;    line-height: 26px;  text-transform: uppercase;}*/
+.prmsn-bx-hed{width: 100%;  float: left;    font-size: 22px;    line-height: 26px;  text-transform: uppercase;  background-image: linear-gradient(to right, #D63B0B 0%, #FFF 100%); color: #fff;    font-family: 'VodafoneRg';    padding:2px 0 2px 10px;   margin-bottom: 20px;}
+.prmsn-tbl{width: 100%; float: left;    text-align: center; margin: 20px 0 30px;    font-size: 16px;    line-height: 18px;}
+.prmsn-rw{width: 100%;  float: left;     border-top: 1px solid #ccc;}
+.prmsn-col-1{width: 12.66%;    float: left;  padding:10px 5px;}
+.prmsn-col-2{width: 22%;    float: left;     padding:10px 5px;}
+.prmsn-col-3{width: 18%;    float: left;     padding:10px 5px;}
+.prmsn-t-2-col-1{width: 11%;    float: left; padding:10px 5px;}
+.prmsn-t-2-col-2{width: 28%;    float: left;}
+.prmsn-tbl-c-fluid{width: 100%;    float: left; padding: 4px;}
+.prmsn-t-2-col-half{width: 50%; float: left;  padding: 4px;}
+.prmsn-t-2-col-3{width: 8%;    float: left;  padding: 10px 5px;}
+.prmsn-t-2-col-4{width: 14%;    float: left;  padding: 10px 5px;}
+/*.prsmn-hgt-1{height: 93px;}
+.prsmn-hgt-2{height: 70px;}*/
+.prmsn-t-disc{width: 100%;   float: left;    margin: 20px 0 30px;    color: #000;   font-size: 16px;    line-height: 20px;}
+.prmsn-hed-2{width: 100%;   float: left;    font-size: 22px;    line-height: 28px;  padding: 10px 0 20px;   color: #666766;}
+.prmsn-t-3-cols{width: 25%; float: left;    padding:10px 5px;}
+.prmsn-p-2{width: 100%; float: left;    color: #010147; margin: 30px 0 25px;  padding: 0;    font-size: 18px;    line-height: 20px; font-family: 'Vodafone_Rg_Bold';}
+
+/*complements*/
+
+.cplt-wrapper{width: 600px;  float: none;   margin: 20px auto 0;}
+.cplt-box{width: 100%; margin: 0 0 50px; font-family: 'VodafoneRg';  font-size: 15px;    line-height: 18px;  border: 1px solid #666766;    float: left; border-radius: 10px;}
+.cplt-hed{width: 100%;  float: left;    text-align: left;   font-family: 'VodafoneRg';  font-size: 22px;    line-height: 26px;  color: #fff;    background: #ED1C24;    padding: 5px 0 5px 10px;    border-top-left-radius: 10px;   border-top-right-radius: 10px;}
+.cplt-rw{width: 100%;   float: left;    padding: 10px;}
+.cplt-col-1{width: 40%; text-align: left;   font-size: 16px;    line-height: 20px; font-family: 'Vodafone_Rg_Bold'; color: #666766; float: left;    margin-top: 6px;}
+.cplt-col-2{width: 60%; float: left;    padding-left: 10px;}
+.cplt-col-2 input{width: 100%;  float: left;    border: 1px solid #666766;  height: 30px;   text-indent: 10px;}
+.cplt-rw-lst{width: 100%;   float: left;    text-align: center; padding: 15px 0; margin-top: 10px;    border-top: 1px solid #666766;}
+.cplt-rw-lst a{display: inline-block; background: #010147;    color: #fff;    font-family: 'VodafoneRg';  margin: 5px 7px;    padding: 5px 20px;  font-size: 20px;    line-height: 26px;    border-radius: 5px;}
+.cplt-col-2 textarea{width: 100%;   float: left;    height: 100px;  border: 1px solid #666766;  font-family: 'VodafoneRg';  padding: 5px 0 5px 10px;}
+
+
+/*store Location*/
+.str-a-link{width: 100%;    float: left;    text-align: right;  font-size: 15px;    line-height: 18px;}
+.str-a-link a{color: #3276B1;}
+.str-a-link a:hover{text-decoration: underline;}
+.str-table{width: 100%; float: left;    font-size: 16px;    line-height: 18px;  margin: 20px 0 30px;}
+.str-rw{width: 100%;    float: left;}
+.str-col-1{width: 24%;  float: left;    padding: 10px 5px;   border-top: 1px solid #ccc;}
+.str-col-2{width: 22%;  float: left;    padding: 10px 5px;   border-top: 1px solid #ccc;}
+.str-col-3{width: 18%;  float: left;    padding: 10px 5px;   border-top: 1px solid #ccc;}
+
+.str-table .faq-tgl-bld{background: #ED1C24;   color: #fff;}
+
+
+/*Contact Us*/
+.ctc-box{width: 100%;   float: left;}
+.ctc-rw{width: 100%;    float: left;    border-bottom: 1px solid #ccc;   padding: 20px 0;}
+.ctc-lft{width: 48%;    float: left;    color: #000;}
+.ctc-hed{width: 100%;   float: left;    font-family: 'Vodafone_Rg_Bold';    font-size: 22px;    line-height: 26px;  padding-left: 50px; margin-top: 35px;}
+.ctc-hed span{width: auto;  float: left;    margin-top: -10px;  margin-right: 10px;}
+.ctc-disc{width: 100%;  float: left;    font-size: 16px;    line-height: 18px;  font-family: 'Vodafone_Rg_Bold';  padding: 10px 0;}
+
+.ctc-rgt{width: 40%;    float: left;    padding:0 40px;}
+.ctc-bx{width: 100%;    float: left;    padding: 10px 0;  text-align: left; color: #000;    font-size: 16px;    line-height: 20px;}
+.ex-pd{padding: 70px 20px;}
+.ex-pd-2{padding: 40px 20px;}
+.tx-lt{text-align: left;}
+.ctc-bx a{text-align: center;   color: #0563c1; text-decoration: underline;}
+
+
+
+
+/*postpaid*/
+.pspd-tbl-1{width: 100%;    float: left;    font-size: 15px;    line-height: 22px;  text-align: center; font-family: 'VodafoneRg';  margin: 20px 0 10px;}
+.pspd-t-1-hed-rw{width: 100%;   float: left;    color: #fff;    background: #ED1C24;    font-family: 'Vodafone_Rg_Bold';    font-size: 18px;    line-height: 20px;}
+.pspd-cols{width: 25%;  float: left;    background: #fff;   color: #000;    font-family: 'VodafoneRg';  padding: 8px 5px;}
+.pspd-t-1-hed-rw .pspd-cols{color: #fff;    background: #ED1C24;    font-family: 'Vodafone_Rg_Bold';}
+.pspd-t-1-rw{width: 100%;   float: left;    color: #000;    background: #fff;   border-bottom: 1px solid #ccc;}
+.pspd-big{width: 100%;  float: left;    display: block; font-family: 'Vodafone_Rg_Bold';    font-size: 17px;    color: #000;}
+.pspd-small{width: 100%;  float: left;    display: block; font-family: 'VodafoneRg';    font-size: 14px;    color: #000;}
+
+.pspd-tbl-2{width: 100%;    float: left;    font-size: 15px;    line-height: 22px;  text-align: center; font-family: 'VodafoneRg';  margin: 10px 0;}
+.pspd-t-1-hed-rw .pspd-t-2-cols{color: #fff;    background: #ED1C24;    font-family: 'Vodafone_Rg_Bold';}
+.pspd-t-2-cols{width: 50%;  float: left;    background: #fff;   color: #000;    font-family: 'VodafoneRg';  padding: 8px 5px;}
+.pspd-hed{width: 100%;  float: left;    color: #ED1C24; font-family: 'Vodafone_Rg_Bold';    padding: 15px 0 5px;    font-size: 24px;    line-height: 28px;}
+
+.msisdn-details { width:68%;  float:left; }
+
+/*promo*/
+.prm-clk{width: 100%;   float: left;    text-align: left;   font-size: 18px;    line-height: 24px;  color: #fff;    background: #ED1C24;    cursor: pointer;    padding: 8px 10px;  font-family: 'Vodafone_Rg_Bold';}
+.prm-conts{width: 100%; float: left;    text-align: left;   color: #000;    font-size: 15px;    line-height: 18px;  padding: 15px;}
+
+.prm-tbl-1{width: 100%; float: left;    /*font-family: 'VodafoneRg';*/  margin-top: 25px;}
+.prm-c-rw{width: 50%;  float: left;    padding: 5px 0;  text-align: center;}
+.prm-rw-mn{width: 100%; float: left;    margin: 0;  border-bottom: 2px solid #fff;}
+.prm-c-col{width: 100%;  float: left;    color: #fff;    /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;   margin-bottom: 10px;    background: #ED1C24;    padding: 5px 0;}
+.prm-hed{width: 100%;   float: left;    text-align: center; font-size: 20px;    line-height: 26px;  /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;    margin: 0 0 20px;}
+.prm-c-col-2{width: 100%;    float: left;}
+.prm-c-col span{/*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;    width: 100%;    float: left;    display: block; margin-bottom: 5px;}
+.prm-col-cl-3{width: 33.33%;   float: left;    padding: 0 3px; text-align: center;}
+.prm-col-hed{width: 100%;   float: left;    color: #fff;    background: #ED1C24;    /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;    padding: 3px 0;}
+.prm-col-cont{width: 100%;  float: left;    text-align: center; padding: 3px 0;}
+.prm-tbl-cont-fluid{width: 100%;    float: left;    margin-top: 10px;}
+.prm-rfrs{width: auto;   float: left;    /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;    font-size: 15px;    line-height: 22px;  color: #000;    text-align: left;}
+.prm-rmv{width: auto;   float: right;    /*font-family: 'VodafoneRg';*/    font-size: 15px;    line-height: 22px;  color: #000;    text-align: right;}
+.prm-wlcm{width: 100%;  float: left;    text-align: left;   /*font-family: 'VodafoneRg';*/    font-size: 15px;    line-height: 22px;  color: #000;  margin-top: 10px;}
+.prm-wlcm span{/*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;}
+.prm-red-bld{/*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;   color: #ED1C24 !important;}
+.prm-slc-no{width: 100%;    float: left;    text-align: left;   color: #000;    font-size: 15px;    line-height: 22px;  /*font-family: 'VodafoneRg';*/  margin-top: 30px;   background: #F2F2F2;    padding: 10px;}
+.prm-slc{width: auto;   float: left;    display: inline-block;  /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;    padding-top: 4px;   padding-right: 10px; font-size: 18px;}
+.prm-slc a{font-size: 16px; text-decoration: underline; color: #6D1A8B;}
+select.prm-slc-bx{width: 280px;  float: left;    padding: 3px 10px;  height: 35px;   font-size: 16px;   background: transparent;   border: 1px solid #ccc; margin-right: 10px;}
+.prm-menu{width: 32%;  float: left;    margin-bottom: 20px;}
+.prm-mnu-hed{width: 100%;   float: left;    text-align: left;   color: #000;    /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;    padding: 5px 0; font-size: 18px;}
+.prm-mnu{width: 100%;    float: left;    padding: 0 5px;    margin-bottom: 20px;}
+.prm-mnu ul{width: 100%;    float: left;    text-align: left;   padding: 0; margin: 0;  list-style: none;   padding-left: 0px;}
+.prm-mnu ul li{width: 100%; float: left;    text-align: left;   padding: 6px 0 8px 20px; border-bottom: 1px solid #ccc; background: url(../images/srch-go.png) no-repeat left center;    background-size: 10px 15px;}
+.prm-mnu ul li a{color: #6D1A8B;    font-size: 15px;}
+.prm-tab-panel{width: 68%; float: left;}
+
+.prm-big-cont{width: 100%;  float: left;    margin:40px 0 20px;  padding: 10px 0;    border-bottom: 1px solid #ccc;}
+.prm-cont-lft{width: 35%;   float: left;    padding-right: 10px;}
+.prm-bal-hed{width: 100%;   float: left;    text-align: left;   font-size: 24px;    color: #666766; line-height: 36px; padding-bottom: 10px;}
+.prm-bal-hed a{font-family: 'Vodafone_Rg_Bold'; color: #666766;}
+.prm-bal-disc{width: 100%;  float: left;    text-align: left;   font-size: 15px;    line-height: 18px;  color: #666766; margin-bottom: 30px;}
+.prm-cont-rgt{width: 65%;   float: left;    padding-left: 10px; margin-bottom: 10px;}
+.prm-c-r-disc{width: 100%;  float: left;    text-align: right;  color: #666766; font-size: 15px;    line-height: 18px;  margin-bottom: 20px;}
+.prm-c-r-big{width: auto;   font-size: 22px;    line-height: 36px;}
+.prm-prgrs-wrap{width: 100%;    float: left;    background: #ccc;   height: 20px;}
+.prm-prgrs{float: left;    background: #ED1C24;   height: 20px; box-shadow: 2px 0px 4px #333;}
+.prm-prm-nm{width: 100%;    float: left;    color: #666766; font-size: 16px;    line-height: 22px;  /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;    padding: 15px 0 0;}
+.prm-prm-nm span{color: #ED1C24;    font-size: 22px;    line-height: 26px;  padding-right: 5px;}
+.prm-big-btns{width: 100%;  float: left;    text-align: left;}
+.prm-big-btns a{width: auto;    display: inline-block; padding: 8px 10px;   border-radius: 5px;    background: #ED1C24; /*font-family: 'Vodafone_Rg_Bold';*/ font-weight:bold;    color: #fff; font-size: 16px;    line-height: 22px; margin-bottom: 5px;}
+.prm-big-buy{float: right;  background: #9C2AA0 !important;}
+.prm-sm-hed{width: 100%;    float: left;    text-align: left;   font-size: 34px;    line-height: 38px;  padding: 0px 0; color: #666766; margin-bottom: 10px;}
+
+/*my-balances*/
+.mbl-main{width: 100%;  float: left;    margin-top: 20px;}
+.mbl-all-cat{width: 100%;   float: left;}
+.mbl-all-cat a{width: auto; display: inline-block;  color: #666766;    background: #fff url(../images/mdp-sld-up-arr-2.png) no-repeat 5px center;    font-size: 16px;    line-height: 22px;  font-family: 'Vodafone_Rg_Bold';    padding: 5px 10px 5px 35px;    border: 1px solid #ccc;}
+.mbl-all-cat-2{display: none;    width: 100%;   float: left;}
+
+.mbl-all-cat-2 a{width: auto; display: inline-block;  color: #666766;   background: #fff url(../images/mdp-sld-up-arr-2-rvrs.png) no-repeat 5px center;    font-size: 16px;    line-height: 22px;  font-family: 'Vodafone_Rg_Bold';    padding: 5px 10px 5px 43px;    border: 1px solid #ccc;}
+
+.mbl-box{width: 100%;   float: left;    margin:20px 0 10px;}
+.mbl-box-trgr{width: 100%;  float: left;    padding: 7px 10px;  background: #ED1C24;    color: #fff;    font-size: 18px;    line-height: 20px;  font-family: 'Vodafone_Rg_Bold';    cursor: pointer;    border: 1px solid #ED1C24;}
+.mbl-bx-cont{width: 100%;   float: left;    padding: 10px;  border: 1px solid #ED1C24;  background: #fff;   border-top: none;}
+
+.mbl-bx-cont-hed{font-size: 20px;    line-height: 24px;  font-family: 'Vodafone_Rg_Bold';   color: #666766; width: 100%;    float: left;    margin: 10px 0;}
+.mbl-bx-c-bal{font-size: 20px;    line-height: 18px;  font-family: 'VodafoneRg';   color: #888988; width: 100%;    float: left;    margin: 20px 0;}
+.mbl-bx-c-bal span{font-family: 'Vodafone_Rg_Bold'; font-size: 26px;    line-height: 30px;  color: #666766;}
+.mbl-buy-btn{width: 100%;   float: left;    margin-top: 10px;   margin-bottom: 10px;    text-align: right;  padding-right: 10px;}
+.mbl-buy-btn a{width: auto; padding: 8px 15px;  color: #fff;    background: #ED1C24;    display: inline-block;  border-radius: 5px; font-size: 16px;    line-height: 20px;  font-family: 'Vodafone_Rg_Bold';}
+
+
+@media screen and (max-width:760px) {
+	/* nav-wrap */
+	#nav-wrap { position: absolute; width:96%; margin:0px;}
+	/* menu icon */
+	#menu-icon { color: #000; width: 34px; height: 25px; float:left;	margin: 8px 0px 0px 10px;	background:url(../images/menu.png) left top no-repeat; padding: 0; cursor: pointer; display: block; z-index: 99999999;}
+	#menu-icon:hover {background:url(../images/menu_hover.png) left top no-repeat;}
+	#menu-icon.active { background:url(../images/menu_hover.png) left top no-repeat; }
+	/* main nav */
+	#nav { position: absolute; top:40px; width: 100%; z-index: 10000; background: #fff; display: none; padding-top: 25px; }
+	#nav li { margin:0px; float:left; width:100%; line-height:50px; background: #ED1C24;   font-family: 'VodafoneRg';  text-align: left;   text-indent: 20px;}
+	#nav a, #nav ul a { padding:0; margin:0px; font-size:14px; border-bottom:solid 1px #fff; color:#FFF;   font-family: 'VodafoneRg';}
+    #nav li a{line-height: 30px;    padding: 5px 0;}
+	#nav a:not(*:root) { padding: 5px 0 !important;}
+	#nav a:hover, #nav ul a:hover { color: #fff; }
+	/* dropdown */
+	#nav ul { width: auto; position: static; display: block; border: none; background: inherit; }
+	#nav ul li { margin: 3px 0 3px 15px;}
+
+	.head-logo a img{max-width: 180px;}
+	/*.main{background: url(../images/lft-mn-bg-2.png) no-repeat	left top;}*/
+	
+	.mdp-c-1-rgt{width: 100%;  padding-left:0;}
+	.mn-dvs {width: 100%;    margin-left: 0;}
+	.dv-bxs-ul li a{background: #F2F2F2;	border-bottom: none !important;}
+	.dv-dxs-rw{line-height: 24px !important;}
+	.dv-bxs-col-lt a, .dv-bxs-col-lt-2 a{padding: 0 !important;}
+
+	#nav{overflow: visible !important;}
+
+	.mdp-c-1-rgt{height: auto;}
+	.mdp-c-ftr{margin-top: 20px;}
+	.sld-li{width: 96%;	margin: 17px 2%;}
+    .abt-disc{text-align: justify;}
+
+    .rohumbus{height: 167px;}
+    .faq-disc{text-align: justify;}
+
+
+
+	ul.sub-mnu{display: block;}
+	ul.sub-mnu li a:hover + ul.sub-sub-mnu{display: block !important;}
+	ul.sub-sub-mnu:hover, ul.sub-sub-sub-mnu:hover{display: block !important;}
+
+	/*ul.sub-sub-mnu, ul.sub-sub-sub-mnu{display: none !important;}*/
+	ul.sub-sub-mnu li a:hover + ul.sub-sub-sub-mnu{display: block !important;}
+	ul.sub-mnu li a, ul.sub-sub-mnu li a, ul.sub-sub-sub-mnu li a{font-size: 15px !important;	word-break: break-all;	line-height: 20px !important;	padding: 4px 0 !important;	border-bottom: none !important;}
+	ul.sub-sub-mnu li a, ul.sub-sub-sub-mnu li a{font-weight: normal !important;}
+
+	ul.sub-mnu li, ul.sub-sub-mnu li, ul.sub-sub-sub-mnu li{background: #f2f2f2 !important;}
+
+	a.has-sub::after {top: 0;}
+
+    .prpd-tbl-rw-col-1, .prpd-tbl-rw-col-2, .prpd-tbl-rw-col-3{height: 47px;}
+
+    /*promotion*/
+    .prmsn-lft{width: 100%; text-align: center; margin-bottom: 20px;}
+    .prmsn-rgt{width: 100%; float: left;}
+
+    /*store locatioin*/
+    .str-dv-mx, .faq-dv-mx{display: none;}
+    .str-dv-mn, .faq-dv-mn{display: block;}
+    .str-col-1, .str-col-2, .str-col-3, .str-col-4{width: 100%; text-align: center;}
+    .faq-rgt-arr-1{background: transparent;}
+    .faq-lft{width: 100%;    padding-left: 0;}
+    .faq-togl{width: 100%;  box-shadow: none;   padding:20px 0 10px;    min-height: 1px;}
+    .faq-rgt-arr-2{background: transparent;}
+
+
+    .mn-dvs-col-3, .mn-dvs-col-4, .mn-dvs-col-2, ul.sub-mnu li{width: 100%; height: auto;}
+    .mn-dvs-conts a{line-height: 16px !important;}
+    .mn-dvs-hed{line-height: 20px !important;}
+    #nav ul li{padding-left: 5px !important;   text-indent: 10px;}
+
+    .v-t-3-col-3, .v-t-4-col-3{text-align: justify !important;}
+
+    .faq-rgt-arr-1, .faq-rgt-arr-2, .faq-rgt-arr-3, .faq-rgt-arr-4, .faq-rgt-arr-5, .faq-rgt-arr-6, .faq-rgt-arr-7, .faq-rgt-arr-8, .faq-rgt-arr-9, .faq-rgt-arr-10, .faq-rgt-arr-11, .faq-rgt-arr-12, .faq-rgt-arr-13, .faq-rgt-arr-14, .faq-rgt-arr-15, .faq-rgt-arr-16, .faq-rgt-arr-17, .faq-rgt-arr-18, .faq-rgt-arr-19, .faq-rgt-arr-20{background: #fff;   background-size: auto auto;}
+    .prm-tab-panel{width: 100%; margin-bottom: 20px;}
+    .prm-menu{width: 100%;  padding-left: 0;}
+    .prm-slc{width: 100%;   margin: 20px 0;}
+
+    .mdp-tgl-mn{display: block;}
+    .mdp-tgl-mx{display: none;}
+
+    .active_sim_popup {  max-width: 450px; width:100%; }  
+    #popup_box {  width:100%; float: left;}     
+    .img_box {  width: 99.5%; float: left; display: none; text-align:center; }   
+
+    /*Prepaid*/
+    .msisdn-details { width:100%; }
+}
+
+@media screen and (min-width: 760px) {
+	#nav {display: block !important;}
+	.mn-dvs-trgr:hover + .mn-dvs{display: block !important;}
+    .vas-mn-dv-1{display: none;}
+
+    /*faq*/
+    .faq-mn-1{display: none;}
+    .faq-dv-mn{display: none;}
+
+    /*promotion*/
+    .prmsn-dv-mn{display: none;}
+
+    /*store location*/
+    .str-dv-mn{display: none;}
+
+    .mn-li-a-2:hover > .mn-trgr-1, .mn-li-a-2:hover > .mn-trgr-2, .mn-li-a-2:hover > .mn-trgr-3, .mn-li-a-2:hover > .mn-trgr-4, .mn-li-a-2:hover > .mn-trgr-5{display: block;}
+    .prm-tab-panel{padding-right: 10px;}
+    .prm-menu{padding-left: 10px;}    
+}
+
+.selector:not([attr*='']) {width: 98px;	box-sizing: initial;}
+
+@media screen and (min-width:1201px) and (max-width:1300px) {
+	.head-logo{width: 100%;	text-align: left;	margin-top: 20px;}
+	.head-logo a img{max-width: 180px;}
+	.log-reg{margin-top: 20px;}
+}
+
+@media screen and (min-width:1001px) and (max-width:1200px) {
+	.head-logo{width: 100%;	text-align: center;	margin-top: 20px;}
+	.head-logo a img{max-width: 180px;}
+	.log-reg{margin-top: 20px;}
+    .rohumbus{margin-left: -960px;}
+}
+
+@media screen and (max-width:1130px) {.rohumbus{margin-left: -908px;    top: -16px; max-height: 200px;}}
+
+@media screen and (min-width:1001px) and (max-width:1300px) {
+	.main-inn > header{padding: 0 0 15px;}
+	
+	.head-rgt{width: 100%;}
+	#nav-wrap{width: 100%;}
+	#nav li{width: 16.5%;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 90%;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+
+	.nav-mn{width: 80%;}
+	.srch{width: 19%;}
+
+/*	.mn-dvs {width: 1000px;	margin-left: -132px;}*/
+	.sld-li{width: 96%;	margin: 17px 2%;}
+
+	.mn-dvs{width: 125%;}
+
+    .mdp-main{margin-top: 210px;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main, .faq-main, .lnd-cat-content-1{margin-top: 260px;}
+    .dt-main{margin-top: 255px;}
+}
+
+@media screen and (min-width:981px) and (max-width:1024px) {
+	/*.main{background: url(../images/lft-mn-bg-2.png) no-repeat	left top;}*/
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+
+	.main-inn > header{padding: 0 0 15px;}
+	.head-logo a img{max-width: 180px;}
+	.head-logo{width: 100%;	text-align: center;	margin-top: 20px;}
+	.head-rgt{width: 100%;}
+	#nav-wrap{width: 100%;}
+	#nav li{width: 16.5%;}
+	.log-reg{margin-top: 20px;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 89%;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+    .dt-main{margin-top: 255px;}
+
+	.ind-cat-prd-bx{padding: 20px 20px 10px;}
+	.ind-cat-prd-sm-nm{text-align: center;}
+	.ind-cat-prd-nm{width: 100%;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 100%;	float: left;	text-align: center;	margin-top: 10px;}
+
+	.mn-dvs{width: 123%;/*	margin-left: -12.6%;*/}
+	.mdp-c-1-rgt{height: auto;}
+	.sld-li{width: 96%;	margin: 17px 2%;}
+    .mdp-main{margin-top: 210px;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main, .faq-main, .lnd-cat-content-1{margin-top: 260px;}
+
+    
+    .faq-togl{min-height: 980px;}
+    .faq-rgt-arr-18{background: transparent url("../images/faq_arr.png") no-repeat scroll left 900px / 15px 46px;}
+    .faq-rgt-arr-19{background: transparent url("../images/faq_arr.png") no-repeat scroll left 944px / 15px 67px;}
+    .faq-rgt-arr-20 {background: transparent url("../images/faq_arr.png") no-repeat scroll left 1010px; background-size: 15px 45px;}
+
+    .prpd-nt-col{width: 30%;}
+}
+
+@media screen and (min-width:961px) and (max-width:980px) {
+	/*.main{background: url(../images/lft-mn-bg-2.png) no-repeat	left top;}*/
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+
+	.main-inn > header{padding: 0 0 15px;}
+	.head-logo a img{max-width: 180px;}
+	.head-logo{width: 100%;	text-align: center;	margin-top: 20px;}
+	.head-rgt{width: 100%;}
+	#nav-wrap{width: 100%;}
+	#nav li{width: 16.5%;}
+	.log-reg{margin-top: 20px;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 89%;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+
+	.ind-cat-prd-bx{padding: 20px 20px 10px;}
+	.ind-cat-prd-sm-nm{text-align: center;}
+	.ind-cat-prd-nm{width: 100%;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 100%;	float: left;	text-align: center;	margin-top: 10px;}
+
+	.mn-dvs{width: 123%;	/*margin-left: -12.6%;*/}
+	.mdp-c-1-rgt{height: auto;}
+	.sld-li{width: 96%;	margin: 17px 2%;}
+    .mdp-main{margin-top: 210px;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main, .faq-main, .lnd-cat-content-1{margin-top: 260px;}
+    .dt-main{margin-top: 255px;}
+
+    .faq-togl{min-height: 980px;}
+    .faq-rgt-arr-18{background: transparent url("../images/faq_arr.png") no-repeat scroll left 900px / 15px 46px;}
+    .faq-rgt-arr-19{background: transparent url("../images/faq_arr.png") no-repeat scroll left 944px / 15px 67px;}
+    .faq-rgt-arr-20 {background: transparent url("../images/faq_arr.png") no-repeat scroll left 1010px; background-size: 15px 45px;}
+    
+    .prpd-nt-col{width: 30%;}
+}
+
+@media screen and (min-width:901px) and (max-width:960px) {
+	/*.main{background: url(../images/lft-mn-bg-2.png) no-repeat	left top;}*/
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+    .mdp-main{margin-top: 210px;}
+
+	.main-inn > header{padding: 0 0 15px;}
+	.head-logo a img{max-width: 180px;}
+	.head-logo{width: 100%;	text-align: center;	margin-top: 20px;}
+	.head-rgt{width: 100%;}
+	#nav-wrap{width: 100%;}
+	#nav li{width: 16.5%;}
+	.log-reg{margin-top: 20px;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 88%;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main, .faq-main, .lnd-cat-content-1{margin-top: 260px;}
+    .dt-main{margin-top: 255px;}
+
+
+	.ind-cat-prd-bx{padding: 20px 20px 10px;}
+	.ind-cat-prd-sm-nm{text-align: center;}
+	.ind-cat-prd-nm{width: 100%;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 100%;	float: left;	text-align: center;	margin-top: 10px;}
+	
+	.mn-dvs{width: 123%;	/*margin-left: -12.6%;*/}
+	.mdp-c-1-rgt{height: auto;}
+	.sld-li{width: 96%;	margin: 17px 2%;}
+
+    /*promotion*/
+    .prmsn-t-2-col-1, .prmsn-t-2-col-4{word-break:break-all;}
+
+    .faq-togl{min-height: 980px;}
+    .faq-rgt-arr-18{background: transparent url("../images/faq_arr.png") no-repeat scroll left 900px / 15px 46px;}
+    .faq-rgt-arr-19{background: transparent url("../images/faq_arr.png") no-repeat scroll left 944px / 15px 67px;}
+    .faq-rgt-arr-20 {background: transparent url("../images/faq_arr.png") no-repeat scroll left 1010px; background-size: 15px 45px;}
+
+    .prpd-nt-col{width: 31%;}
+    .col-clr-1, .col-clr-2, .col-clr-4{margin-right: 21px;}
+}
+
+@media screen and (min-width:801px) and (max-width:900px) {
+	/*.main{background: url(../images/lft-mn-bg-2.png) no-repeat	left top;}*/
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+
+	.main-inn > header{padding: 0 0 15px;}
+	.head-logo a img{max-width: 180px;}
+	.head-logo{width: 100%;	text-align: center;	margin-top: 20px;}
+	.head-rgt{width: 100%;}
+	#nav-wrap{width: 100%;}
+	#nav li{width: 16.5%;}
+	.log-reg{margin-top: 20px;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 86%;}
+	#nav a{font-size: 16px;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+    .mdp-main{margin-top: 210px;}
+    .dt-main{margin-top: 255px;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main, .faq-main, .lnd-cat-content-1{margin-top: 260px;}
+    .ctc-rgt{width: 48%;}
+
+
+	.ind-cat-prd-bx{padding: 20px 20px 10px;}
+	.ind-cat-prd-sm-nm{text-align: center;}
+	.ind-cat-prd-nm{width: 100%;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 100%;	float: left;	text-align: center;	margin-top: 0;}
+	
+	.lpn-main{padding: 0px 50px 60px;}
+	.lpn-left{width: 100%;	padding-right: 0;}
+	.lpn-lt-txt{text-align: left;}
+	.lpn-rgt{width: 100%;	padding-left: 0;}
+	.lpn-rgt p{text-align: justify;}
+
+	.mn-dvs{width: 123%;}
+	.mdp-c-1-rgt{height: auto;}
+	.mdp-c-ftr{margin-top: 0;}
+	.sld-li{width: 96%;	margin: 17px 2%;}
+
+    /*faq - page*/
+    .faq-tgl-tbl-3{width: 100%;}
+    .faq-tbl-3-col-1, .faq-tgl-tbl-3-col-1{width: 13%;}
+    .faq-tbl-3-col-2, .faq-tgl-tbl-3-col-2{width: 32%;}
+    .faq-tbl-3-part-2 {width: 55%;}
+    .faq-tgl-tbl-3-col-3{width: 27.5%;}
+    .faq-tbl-3-col-2{height: 81px;}
+    .faq-tbl-3-col-4{height: 50px;}
+
+
+    /*promotion*/
+    .prmsn-t-2-col-1, .prmsn-t-2-col-4{word-break:break-all;}
+
+    /*vas*/
+    .v-t-3-col-3, .v-t-4-col-3{text-align: justify !important;}
+
+    .faq-togl{min-height: 980px;}
+    .faq-rgt-arr-18{background-size: 15px 67px;}
+    .faq-rgt-arr-19{background: url(../images/faq_arr.png) no-repeat left 922px;  background-size: 15px 46px;}
+    .faq-disp a{font-size: 17px;    line-height: 21px;}
+    .faq-lft{width: 27%;}
+    .faq-togl{width: 72%;   min-height: 980px;}
+    .faq-rgt-arr-18{background: transparent url("../images/faq_arr.png") no-repeat scroll left 900px / 15px 46px;}
+    .faq-rgt-arr-19{background: transparent url("../images/faq_arr.png") no-repeat scroll left 944px / 15px 67px;}
+    .faq-rgt-arr-20 {background: transparent url("../images/faq_arr.png") no-repeat scroll left 1010px; background-size: 15px 45px;}
+    .faq-t-3-col-1, .faq-t-3-col-2{width: 272%;}
+
+     .prpd-net-rw{width: 100%;   margin-top: 100px;}
+    .prpd-lst-lt{width: 100%;}
+    .prpd-nt-col{width: 31%;}
+    .col-clr-1, .col-clr-2, .col-clr-4{margin-right: 20px;}
+}
+
+@media screen and (max-height:800px) and (max-width: 760px;) {
+    .mn-trgr-2, .mn-trgr-3, .mn-trgr-4, .mn-trgr-5{height: 200px;   overflow-y: scroll; overflow-x: hidden;}
+    .mn-trgr-1{height: 300px;   overflow-y: scroll; overflow-x: hidden;}
+}
+
+@media screen and (min-width:769px) and (max-width:800px) {
+	/*.main{background: url(../images/lft-mn-bg-2.png) no-repeat	left top;}*/
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+
+	.main-inn > header{padding: 0 0 15px;}
+	.head-logo a img{max-width: 180px;}
+	.head-logo{width: 100%;	text-align: center;	margin-top: 20px;}
+	.head-rgt{width: 100%;}
+	#nav-wrap{width: 100%;}
+	.nav-mn{width: 77%;}
+	.srch{width: 22%;}
+	#nav li{width: 16.5%;}
+	.log-reg{margin-top: 20px;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 87%;}
+	#nav a{font-size: 15px;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+    .mdp-main{margin-top: 210px;}
+    .dt-main{margin-top: 255px;}
+    .ctc-rgt{width: 48%;}
+
+	.ind-cat-prd-bx{padding: 20px 10px 10px;}
+	.ind-cat-prd-sm-nm{text-align: center;}
+	.ind-cat-prd-nm{width: 100%;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 100%;	float: left;	text-align: center;	margin-top: 0;}
+
+	.lpn-main{padding: 0px 50px 60px;}
+	.lpn-left{width: 100%;	padding-right: 0;}
+	.lpn-lt-txt{text-align: left;}
+	.lpn-rgt{width: 100%;	padding-left: 0;}
+	.lpn-rgt p{text-align: justify;}
+
+	.mdp-c-1-lft{width: 40%;	margin: 40px 0 20px 30%;}
+	.mdp-c-1-rgt{width: 100%;  padding-left:0;}
+
+	.mn-dvs{width: 130%;	/*margin-left: -12.6%;	margin-top: 2px;*/}
+	.mdp-c-1-rgt{height: auto;}
+	.mdp-c-ftr{margin-top: 20px;}
+	.sld-li{width: 96%;	margin: 17px 2%;}
+
+    /*faq - page*/
+    .faq-tgl-tbl-3{width: 100%;}
+    .faq-tbl-3-col-1, .faq-tgl-tbl-3-col-1{width: 13%;}
+    .faq-tbl-3-col-2, .faq-tgl-tbl-3-col-2{width: 32%;}
+    .faq-tbl-3-part-2 {width: 55%;}
+    .faq-tgl-tbl-3-col-3{width: 27.5%;}
+    .faq-tbl-3-col-2{height: 81px;}
+    .faq-tbl-3-col-4{height: 50px;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main, .faq-main, .lnd-cat-content-1{margin-top: 260px;}
+
+    /*prepaid*/
+    .prpd-tbl-1{width: 100%;}
+
+    /*promotion*/
+    .prmsn-t-2-col-1, .prmsn-t-2-col-4{word-break:break-all;}
+
+    /*vas*/
+    .v-t-3-col-3, .v-t-4-col-3{text-align: justify !important;}
+
+    .faq-togl{min-height: 980px;}
+    .faq-rgt-arr-18{background-size: 15px 67px;}
+    .faq-rgt-arr-19{background: url(../images/faq_arr.png) no-repeat left 922px;  background-size: 15px 46px;}
+    .faq-disp a{font-size: 17px;    line-height: 21px;}
+    .faq-lft{width: 27%;}
+    .faq-togl{width: 72%;   min-height: 980px;}
+    .faq-rgt-arr-18{background: transparent url("../images/faq_arr.png") no-repeat scroll left 900px / 15px 46px;}
+    .faq-rgt-arr-19{background: transparent url("../images/faq_arr.png") no-repeat scroll left 944px / 15px 67px;}
+    .faq-rgt-arr-20 {background: transparent url("../images/faq_arr.png") no-repeat scroll left 1010px; background-size: 15px 45px;}
+    .faq-t-3-col-1, .faq-t-3-col-2{width: 272%;}
+
+    .prm-tab-panel {width: 100%;    margin-bottom: 20px;}
+    .prm-menu {width: 100%; padding-left: 0px;}
+
+    .mdp-tgl-mn{display: block;}
+    .mdp-tgl-mx{display: none;}
+
+    .prpd-net-rw{width: 100%;   margin-top: 100px;}
+    .prpd-lst-lt{width: 100%;}
+    .prpd-nt-col{width: 31%;}
+    .col-clr-1, .col-clr-2, .col-clr-4{margin-right: 20px;}
+}
+
+@media screen and (min-width:761px) and (max-width:768px){
+	/*.main{background: url(../images/lft-mn-bg-2.png) no-repeat	left top;}*/
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+
+	.main-inn > header{padding: 0 0 15px;}
+	.head-logo a img{max-width: 180px;}
+	.head-logo{width: 100%;	text-align: center;	margin-top: 20px;}
+	.head-rgt{width: 100%;}
+	/*#nav-wrap{width: 100%;}
+	#nav li{width: 19.5%;}
+	.log-reg{text-align: center;	margin-top: 20px;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 90%;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}*/
+
+	#nav-wrap{width: 100%;}
+	.nav-mn{width: 77%;}
+	.srch{width: 22%;}
+	#nav li{width: 16.5%;}
+	.log-reg{text-align: center;	margin-top: 20px;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 87%;}
+	#nav a{font-size: 15px;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+    .mdp-main{margin-top: 210px;}
+    .dt-main{margin-top: 255px;}
+    .ctc-rgt{width: 48%;}
+
+	.ind-cat-prd-bx{padding: 20px 10px 10px;}
+	.ind-cat-prd-sm-nm{text-align: center;}
+	.ind-cat-prd-nm{width: 100%;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 100%;	float: left;	text-align: center;	margin-top: 0;}
+
+	.lpn-main{padding: 0px 50px 60px;}
+	.lpn-left{width: 100%;	padding-right: 0;}
+	.lpn-lt-txt{text-align: left;}
+	.lpn-rgt{width: 100%;	padding-left: 0;}
+	.lpn-rgt p{text-align: justify;}
+
+	.mdp-c-1-lft{width: 40%;	margin: 40px 0 20px 30%;}
+	.mdp-c-1-rgt{width: 100%;  padding-left:0;}
+
+	.mn-dvs{width: 130%;	/*margin-left: -12.6%;	margin-top: 2px;*/}
+	.mdp-c-1-rgt{height: auto;}
+	.mdp-c-ftr{margin-top: 20px;}
+	.sld-li{width: 96%;	margin: 17px 2%;}
+
+    /*faq - page*/
+    .faq-tgl-tbl-3{width: 100%;}
+    .faq-tbl-3-col-1, .faq-tgl-tbl-3-col-1{width: 13%;}
+    .faq-tbl-3-col-2, .faq-tgl-tbl-3-col-2{width: 32%;}
+    .faq-tbl-3-part-2 {width: 55%;}
+    .faq-tgl-tbl-3-col-3{width: 27.5%;}
+    .faq-tbl-3-col-2{height: 81px;}
+    .faq-tbl-3-col-4{height: 50px;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main, .faq-main, .lnd-cat-content-1{margin-top: 260px;}
+
+    /*prepaid*/
+    .prpd-tbl-1{width: 100%;}
+
+    /*promotion*/
+    .prmsn-t-2-col-1, .prmsn-t-2-col-4{word-break:break-all;}
+
+    /*vas*/
+    .v-t-3-col-3, .v-t-4-col-3{text-align: justify !important;}
+
+    .faq-togl{min-height: 980px;}
+    .faq-rgt-arr-19{background-size: 15px 67px;}
+    .faq-rgt-arr-20 {background: transparent url("../images/faq_arr.png") no-repeat scroll left 1010px; background-size: 15px 45px;}
+    .faq-disp a{font-size: 17px;    line-height: 21px;}
+    .faq-lft{width: 27%;}
+    .faq-togl{width: 72%;   min-height: 980px;}
+    .faq-rgt-arr-18{background: transparent url("../images/faq_arr.png") no-repeat scroll left 900px / 15px 46px;}
+    .faq-rgt-arr-19{background: transparent url("../images/faq_arr.png") no-repeat scroll left 944px / 15px 67px;}
+    .faq-rgt-arr-20{background: transparent url("../images/faq_arr.png") no-repeat scroll left 1010px; background-size: 15px 45px;}
+    .faq-t-3-col-1, .faq-t-3-col-2{width: 272%;}
+
+    .prm-tab-panel {width: 100%;    margin-bottom: 20px;}
+    .prm-menu {width: 100%; padding-left: 0;}
+
+    .mdp-tgl-mn{display: block;}
+    .mdp-tgl-mx{display: none;}
+
+    .prpd-net-rw{width: 100%;   margin-top: 100px;}
+    .prpd-lst-lt{width: 100%;}
+    .prpd-nt-col{width: 31%;}
+    .col-clr-1, .col-clr-2, .col-clr-4{margin-right: 20px;}
+}
+
+@media screen and (min-width: 641px) and (max-width: 760px) {
+
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+
+	.head-logo{width: 100%;	text-align: center;	margin-top: 20px;}
+	.head-rgt{width: 100%;}
+	#nav li{width: 100%;}
+	.log-reg{text-align: center;	margin-top: 20px;}
+	.srch{float: right;	width: 250px;	margin-right: 10px;}
+	.nav-mn{height: 40px;	width: auto;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 92%;	padding-left: 42px;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+	.ftr-big-col, .ftr-col{width: 50%;	padding: 0 10px;}
+	.ex-col-mrg{width: 100%;	float: left;	margin-top: 30px;}
+    .mdp-main{margin-top: 230px;}
+    .dt-main{margin-top: 255px;}
+    .ctc-rgt{width: 48%;}
+
+	.ind-cat-prd-bx{padding: 20px 10px 10px;}
+	.ind-cat-prd-sm-nm{text-align: center;}
+	.ind-cat-prd-nm{width: 100%;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 100%;	float: left;	text-align: center;	margin-top: 0;}
+	.sld-btns a{margin-right: 10px;	max-width: 130px;}
+
+	.lpn-main{padding: 0px 50px 60px;}
+	.lpn-left{width: 100%;	padding-right: 0;}
+	.lpn-lt-txt{text-align: left;}
+	.lpn-rgt{width: 100%;	padding-left: 0;}
+	.lpn-rgt p{text-align: justify;}
+	.sld-rgt{padding-bottom: 20px;}
+
+	.mdp-c-cols{width: 30.6%;	margin-right: 4%;}
+	.mdp-c-1-lft{width: 40%;	margin: 40px 0 20px 30%;}
+
+	.dv-bxs-col-lt, .dv-bxs-col-rgt, .dv-bxs-col-lt-2, .dv-bxs-col-rgt-2{width: 100%;}
+	.dv-bxs p{width: 100%;	float: left;	line-height: 20px;}
+
+	.dv-bxs{min-height: 335px;}
+    .vas-mn-dv-1{display: none;}
+
+    /*faq - page*/
+    .faq-tgl-tbl-3{width: 100%;}
+    .faq-tbl-3-col-1, .faq-tgl-tbl-3-col-1{width: 13%;}
+    .faq-tbl-3-col-2, .faq-tgl-tbl-3-col-2{width: 32%;}
+    .faq-tbl-3-part-2 {width: 55%;}
+    .faq-tgl-tbl-3-col-3{width: 27.5%;}
+
+    .faq-tbl-6, .faq-tbl-8{width: 100%;}
+    .faq-tgl-tbl-2{width: 600px;}
+    .faq-mn-1{display: none;}
+    
+    .faq-tgl-tbl-4{width: 100%;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main, .faq-main, .lnd-cat-content-1{margin-top: 260px;}
+
+    /*prepaid*/
+    .prpd-tbl-1{width: 100%;}
+    .hgt-eq{height: 100px;}
+
+    /*promotion*/
+    .prmsn-t-2-col-1, .prmsn-t-2-col-4{word-break:break-all;}
+    .prmsn-dv-mn{display: none;}
+
+    ul.sub-mnu li{height: 180px !important;}
+    ul.sub-sub-mnu li{height: auto !important;}
+    ul.sub-sub-sub-mnu li{height: auto !important;}
+    .faq-t-3-col-1, .faq-t-3-col-2{width: 272%;}
+
+    .prpd-net-rw{width: 100%;   margin-top: 100px;}
+    .prpd-lst-lt{width: 100%;}
+    .prpd-nt-col{width: 31%;}
+    .col-clr-1, .col-clr-2, .col-clr-4{margin-right: 20px;}
+}
+
+@media screen and (min-width:601px) and (max-width:640px) {
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+
+    .head-logo a img{margin-top: 20px;}
+	.head-logo{width: 100%;	text-align: center;	margin-top: 20px;}
+	.head-rgt{width: 100%;}
+	#nav li{width: 100%;}
+	.log-reg{text-align: center;	margin-top: 20px;}
+	.srch{float: right;	width: 250px;	margin-right: 10px;}
+	.nav-mn{height: 40px;	width: auto;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 92%;	padding-left: 42px;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+	.ftr-big-col, .ftr-col{width: 50%;	padding: 0 10px;}
+	.ex-col-mrg{width: 100%;	float: left;	margin-top: 30px;}
+    .mdp-main{margin-top: 210px;}
+    .dt-main{margin-top: 255px;}
+    .ctc-lft{margin: 20px 0;   width: 100%;}
+    .ctc-disc{border-bottom: none;}
+    .ctc-rgt{width: 100%;   border-bottom: 1px solid #AAA;  padding-bottom: 30px;}
+
+	.ind-cat-prd-bx{padding: 20px 10px 10px;}
+	.ind-prd-box-1, .ind-prd-box-2, .ind-prd-box-3{width: 70%;	float: left;	margin-left: 15%;}
+	.ind-cat-prd-img{width: 40%;}
+	.ind-cat-prd-sm-nm{width: 60%;	float: left;	padding: 20px 0 10px;	text-align: center;}
+	.ind-cat-prd-nm{width: 60%;	float: left;	padding: 0 0 10px;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 60%;	float: left;	text-align: center;	margin-top: 0;}
+	.sld-btns a{margin-right: 10px;	max-width: 130px;	padding-bottom: 20px;}
+
+	.lpn-main{padding: 0px 50px 60px;}
+	.lpn-left{width: 100%;	padding-right: 0;}
+	.lpn-lt-txt{text-align: left;}
+	.lpn-rgt{width: 100%;	padding-left: 0;}
+	.lpn-rgt p{text-align: justify;}
+
+	.mdp-c-cols{width: 30.6%;	margin-right: 4%;}
+	.mdp-c-1-lft{width: 40%;	margin: 20px 0 20px 30%;}
+
+	.mn-dvs{width: 100%;	margin-top: 2px;}
+	.dv-bxs-col-lt, .dv-bxs-col-rgt, .dv-bxs-col-lt-2, .dv-bxs-col-rgt-2{width: 100%;}
+	.dv-bxs p{width: 100%;	float: left;	line-height: 20px;}
+	.dv-bxs{min-height: 335px;}
+    .vas-mx-dv-1{display: none;}
+    .vas-mn-dv-1{display: block;}
+    .v-t-1-col-1{width: 100%;   border-right: none; min-height: 26px;   padding: 10px 5px;}
+    .vas-tbl-1{width: 100%;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main, .faq-main, .lnd-cat-content-1{margin-top: 260px;}
+
+    /*faq*/
+    .faq-mn-1{display: block;}
+    .faq-mx-1{display: none;}
+    .faq-tbl-hd-col-1, .faq-tbl-col-1, .faq-tbl-hd-col-2, .faq-tbl-col-2, .faq-tgl-tbl-col-1, .faq-tgl-hd-rws, .faq-tgl-tbl-col-2, .faq-tgl-tbl-col-3{width: 100%; border-right: none; text-align: center;}
+    .faq-tgl-table, .faq-tgl-tbl-col-3, .faq-tgl-tbl-col-1, .faq-tgl-tbl-col-2, .faq-t-3-col-1, .faq-t-3-col-2, .faq-tgl-tbl-3-col-3, .faq-tgl-tbl-3 > .faq-tbl-3-rw:first-child, .f-t-4-cols, .f-t-5-col-2, .f-t-6-col-1, .f-t-6-col-2{border-top: none;    text-align: center;}
+
+    .faq-tgl-rws, .faq-tbl-3-rw, .f-tbl-4-rw, .f-t-6-rw{border-top: 1px solid #666766;}
+    .faq-tbl-3-rw{margin: 10px 0 0;}
+    .faq-tgl-tbl-3, .f-t-5-col-2, .f-t-6-rw{width: 100%;}
+    .faq-tbl-3-col-1, .faq-tgl-tbl-3-col-1, .f-t-4-cols{width: 100%;   text-align: center;}
+    .faq-tbl-3-col-2, .faq-tgl-tbl-3-col-2, .faq-tbl-3-part-2, .f-t-4-cols, .f-t-6-col-1, .f-t-6-col-2{width: 100%; border-left: none;  text-align: center;}
+    .faq-tbl-3-part-2 > .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3, .f-t-5-col-2{border-left: none;}
+    .faq-tbl-3-col-3{border-bottom: none;}
+    .faq-tbl-3-part-2, .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3{width: 100%;  text-align: center;}
+    .faq-tbl-6, .faq-tbl-8{width: 100%; text-align: center;}
+    .faq-tgl-tbl-2, .faq-tgl-tbl-4, .faq-tbl-5, .faq-tgl-box{width: 100%;   text-align: center;}
+    .faq-t-8-col-1, .faq-t-8-col-2, .faq-t-8-col-3, .faq-t-8-col-4{width: 100%;}
+    .f-t-8-c-fluid{width: 50%;}
+    .f-t-6-rw{border-left: 1px solid #666766;}
+    .faq-tbl-3-col-2, .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3, .col-eq-2{height: auto;}
+
+    /*prepaid*/
+    .prpd-tbl-1{width: 100%;}
+    .hgt-eq{height: 100px;}
+
+    /*data*/
+    .dt-tbl{width: 100%;}
+
+
+    /*promotion*/
+    .prmsn-dv-mx{display: none;}
+    .prmsn-dv-mn{display: block;}
+    .prmsn-col-1, .prmsn-col-2, .prmsn-col-3, .prmsn-t-2-col-1, .prmsn-t-2-col-2, .prmsn-t-2-col-3, .prmsn-t-2-col-4, .prmsn-t-2-col-5, .prmsn-t-3-cols{width: 100%;}
+    .prmsn-t-2-col-half{height: auto;}
+
+    /*compliments*/
+    .cplt-wrapper{width: 100%;  float: left;}
+
+    .prpd-net-rw{width: 100%;   margin-top: 100px;}
+    .prpd-lst-lt{width: 100%;}
+    .prpd-nt-col{width: 31%;}
+    .col-clr-1, .col-clr-2, .col-clr-4{margin-right: 20px;}
+}
+
+@media screen and (min-width:481px) and (max-width:600px) {
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+
+	.head-logo{width: 100%;	text-align: center;	margin-top: 20px;}
+	.head-rgt{width: 100%;}
+	#nav li{width: 100%;}
+	.log-reg{text-align: center;	margin-top: 20px;}
+	.srch{float: right;	width: 250px;	margin-right: 10px;}
+	.nav-mn{height: 40px;	width: auto;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 92%;	padding-left: 42px;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+	.view-cats-cols{width: 100%;	margin: 0 0 10px;	padding: 0 20%;}
+	.vw-by-ctgr, .vw-by-brnd, .vw-by-price{width: 100%;	float: left;	margin: 0;	padding: 0 5px;}
+	.ftr-big-col, .ftr-col{width: 50%;	padding: 0 10px;}
+	.ex-col-mrg{width: 100%;	float: left;	margin-top: 30px;}
+	.ftr-lst-lt{width: 100%;}
+	.ftr-lst-rgt{margin-top: 20px;	float: left;}
+    .mdp-main{margin-top: 210px;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main, .faq-main, .lnd-cat-content-1{margin-top: 260px;}
+    .dt-main{margin-top: 255px;}
+    .ctc-lft{margin: 20px 0;   width: 100%;}
+    .ctc-disc{border-bottom: none;}
+    .ctc-rgt{width: 100%;   border-bottom: 1px solid #AAA;  padding-bottom: 30px;}
+
+
+	.ind-cat-prd-bx{padding: 20px 10px 10px;}
+	.ind-prd-box-1, .ind-prd-box-2, .ind-prd-box-3{width: 70%;	float: left;	margin-left: 15%;}
+	.ind-cat-prd-img{width: 40%;}
+	.ind-cat-prd-sm-nm{width: 60%;	float: left;	padding: 20px 0 10px;	text-align: center;}
+	.ind-cat-prd-nm{width: 60%;	float: left;	padding: 0 0 10px;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 60%;	float: left;	text-align: center;	margin-top: 0;}
+
+	.sld-btns a{margin-right: 10px;	max-width: 100px;	padding-bottom: 20px;}
+	.sld-rgt{margin-top: 30px;}
+
+	.lpn-main{padding: 0px 30px 60px;}
+	.lpn-left{width: 100%;	padding-right: 0;}
+	.lpn-lt-txt{text-align: left;}
+	.lpn-rgt{width: 100%;	padding-left: 0;}
+	.lpn-rgt p{text-align: justify;}
+	.lpn-lt-img, .lpn-lt-txt{width: 100%;	text-align: center;}
+
+	.mdp-c-cols{width: 30.6%;	margin-right: 4%;}
+	.mdp-c-bx-disc p{font-size: 12px;}
+	.mdp-c-1-lft{width: 60%;	margin: 20px 0 20px 20%;}
+
+	.dv-bxs{margin-bottom: 15px;	width: 100%;	border-right: none;}
+	.dv-bxs-ul li{display: inline !important;	width: 20% !important;	float: left !important;}
+	.dv-dxs-rw{width: 33%;	float: left;	padding: 0 5px;}
+	.dv-bxs-col-lt, .dv-bxs-col-rgt, .dv-bxs-col-lt-2, .dv-bxs-col-rgt-2{width: 100%;}
+	.dv-bxs p{width: 100%;	float: left;	line-height: 20px;	padding: 5px 0;	margin: 0;}
+	.dv-bxs-hed{margin: 0 0 10px;}
+	.dv-bxs{min-height: 1px;}
+
+	ul.sub-sub-mnu li{text-indent: 0px !important;}
+	ul.sub-mnu li{width: 100% !important;	border-left: none !important;	height: auto !important;}
+	ul.sub-mnu{height: auto !important;}
+
+    .mn-dvs{width: 100%;    margin-top: 2px;}
+    .dv-bxs-col-lt, .dv-bxs-col-rgt, .dv-bxs-col-lt-2, .dv-bxs-col-rgt-2{width: 100%;}
+    .dv-bxs p{width: 100%;  float: left;    line-height: 20px;}
+    .dv-bxs{min-height: 335px;}
+    .vas-mx-dv-1{display: none;}
+    .vas-mn-dv-1{display: block;}
+    .v-t-1-col-1{width: 100%;   border-right: none; min-height: 26px;   padding: 10px 5px;}
+    .vas-tbl-1{width: 100%;}
+
+
+    /*faq*/
+    .faq-mn-1{display: block;}
+    .faq-mx-1{display: none;}
+    .faq-tbl-hd-col-1, .faq-tbl-col-1, .faq-tbl-hd-col-2, .faq-tbl-col-2, .faq-tgl-tbl-col-1, .faq-tgl-hd-rws, .faq-tgl-tbl-col-2, .faq-tgl-tbl-col-3{width: 100%; border-right: none; text-align: center;}
+    .faq-tgl-table, .faq-tgl-tbl-col-3, .faq-tgl-tbl-col-1, .faq-tgl-tbl-col-2, .faq-t-3-col-1, .faq-t-3-col-2, .faq-tgl-tbl-3-col-3, .faq-tgl-tbl-3 > .faq-tbl-3-rw:first-child, .f-t-4-cols, .f-t-5-col-2, .f-t-6-col-1, .f-t-6-col-2{border-top: none;    text-align: center;}
+
+    .faq-tgl-rws, .faq-tbl-3-rw, .f-tbl-4-rw, .f-t-6-rw{border-top: 1px solid #666766;}
+    .faq-tbl-3-rw{margin: 10px 0 0;}
+    .faq-tgl-tbl-3, .f-t-5-col-2, .f-t-6-rw{width: 100%;}
+    .faq-tbl-3-col-1, .faq-tgl-tbl-3-col-1, .f-t-4-cols{width: 100%;   text-align: center;}
+    .faq-tbl-3-col-2, .faq-tgl-tbl-3-col-2, .faq-tbl-3-part-2, .f-t-4-cols, .f-t-6-col-1, .f-t-6-col-2{width: 100%; border-left: none;  text-align: center;}
+    .faq-tbl-3-part-2 > .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3, .f-t-5-col-2{border-left: none;}
+    .faq-tbl-3-col-3{border-bottom: none;}
+    .faq-tbl-3-part-2, .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3{width: 100%;  text-align: center;}
+    .faq-tbl-6, .faq-tbl-8{width: 100%; text-align: center;}
+    .faq-tgl-tbl-2, .faq-tgl-tbl-4, .faq-tbl-5, .faq-tgl-box{width: 100%;   text-align: center;}
+    .faq-t-8-col-1, .faq-t-8-col-2, .faq-t-8-col-3, .faq-t-8-col-4{width: 100%;}
+    .f-t-8-c-fluid{width: 50%;}
+    .f-t-6-rw{border-left: 1px solid #666766;}
+    .col-eq-2{height: auto;}
+
+    /*prepaid*/
+    .prpd-tbl-1{width: 100%;}
+    .hgt-eq{height: 115px !important;}
+    .prpd-cols{height: 48px;}
+    .hgt-eq-2{height: 100px !important;}
+
+    /*data*/
+    .dt-tbl{width: 100%;}
+    .hgt-eql{height: 70px;}
+
+    /*contact-us*/
+    .ctc-ht{height: 45px;}
+
+    /*promotion*/
+    .prmsn-dv-mx{display: none;}
+    .prmsn-dv-mn{display: block;}
+    .prmsn-col-1, .prmsn-col-2, .prmsn-col-3, .prmsn-t-2-col-1, .prmsn-t-2-col-2, .prmsn-t-2-col-3, .prmsn-t-2-col-4, .prmsn-t-2-col-5, .prmsn-t-3-cols{width: 100%;}
+    .prmsn-t-2-col-half{height: auto;}
+
+    /*compliments*/
+    .cplt-wrapper{width: 85%;  float: none;}
+    .cplt-col-1, .cplt-col-2{width: 100%;   float: left;    margin-bottom: 10px;}
+    .cplt-col-2{padding-left: 0;}
+    .cplt-rw{padding: 10px 10px 0;}
+}
+
+@media screen and (max-width:640px) {
+    .head-logo{width: 100%; text-align: center; margin-top: 0px;}
+    .head-logo a img {max-width: 120px;}
+    .rohumbus img{height: 380px;}
+    .rohumbus {height: 100px;   margin-left: -580px;    top: -6px; z-index: 999999;}
+    .head{position: relative;z-index: 9999;}
+    #nav-wrap{width: 100%;}
+    .log-reg{padding: 0;    margin-top: 10px;   text-align: center;}
+
+    .mdp-main, .abt-main, .prpd-main, .faq-main, .dt-main, .lnd-cat-content-1{margin-top: 10px;}
+    .abt-main{padding: 0px 2% 0px;}
+    .brd-crm{margin: 10px 0;}
+    .ctc-hed{margin-top: 0;}
+    .flex-direction-nav a{margin: -20px 0px 0 !important;   top: 53% !important;}
+
+    .fq-ct-lt{width: 100%;  margin-bottom: 20px;}
+    .fq-ct-rgt{width: 100%;}
+    .fq-tgl-btn a{margin-right: 10px;}
+    .faq-t-3-col-1, .faq-t-3-col-2{width: 100%;}
+
+    .prm-cont-lft{width: 100%;  margin-bottom: 30px;}
+    .prm-cont-rgt{width: 100%;  padding-left: 0;}
+    .prm-big-cont{margin: 0 0 20px;}
+    .prm-c-r-disc{text-align: left;}
+    .prm-tbl-cont-fluid{margin-bottom: 40px;}
+    .prm-col-cl-3, .prm-c-rw{width: 100%;  margin-bottom: 10px;}
+    .prm-bal-disc{margin-bottom: 0;}
+    .main-inn > header{position: relative;}
+    .rohumbus{position: absolute;   width: 100%;    top: 0; margin-left: 0; background: url(../images/rhm-mbl.png) no-repeat left top;  left: 0;}
+    .rohumbus img{display: none;}
+
+    .prpd-net-rw{width: 100%;   margin-top: 100px;}
+    .prpd-lst-lt{width: 100%;}
+    .prpd-nt-col{width: 70%;    margin-left: 15%;   margin-right: 0;    margin-top: 100px;}
+    .col-clr-1{margin-top: 0 !important;}
+    .col-clr-4{margin-bottom: 100px}
+    #showintdiv{margin-top: 0;}
+
+    .btz-tgl-img-1, .btz-tgl-img-2, .beat-tbls a{width: 49%;}
+
+    .dRowlbl { width: 99%; float: left; text-align: left; padding: 2px;}
+    .dRowctrl { width: 100%; float: right; text-align: left; }
+    .postsumdiv { width:49%; float:left; padding:3px 0px 3px 0px;}
+    
+    .dRowvsmlbl { width: 99%; float: left; text-align: left; padding: 5px;}
+    .dRowvsmctrl { width: 99%; float: left; text-align: left; overflow: hidden; padding: 5px;}
+}
+
+@media screen and (min-width:361px) and (max-width:480px) {
+    .main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+	.head-rgt{width: 100%;}
+	#nav li{width: 100%;}
+	.srch{float: right;	width: 250px;	margin:4px 10px 0 0;}
+	.nav-mn{height: 40px;	width: auto;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 92%;	padding-left: 35px;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+	.view-cats-cols{width: 100%;	margin: 0 0 10px;	padding: 0 10%;}
+	.vw-by-ctgr, .vw-by-brnd, .vw-by-price{width: 100%;	float: left;	margin: 0;	padding: 0 5px;}
+	.ftr-big-col, .ftr-col{width: 100%;	padding: 0 10px;	margin-bottom: 30px;}
+	.ex-col-mrg{width: 100%;	float: left;}
+	.ftr-lst-lt{width: 100%;}
+	.ftr-lst-rgt{margin-top: 20px;	float: left;}
+    .ctc-lft{margin: 20px 0;   width: 100%;}
+    .ctc-disc{border-bottom: none;}
+    .ctc-rgt{width: 100%;   border-bottom: 1px solid #AAA;  padding-bottom: 30px;}
+
+
+	.ind-cat-prd-bx{padding: 20px 10px 10px;}
+	.ind-prd-box-1, .ind-prd-box-2, .ind-prd-box-3{width: 90%;	float: left;	margin-left: 5%;	text-align: center;}
+	.ind-cat-prd-img{width: 40%;}
+	.ind-cat-prd-sm-nm{width: 60%;	float: left;	padding: 20px 0 10px;}
+	.ind-cat-prd-nm{width: 60%;	float: left;	padding: 0 0 10px;}
+	.ind-cat-prd-lnmr{width: 60%;	float: left;	text-align: center;	margin-top: 0;}
+	.main{background-position: -10px top;}
+
+	.sld-li{padding: 0 30px;}
+	.sld-lft, .sld-rgt{width: 100%;	max-width: 100%;}
+	.sld-rgt{margin-top: 20px;	margin-bottom: 20px;	padding: 0 20px;}
+	.sld-btns a{max-width: 110px;}
+
+	.lpn-main{padding: 0px 30px 60px;}
+	.lpn-left{width: 100%;	padding-right: 0;}
+	.lpn-lt-txt{text-align: left;}
+	.lpn-rgt{width: 100%;	padding-left: 0;}
+	.lpn-rgt p{text-align: justify;}
+	.lpn-lt-img, .lpn-lt-txt{width: 100%;	text-align: center;}
+
+	/*.head-logo a img {    max-width: 110px;}*/
+
+	.mdp-c-cols{width: 31%;	margin-right: 3%;}
+	.mdp-c-bx-disc p{font-size: 12px;}
+	.mdp-c-1-lft{width: 100%;	margin: 20px 0;}
+
+	.dv-bxs{margin-bottom: 15px;	width: 100%;	border-right: none;}
+	.dv-bxs-col-lt, .dv-bxs-col-rgt, .dv-bxs-col-lt-2, .dv-bxs-col-rgt-2{width: 100%;}
+	.dv-bxs p{width: 100%;	float: left;	line-height: 20px;	padding: 5px 0;	margin: 0;}
+	.dv-bxs-hed{margin: 0 0 10px;}
+	.dv-bxs{min-height: 1px;}
+
+
+	ul.sub-sub-mnu li{text-indent: 0px !important;}
+	ul.sub-mnu li{width: 100% !important;	border-left: none !important;}	
+	ul.sub-mnu li{height: auto !important;}
+
+    .mn-dvs{width: 100%;    margin-top: 2px;}
+    .dv-bxs-col-lt, .dv-bxs-col-rgt, .dv-bxs-col-lt-2, .dv-bxs-col-rgt-2{width: 100%;}
+    .dv-bxs p{width: 100%;  float: left;    line-height: 20px;}
+    .dv-bxs{min-height: 335px;}
+    .vas-mx-dv-1{display: none;}
+    .vas-mn-dv-1{display: block;}
+    .v-t-1-col-1{width: 100%;   border-right: none; min-height: 26px;   padding: 10px 5px;}
+    .vas-tbl-1{width: 100%;}
+
+
+    /*faq*/
+    .faq-mn-1{display: block;}
+    .faq-mx-1{display: none;}
+    .faq-tbl-hd-col-1, .faq-tbl-col-1, .faq-tbl-hd-col-2, .faq-tbl-col-2, .faq-tgl-tbl-col-1, .faq-tgl-hd-rws, .faq-tgl-tbl-col-2, .faq-tgl-tbl-col-3{width: 100%; border-right: none; text-align: center;}
+    .faq-tgl-table, .faq-tgl-tbl-col-3, .faq-tgl-tbl-col-1, .faq-tgl-tbl-col-2, .faq-t-3-col-1, .faq-t-3-col-2, .faq-tgl-tbl-3-col-3, .faq-tgl-tbl-3 > .faq-tbl-3-rw:first-child, .f-t-4-cols, .f-t-5-col-2, .f-t-6-col-1, .f-t-6-col-2{border-top: none;    text-align: center;}
+
+    .faq-tgl-rws, .faq-tbl-3-rw, .f-tbl-4-rw, .f-t-6-rw{border-top: 1px solid #666766;}
+    .faq-tbl-3-rw{margin: 10px 0 0;}
+    .faq-tgl-tbl-3, .f-t-5-col-2, .f-t-6-rw{width: 100%;}
+    .faq-tbl-3-col-1, .faq-tgl-tbl-3-col-1, .f-t-4-cols{width: 100%;   text-align: center;}
+    .faq-tbl-3-col-2, .faq-tgl-tbl-3-col-2, .faq-tbl-3-part-2, .f-t-4-cols, .f-t-6-col-1, .f-t-6-col-2{width: 100%; border-left: none;  text-align: center;}
+    .faq-tbl-3-part-2 > .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3, .f-t-5-col-2{border-left: none;}
+    .faq-tbl-3-col-3{border-bottom: none;}
+    .faq-tbl-3-part-2, .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3{width: 100%;  text-align: center;}
+    .faq-tbl-6, .faq-tbl-8{width: 100%; text-align: center;}
+    .faq-tgl-tbl-2, .faq-tgl-tbl-4, .faq-tbl-5, .faq-tgl-box{width: 100%;   text-align: center;}
+    .faq-t-8-col-1, .faq-t-8-col-2, .faq-t-8-col-3, .faq-t-8-col-4{width: 100%;}
+    .f-t-8-c-fluid{width: 50%;}
+    .f-t-6-rw{border-left: 1px solid #666766;}
+    .col-eq-2{height: auto;}
+
+    /*prepaid*/
+    .prpd-tbl-1{width: 100%;}
+    .hgt-eq{height: 150px !important;}
+    .prpd-cols{height: 48px;}
+    .hgt-eq-2{height: 120px !important;}
+
+    /*data*/
+    .dt-tbl{width: 100%;}
+    .hgt-eql{height: 85px;  word-break:break-all;}
+
+    /*contact-us*/
+    .ctc-ht{height: 45px;}
+    .dt-tbl-2{width: 100%;}
+    .dt-col a{font-size: 15px;}
+
+    /*promotion*/
+    .prmsn-dv-mx{display: none;}
+    .prmsn-dv-mn{display: block;}
+    .prmsn-col-1, .prmsn-col-2, .prmsn-col-3, .prmsn-t-2-col-1, .prmsn-t-2-col-2, .prmsn-t-2-col-3, .prmsn-t-2-col-4, .prmsn-t-2-col-5, .prmsn-t-3-cols{width: 100%;}
+    .prmsn-t-2-col-half{height: 45px;}
+
+    /*compliments*/
+    .cplt-wrapper{width: 95%;  float: none;}
+    .cplt-col-1, .cplt-col-2{width: 100%;   float: left;    margin-bottom: 10px;}
+    .cplt-col-2{padding-left: 0;}
+    .cplt-rw{padding: 10px 10px 0;}
+    .prpd-main img{max-width: 100%;}
+
+    .prpd-net-rw{width: 100%;   margin-top: 100px;}
+    .prpd-lst-lt{width: 100%;}
+    .prpd-col-img img, .prpd-col-img-2 img{max-width: 100px;}
+    .prpd-nt-col{width: 90%;    margin-left: 5%;   margin-right: 0;    margin-top: 100px;   padding: 0 10px;}
+    .col-clr-1{margin-top: 0 !important;}
+    .col-clr-4{margin-bottom: 100px}
+    #showintdiv{margin-top: 0;}
+    .log-txt span{text-align: left;}
+}
+
+
+@media screen and (min-width:370px) and (max-width:380px){
+.cbp-contentslider nav:not(*:root) {margin-top: -28px !important;}
+.cbp-contentslider nav:not(*:root) {margin-top: -28px !important;}
+}
+@media screen and (min-width:321px) and (max-width:360px){
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+
+	.head-rgt{width: 100%;}
+	#nav li{width: 100%;}
+	.srch{float: right;	width: 240px;	margin-right: 10px;}
+	.nav-mn{height: 40px;	width: auto;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 92%;	padding-left: 42px;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+	.view-cats-cols{width: 100%;	margin: 0 0 10px;}
+	.vw-by-ctgr, .vw-by-brnd, .vw-by-price{width: 100%;	float: left;	margin: 0;	padding: 0 5px;}
+	.ftr-big-col, .ftr-col{width: 100%;	padding: 0 10px;	margin-bottom: 30px;}
+	.ex-col-mrg{width: 100%;	float: left;}
+	.ftr-lst-rgt{margin-top: 20px;	float: left;}
+    /*.mdp-main{margin-top: 220px;}
+    .abt-main{margin-top: 250px;}
+    .prpd-main{margin-top: 260px;}
+    .faq-main{margin-top: 260px;}
+    .dt-main{margin-top: 260px;}
+    .lnd-cat-content-1{margin-top: 265px;}*/
+    .ctc-lft{margin: 20px 0;   width: 100%;}
+    .ctc-disc{border-bottom: none;}
+    .ctc-rgt{width: 100%;   border-bottom: 1px solid #AAA;  padding: 0 20px 30px;}
+
+
+	.ind-cat-prd-bx{padding: 20px 10px 10px;}
+	.ind-cat-prd-sm-nm{text-align: center;}
+	.ind-cat-prd-nm{width: 100%;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 100%;	float: left;	text-align: center;	margin-top: 0;}
+
+	.ind-prd-box-1, .ind-prd-box-2, .ind-prd-box-3{width: 96%;	float: left;	margin-left: 2%;}
+	.main{background-position: -15px top;}
+	/*.head-logo a img {max-width: 180px;}*/
+
+	/*.sld-li{padding: 0 30px;}*/
+	.sld-lft, .sld-rgt{width: 100%;	max-width: 100%;}
+	.sld-rgt{margin-top: 20px;	margin-bottom: 20px;	padding: 0 20px;}
+	.sld-btns a{max-width: 110px;}
+
+	.lpn-main{padding: 0px 15px 60px;}
+	.lpn-left{width: 100%;	padding-right: 0;}
+	.lpn-lt-txt{text-align: left;}
+	.lpn-rgt{width: 100%;	padding-left: 0;}
+	.lpn-rgt p{text-align: justify;}
+	.lpn-lt-img, .lpn-lt-txt{width: 100%;	text-align: center;}
+
+	.mdp-c-cols{width: 100%;	margin: 0 0 40px;}
+	.mdp-c-1-lft{width: 100%;	margin: 20px 0;}
+
+	.dv-bxs{margin-bottom: 15px;	width: 100%;	border-right: none;}
+	.dv-bxs-col-lt, .dv-bxs-col-rgt, .dv-bxs-col-lt-2, .dv-bxs-col-rgt-2{width: 100%;}
+	.dv-bxs p{width: 100%;	float: left;	line-height: 20px;	padding: 5px 0;	margin: 0;}
+	.dv-bxs-hed{margin: 0 0 10px;}
+
+	.sp-slide {background: transparent url("../images/mdp-sld-up-arr-2.png") no-repeat scroll center top;}
+	.dv-bxs{min-height: 1px;}
+
+
+	ul.sub-sub-mnu li{text-indent: 0px !important;}
+	ul.sub-mnu li{width: 100% !important;	border-left: none !important;}	
+	ul.sub-mnu li{height: auto !important;}
+
+    .mn-dvs{width: 100%;    margin-top: 2px;}
+    .dv-bxs-col-lt, .dv-bxs-col-rgt, .dv-bxs-col-lt-2, .dv-bxs-col-rgt-2{width: 100%;}
+    .dv-bxs p{width: 100%;  float: left;    line-height: 20px;}
+    .dv-bxs{min-height: 335px;}
+    .vas-mx-dv-1{display: none;}
+    .vas-mn-dv-1{display: block;}
+    .v-t-1-col-1{width: 100%;   border-right: none; min-height: 26px;   padding:10px 5px;}
+    .vas-tbl-1{width: 100%;}
+
+    /*faq*/
+    .faq-mn-1{display: block;}
+    .faq-mx-1{display: none;}
+    .faq-tbl-hd-col-1, .faq-tbl-col-1, .faq-tbl-hd-col-2, .faq-tbl-col-2, .faq-tgl-tbl-col-1, .faq-tgl-hd-rws, .faq-tgl-tbl-col-2, .faq-tgl-tbl-col-3{width: 100%; border-right: none; text-align: center;}
+    .faq-tgl-table, .faq-tgl-tbl-col-3, .faq-tgl-tbl-col-1, .faq-tgl-tbl-col-2, .faq-t-3-col-1, .faq-t-3-col-2, .faq-tgl-tbl-3-col-3, .faq-tgl-tbl-3 > .faq-tbl-3-rw:first-child, .f-t-4-cols, .f-t-5-col-2, .f-t-6-col-1, .f-t-6-col-2{border-top: none;    text-align: center;}
+
+    .faq-tgl-rws, .faq-tbl-3-rw, .f-tbl-4-rw, .f-t-6-rw{border-top: 1px solid #666766;}
+    .faq-tbl-3-rw{margin: 10px 0 0;}
+    .faq-tgl-tbl-3, .f-t-5-col-2, .f-t-6-rw{width: 100%;}
+    .faq-tbl-3-col-1, .faq-tgl-tbl-3-col-1, .f-t-4-cols{width: 100%;   text-align: center;}
+    .faq-tbl-3-col-2, .faq-tgl-tbl-3-col-2, .faq-tbl-3-part-2, .f-t-4-cols, .f-t-6-col-1, .f-t-6-col-2{width: 100%; border-left: none;  text-align: center;}
+    .faq-tbl-3-part-2 > .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3, .f-t-5-col-2{border-left: none;}
+    .faq-tbl-3-col-3{border-bottom: none;}
+    .faq-tbl-3-part-2, .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3{width: 100%;  text-align: center;}
+    .faq-tbl-6, .faq-tbl-8{width: 100%; text-align: center;}
+    .faq-tgl-tbl-2, .faq-tgl-tbl-4, .faq-tbl-5, .faq-tgl-box{width: 100%;   text-align: center;}
+    .faq-t-8-col-1, .faq-t-8-col-2, .faq-t-8-col-3, .faq-t-8-col-4, .faq-tgl-bx-col-1, .faq-tgl-bx-col-2{width: 100%;}
+    .f-t-8-c-fluid{width: 50%;}
+    .f-t-6-rw{border-left: 1px solid #666766;}
+    .col-eq-2{height: auto;}
+    .f-t-8-c-fluid{line-height: 16px;}
+
+    /*prepaid*/
+    .prpd-tbl-1{width: 100%;}
+    .hgt-eq{height: 170px !important;}
+    .prpd-cols{height: 48px;}
+    .hgt-eq-2{height: 150px !important;}
+
+    /*data*/
+    .dt-tbl{width: 100%;}
+    .hgt-eql{height: 105px;  word-break:break-all;}
+
+    /*contact-us*/
+    .ctc-ht{height: 70px;}
+    .dt-tbl-2{width: 100%;}
+    .dt-col a{font-size: 13px;}
+
+    /*promotion*/
+    .prmsn-dv-mx{display: none;}
+    .prmsn-dv-mn{display: block;}
+    .prmsn-col-1, .prmsn-col-2, .prmsn-col-3, .prmsn-t-2-col-1, .prmsn-t-2-col-2, .prmsn-t-2-col-3, .prmsn-t-2-col-4, .prmsn-t-2-col-5, .prmsn-t-3-cols{width: 100%;}
+    .prmsn-t-2-col-half{height: 45px;}
+
+    /*compliments*/
+    .cplt-wrapper{width: 100%;  float: left;}
+    .cplt-col-1, .cplt-col-2{width: 100%;   float: left;    margin-bottom: 10px;}
+    .cplt-col-2{padding-left: 0;}
+    .cplt-rw{padding: 10px 10px 0;}
+    .prpd-main img{max-width: 100%;}
+
+    .prpd-net-rw{width: 100%;   margin-top: 100px;}
+    .prpd-lst-lt{width: 100%;}
+    .prpd-col-img img, .prpd-col-img-2 img{max-width: 100px;}
+    .prpd-nt-col{width: 100%;    margin-left: 0;   margin-right: 0;    margin-top: 100px;   padding: 0 10px;}
+    .col-clr-1{margin-top: 0 !important;}
+    .col-clr-4{margin-bottom: 100px}
+    #showintdiv{margin-top: 0;}
+
+    /*login*/
+    .log-lnk a{width: 100%; display: block; text-align: center; margin-bottom: 10px;}
+    .log-sbmt{width: 100%;  text-align: center;}
+    .log-txt span{text-align: left;}
+}
+
+@media screen and (max-width:320px){
+	.main-inn > header{width: 100%;}
+	.margin{width: 96%;}
+
+	.head-rgt{width: 100%;}
+	#nav li{width: 100%;}
+	.srch{float: right;	width: 240px;	margin:4px 10px 0 0;}
+	.nav-mn{height: 40px;	width: auto;}
+	.srch input{width: 100%;}
+	.srch-inn{width: 92%;	padding-left: 42px;}
+	#menu-icon{margin: 8px 0px 0px 7px;}
+	.lnd-cat-content-1{overflow: hidden;}
+	.brd-crm{padding-left: 20px;}
+	.view-cats-cols{width: 100%;	margin: 0 0 10px;}
+	.vw-by-ctgr, .vw-by-brnd, .vw-by-price{width: 100%;	float: left;	margin: 0;	padding: 0 5px;}
+	.ftr-big-col, .ftr-col{width: 100%;	padding: 0 10px;	margin-bottom: 30px;}
+	.ex-col-mrg{width: 100%;	float: left;}
+	.ftr-lst-rgt{margin-top: 20px;	float: left;}
+    /*.mdp-main{margin-top: 115px;}
+    .abt-main{margin-top: 220px;}
+    .prpd-main{margin-top: 260px;}
+    .faq-main{margin-top: 260px;}
+    .dt-main{margin-top: 260px;}
+    .lnd-cat-content-1{margin-top: 265px;}*/
+    .ctc-lft{margin: 20px 0;   width: 100%;}
+    .ctc-disc{border-bottom: none;}
+    .ctc-rgt{width: 100%;   border-bottom: 1px solid #AAA;  padding: 0 20px 30px;}
+
+
+	.ind-cat-prd-bx{padding: 20px 10px 10px;}
+	.ind-cat-prd-sm-nm{text-align: center;}
+	.ind-cat-prd-nm{width: 100%;	text-align: center;}
+	.ind-cat-prd-lnmr{width: 100%;	float: left;	text-align: center;	margin-top: 0;}
+
+	.ind-prd-box-1, .ind-prd-box-2, .ind-prd-box-3{width: 96%;	float: left;	margin-left: 2%;}
+	.main{background-position: -20px top;}
+	/*.head-logo a img {max-width: 180px;}*/
+
+	/*.sld-li{padding: 0 30px;}*/
+	.sld-lft, .sld-rgt{width: 100%;	max-width: 100%;}
+	.sld-rgt{margin-top: 20px;	margin-bottom: 20px;	padding: 0 20px;}
+
+	.lpn-main{padding: 0px 10px 60px;}
+	.lpn-left{width: 100%;	padding-right: 0;}
+	.lpn-lt-txt{text-align: left;}
+	.lpn-rgt{width: 100%;	padding-left: 0;}
+	.lpn-rgt p{text-align: justify;}
+	.lpn-lt-img, .lpn-lt-txt{width: 100%;	text-align: center;}
+
+	.mdp-c-cols{width: 100%;	margin: 0 0 40px;}
+	.mdp-c-1-lft{width: 100%;	margin: 20px 0;}
+
+	.dv-bxs{margin-bottom: 15px;	width: 100%;	border-right: none;}
+	.dv-bxs-col-lt, .dv-bxs-col-rgt, .dv-bxs-col-lt-2, .dv-bxs-col-rgt-2{width: 100%;}
+	.dv-bxs p{width: 100%;	float: left;	line-height: 20px;	padding: 5px 0;	margin: 0;}
+	.dv-bxs-hed{margin: 0 0 10px;}
+	.dv-bxs{min-height: 1px;}
+
+
+	ul.sub-sub-mnu li{text-indent: 0px !important;}
+	ul.sub-mnu li{width: 100% !important;	border-left: none !important;}	
+	ul.sub-mnu li{height: auto !important;}
+
+    .mn-dvs{width: 100%;    margin-top: 2px;}
+    .dv-bxs-col-lt, .dv-bxs-col-rgt, .dv-bxs-col-lt-2, .dv-bxs-col-rgt-2{width: 100%;}
+    .dv-bxs p{width: 100%;  float: left;    line-height: 20px;}
+    .dv-bxs{min-height: 335px;}
+    .vas-mx-dv-1{display: none;}
+    .vas-mn-dv-1{display: block;}
+    .v-t-1-col-1{width: 100%;   border-right: none; min-height: 26px;   padding:10px 5px;}
+    .vas-tbl-1{width: 100%;}
+
+    /*faq*/
+    .faq-mn-1{display: block;}
+    .faq-mx-1{display: none;}
+    .faq-tbl-hd-col-1, .faq-tbl-col-1, .faq-tbl-hd-col-2, .faq-tbl-col-2, .faq-tgl-tbl-col-1, .faq-tgl-hd-rws, .faq-tgl-tbl-col-2, .faq-tgl-tbl-col-3{width: 100%; border-right: none; text-align: center;}
+    .faq-tgl-table, .faq-tgl-tbl-col-3, .faq-tgl-tbl-col-1, .faq-tgl-tbl-col-2, .faq-t-3-col-1, .faq-t-3-col-2, .faq-tgl-tbl-3-col-3, .faq-tgl-tbl-3 > .faq-tbl-3-rw:first-child, .f-t-4-cols, .f-t-5-col-2, .f-t-6-col-1, .f-t-6-col-2{border-top: none;    text-align: center;}
+
+    .faq-tgl-rws, .faq-tbl-3-rw, .f-tbl-4-rw, .f-t-6-rw{border-top: 1px solid #ccc;}
+    .faq-tbl-3-rw{margin: 10px 0 0;}
+    .faq-tgl-tbl-3, .f-t-5-col-2, .f-t-6-rw{width: 100%;}
+    .faq-tbl-3-col-1, .faq-tgl-tbl-3-col-1, .f-t-4-cols{width: 100%;   text-align: center;}
+    .faq-tbl-3-col-2, .faq-tgl-tbl-3-col-2, .faq-tbl-3-part-2, .f-t-4-cols, .f-t-6-col-1, .f-t-6-col-2{width: 100%; border-left: none;  text-align: center;}
+    .faq-tbl-3-part-2 > .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3, .f-t-5-col-2{border-left: none;}
+    .faq-tbl-3-col-3{border-bottom: none;}
+    .faq-tbl-3-part-2, .faq-tbl-3-col-4, .faq-tgl-tbl-3-col-3{width: 100%;  text-align: center;}
+    .faq-tbl-6, .faq-tbl-8{width: 100%; text-align: center;}
+    .faq-tgl-tbl-2, .faq-tgl-tbl-4, .faq-tbl-5, .faq-tgl-box{width: 100%;   text-align: center;}
+    .faq-t-8-col-1, .faq-t-8-col-2, .faq-t-8-col-3, .faq-t-8-col-4, .faq-tgl-bx-col-1, .faq-tgl-bx-col-2{width: 100%;}
+    .f-t-8-c-fluid{width: 50%;}
+    .f-t-6-rw{border-left: 1px solid #666766;}
+    .f-t-8-c-fluid{line-height: 16px;}
+    .col-eq-2{height: auto;}
+
+    /*prepaid*/
+    .prpd-tbl-1{width: 100%;}
+    .hgt-eq{height: 170px !important;}
+    .prpd-cols{height: 48px;}
+    .hgt-eq-2{height: 155px !important;}
+
+    /*data*/
+    .dt-tbl{width: 100%;}
+    .hgt-eql{height: 105px;  word-break:break-all;}
+
+    /*contact-us*/
+    .ctc-ht{height: 70px;}
+    .dt-tbl-2{width: 100%;}
+    .dt-col a{font-size: 13px;}
+
+    /*promotion*/
+    .prmsn-dv-mx{display: none;}
+    .prmsn-dv-mn{display: block;}
+    .prmsn-col-1, .prmsn-col-2, .prmsn-col-3, .prmsn-t-2-col-1, .prmsn-t-2-col-2, .prmsn-t-2-col-3, .prmsn-t-2-col-4, .prmsn-t-2-col-5, .prmsn-t-3-cols{width: 100%;}
+    .prmsn-t-2-col-half{height: 45px;}
+
+    /*compliments*/
+    .cplt-wrapper{width: 100%;  float: left;}
+    .cplt-col-1, .cplt-col-2{width: 100%;   float: left;    margin-bottom: 10px;}
+    .cplt-col-2{padding-left: 0;}
+    .cplt-rw{padding: 10px 10px 0;}
+    .prpd-main img{max-width: 100%;}
+    /*.rohumbus {height: 140px;   top: -16px;}*/
+
+     .prpd-net-rw{width: 100%;   margin-top: 100px;}
+    .prpd-lst-lt{width: 100%;}
+    .prpd-col-img img, .prpd-col-img-2 img{max-width: 100px;}
+    .prpd-nt-col{width: 100%;    margin-left: 0;   margin-right: 0;    margin-top: 100px;   padding: 0 10px;}
+    .col-clr-1{margin-top: 0 !important;}
+    .col-clr-4{margin-bottom: 100px}
+    #showintdiv{margin-top: 0;}
+
+    /*login*/
+    .log-lnk a{width: 100%; display: block; text-align: center; margin-bottom: 10px;}
+    .log-sbmt{width: 100%;  text-align: center;}
+    .log-txt span{text-align: left;}
+
+
+
+
+
+
+
+
+}
+
+
+
+
+/* Order Summary
+-----------------------------------------------------------------------------------------------------------------------*/
+.o-lbl-1 {
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.o-lbl-4 {
+    float: left;
+    font-size: 14px;
+    width: 24.5%;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.tbl-head {
+    max-width: 800px;
+    width: 100%;
+    border: solid 1px #808080;
+}
+
+.tbl-row {
+    max-width: 800px;
+    width: 100%;
+    border: solid 1px #808080;
+}
+
+.tbl-th-1 {
+    float: left;
+    width: 10%;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+.tbl-th-2 {
+    float: left;
+    width: 40%;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+.tbl-td-1 {
+    float: left;
+    width: 10%;
+    font-size: 13px;
+    text-align: center;
+    padding: 5px;
+}
+
+.tbl-td-2 {
+    float: left;
+    width: 40%;
+    font-size: 13px;
+    text-align: center;
+    padding: 5px;
+}
+
+.span-th {
+    display: none;
+    font-weight: bold;
+    float: left;
+}
+
+.btn-row-1 {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+@media screen and (max-width:399px) {
+    .o-lbl-1 {
+        font-size: 14px;
+    }
+
+    .o-lbl-4 {
+        font-size: 14px;
+        width: 99.5% !important;
+    }
+
+    .tbl-head {
+        display: none;
+    }
+
+    .tbl-td-1, .tbl-td-2 {
+        width: 99.5% !important;
+    }
+
+    .span-th {
+        display: block;
+    }
+
+    .btn-row-1 > .btn-sbmt {
+        display: none;
+    }
+}
+
+@media (min-width:400px) and (max-width:800px) {
+    /* Order Summary */
+    .o-lbl-1 {
+        font-size: 16px;
+    }
+
+    .o-lbl-4 {
+        font-size: 14px;
+        width: 49.5% !important;
+    }
+
+    .tbl-head {
+        display: none;
+    }
+
+    .tbl-td-1, .tbl-td-2 {
+        width: 49.5% !important;
+    }
+
+    .span-th {
+        display: block;
+    }
+
+    .btn-row-1 > .btn-sbmt {
+        display: none;
+    }
+}

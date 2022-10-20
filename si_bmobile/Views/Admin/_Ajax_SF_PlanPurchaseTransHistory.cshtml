@@ -1,0 +1,109 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.tbl_web_plan_purchase_trans>
+
+@if (Model != null)
+{
+    if (Model.Count() > 0)
+    {
+        <a href="@Url.Action("SF_PlanPurchaseTransHis_CSV", "Admin")" style="float:right">
+            <img src="~/images/Csv-icon.png" alt="Export to csv" border="0" />
+        </a>
+    
+        <table class="table table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th>Transaction Number </th>
+                    <th>MSISDN</th>
+                    <th>Plan ID</th>
+                    <th>Plan Name</th>
+                    <th>Plan Price</th>
+                    <th>Trans Initiated Date</th>
+                    <th>Trans Purchase Date</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.trans_number </td>
+                        <td>@item.msisdn</td>
+                        <td>@item.plan_id</td>
+                        <td>@item.plan_name</td>
+                        <td>@item.plan_price</td>
+                        <td>
+                            @item.created_on.ToString("dd/MM/yyyy H:mm:ss")
+                        </td>
+                        <td>@string.Format("{0:dd/MM/yyyy H:mm:ss}", @item.plan_purchased_on)</td>
+                        <td>@item.trans_status</td>
+                        @if (@item.type_id == 1)
+                        {
+                            <td>
+                                Web
+                            </td>
+                        }
+                        else if (@item.type_id == 2)
+                        {
+                            <td>
+                                Android
+                            </td>
+                        }
+                        else if (@item.type_id == 3)
+                        {
+                            <td>
+                                Iphone
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                NA
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="pager1">
+            @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "SF_PlanPurchaseTransHistory", pTransNo = ViewData["pTransNo"], pMSISDN = ViewData["pMSISDN"], planID = ViewData["pPlanID"], planName = ViewData["sPlanName"], pStatus = ViewData["pStatus"], sDt = ViewData["sDt"], eDt = ViewData["eDt"], TypeId = ViewData["TypeId"] })) @*,bundle_id=ViewData["bundle_id"],plan_name=ViewData["plan_name"],ddlStatus=ViewData["ddlStatus"],ddlType=ViewData["ddlType"]*@
+            <div class="well">
+                Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+                of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+            </div>
+        </div>
+    }
+    else
+    {
+        <div style="margin-left: 35%">
+            <h3>No Record Found</h3>
+        </div>
+    }
+}
+
+
+
+

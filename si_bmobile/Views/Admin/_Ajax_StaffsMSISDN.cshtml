@@ -1,0 +1,108 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.bm_staffs_topup>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Staff Name
+            </th>
+            <th>MSISDN Number
+            </th>
+            <th>Amount
+            </th>
+            <th>Invoice
+            </th>
+            <th>E-mail
+            </th>
+            <th>Recharge Status
+            </th>
+            <th>Active Status
+            </th>
+            <th>Reason
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.first_name&nbsp;@item.last_name
+                </td>
+                <td>
+                    @item.msisdn_number
+                </td>
+                <td>
+                    @item.amount
+                </td>
+                <td>
+                    @item.invoice
+                </td>
+                <td>
+                    @item.email
+                </td>
+                @if (item.is_recharged == true)
+                {
+                    <td>Success</td>
+                }
+                else
+                {
+                    <td>Failed</td>
+                }
+
+                @if (item.is_active == true)
+                {
+                    <td>Active</td>
+                }
+                else
+                {
+                    <td>Inactive</td>
+                }
+                <td>
+                    @item.reason
+                </td>
+                @*<td>
+                    @Html.ActionLink("Edit", "EditProduct", new { id = @item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteProduct", new { id = @item.Id }, new { @onclick = "return confirm('Are you sure,want to delete this product ?')" })
+                </td>*@
+            </tr>
+            }
+
+        }
+    </tbody>
+</table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "staffs_msisdn", staffs = ViewData["staffs"], msisdn = ViewData["msisdn"], invoice = ViewData["invoice"], sBrand = ViewData["sBrand"] }))
+
+
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>
+

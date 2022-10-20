@@ -1,0 +1,176 @@
+﻿@model si_bmobile.Models.order_summary_model
+
+@{
+    ViewBag.Title = "MyOrderSummary";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+
+    string status = Model.order.order_is_delivery == true ? "Delivered" : "Pending";
+}
+<iframe id="ifrmPrint" src="" style="width: 0px; height: 0px;"></iframe>
+
+<div class="mid_margin">
+    <div class="BreadCrumb">
+        <ul>
+            <li>You are here:</li>
+            <li><a href="/Shop/MyOrders">MyOrders</a></li>
+            <li>>>&nbsp;Order Summary</li>
+        </ul>
+    </div>
+    <div style="clear: both;"></div>
+    <div id="printdiv">
+        @if (Model != null && Model.ordered_user!=null && Model.order != null)
+        {
+        <div class="cont_pan box_shadow" style="background-color: #FFF !important; margin-top: 30px; padding: 0.5%;">
+            <div class="title">Order Summary</div>
+            <div class="divtr">
+                <div class="editor-label w20">Order No:&nbsp;</div>
+                <div class="editor-field w30">@Model.order_pay.payment_transaction_number</div>
+                <div class="editor-label w20">Order Date:&nbsp;</div>
+                <div class="editor-field w30">@Model.order.order_datetime.ToString("dd/MM/yyyy hh:mm tt")</div>
+            </div>
+            <div class="divtr">
+                <div class="editor-label w20">Name:&nbsp;</div>
+                <div class="editor-field w30">@Model.ordered_user.first_name&nbsp;@Model.ordered_user.last_name</div>
+                <div class="editor-label w20">Email:&nbsp;</div>
+                <div class="editor-field w30">@Model.ordered_user.email</div>
+            </div>
+            <div class="divtr">
+                <div class="editor-label w20">Order Status:&nbsp;</div>
+                <div class="editor-field w30">@Model.order_pay.payment_status</div>
+                <div class="editor-label w20">&nbsp;</div>
+                <div class="editor-field w30">&nbsp;</div>
+            </div>
+            <div class="divtr">
+                <div class="editor-label w20">&nbsp;</div>
+                <div class="editor-field w30">&nbsp;</div>
+                <div class="editor-label w20">Shipping Address:&nbsp;</div>
+                <div class="editor-field w30">
+                    @Model.ordered_user.address1
+                    <br />
+                    @Model.ordered_user.address2
+                    <br />
+                    @Model.ordered_user.city&nbsp;-&nbsp;@Model.ordered_user.postcode
+                    <br />
+                    @Model.ordered_user.country
+                </div>
+            </div>
+            <div class="divtr" style="height: 20px;"></div>
+            <div class="divtr">
+                <table class="webGrid">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th style="text-align: center;">Product Name
+                            </th>
+                            <th>Model No
+                            </th>
+                            <th style="text-align: right;">Unit Price
+                            </th>
+                            <th style="text-align: center;">Qty
+                            </th>
+                            <th style="text-align: right;">Sub Total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{decimal total_amount = 0; }
+                        @foreach (var item in Model.order_items)
+                        {        
+                            <tr>
+                                <td>
+                                    <div style="width: 100px; min-width: 100px;">
+
+                                        @if (item.product_img!=null)
+                                        {
+                                            <a href="@Url.Action("ProductInfo", "Shop", new { Id = item.product_id })">
+                                                <img  src="~/pro_images/@item.product_img" style="max-width:100px; max-height:100px;" border="0" />
+                                            </a>
+                                        }
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">
+                                    @Html.DisplayFor(modelItem => item.product_name)
+                                </td>
+                                <td style="text-align: left;">
+
+                                    @if (item.product_name != "SIM Topup Charges")
+                                    {
+                                        @Html.DisplayFor(modelItem => item.product_model)
+                                    }
+                                    &nbsp;
+                                </td>
+                                <td style="text-align: right;">K&nbsp;@Html.DisplayFor(modelItem => item.product_price)
+                                </td>
+                                <td style="text-align: center;">
+                                    @Html.DisplayFor(modelItem => item.product_qty)
+                                </td>
+
+                                @{var sub_total = item.product_qty * item.product_price;
+                                  total_amount += sub_total;
+                                }
+
+                                <td style="text-align: right;">K&nbsp;@sub_total.ToString("0.#0")
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td colspan="4" style="text-align: right; font-weight: bold;">Cart Subtotal :&nbsp;</td>
+                            <td style="text-align: right; font-weight: bold;">K&nbsp;@Model.order.order_product_total.ToString("0.#0")</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="4" style="text-align: right; font-weight: bold;">Grand Total :&nbsp;</td>
+                            <td style="text-align: right; font-weight: bold;">K&nbsp;@Model.order.order_product_total.ToString("0.#0")</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="clr"></div>
+        </div>
+        }
+    </div>
+
+    <div class="divtr" style="padding: 30px 0px 30px 0px; text-align: center;">
+        <input type="button" value="Back" onclick="window.location.href='@Url.Action("MyOrders", "Shop")'" />&nbsp;
+            <input type="button" value="Print" onclick="printsummary()" />
+    </div>
+
+
+</div>
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        function printsummary() {
+            try {        
+                var oIframe = $('#ifrmPrint')[0];
+                var oContent = $('#printdiv').html();
+
+                var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
+                if (oDoc.document) oDoc = oDoc.document;
+                oDoc.write("<head>");
+                oDoc.write("<link href='@Url.Content("~/Content/Site.css")' rel='stylesheet' type='text/css' />");
+                //oDoc.write("<style>");
+                //oDoc.write("#divBtn { display: none; }");
+                //oDoc.write("</style>");
+                oDoc.write("</head><body onload='this.focus(); this.print();'>");
+                oDoc.write(oContent + "</body>");
+                oDoc.close();
+                var ua = $.browser;
+                if (ua.mozilla) {
+                    alert('Printing in progress..');
+                }
+
+                titlediv.style.display = "block";
+            }
+            catch (e) {
+                self.print();
+            }
+        }
+    </script>
+
+}

@@ -1,0 +1,105 @@
+﻿@model si_bmobile.Models.ChangeTypeModel
+
+@{
+    ViewBag.Title = "ChangeType";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+}
+
+<div class="abt-main">
+    <div class="prm-tab-panel">
+        @using (Html.BeginForm("ChangeType", "Care", FormMethod.Post, new { id = "frmChangeType", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h2>You are about to buy a Prepaid @Html.DisplayFor(c => c.BundleType) @*Bundle*@ </h2>
+            <div class="dRow">
+                <p><b>Details:</b></p>
+                <p>Mobile number:&nbsp;@Html.DisplayFor(c => c.FormattedMobileNo)</p>
+                <p>Prepaid&nbsp;@Html.DisplayFor(c => c.BundleType)&nbsp;@*Bundle*@: @Html.DisplayFor(p => p.planName),&nbsp;@Html.DisplayFor(p => p.Description)</p>
+                <p>Fee of @Html.DisplayFor(c => c._planPrice) will be deducted from your account</p>
+            </div>
+
+            @Html.HiddenFor(c => c.MobileNo)
+            @Html.HiddenFor(c => c.Email)
+            @Html.HiddenFor(c => c.PlanId)
+            @Html.HiddenFor(c => c.balance)
+            @Html.HiddenFor(c => c.dPlanPrice)
+            @Html.HiddenFor(c => c.UserId)
+            @Html.HiddenFor(c => c.BundleType)
+            @Html.HiddenFor(c => c.planName)
+            <div class="dRow">
+                <div class="dRowlbl">
+                    &nbsp;
+                </div>
+                <div class="dRowctrl">
+                    <input id="btnSubmit" type="submit" name="Command" class="btn-sbmt" value="Confirm" />&nbsp;
+                    @Html.ActionLink("Cancel", "RefreshACC", "Care")
+                </div>
+                <div class="clear">
+                </div>
+
+            </div>
+            <div id="div_DialogPlans" style="display: none;">
+                <p>@ViewBag.Message</p>
+            </div>
+            <div id="confirm_dialog" style="display: none;">
+                <p>Are you sure want to continue?</p>
+            </div>
+        }
+    </div>
+    @Html.Partial("_cms_RightNav_Menu")
+    <div style="clear:both;"></div>
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        $("#div_DialogPlans").dialog({
+            title: "Message",
+            buttons: {
+                Close: function () {
+                    $(this).dialog('close');
+                    //window.location.href = '/Care/Prepaid';
+                    window.location = '@Url.Action("Prepaid", "Care")';
+                }
+            },
+            width: 300,
+            top: 450,
+            left: 10,
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            modal: true
+        });
+    </script>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $('#btnSubmit').click(function () {
+            var res = false;
+            $("#confirm_dialog").dialog({
+                title: "Confirmation",
+                buttons: {
+                    Continue: function () {
+                        $(this).dialog('close');
+                        res = true;
+                        $('form').submit();
+                    },
+                    Close: function () {
+                        $(this).dialog('close');
+                    }
+                },
+                dialogClass: 'dialog_css',
+                width: 350,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+           
+            return res;
+        });
+    </script>
+}

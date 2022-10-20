@@ -1,0 +1,51 @@
+﻿@model bemobile.Models.AdminModel
+
+@{
+    ViewBag.Title = "Doku Login";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+
+}
+
+<h2>Doku Login</h2>
+@using (Html.BeginForm("Login", "Doku", FormMethod.Post, new { id = "frmDokuLogin", enctype = "multipart/form-data" }))
+{
+  
+    <div class="container">
+          @Html.AntiForgeryToken()
+         @Html.ValidationSummary(true)
+        <div class="DivRow">
+            <div class="DivLabel">
+                UserName :
+            </div>
+            <div class="DivTxt">
+                @Html.TextBoxFor(model => model.Username, null, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.Username)
+            </div>
+        </div>
+        <div class="DivRow">
+            <div class="DivLabel">
+                Password :
+            </div>
+            <div class="DivTxt">
+                @Html.PasswordFor(model => model.Password, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+        <div class="DivRow">
+            <div class="DivLabel">
+                &nbsp;
+            </div>
+            <div class="DivTxt">
+                <div style="color:red;">@ViewBag.Message</div>
+            </div>
+        </div>   
+         <div class="DivRow">
+            <div class="DivLabel">
+                &nbsp;
+            </div>
+            <div class="DivTxt">
+                <input type="submit" value="Login" />
+            </div>
+        </div>     
+    </div>
+}

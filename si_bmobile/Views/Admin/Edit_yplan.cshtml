@@ -1,0 +1,133 @@
+﻿@model si_bmobile.Models.plansModel
+@{
+    ViewBag.Title = "Edit your plan";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+@using (Html.BeginForm("Edit_yplan", "Admin", FormMethod.Post, new { id = "frmEditYplan", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.id)
+   
+    <div class="divheader">
+        EDIT YOUR PLAN
+    </div>
+    <div class="maindivlayout">
+
+        <div>
+            <div class="divlabel">
+                Plan Type<span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.DropDownListFor(model => model.plan_type_id, Model.lstPlanType, "-- Select --", new { @style = "width:220px" })
+                @for (var i = 0; i < Model.lstPlanType.Count; i++)
+                {
+                    @Html.HiddenFor(m => m.lstPlanType[i].Text);
+                    @Html.HiddenFor(m => m.lstPlanType[i].Value);
+                    @Html.HiddenFor(m => m.lstPlanType[i].Selected);
+                }
+
+                @Html.ValidationMessageFor(model => model.plan_type_id)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+
+        <div>
+            <div class="divlabel">
+                Plan Name <span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.name)
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+       
+
+
+        <div>
+            <div class="divlabel">
+                Account Type Id <span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.account_type)
+                @Html.ValidationMessageFor(model => model.account_type)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Min Measure Id <span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.Minmeasureid)
+                @Html.ValidationMessageFor(model => model.Minmeasureid)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div style="padding-bottom: 10px;">
+            <div class="divlabel">
+                Active
+            </div>
+            <div class="divtxt">
+                @Html.CheckBoxFor(model => model.isActive)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">&nbsp;</div>
+            <div class="divtxt">
+                <input type="submit" value="Save" />&nbsp;<input type="button" id="cancelBtn" onclick="window.location.href = '/Admin/Yplans';" value="Cancel" />
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+    
+ 
+
+}
+<div style="clear: both;"></div>
+
+<div id="div_bundle_dialog" style="display: none;">
+    <p>@ViewBag.Msg</p>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Msg))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#div_bundle_dialog").dialog({
+                    title: "Message",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            window.location.href = '@Url.Action("Yplans", "Admin")';
+                        }
+                    },
+                    dialogClass: 'dialog_css',
+                    width: 350,
+                    autoOpen: true,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });
+            });
+        </script>   
+   
+    }
+}

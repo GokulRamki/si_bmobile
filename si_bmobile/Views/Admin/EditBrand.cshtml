@@ -1,0 +1,90 @@
+﻿@model si_bmobile.Models.web_tbl_brand
+@{
+    ViewBag.Title = "EditBrand";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+
+@using (Html.BeginForm("EditBrand", "Admin", FormMethod.Post, new { id = "frmEditBrand", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+  
+    <div class="divheader">
+        EDIT BRAND
+    </div>
+    
+    <div class="maindivlayout">
+
+        @Html.HiddenFor(m=>m.Brand_ID)
+        @Html.HiddenFor(m=>m.Creation_Date)
+
+        <div>
+            <div class="divlabel">
+                Brand Name <span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.Brand_Name, new { maxlength = 100 })
+                @Html.ValidationMessageFor(model => model.Brand_Name)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Brand Description<span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextAreaFor(model => model.Brand_Description, new { @style = "width: 50%;" })
+                @Html.ValidationMessageFor(model => model.Brand_Description)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">&nbsp;</div>
+            <div class="divtxt">
+                <input type="submit" value="Update" />&nbsp;<input type="button" onclick="window.location.href = '@Url.Action("Brands", "Admin")    '" value="Cancel" />
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+    
+    <div id="div_dialog" style="display: none;">
+        <p>@ViewBag.Message</p>
+    </div>
+
+    
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+
+    @if (ViewBag.Message != null)
+    { 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#div_dialog").dialog({
+                    title: "Message",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            window.location.href = '@Url.Action("Brands", "Admin")';
+                        }
+                    },
+                    width: 350,
+                    dialogClass: 'dialog_css',
+                    autoOpen: true,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });
+            });
+        </script>
+    }
+}

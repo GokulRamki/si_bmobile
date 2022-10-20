@@ -1,0 +1,113 @@
+﻿@model si_bmobile.Models.tbl_kyc_version_update
+
+
+@{
+    ViewBag.Title = "Create KYC Version";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+@using (Html.BeginForm("CreateKYCVersion", "Admin", FormMethod.Post, new { id = "frmCreateKYCVersion", enctype = "multipart/form-data" }))
+{
+
+    @Html.ValidationSummary(true)
+
+    <div class="divheader">
+        Create KYC Version
+    </div>
+    <div class="maindivlayout">
+
+        <div>
+            <div class="divlabel">
+                KYC Version <span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.kyc_version)
+                @Html.ValidationMessageFor(model => model.kyc_version)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div>
+            <div class="divlabel">
+                APK Url<span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.apk_url)
+                @Html.ValidationMessageFor(model => model.apk_url)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div>
+            <div class="divlabel">
+                Description<span class="mandiv"></span>
+            </div>
+            <div class="divtxt">
+                @Html.TextAreaFor(model => model.description)
+                @Html.ValidationMessageFor(model => model.description)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div>
+            <div class="divlabel">
+                Active<span class="mandiv"></span>
+            </div>
+            <div class="divtxt">
+                @Html.CheckBoxFor(model => model.is_active)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+
+
+
+
+        <div style="padding-top: 10px;">
+            <div class="divlabel">&nbsp;</div>
+            <div class="divtxt">
+                <input type="submit" value="Create" />&nbsp;<input type="button" onclick="window.location= '@Url.Action("KYC_Version_List", "Admin")'" value="Cancel" />
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+    
+    <div id="div_dialog" style="display: none;">
+
+        <p>@ViewBag.Message</p>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    @if (ViewBag.Message != null)
+    { 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#div_dialog").dialog({
+                    title: "Message",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            var message='@ViewBag.Message'
+
+                            if(message == "KYC Version Inserted Successfully")
+                                window.location.href = "@Url.Action("CreateKYCVersion", "Admin")";
+                        }
+                    },
+                    width: 350,
+                    dialogClass: 'dialog_css',
+                    autoOpen: true,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });
+            });
+        </script>
+    }
+}

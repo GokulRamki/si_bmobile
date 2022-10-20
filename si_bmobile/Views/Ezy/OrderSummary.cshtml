@@ -1,0 +1,250 @@
+﻿@model si_bmobile.Models.EzyOrderModel
+@{
+    ViewBag.Title = "Payment Summary";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+
+<div class="mid_margin">
+
+    <iframe id="ifrmPrint" src="" style="width: 0px; height: 0px;"></iframe>
+    @if (Model == null)
+    {
+        <div style="@ViewBag.dFail">
+            <h2>Sorry,</h2>
+            <div style="font-size: 25px;">
+                <img src="~/images/Close-2-icon.png" />&nbsp;
+                Your Transaction has Cancelled!
+            </div>
+            <div style="margin-top: 10px; font-size: 15px; padding-left: 70px; margin-bottom: 10px;">
+                <div>Please Contact Customer Care: 1555 </div>
+                <div><span>Click&nbsp;@Html.ActionLink("here", "RefreshACC", "Care")&nbsp;to go to Account Summary</span></div>
+            </div>
+        </div>
+    }
+   
+    else
+    {
+        if (Model.eo != null)
+        {
+            <div style="@ViewBag.dSuccess">
+
+                <div id="divOrderSummary">
+                    <div style="float: left; width: 800px;">
+                        <div>
+                            <br />
+                            <strong>bmobile Limited</strong><br />
+                            <strong>PO Box 1055,</strong><br />
+                            <strong>Waigani</strong><br />
+                            <strong>National Capital District 131</strong><br />
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div style="float: left; width: 800px;">&nbsp</div>
+                    <div style="float: left; font-size: 18px; font-weight: bold; padding-bottom: 10px; width: 800px;">
+                        <img src="~/images/Ok-icon.png" title="Process done" />
+                        THANK YOU FOR YOUR PAYMENT
+                    </div>
+                    <div style="clear: both;"></div>
+
+                    <div style="float: left; font-size: 14px; width: 200px; font-weight: bold; padding-bottom: 10px;">
+                        YOUR TRANSACTION NO :
+                    </div>
+                    <div style="float: left; font-size: 14px; width: 200px; font-weight: bold; text-align: left;">
+                        @Html.DisplayFor(t => t.eop.payment_transaction_number)
+                    </div>
+                    <div style="clear: both;"></div>
+                    <div style="float: left; font-size: 12px; width: 200px; text-align: left;">
+                        Payment date :
+                    </div>
+                    <div style="float: left; font-size: 12px; width: 200px; text-align: left;">
+                        @Html.DisplayFor(t => t.eo.order_datetime)
+                    </div>
+                    <div style="clear: both;"></div>
+
+                  
+                    @if (Model.eoi.Count > 0)
+                    {
+                  
+                        decimal dtotal = 0;
+                        int sno = 0;
+                        long qty = 0;
+                        string tot_qty = "";
+                        
+<!-- Order items --><div>
+                        @for (int i = 0; i < Model.eoi.Count; i++)
+                        {
+                            string description = "";
+
+                            if (i == 0)
+                            {
+                             
+                                <div style="border: solid 1px #808080; width: 800px;">
+                            <div style="float: left; width: 35px; font-size: 13px; font-weight: bold; text-align: left; padding: 5px;">
+                                SNO
+                            </div>
+                            <div style="float: left; width: 250px; font-size: 13px; font-weight: bold; text-align: center; padding: 5px;">
+                                Description
+                            </div>
+
+                            <div style="float: left; width: 100px; font-size: 13px; font-weight: bold; text-align: center; padding: 5px;">
+                                Quantity
+                            </div>
+
+                            <div style="float: left; width: 150px; font-size: 13px; font-weight: bold; text-align: right; padding: 5px;">
+                                Price
+                            </div>
+
+                            <div style="float: left; width: 150px; font-size: 13px; font-weight: bold; text-align: right; padding: 5px;">
+                                Total Price
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+                    
+                            }
+
+                            long quantity = Model.eoi[i].product_qty;
+                        
+                           
+
+                            if (Model.eoi[i].product_id == -11)
+                            {
+                                description = "RECHARGE DONE FOR " + Model.eoi[i].product_name;
+                            }
+                       
+                            sno = i + 1;
+                            decimal ind_product_price = (quantity * @Model.eoi[i].product_price);
+
+                        <div style="float: left; width: 35px; font-size: 13px; text-align: center; padding: 5px;">
+                            @sno
+                        </div>
+                        <div style="float: left; width: 250px; font-size: 13px; text-align: center; padding: 5px;">
+                            @description
+                        </div>
+                      
+                        <div style="float: left; width: 100px; font-size: 13px; text-align: center; padding: 5px;">
+                            @quantity
+                        </div>
+                    
+                   
+                        <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px;">
+                            $ @Model.eoi[i].product_price.ToString("#0.00")
+                        </div>
+                 
+                        <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px;">
+                            $ @ind_product_price.ToString("#0.00")
+                        </div>
+                   
+                        <div style="clear: both;"></div>
+                            qty = qty + quantity;
+                
+                                dtotal = @Model.eo.order_product_total;
+
+                                tot_qty = qty.ToString();
+                           
+                   
+                     }
+<!-- end order items -->   </div>   
+                         <div style="float: left; width: 35px; font-size: 13px; text-align: center; padding: 5px;">
+                          
+                        </div>
+                        <div style="float: left; width: 250px; font-size: 13px; text-align: center; padding: 5px;">
+                            
+                        </div>
+                       
+                        <div style="float: left; width: 100px; font-size: 13px; text-align: center; padding: 5px; border-top: 1px solid;">
+                            @tot_qty
+                        </div>
+               
+                        <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px; border-top: 1px solid;">
+                            Total Price 
+                        </div>
+                     
+                        <div style="float: left; width: 150px; font-size: 13px; text-align: right; padding: 5px; border-top: 1px solid;">
+                            $ @dtotal.ToString("#0.00")
+                        </div>
+                        <div style="clear: both;"></div>
+                    
+                    }
+                 
+                    
+                </div>
+
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div style="width: 800px; text-align: center;">
+                    <button id="btnPrint" class="btn btn-success"><i class="fa fa-print "></i>&nbsp;Print</button>
+                    <a href="@Url.Action("RefreshACC", "Care")" class="btn btn-success">Finish</a>
+                </div>
+
+
+            </div>
+            
+            <div style="@ViewBag.dFail">
+                <h2>Sorry,</h2>
+                <div style="font-size: 25px;">
+                    <img src="~/images/Close-2-icon.png" />&nbsp;
+                    Your Transaction has Failed!
+                </div>
+                <div style="margin-top: 10px; font-size: 15px; padding-left: 70px; margin-bottom: 10px;">
+                    <div>Please Contact Customer Care: 1555 </div>
+                    <div><span>Click&nbsp;@Html.ActionLink("here", "RefreshACC", "Care")&nbsp;to go to Account Summary</span></div>
+                </div>
+            </div>
+ 
+        
+        }
+        else
+        {
+                
+        <div style="@ViewBag.dFail">
+            <h2>Sorry,</h2>
+            <div style="font-size: 25px;">
+                <img src="~/images/Close-2-icon.png" />&nbsp;
+                Your Transaction has Failed!
+            </div>
+            <div style="margin-top: 10px; font-size: 15px; padding-left: 70px; margin-bottom: 10px;">
+                <div>Please Contact Customer Care: 1555 </div>
+
+                <div><span>Click&nbsp;@Html.ActionLink("here", "RefreshACC", "Care")&nbsp;to go to Account Summary</span></div>
+            </div>
+        </div>
+        
+        }
+    }
+
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnPrint').click(function () {
+                try {
+                    var oIframe = $('#ifrmPrint')[0];
+                    var oContent = $('#divOrderSummary').html();
+
+
+                    var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
+                    if (oDoc.document) oDoc = oDoc.document;
+                    oDoc.write("<html><head>");
+                    oDoc.write("</head><body onload='this.focus(); this.print();'>");
+                    oDoc.write(oContent + "</body></html>");
+                    oDoc.close();
+                    var ua = $.browser;
+                    if (ua.mozilla) {
+                        alert('Printing in progress..');
+                    }
+
+
+                }
+                catch (e) {
+                    // self.print();
+                }
+            });
+
+
+        });
+    </script>
+
+}

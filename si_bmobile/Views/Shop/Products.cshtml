@@ -1,0 +1,256 @@
+﻿@model si_bmobile.Models.ShopProductsModel
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+
+
+<div class="mid_margin">
+
+    @if (Session["ShoppingUserID"] != null)
+    {
+        <div class="head_login_cart" style="float: right; margin-top: 10px;">
+
+            @{Html.RenderAction("_CartSummaryPartial", "Shop");}
+            <div id="login">
+                <ul style="float: right; margin-bottom: 10px;">
+                    <li>Hello, @Session["UName"].ToString()!</li>
+                    <li>@Html.ActionLink("My Orders", "MyOrders", "Shop")</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Shop", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                </ul>
+            </div>
+        </div>
+        @*            <div>
+                <nav id="nav-wrap">
+                    <ul style="display: none;" id="nav">
+                        <li style="background: none;"><a href="javascript:void(0);" style="line-height:30px;">Hello, @Session["UName"].ToString()!</a>
+                            <ul class="mid_menu_1" style="width: 225px;margin-top: 30px;">
+                                <li>
+                                    <div class="cat_left_menu">
+                                        <div class="cat_sub_menu"><a href="http://www.bmobile.com.sb/Home/prepaid">Prepaid</a></div>
+                                        <div class="cat_sub_menu"><a href="http://www.bmobile.com.sb/Home/postpaid">Post Paid</a></div>
+                                        <div class="cat_sub_menu"><a href="http://www.bmobile.com.sb/Home/data">Data</a></div>
+                                        <div class="cat_sub_menu">@Html.ActionLink("Logout", "Logout", "Shop", routeValues: null, htmlAttributes: new { id = "registerLink" })</div>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>*@
+    }
+
+    <div class="product_pan">
+
+        <div class="title">Products</div>
+
+        <div class="filter_pan box_shadow">
+
+            @if (Model.CategoryList != null && Model.CategoryList.Count() > 0)
+            {
+                <div class="title">BROWSE BY CATEGORY</div>
+                
+                <div class="content">
+
+                    <ul>
+
+                        @foreach (var item in Model.CategoryList)
+                        {
+                            if (item.parent_category != null)
+                            {
+                            <li style="font-weight: 600"><a href="javascript:void(0)" class="category_ids" id="@item.parent_category.Category_ID">@item.parent_category.Category_Name&nbsp;(@item.parent_product_count)</a></li>
+               
+                                if (item.sub_category.Count > 0)
+                                {
+                                    foreach (var subitem in item.sub_category)
+                                    {
+                            <li style="margin: 0px; padding: 3px; border-bottom: 1px dashed #808080; padding-left: 20px;" class="sub_categorys_@item.parent_category.Category_ID"><a href="javascript:void(0)" class="category_ids" id="@subitem.category.Category_ID" >@subitem.category.Category_Name&nbsp;(@subitem.sub_category_count)</a></li>
+                                    }
+                                }
+                            }
+                        }
+
+                    </ul>
+
+                </div>
+            }
+
+            <div class="title">BROWSE BY BRAND</div>
+
+            <div class="content">
+
+                @if (Model.BrandList != null)
+                {
+                    <ul>
+                        @foreach (var brand in Model.BrandList)
+                        {
+                            <li><a href="javascript:void(0)" class="brand_ids" id="@brand.brand.Brand_ID" >@brand.brand.Brand_Name&nbsp;(@brand.product_count)</a></li>
+                        }
+                    </ul>
+                }
+
+            </div>
+
+            <div class="title">BROWSE BY PRICE</div>
+
+            <div class="content">
+
+                @if (Model.PriceList != null)
+                {
+                    <ul>
+                        @foreach (var prices in Model.PriceList)
+                        {
+                            <li><a href="javascript:void(0)" class="price_ids" id="@prices.ID" >@prices.Description&nbsp;(@prices.product_count)</a></li>
+                        }
+                    </ul>
+                }
+
+            </div>
+
+            <div style="clear: both"></div>
+            @if (Model.Products != null)
+            {
+                <div class="title">Featured Products</div>
+                <div id="carousel-F" class="carousel-f carousel-f-vertical">
+                    <ul>
+                        @foreach (var item in Model.Products)
+                        {
+                            if (item.product.IsFeatured == true)
+                            {
+                            <li class="s_box">
+                                <a href="javascript:void(0)" class="feature_detail">
+                                    <img class="imgicon"  src="~/pro_images/@item.product_img.img_medium" border="0" /><br />
+                                    <span>@item.product.Product_Name</span>
+                                </a>
+                                <input type="hidden" id="SP_id" value="@item.product.Product_ID" />
+                            </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            }
+
+        </div>
+
+        <div id="grid-list" class="list_pan">
+
+            @{ Html.RenderAction("_Ajax_Product"); }
+
+        </div>
+
+        <div class="clr"></div>
+
+    </div>
+</div>
+
+<script src="~/Scripts/scrollingcarousel.2.0.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("li[class^='sub_categorys_'],li[class*='sub_categorys_']").hide();
+
+        //$(".sub_categorys").hide();
+
+        $(".category_ids").live("click", function () {
+
+            var categoryid = $(this).attr('id');
+
+            $(".category_ids").css("color", "black");
+            $(this).css("color", "#B23996");
+
+
+            var subcategory = 'sub_categorys_' + categoryid;
+
+            if ($('li').hasClass(subcategory)) {
+                $("li[class^='sub_categorys_'],li[class*='sub_categorys_']").hide();
+            }
+
+            $('.' + subcategory).show();
+
+            var url_path = '@Url.Action("_Ajax_Product", "Shop")';
+
+            $.ajax({
+                url: url_path,
+                data: { 'cid': categoryid },
+                type: 'GET',
+                success: function (data) {
+
+                    $("#grid-list").empty().html(data);
+
+                },
+                error: function () {
+                    alert("something seems wrong");
+                }
+            });
+
+        });
+
+        $(".brand_ids").live("click", function () {
+
+            var brandid = $(this).attr('id');
+
+            var url_path = '@Url.Action("_Ajax_Product", "Shop")';
+
+            $.ajax({
+                url: url_path,
+                data: { 'bid': brandid },
+                type: 'GET',
+                success: function (data) {
+
+                    $("#grid-list").empty().html(data);
+
+                },
+                error: function () {
+                    alert("something seems wrong");
+                }
+            });
+
+        });
+
+        $(".price_ids").live("click", function () {
+
+            var priceid = $(this).attr('id');
+
+            var url_path = '@Url.Action("_Ajax_Product", "Shop")';
+
+            $.ajax({
+                url: url_path,
+                data: { 'prid': priceid },
+                type: 'GET',
+                success: function (data) {
+
+                    $("#grid-list").empty().html(data);
+
+                },
+                error: function () {
+                    alert("something seems wrong");
+                }
+            });
+
+        });
+
+        $(".feature_detail").live('click', function (event) {
+            var tr = $(this).parents('.s_box');
+            var p_id = tr.find('#SP_id').val();
+
+            var url = "@Url.Action("ProductInfoPartial", "Shop", new { Id = "xxx" })";
+            url = url.replace("xxx", p_id);
+            $.post(url, function (data) {  //Post to action
+                $('#ProductInfodialog').html(data);
+
+                $('#ProductInfodialog').popup('show');
+            });
+        });
+
+    });
+    $(document).ready(function () {
+        $('#carousel-F').scrollingCarousel({
+            scrollerAlignment: 'vertical',
+            autoScroll: true
+        });
+    });
+</script>
+

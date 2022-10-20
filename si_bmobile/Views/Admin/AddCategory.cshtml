@@ -1,0 +1,147 @@
+﻿@model si_bmobile.Models.web_tbl_category
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+
+@using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post, new { id = "frmAddCategory", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+  
+    <div class="divheader">
+        ADD CATEGORY
+    </div>
+    
+    <div class="maindivlayout">
+
+        <div>
+            <div class="divlabel">
+                Category Name <span class="mandiv">*</span>
+            </div>
+
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.Category_Name, new { maxlength = 100 })
+                @Html.ValidationMessageFor(model => model.Category_Name)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div>
+            <div class="divlabel">
+                Category Description
+            </div>
+
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.Category_Description, new { maxlength = 100 })
+                @Html.ValidationMessageFor(model => model.Category_Description)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Parent Category Name
+            </div>
+
+            <div class="divtxt">
+                @Html.DropDownListFor(model => model.Parent_ID, ((IEnumerable<SelectListItem>)ViewBag.parentcategory), "-- Select Parent Category --", new { @style="width:220px;" })
+                
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Upload Image
+            </div>
+
+            <div class="divtxt">
+            @Html.TextBox("image_item", null, new { type = "file",@style="width: 210px;margin-bottom: 10px;" })
+                <br />
+                <span>@ViewBag.Image_valid</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Page Title <span class="mandiv">*</span>
+            </div>
+
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.PageTitle, new { maxlength = 100 })
+                @Html.ValidationMessageFor(model => model.PageTitle)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Meta Description
+            </div>
+
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.MetaDescription, new { maxlength = 100 })
+                @Html.ValidationMessageFor(model => model.MetaDescription)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Meta Keywords
+            </div>
+
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.MetaKeyword, new { maxlength = 100 })
+                @Html.ValidationMessageFor(model => model.MetaKeyword)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">&nbsp;</div>
+            <div class="divtxt">
+                <input type="submit" value="Create" />&nbsp;<input type="button" onclick="window.location.href = '@Url.Action("Category", "Admin")    '" value="Cancel" />
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+    
+    <div id="div_dialog" style="display: none;">
+        <p>@ViewBag.Message</p>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+
+    @if (ViewBag.Message != null)
+    { 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#div_dialog").dialog({
+                    title: "Message",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            window.location.href = '@Url.Action("Category", "Admin")';
+                        }
+                    },
+                    width: 350,
+                    dialogClass: 'dialog_css',
+                    autoOpen: true,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });
+            });
+        </script>
+    }
+}

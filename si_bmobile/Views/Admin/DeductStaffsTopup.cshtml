@@ -1,0 +1,107 @@
+﻿@model List<si_bmobile.Models.StaffsTopupModel>
+
+@{
+    ViewBag.Title = "Deduct Staffs Topup";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";    
+    
+}
+
+<style>
+    .isuccess
+    {
+        color:green;         
+    }
+
+    .ifail
+    {
+        width:100%;
+        color:red; 
+        padding-bottom:2px;
+    }
+
+</style>
+
+<div class="divheader">
+    STAFFS TOPUP 
+</div>
+@using (Html.BeginForm("DeductStaffsTopup", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "form-DeductStaffsTopup" }))                     
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="dRowvlg" style="width:100%;">
+        <div style="text-align: center;">
+            @if (ViewBag.Msg != null)
+            {
+                <span style="color: red;">@ViewBag.Msg</span>
+            }
+
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <span style="color: green;">@ViewBag.SuccessMessage</span>
+            }
+        </div>
+    </div>
+    <div class="dRowvlg">
+        <div class="input-append">
+            @Html.TextBox("StaffsTopupCsvfile", null, new { type = "file" })
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Submit</button>&nbsp;
+                 <button class="btn" type="button" onclick="window.location.href='@Url.Action("DeductStaffsTopup", "Admin")'" >
+                     <i class="icon-search"></i>&nbsp;Reset</button>
+        </div>
+    </div>
+
+    <div id="grid-list">
+        @if (Model.Count > 0)
+        {
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Staff Name
+                        </th>
+                        <th>MSISDN Number
+                        </th>
+                        <th>Amount
+                        </th>
+                        <th>Invoice
+                        </th>
+                        <th>E-mail
+                        </th>
+                        <th>Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.first_name&nbsp;@item.last_name
+                            </td>
+                            <td>
+                                @item.msisdn_number
+                            </td>
+
+                            <td>
+                                @item.amount
+                            </td>
+                            <td>
+                                @item.invoice
+                            </td>
+                             <td>
+                                @item.email
+                            </td>
+                            <td>
+                                @Html.Raw(item.description)
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+    </div>   
+
+}
+

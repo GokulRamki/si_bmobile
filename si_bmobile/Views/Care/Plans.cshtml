@@ -1,0 +1,141 @@
+﻿@model si_bmobile.Models.BundlesModel
+
+@{
+    ViewBag.Title = "Plans";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+}
+
+<div class="abt-main">
+    <div class="prm-tab-panel">
+        @using (Html.BeginForm("Plans", "Care", FormMethod.Post, new { id = "frmPlans", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false)
+            <div class="mid_margin">
+                <h2>Buying a Prepaid Data Bundle</h2>
+
+                @Html.Partial("_bm_PlanDetails", Model)
+
+                <div id="plans_dialog" style="display: none;">
+                    <p>Please select a plan to purchase!</p>
+                </div>
+            </div>
+        }
+    </div>
+    @Html.Partial("_cms_RightNav_Menu")
+    <div style="clear:both;"></div>
+</div>
+<style>
+    .ui-tabs .ui-tabs-nav li a { padding: 10px 6px 6px 10px !important; font-size:16px; }
+</style>
+<style media="screen and (max-width:600px)">
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+    tr {
+        border: 1px solid #ccc;
+    }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+
+    td span {
+        width:auto !important;
+        font-weight:bold;
+        display: block !important;
+    }
+
+    .ui-tabs .ui-tabs-nav li { width:100% !important}
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        // <![CDATA[
+
+        $(function () {
+
+            //  LoadPlans();
+        });
+
+        function LoadPlans() {
+            DisplayProgress();
+            var msdnno = $("#ddlMsisdn :selected").text();
+            $.post("/Care/MsisDNBundles",
+              { sMsisdn: msdnno },
+               function (data) {
+                   HideProgressPanel();
+                   $("#divplandetails").html(data);
+               });
+        }
+
+        function DisplayProgress() {
+            $("#pnlProgress").css("display", "block");
+            $("#divplandetails").css("display", "none");
+        }
+
+        function HideProgressPanel() {
+            $("#pnlProgress").css("display", "none");
+            $("#divplandetails").css("display", "block");
+        }
+        // ]]>
+    </script>
+
+    <script type="text/javascript">
+        $('#btnSubmit').click(function () {
+            var res = false;
+            $("input:radio[name='_planId']").each(function () {
+                if (this.checked) {
+                    res = true;
+                }
+            });
+
+            if (res == false) {
+                $("#plans_dialog").dialog({
+                    title: "Warning",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                        }
+                    },
+                    dialogClass: 'dialog_css',
+                    width: 350,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });
+            }
+
+            return res;
+        });
+    </script>
+
+
+}

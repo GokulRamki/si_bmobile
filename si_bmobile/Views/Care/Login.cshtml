@@ -1,0 +1,105 @@
+﻿@model si_bmobile.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+}
+
+<div class="abt-main">    
+    <div class="login-main">        
+        @using (Html.BeginForm("Login", "Care", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmLogin", @class = "smart-form", novalidate = "novalidate" }))
+        {
+            <div class="log-inn">
+                <div class="log-hed"> Login </div>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                @if (ViewBag.Message != null)
+                {         
+                    <div style="clear:both;"></div>      
+                    <div class="alert-box warning">
+                        <span>warning: </span>
+                         @ViewBag.Message                    
+                </div>
+                }   
+                <div class="log-mn">
+                    <div class="log-nm"> Mobile Number: </div>
+                    <div class="log-txt"> <span> 677 </span> @Html.TextBoxFor(model => model.MSISDN, new { placeholder = "Mobile Number", maxlength = 15, @style = "width:90%;" }) 
+                        </div>
+                    <div class="log-valid-msg">@Html.ValidationMessageFor(model => model.MSISDN)</div>
+                </div>
+
+                <div class="log-mn">
+                    <div class="log-nm"> Password: </div>
+                    <div class="log-txt"> <span> &nbsp; </span> @Html.PasswordFor(model => model.Pwd, new { placeholder = "Password", maxlength = 15, @style = "width:90%;" })                       
+                     </div>
+                    <div class="log-valid-msg">@Html.ValidationMessageFor(model => model.Pwd)</div>
+                </div>
+
+                <div class="log-mn">
+                    <div class="log-nm">
+                        @Html.CheckBoxFor(model => model.RememberMe) Remember Me
+                    </div>
+                </div>
+
+                <div class="log-lnk">
+                    <a href="/Care/register" > Register for new account </a>
+                    <a href="/Care/ForgotPassword" >Forgot your Password? </a>
+                </div>                
+                <div class="log-sbmt"> <button id="btnSubmit" class="btn-sbmt" type="submit" style="width: 100px;">Submit</button></div>
+            </div>
+        }
+    </div>
+    <div style="clear:both;"></div>    
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+   <script>
+       $(function () {
+
+           if (localStorage.chkbx && localStorage.chkbx != '') {
+               $('#RememberMe').attr('checked', 'checked');
+               $('#MSISDN').val(localStorage.usrname);
+               $('#Pwd').val(localStorage.pass);
+           } else {
+               $('#RememberMe').removeAttr('checked');
+               $('#MSISDN').val('');
+               $('#Pwd').val('');
+           }
+
+           $('#RememberMe').click(function () {
+
+               if ($('#RememberMe').is(':checked')) {
+                   // save username and password
+                   localStorage.usrname = $('#MSISDN').val();
+                   localStorage.pass = $('#Pwd').val();
+                   localStorage.chkbx = $('#RememberMe').val();
+               } else {
+                   localStorage.usrname = '';
+                   localStorage.pass = '';
+                   localStorage.chkbx = '';
+               }
+           });
+       });
+
+
+       
+</script>
+
+@if (TempData["ResLOG"] != null)
+    {
+    <script>
+
+        $(document).ready(function () {
+            $('#RememberMe').removeAttr('checked');
+            $('#MSISDN').val('');
+            $('#Pwd').val('');
+        });
+
+
+    </script>
+
+}
+    }

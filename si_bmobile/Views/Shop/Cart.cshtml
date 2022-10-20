@@ -1,0 +1,75 @@
+﻿@model IEnumerable<bemobile.Models.OrderItemModel>
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    <link rel="stylesheet" href="../Content/Site.css" type="text/css" />
+    <link rel="stylesheet" href="../Content/CSS/BMob_Templete.css" type="text/css" />
+}
+
+<h2>Cart</h2>
+<br />
+@using (Html.BeginForm("Cart", "Shop", FormMethod.Post, new { id = "frmCarts", enctype = "multipart/form-data" }))
+{
+
+    <div style="background-color: gray;width:900px;">
+        <div style="width: 150px; min-width: 150px;">&nbsp;</div>
+        <div style="width: 150px; min-width: 150px; float: left;">Product Name</div>
+        <div style="width: 150px; min-width: 150px; float: left;">Unit Price</div>
+        <div style="width: 150px; min-width: 150px; float: left;">Qty</div>
+        <div style="width: 150px; min-width: 150px; float: left;">Subtotal</div>
+        <div style="width: 150px; min-width: 150px; float: left;">&nbsp;</div>
+    </div>
+    decimal producttotalprice = 0;
+    int count=0;
+    foreach (var item in Model)
+    {
+        count++;
+        string productid = "productid" + count;
+        producttotalprice = item.total_product_price;
+                                 
+@Html.HiddenFor(model => item.product_id)
+    @Html.HiddenFor(model => item.ProductName)
+    @Html.HiddenFor(model => item.product_price)
+    @Html.HiddenFor(model => item.total_product_price)
+    @Html.HiddenFor(model => item.product_Image)
+    @Html.HiddenFor(model => item.Model_No)
+    
+    <div style="width:900px;">
+        <div style="width: 150px; min-width: 150px;">
+            @Html.ActionLink("Image", "ProductInfo", "Shop", new { Id = item.product_id },
+            new { @style = "background-image: url(" + ViewBag.imageUrl + "_img_medium.png);width: 200px;height: 40px;text-indent: -9999px; background-repeat: no-repeat;" })
+        </div>
+        <div style="width: 150px; min-width: 150px; float: left;">
+            @item.ProductName &nbsp;
+            <br />
+            @item.Model_No
+        </div>
+        <div style="width: 150px; min-width: 150px;  float: left;">K&nbsp;<label>@item.product_price</label>)</div>
+        <div style="width: 150px; min-width: 150px;  float: left;" >@Html.TextBoxFor(model => item.product_qty, new { @id=productid})</div>
+        <div style="width: 150px; min-width: 150px; float: left;">K&nbsp;<label>@item.Sub_total_price</label></div>
+        <div style="width: 150px; min-width: 150px; float: left;">
+            @Html.ActionLink("Remove", "RemoveProduct", "Shop", new { Id = item.product_id }, null)
+        </div>
+    </div>
+    }
+    <div style="width:900px;padding-top: 100px;">
+        <div style="width: 150px; min-width: 150px; float: left;">
+            @Html.ActionLink("Continue", "Products", "Shop", null, new { @class = "ContinueImage" })
+            <br />Cart subtotal :K&nbsp;@producttotalprice
+            <br />
+             Grand Total :K&nbsp;@producttotalprice
+        </div>
+        <div style="width: 150px; min-width: 150px;  float: left;">&nbsp;</div>
+        <div style="width: 150px; min-width: 150px;  float: left;">&nbsp;</div>
+        <div style="width: 150px; min-width: 150px;  float: left;">
+            <input type="submit" value="Update qty" id="update"/>
+        </div>
+        <div style="width: 150px; min-width: 150px;  float: left;">
+            @Html.ActionLink("Checkout", "Confirm", "Shop", null, new { @class = "CheckoutImage" })
+        </div>
+        <div style="width: 150px; min-width: 150px; float: left;">&nbsp;</div>
+    </div>
+}
+

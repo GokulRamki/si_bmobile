@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.ActionName = ViewContext.RouteData.Values["action"].ToString().ToLower();
+}
+
+<div class="prm-menu">
+    <div class="prm-mnu">
+        <div class="prm-mnu-hed"> User profile </div>
+        <ul>
+            @if (@ViewBag.preType == "501" && @ViewBag.posType == null)
+            {
+                <li> <a href="/Care/prepaid" class="@(ViewBag.ActionName == "prepaid" ? "prm-red-bld" : null)"> Account summary </a> </li>
+            }
+            @*@if (@ViewBag.preType == "501" && @ViewBag.posType == "502")
+                {
+                    <li> <a href="/Care/postpaid" class="@(ViewBag.ActionName == "postpaid" ? "prm-red-bld" : null)"> Account summary </a> </li>
+                }
+                @if (@ViewBag.posType == "502" && @ViewBag.preType == null)
+                {
+                    <li> <a href="/Care/postpaid" class="@(ViewBag.ActionName == "postpaid" ? "prm-red-bld" : null)"> Account summary </a> </li>
+                }*@
+            <!-- <li> <a href="#"> Add Additional Mobile No </a> </li> -->
+            <li> <a href="#" id="lnkActivateSIM"> Activate your SIM </a> </li>
+            <li> <a href="/Care/editpro" class="@(ViewBag.ActionName == "editpro" ? "prm-red-bld" : null)"> Update profile </a> </li>
+            <li> <a href="/Care/resetpassword" class="@(ViewBag.ActionName == "resetpassword" ? "prm-red-bld" : null)"> Change password </a> </li>
+        </ul>
+    </div>
+    <input type="hidden" value="@ViewBag.preType" />
+    <input type="hidden" value="@ViewBag.posType" />
+
+    @*@if (ViewBag.preType == "501" && ViewBag.posType == null)*@
+    @if (ViewBag.preType == "501")
+    {
+        <div class="prm-mnu">
+            <div class="prm-mnu-hed"> Top up your account </div>
+            <ul>
+                <li> <a href="/Care/plans" class="@(ViewBag.ActionName == "plans" ? "prm-red-bld" : null)"> Purchase plans </a> </li>
+                <li> <a href="/Care/topup" class="@(ViewBag.ActionName == "topup" ? "prm-red-bld" : null)"> Recharge </a> </li>
+                @*<li> <a href="#" id="lnkBuyPower"> Get pawa </a> </li>*@
+                @*<li> <a href="#" onclick="RedeemFBVoucher()"><span>Redeem voucher</span> </a> </li>*@
+                @*<li> <a href="#" onclick="VoiceCallActDeact()"> Voice mail call activation/deactivation </a> </li>*@
+                <li> <a href="/Care/devicesettings"> Device settings </a> </li>
+                <li> <a href="/Care/Logout"> Logout </a> </li>
+            </ul>
+        </div>
+    }
+
+    @*@if (@ViewBag.preType == "501" && @ViewBag.posType == "502")
+        {
+            <div class="prm-mnu">
+                <div class="prm-mnu-hed"> Top up your account </div>
+                <ul>
+                    <li> <a href="/Care/plans" class="@(ViewBag.ActionName == "plans" ? "prm-red-bld" : null)"> Purchase plans </a> </li>
+                    <li> <a href="/Care/topup" class="@(ViewBag.ActionName == "topup" ? "prm-red-bld" : null)"> Recharge </a> </li>
+                    <li> <a href="#" id="lnkBuyPower2"> Get pawa </a> </li>
+                    <li> <a href="#" onclick="RedeemFBVoucher()"><span>Redeem voucher</span> </a> </li>
+                    <li> <a href="#" onclick="VoiceCallActDeact()"> Voice mail call activation/deactivation </a> </li>
+                    <li> <a href="/Care/devicesettings"> Device settings </a> </li>
+                    <li> <a href="/Care/Logout"> Logout </a> </li>
+                </ul>
+            </div>
+        }*@
+    <!-- <div class="prm-mnu">
+        <div class="prm-mnu-hed">  </div>
+        <ul>
+            <li> <a href="#"> Buy/transfer bundles &amp; airtime </a> </li>
+            <li> <a href="#"> Recharge now </a> </li>
+            <li> <a href="#"> Please recharge me </a> </li>
+            <li> <a href="#"> Manage my numbers </a> </li>
+        </ul>
+    </div> -->
+</div>

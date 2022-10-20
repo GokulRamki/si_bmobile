@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <title>:: bmobile :: - @ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--[if lt IE 8]>
+       <div style=' clear: both; text-align:center; position: relative;'>
+         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+        </a>
+      </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+		<script src="js/html5.js"></script>
+	<![endif]-->
+    <!--[if lt IE 7]>
+	<link rel="stylesheet" href="ie6.css" type="text/css" />
+<![endif]-->
+
+    <link href="@Url.Content("~/Content/Site.css?modified=20140408")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/style-new.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/js/jquery-latest.js")"></script>
+    <script src="@Url.Content("~/js/stepcarousel.js")"></script>
+    <script src="@Url.Content("~/js/stepcarousel_002.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/jquery.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/modernizr.custom.js")"></script>
+
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.form.min.js")" type="text/javascript"></script>
+    
+    <!--  knockout files   -->
+    <script src="@Url.Content("~/Scripts/knockout-3.0.0.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/knockout-jqueryui.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Twinkle.Knockout.js")" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/font-awesome.min.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/smartadmin-production.css")">
+
+    <script src="@Url.Content("~/Scripts/popupoverlay/jquery.popupoverlay.js")" type="text/javascript"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/popupoverlay/css-overlaybox.css")" type="text/css" media="screen" />
+
+    <style type="text/css">
+        .recentcomments a
+        {
+            display: inline !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    </style>
+
+    <script type="text/javascript">       
+
+        jQuery(document).ready(function ($) {
+            /* prepend menu icon */
+            $('#nav-wrap').prepend('<div id="menu-icon"></div>');
+
+            /* toggle nav */
+            $("#menu-icon").on("click", function () {
+                $("#nav").slideToggle();
+                $(this).toggleClass("active");
+            });
+        });       
+    </script>
+
+    <script type="text/javascript">
+        $('button.close').live("click", function () {
+            $(this).parents('#msg_pan').fadeOut('slow');
+        });
+
+        $(document).ready(function () {         
+
+        $(".CartImg").live('click', function (event) {
+            var tr = $(this).parents('div');
+            var p_id = tr.find('#Prd_id').val();
+
+            var loginuser = '@Session["ShoppingUserID"]';
+
+            if (loginuser != '') {
+                //$("#Cartdialog").data('id', p_id).dialog('open');
+                ShowCartDialog(p_id);
+            }
+            else {
+                window.location.href = '@Url.Action("Login", "Shop")';
+                return true;
+            }            
+        });
+
+        $(".cart_bucket").click(function (event) {
+            //$("#Cartdialog").data('id', null).dialog('open');
+            ShowCartDialog(null);
+            return false;
+
+        });
+
+        $('.delete').live('click', function () {
+            var tr = $(this).parents('tr:first');
+            var PId = parseInt(tr.find("#hdnPId").val());
+            var qty = tr.find(".product_qty").val();
+            $.post("@Url.Action("DeleteProduct", "Shop")/" + PId, function (data) {
+                    if (data.Status == true) {
+                        tr.remove();
+                        CalculateTotPrice();
+                    }
+                });
+            });
+
+        $('.product_qty').live("change", function () {
+
+            var tr = $(this).parents('tr:first');
+            var PId = parseInt(tr.find("#hdnPId").val());
+            var qty = tr.find(".product_qty").val();
+
+            $.post("@Url.Action("UpdateProduct_Qunatity", "Shop")", { PId: PId, qty: qty }, function (data) {
+                    if (data.Status == true) {
+                        if (qty == 0)
+                            tr.find(".product_qty").val(1);
+
+                        tr.find(".product_tot_price").html(data.price.toFixed(2));
+                        CalculateTotPrice();
+                    }
+                });
+
+            });
+
+        });
+
+        function ShowCartDialog(pid) {
+            var url = "@Url.Action("CartPanel", "Shop", new { id = "xxx" })";
+            url = url.replace("xxx", pid);
+            $.post(url, function (data) {  //Post to action                    
+                $('#Cartdialog').html(data);
+
+                $('#Cartdialog').popup('show');
+            });
+        }
+
+        function CalculateTotPrice() {
+            var tot = 0;
+            $('.cart-body tr').each(function () {
+                var tr = $(this);
+                var price = tr.find(".product_price").html();
+                var qty = tr.find(".product_qty").val();
+                tot += parseInt(price) * parseFloat(qty);
+            });
+
+            if (tot > 0) {
+                $('#TotalAmt').html(tot.toFixed(2));
+                $('#EmptyMsg2').css({ 'display': 'none' });
+            }
+            else {
+                $('#gridpan').hide();
+                $('#confirmBtnpan').hide();
+                //$('#EmptyMsg').show();
+                $('#EmptyMsg2').css({ 'display': 'block' });
+                $("#Cartdialog").dialog('close');
+            }
+        }
+
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () { 
+
+            $(".view_detail").live('click', function (event) {               
+                var tr = $(this).parents('.pbox');
+                var p_id = tr.find('#Prd_id').val();
+                //$("#ProductInfodialog").data('id', p_id).dialog('open');
+
+                var url = "@Url.Action("ProductInfoPartial", "Shop", new { Id = "xxx" })";
+                url = url.replace("xxx", p_id);
+                $.post(url, function (data) {  //Post to action
+                    $('#ProductInfodialog').html(data);
+
+                    $('#ProductInfodialog').popup('show');
+                });                               
+                
+            });
+
+
+            //Search
+            $(".search_txt a").click(function () {
+                var sdata = $('#search').val();
+                if (sdata != "") {
+                    var url = "@Url.Action("Products", "Shop", new { skey = "xxx" })";
+                    url = url.replace("xxx", sdata);
+                    $(this).attr('href', url);
+                }
+            });
+        });
+
+        function HideProductInfoPopup() {
+            $('#ProductInfodialog').popup('hide');
+        }
+
+        // Call from ProductInfo Partial view
+        function addtocart(id) {
+            //$("#ProductInfodialog").dialog('close');
+            $('#ProductInfodialog').popup('hide');
+
+            var loginuser = '@Session["ShoppingUserID"]';
+
+            if (loginuser != '') {
+                //$("#Cartdialog").data('id', id).dialog('open');
+                ShowCartDialog(id)
+            }
+            else {
+                window.location.href = '@Url.Action("Login", "Shop")';
+                return true;
+            }
+
+
+        }
+
+        function ViewProductInfo(id) {
+            $("#ProductInfodialog").data('id', id).dialog('open');
+        }
+
+    </script>
+
+</head>
+<body style="height: auto;">
+    @Html.Partial("bm_HeaderLayout_Shopping")
+    <div class="mid">
+        @RenderBody()
+        <div id="Cartdialog" style="display:none;"></div>
+        <div id="ProductInfodialog" style="display:none;"></div>
+    </div>
+
+    @Html.Partial("bm_FooterLayout")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

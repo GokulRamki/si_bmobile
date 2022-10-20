@@ -1,0 +1,30 @@
+﻿@model IEnumerable<si_bmobile.Models.cartpanel_model>
+
+
+<div id="CartCount" style="width: 60px; height: 30px; float: left;">
+    @if (ViewBag.CartCount != 0)
+    {       
+        <a href="#">
+            <div style="float: left; width: 30px;">
+                <img src="@Url.Content("~/images/shopping-cart-icon2.png")" border="0" style="width:30px;" class="cart_bucket" />
+            </div>
+        </a>         
+    }
+    else
+    {
+        <a href="/Shop/Products">
+            <div style="float: left; width: 30px;">
+                <img src="@Url.Content("~/images/shopping-cart-icon.png")" border="0" style="width:30px; color:#E56717;"  />
+            </div>
+        </a>                      
+    }
+</div>
+
+@if (ViewBag.CartCount != 0)
+{
+    <a href="/Shop/Products" class="cart_bucket" style="color: black; font-weight: 600;">Cart(@ViewBag.CartCount)</a>
+}
+else
+{
+    <a href="#">Cart(0)</a>
+}

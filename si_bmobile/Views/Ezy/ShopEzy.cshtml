@@ -1,0 +1,47 @@
+﻿@model si_bmobile.Models.EzyModel
+
+@{
+    ViewBag.Title = "Redirecting..";
+    Layout = null; 
+  <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    
+   <script type="text/javascript">
+       
+
+        $(function () {
+         
+           $("#frmShopEzy").submit();
+        });
+
+      
+    </script>
+}
+
+<h2>Please wait..</h2>
+
+@using (Html.BeginForm("ShopEzy", "Ezy", FormMethod.Post, new { id = "frmShopEzy" , action=Model.paymentURL}))
+{
+    @Html.HiddenFor(e => e.ezt_amount, new { name="ezt_amount" })
+    @Html.HiddenFor(e => e.ezt_cancel_url, new { name="ezt_cancel_url" })
+    @Html.HiddenFor(e => e.ezt_keycode, new { name="ezt_keycode" })
+    @Html.HiddenFor(e => e.ezt_logo_url, new { name="ezt_logo_url" })
+    @Html.HiddenFor(e => e.ezt_orderinfo, new { name="ezt_orderinfo" })
+    @Html.HiddenFor(e => e.ezt_refnumber, new { name="ezt_refnumber" })
+    @Html.HiddenFor(e => e.ezt_return_url, new { name="ezt_return_url" })
+    @Html.HiddenFor(e => e.ezt_secure_secret, new { name="ezt_secure_secret" })
+    @Html.HiddenFor(e => e.ezt_txn_data1, new { name="ezt_txn_data1" })
+    @Html.HiddenFor(e => e.ezt_txn_data2, new { name="ezt_txn_data2" })
+    @Html.HiddenFor(e => e.ezt_txn_data3, new { name="ezt_txn_data3" })
+    @Html.HiddenFor(e => e.ezt_user_key, new { name="ezt_user_key" })
+    <input type="submit" name="action" value="One Moment Please - Redirecting.." />
+    
+    
+     <!--Ezytrans popup --> 
+     <div id="ezytranspanel">   
+    <div id="ezytrans-box"> 
+        <img src="~/images/popup-close-2.png" alt="Close" style="float:right; z-index:2200; margin:-30px -30px 0px 0px;cursor:pointer;" width="40px" height="40px" onclick="return closepopup();" />
+        <iframe id="frame1" width="900px" height="560px" frameBorder="0" style="margin-top:-10px;"></iframe>   
+    </div>            
+    </div>
+}
+

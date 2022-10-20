@@ -1,0 +1,204 @@
+﻿@model si_bmobile.Models.Care_User_Model
+
+@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+
+@using (Html.BeginForm("EditUser", "Admin", FormMethod.Post, new { id = "frmEditUser", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.id)
+    @*@Html.HiddenFor(model => model.user_pwd)*@
+
+    <div class="divheader">
+        Edit User
+    </div>
+    @Html.HiddenFor(model => model.id)
+    @*@Html.HiddenFor(model => model.user_pwd)*@
+    @Html.HiddenFor(model => model.user_name)
+      
+    <div class="maindivlayout">
+
+        <div>
+            <div class="divlabel" style="padding-bottom: 10px;">
+                Username
+            </div>
+            <div class="divtxt">
+                @Html.DisplayFor(model => model.user_name)
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+
+        <div>
+            <div class="divlabel">
+                Role
+            </div>
+            <div class="divtxt">
+                @Html.DropDownListFor(model => model.role_id, new List<SelectListItem>(ViewBag.vroles), "--Select--")
+                @Html.ValidationMessageFor(model => model.role_id)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Firstname
+            </div>
+            <div class="divtxt">
+                @Html.EditorFor(model => model.first_name)
+                @Html.ValidationMessageFor(model => model.first_name)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Lastname
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.last_name)
+                @Html.ValidationMessageFor(model => model.last_name)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                EmailId
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.email_id)
+                @Html.ValidationMessageFor(model => model.email_id)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div>
+            <div class="divlabel">
+                Password
+            </div>
+            <div class="divtxt">
+                @Html.PasswordFor(model => model.user_pwd, new { value = Model.user_pwd })
+                @*@Html.PasswordFor(model => model.user_pwd)*@
+                @Html.ValidationMessageFor(model => model.user_pwd)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Confirm Password
+            </div>
+            <div class="divtxt">
+                @Html.PasswordFor(model => model.confirm_pwd, new { value = Model.confirm_pwd })
+                @*@Html.PasswordFor(model => model.confirm_pwd)*@
+                @Html.ValidationMessageFor(model => model.confirm_pwd)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Contactnumber
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.contact_number)
+                @Html.ValidationMessageFor(model => model.contact_number)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                IsActive
+            </div>
+            <div class="divtxt">
+                @Html.CheckBoxFor(model => model.is_active)
+                @Html.ValidationMessageFor(model => model.is_active)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <br />
+        <div>
+            <div class="divlabel">
+                Send Login Details
+            </div>
+            <div class="divtxt">
+                @Html.CheckBoxFor(model => model.is_send_login)
+                @Html.ValidationMessageFor(model => model.is_send_login)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div style="padding-top:20px; border-bottom:1px dotted lightgray;"></div>
+        <div>
+            <div class="divlabel">
+                User Access Level
+            </div>
+            <div class="divtxt">
+                @for (int i = 0; i < Model.MenuList.Count; i++)
+                {
+                    <div style="width: 48%; float: left; height: 30px; padding: 2px;">
+                        @Html.HiddenFor(model => Model.MenuList[i].Menu_Id)  
+                        @Html.HiddenFor(model=>model.MenuList[i].menu_name)                     
+                        @Html.CheckBoxFor(model => Model.MenuList[i].active)<i></i>
+                        @Html.DisplayFor(model => Model.MenuList[i].menu_name)
+                    </div>	
+                }
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div style="padding-top: 10px;">
+            <div class="divlabel">&nbsp;</div>
+            <div class="divtxt">
+                <input type="submit" value="Update" />&nbsp;<input type="button" onclick="window.location.href = '/Admin/CareUsers';" value="Cancel" />
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div id="div_dialog" style="display: none;">
+
+        <p>@ViewBag.Message</p>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+
+    @if (ViewBag.Message != null)
+    { 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#div_dialog").dialog({
+                    title: "Message",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            var message = '@ViewBag.Message'
+
+                            if (message == "User Detail Updated Successfully")
+                                window.location.href = '@Url.Action("careusers", "Admin")';
+                        }
+                    },
+                    width: 350,
+                    dialogClass: 'dialog_css',
+                    autoOpen: true,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });
+            });
+        </script>
+    }
+}

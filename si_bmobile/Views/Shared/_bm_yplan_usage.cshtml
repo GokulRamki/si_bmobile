@@ -1,0 +1,29 @@
+﻿@model IEnumerable<si_bmobile.Models.YPlanUsageModel>
+
+@if (Model.Count() > 0)
+{
+    <div class="dashboard_pan">
+        <div class="stit">Usage and Balance </div>
+        @foreach (var item in Model)
+        {        
+            <div class="dbox">
+                <div class="div-plan">
+                    @item.planName&nbsp<span style="color:gray;">(@item.denom_type)</span>
+                </div>
+                <div class="div-usage">
+                    @item.usage/&nbsp<span style="color:gray;">@item.total</span>
+                </div>
+                <div class="div-img @item.planName">
+                    &nbsp;
+                </div>
+                <div class="div-grap">
+                    <span class="span_total" style="display:none;">@item.total</span>
+                    <span class="span_usage" style="display:none;">@item.usage</span>
+                    <div class="graph-fil @item.planName">
+                    </div>
+                </div>
+            </div>
+        }
+        <div style="clear: both;" class="clr-fx"></div>
+    </div> 
+}

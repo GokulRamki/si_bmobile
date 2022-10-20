@@ -1,0 +1,113 @@
+﻿<div class="header">
+  <div class="header_next">
+    <div class="margin">
+      <div class="head_top">
+          <div class="logo">
+            <div class="logo_img"><a href="/Care/Login"><img src="@Url.Content("~/images/logo_new.jpg")" title="logo" alt="" /></a></div>
+          </div>
+          <div class="header_right">
+            <div class="header_top_menu">
+              <!--<div class="hed_logo"><img src="images/hed_logo.png" title="" alt=""></div>-->
+              <div class="hed_menu">
+                <div class="hed_menu_box ext_width">
+				<div class="hed_menu_box_img padd_top"><a href="/Care/RefreshACC"><img src="@Url.Content("~/images/myaccount_icon.png")" title="" alt="" /></a></div>
+                    <div class="hed_menu_box_text">
+                        @if(Session["subscriber"] != null)
+                        {
+                        <a href="/Care/RefreshACC" >
+
+                        </a>
+                        }
+                        else                        
+                        {
+                            <a href="/Care/Login" >Login</a>
+                        }
+                    </div>
+                    
+                </div>
+				
+				<div class="hed_menu_box">
+                  <div class="hed_menu_box_img padd_top"><a href="/Care/Register"><img src="@Url.Content("~/images/register_icon.png")" title="" alt="Register" border="0" /></a></div>
+                  <div class="hed_menu_box_text"><a href="/Care/Register">Register</a></div>
+				  
+                </div>
+				
+                 
+                      <div class="hed_menu_box">
+                          <div class="hed_menu_box_img">
+                              <a href="/Care/RefreshAcc"><img src="@Url.Content("~/images/pay_your_bill.png")" title="" alt="pay_your_bill" border="0" /></a>
+                          </div>
+                          <div class="hed_menu_box_text"><a href="/Care/RefreshAcc">Pay Your Bill</a></div>
+                      </div>
+                 
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><a href="/Care/RefreshAcc"><img src="@Url.Content("~/images/check_bill.png")" title="" alt="check_bill" border="0" /></a></div>
+                  <div class="hed_menu_box_text"><a href="/Care/RefreshAcc">Check Bill</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><a href="/Care/RefreshAcc"><img src="@Url.Content("~/images/recharge_now.png")" title="" alt="recharge_now" /></a></div>
+                  <div class="hed_menu_box_text"><a href="/Care/RefreshAcc">Recharge Now</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><a href="/Care/RefreshAcc"><img src="@Url.Content("~/images/check_usage.png")" title="" alt="check_usage" /></a></div>
+                  <div class="hed_menu_box_text"><a href="/Care/RefreshAcc">Check Usage</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><a href="/Care/RefreshAcc"><img src="@Url.Content("~/images/activate_a_sim.png")" title="" alt="activate_a_sim" /></a></div>
+                  <div class="hed_menu_box_text"><a href="/Care/RefreshAcc">Activate A Sim</a></div>
+                </div>
+              </div>
+              <div class="social_icon"><a href="https://www.facebook.com/bmobile.vodafone"><img src="@Url.Content("~/images/fb_icon.png")" alt="fb_icon" /></a>
+			  </div>
+            </div>
+            <div class="nav_menu">
+            <nav id="nav-wrap">
+                <ul style="display: none;" id="nav">
+                    <li class="first"><a href="http://www.bmobile.com.sb/" >Home</a></li>
+                   
+                    <li>
+                        <a href="http://www.bmobile.com.sb/Home/priceplans">Price Plans</a>
+                        <ul class="mid_menu_1" style="width:225px;">
+                            <li>
+                                <div class="mid_hor_sub">
+                                    <div class="arrow_img">
+                                        <img src="@Url.Content("~/images/mega-menu-up-arrow.png")" style="margin-top:-10px" />
+                                    </div>
+                                    <div class="cat_left_menu">
+                                        <div class="cat_sub_menu"><a href="http://www.bmobile.com.sb/Home/prepaid">Prepaid</a></div>
+                                        <div class="cat_sub_menu"><a href="http://www.bmobile.com.sb/Home/postpaid">Post Paid</a></div>
+                                        <div class="cat_sub_menu"><a href="http://www.bmobile.com.sb/Home/data">Data</a></div>
+                                        <div class="cat_sub_menu"><a href="http://www.bmobile.com.sb/Home/callforwarding">Call Forwarding</a></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/Shop/Products">Products</a></li>
+                    <li><a href="http://www.bmobile.com.sb/Home/value_added_service">Value Added Services</a></li>
+                    <li><a href="http://www.bmobile.com.sb/Home/promotions">Promotions</a></li>
+                    <li>
+                        <a href="http://www.bmobile.com.sb/Home/support">Support</a>
+                        <ul class="mid_menu_1" style="width: 225px;">
+                            <li>
+                                <div class="mid_hor_sub">
+                                    <div class="arrow_img">
+                                        <img src="~/Images/mega-menu-up-arrow.png" style="margin-top:-10px;">
+                                    </div>
+                                    <div class="cat_left_menu">
+                                        <div class="cat_sub_menu"><a href="http://www.bmobile.com.sb/Home/faq">Faqs</a></div>
+                                        <div class="cat_sub_menu"><a href="http://www.bmobile.com.sb/Home/contactus">Contact Us</a></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="last last_bg"><a href="http://www.bmobile.com.sb/Home/what_new">News</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

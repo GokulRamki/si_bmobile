@@ -1,0 +1,71 @@
+﻿@using MvcPaging
+@model List<si_bmobile.Models.YourPlanTransModel>
+
+@{
+    ViewBag.Title = "Application Transaction Logs";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+
+
+    List<SelectListItem> ddlstatus = new List<SelectListItem>();
+    ddlstatus.Add(new SelectListItem { Value = "True", Text = "Active" });
+    ddlstatus.Add(new SelectListItem { Value = "False", Text = "InActive" });
+}
+
+@*<h2>Your Plan Transaction Logs</h2>*@
+<div class="divheader">
+    YOUR PLAN TRANSACTION LOGS
+</div>
+
+@using (Ajax.BeginForm("YPlanTransactionLogs", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmYPlanTransactionLogs" }))
+{
+    <div class="dRowvlg">
+        <div class="input-append">
+            @Html.TextBox("from_msisdn", null, new { @placeholder = "From Mobile Number", @style = "width:150px" })
+            @Html.TextBox("to_msisdn", "", new { @placeholder = "To Mobile Number", @style = "width:150px" })
+            @Html.DropDownList("ddlExpiry", ddlstatus, "--Is Expiry --", new { @style = "width:150px" })
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search
+            </button>&nbsp;
+            <button class="btn" type="button" onclick="window.location.href='@Url.Action("YPlanTransactionLogs", "Admin")'">
+                <i class="icon-search"></i>&nbsp;Reset
+            </button>
+        </div>
+    </div>
+
+    <div id="div_loading" class="div-btn" style="top: 50%;">
+        <img src="~/images/slider/301.GIF" alt="Loading..." /><br />
+        <span style="font-weight: bold; color: gray;">Please Wait...</span>
+    </div>
+
+    <div id="grid-list">
+        @if (Model.Count > 0)
+        {
+            @{ Html.RenderPartial("_Ajax_YPlanTransactionLogs", Model); }
+        }
+    </div>
+}
+
+
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        $("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+

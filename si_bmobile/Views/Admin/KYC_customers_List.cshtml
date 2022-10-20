@@ -1,0 +1,144 @@
+﻿@using MvcPaging
+@model List<si_bmobile.Models.kyc_grid_list>
+@{
+    ViewBag.Title = "KYC_Customer_List";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+<h2>KYC Customers</h2>
+@using (Ajax.BeginForm("KYC_Customers_List", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmKYCCustomerList" }))
+{
+    
+                          
+    <div class="dRowvlg">
+
+        <div class="input-append">
+
+            @Html.TextBox("Mobile_no", "", new { placeholder = "Mobile Number" })
+
+            @Html.DropDownList("ddlProvince",new SelectList((IEnumerable<si_bmobile.Models.PROVINCIAL_CODES>)ViewBag.ProvincialList, "CODE", "PROVINCE"), "-- All Provinces  --", new { @style="width: 300px;"}) &nbsp;&nbsp;&nbsp;
+
+            @Html.DropDownList("ddlDistrict", new SelectList((List<SelectListItem>)ViewBag.District, "Value", "Text"),"-- All Towns --",new { @style="width:200px;margin-left:5px;margin-right:5px"})  &nbsp;
+
+            @*   @Html.DropDownList("ddlStatus", (IEnumerable<SelectListItem>)ViewBag.statuslist, "--Status--")
+
+            @Html.DropDownList("ddlType", (IEnumerable<SelectListItem>)ViewBag.typeslist, "--Type--")*@
+
+
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search</button>
+            <button class="btn" type="button" onclick="window.location.href='@Url.Action("KYC_customers_List", "Admin")';">
+                <i class="icon-search"></i>&nbsp;Reset</button>
+             
+                <a href="@Url.Action("KYC_CustomerList_To_CSV", "Admin")" style="margin-left:20px">
+                    <img src="~/images/Csv-icon.png" alt="Export to csv" border="0" /></a>
+            
+        </div>
+
+    </div>   
+}
+
+ @if (Model.Count > 0)
+    {
+    <div id="grid-list">
+        @{ Html.RenderPartial("_Ajax_KYC_CustomerList", Model); }
+    </div>
+    }
+
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        //$("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        // $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+
+
+@section Scripts {
+    <style>
+        .allHideblock
+        {
+            display: none;
+        }
+
+        .allshowblock
+        {
+            display: block;
+        }
+    </style>
+        <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+        <script>
+
+            $(document).ready(function () {
+                $(".kychidden").addClass("allHideblock");
+                $(".kycloghidden").addClass("allHideblock");
+                
+            });
+            function showmore(id) {
+                $(".kycloghidden").removeAttr("style");
+                $(".kycloghidden").addClass("allHideblock");
+                $(".kychidden").removeAttr("style");
+
+                var kycId = "#id_" + id;
+
+                $(".kychidden").removeClass("allHideblock");
+                $(".kychidden").addClass("allHideblock");
+                $(kycId).removeClass("allHideblock");
+            }
+            function showlog(id) {
+                $(".kychidden").removeAttr("style");
+                $(".kychidden").addClass("allHideblock");
+                $(".kycloghidden").removeAttr("style");
+
+                var kycId = "#log_" + id;
+
+                $(".kycloghidden").removeClass("allHideblock");
+                $(".kycloghidden").addClass("allHideblock");
+                $(kycId).removeClass("allHideblock");
+            }
+
+            $("#ddlProvince").change(function () {
+
+                $("#ddlDistrict").val("");
+
+                var url = '@Url.Content("~/")' + "Admin/DistrictByProvinceID";
+            var ddlsource = "#ddlProvince";
+            var ddltarget = "#ddlDistrict";
+            if ($(ddlsource).val() == "")
+                return false;
+
+            $.getJSON(url, { id: parseInt($(ddlsource).val()) }, function (data) {
+                $(ddltarget).empty();
+                $.each(data, function (index, optionData) {
+                    $(ddltarget).append("<option value='" + optionData.Text + "'>" + optionData.Value + "</option>");
+                    $("#ddlDistrict").removeAttr('disabled')
+                    ;
+                });
+                $(ddltarget).append("<option value='0'> -- All Towns-- </option>");
+                $("#ddlDistrict").val(0);
+            });
+        });
+
+    </script>
+
+
+
+
+}
+

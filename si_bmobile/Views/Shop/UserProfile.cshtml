@@ -1,0 +1,301 @@
+﻿@model si_bmobile.Models.all_user_details
+
+@{
+    ViewBag.Title = "User Profile";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+<div class="mid_margin">
+    <div class="myacc_pan">
+        <div class="lef_pan">
+            <section id="widget-grid" style="margin: 50px auto;">
+                <!-- START ROW -->
+                <div class="row">
+                    <!-- NEW COL START -->
+                    <article class="col-sm-12 col-md-12 col-lg-9">
+
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                            <header>
+                                <span class="widget-icon"><i class="fa fa-user"></i></span>
+                                <h2>My Profile </h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    @using (Html.BeginForm("UserProfile", "Shop", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmUserprofile", @class = "smart-form", novalidate = "novalidate" }))
+                                    {
+                                        @Html.ValidationSummary(true)
+                                        @Html.HiddenFor(model => model.user_contact.user_id)
+                                        @Html.HiddenFor(model => model.user_contact.contact_id)
+                                        @Html.HiddenFor(model => model.user_contact.email)
+                                        @Html.HiddenFor(model => model.user_contact.pwd)
+
+                                        if (ViewBag.Message != null)
+                                        {
+                                            <fieldset id="msg_pan">
+                                                <div class="alert alert-warning fade in">
+                                                    <button class="close" data-dismiss="alert">
+                                                        ×
+                                                    </button>
+                                                    <i class="fa-fw fa fa-warning"></i>
+                                                    <strong>Warning</strong> @ViewBag.Message
+                                                </div>
+                                            </fieldset>
+                                        }
+                                        <fieldset>
+                                            <section>
+                                                <b>First Name:&nbsp;</b>
+                                                <label for="first_name" class="input">
+                                                    @Html.TextBoxFor(model => model.user_contact.first_name, new { placeholder = "First Name" })
+                                                    @Html.ValidationMessageFor(model => model.user_contact.first_name)
+                                                </label>
+                                            </section>
+
+                                            <section>
+                                                <b>Last Name:&nbsp;</b>
+                                                <label for="LastName" class="input">
+                                                    @Html.TextBoxFor(model => model.user_contact.last_name, new { placeholder = "Last Name" })
+                                                    @Html.ValidationMessageFor(model => model.user_contact.last_name)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <b>E-mail:&nbsp;</b>
+                                                <label for="Password" class="input">
+                                                    @Html.PasswordFor(model => model.user_contact.email, new { placeholder = "E-mail" })
+                                                    @Html.ValidationMessageFor(model => model.user_contact.email)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <b>Phone Number:&nbsp;</b>
+                                                <label for="phone_number" class="input">
+                                                    @Html.TextBoxFor(model => model.user_contact.phone_number, new { placeholder = "Phone Number" })
+                                                    @Html.ValidationMessageFor(model => model.user_contact.phone_number)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <b>Mobile Number:&nbsp;</b>
+                                                <label for="mobile_number" class="input">
+                                                    @Html.TextBoxFor(model => model.user_contact.mobile_number, new { placeholder = "Mobile Number" })
+                                                    @Html.ValidationMessageFor(model => model.user_contact.mobile_number)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <b>Address Line-1:&nbsp;</b>
+                                                <label for="mobile_number" class="input">
+                                                    @Html.TextBoxFor(model => model.user_contact.address1, new { placeholder = "Address Line-1" })
+                                                    @Html.ValidationMessageFor(model => model.user_contact.address1)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <b>Address Line-2:&nbsp;</b>
+                                                <label for="address2" class="input">
+                                                    @Html.TextBoxFor(model => model.user_contact.address2, new { placeholder = "Address Line-2" })
+                                                    @Html.ValidationMessageFor(model => model.user_contact.address2)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <b>City:&nbsp;</b>
+                                                <label for="city" class="input">
+                                                    @Html.TextBoxFor(model => model.user_contact.city, new { placeholder = "City" })
+                                                    @Html.ValidationMessageFor(model => model.user_contact.city)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <b>Country:&nbsp;</b>
+                                                <label for="country" class="input">
+                                                    @Html.TextBoxFor(model => model.user_contact.country, new { placeholder = "Country" })
+                                                    @Html.ValidationMessageFor(model => model.user_contact.country)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <b>Post Code:&nbsp;</b>
+                                                <label for="PostCode" class="input">
+                                                    @Html.TextBoxFor(model => model.user_contact.postcode, new { placeholder = "Post Code" })
+                                                    @Html.ValidationMessageFor(model => model.user_contact.postcode)
+                                                </label>
+                                            </section>
+                                        </fieldset>
+                                        <footer>
+                                            <button id="btnSubmit" class="btn btn-mini top_btn" type="submit">Submit</button>
+                                        </footer>
+                                    }
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+                    </article>
+                    <!-- END COL -->
+                </div>
+                <!-- END ROW -->
+            </section>
+
+            @* @using (Html.BeginForm("UserProfile", "Shop", FormMethod.Post, new { id = "frmUserprofile", enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.user_contact.user_id)
+                    @Html.HiddenFor(model => model.user_contact.contact_id)
+                    @Html.HiddenFor(model => model.user_contact.email)
+                    @Html.HiddenFor(model => model.user_contact.pwd)
+                    <div class="content_pan">
+                        <div class="DivRow">
+                            <div class="DivMant">*</div>
+                            <div class="DivLabel">
+                                First name:
+                            </div>
+                            <div class="DivTxt">
+                                @Html.TextBoxFor(model => model.user_contact.first_name, new { maxlength = 50, @class = "Txtbox" })
+                                @Html.ValidationMessageFor(model => model.user_contact.first_name)
+                            </div>
+                        </div>
+                        <div class="DivRow">
+                            <div class="DivMant">&nbsp;</div>
+                            <div class="DivLabel">
+                                Last name:
+                            </div>
+                            <div class="DivTxt">
+                                @Html.TextBoxFor(model => model.user_contact.last_name, new { maxlength = 100, @class = "Txtbox" })
+                            </div>
+                        </div>
+                        <div class="DivRow">
+                            <div class="DivMant">&nbsp;</div>
+                            <div class="DivLabel">
+                                Email:
+                            </div>
+                            <div class="DivTxt">
+                                @Html.DisplayFor(model => model.user_contact.email)&nbsp;
+                            </div>
+                        </div>
+                        <div class="DivRow">
+                            <div class="DivMant">*</div>
+                            <div class="DivLabel">
+                                Phone number:
+                            </div>
+                            <div class="DivTxt">
+                                @Html.TextBoxFor(model => model.user_contact.phone_number, new { maxlegth = 15, @class = "Txtbox" })
+                                @Html.ValidationMessageFor(model => model.user_contact.phone_number)
+                            </div>
+                        </div>
+                        <div class="DivRow">
+                            <div class="DivMant">*</div>
+                            <div class="DivLabel">
+                                Mobile number:
+                            </div>
+                            <div class="DivTxt">
+                                @Html.TextBoxFor(model => model.user_contact.mobile_number, new { maxlegth = 15, @class = "Txtbox" })
+                                @Html.ValidationMessageFor(model => model.user_contact.mobile_number)
+                            </div>
+                        </div>
+                        <div class="DivRow">
+                            <div class="DivMant">*</div>
+                            <div class="DivLabel">
+                                Address line 1:
+                            </div>
+                            <div class="DivTxt">
+                                @Html.TextBoxFor(model => model.user_contact.address1, new { maxlength = 250, @class = "Txtbox" })
+                                @Html.ValidationMessageFor(model => model.user_contact.address1)
+                            </div>
+                        </div>
+                        <div class="DivRow">
+                            <div class="DivMant">&nbsp;</div>
+                            <div class="DivLabel">
+                                Address line 2:
+                            </div>
+                            <div class="DivTxt">
+                                @Html.TextBoxFor(model => model.user_contact.address2, new { maxlength = 250, @class = "Txtbox" })
+                            </div>
+                        </div>
+                        <div class="DivRow">
+                            <div class="DivMant">*</div>
+                            <div class="DivLabel">
+                                City:
+                            </div>
+                            <div class="DivTxt">
+                                @Html.TextBoxFor(model => model.user_contact.city, new { maxlength = 50, @class = "Txtbox" })
+                                @Html.ValidationMessageFor(model => model.user_contact.city)
+                            </div>
+                        </div>
+                        <div class="DivRow">
+                            <div class="DivMant">*</div>
+                            <div class="DivLabel">
+                                Country:
+                            </div>
+                            <div class="DivTxt">
+                                @Html.TextBoxFor(model => model.user_contact.country, new { maxlength = 50, @class = "Txtbox" })
+                                @Html.ValidationMessageFor(model => model.user_contact.country)
+                            </div>
+                        </div>
+                        <div class="DivRow">
+                            <div class="DivMant">*</div>
+                            <div class="DivLabel">
+                                Post code:
+                            </div>
+                            <div class="DivTxt">
+                                @Html.TextBoxFor(model => model.user_contact.postcode, new { maxlength = 20, @class = "Txtbox" })
+                                @Html.ValidationMessageFor(model => model.user_contact.postcode)
+                            </div>
+                        </div>
+                        <div class="DivRow">
+                            <div class="DivMant">&nbsp;</div>
+                            <div class="DivLabel">
+                                &nbsp;
+                            </div>
+                            <div class="DivTxt">
+                                <input type="submit" value="Save" />
+                            </div>
+                        </div>
+                        <div id="LoginFailMeg" style="display: none;">
+                            <p>@ViewBag.Message</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                }*@
+        </div>
+        <div class="rig_pan">
+            @Html.Partial("_myacc_navpartial")
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#phone_number,#mobile_number,#postcode').keypress(function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    return false;
+                }
+            });
+
+        });
+    </script>
+}
+<style type="text/css">
+    .ui-dialog .ui-dialog-buttonpane button {
+        /*padding-bottom: 35px;*/
+        width: 80px;
+        text-align: center;
+        height: 30px;
+    }
+
+    .ui-button-text-only .ui-button-text {
+        padding: 0px;
+    }
+
+    .content_pan {
+        width: 600px;
+        margin: 20px auto;
+        border: 2px solid rgb(221, 221, 221);
+        border-radius: 7px;
+        padding: 10px;
+    }
+</style>
+
+

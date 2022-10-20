@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "Thank you";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";    
+}
+<div class="abt-main">
+    @using (Html.BeginForm("Thankyou", "Care", FormMethod.Post, new { id = "frmThankyou", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="choose_box remov_padd wrapper" style="padding: 10px;">
+            <h2>Thankyou</h2>
+            @if (ViewBag.Message == "Register")
+            {
+                <div class="DivRow">
+                    <p class="ThankMessage">
+                        You have been Registered Successfully...
+                    </p>
+                    <p>
+                        Your temporary password was sent to your nominated contact number via SMS.<br />
+                        Please click&nbsp;@Html.ActionLink("here", "login", "Care")&nbsp;to login your account
+                    </p>
+                </div>
+            }
+            else if (ViewBag.Message == "Update")
+            {
+                <div class="DivRow">
+                    <p class="ThankMessage">
+                        Changes Updated Successfully...
+                    </p>
+                    <p>
+                        Please click&nbsp;@Html.ActionLink("here", "login", "Care")&nbsp;to login your account
+                    </p>
+                </div>
+            }
+            else if (ViewBag.Message == "ResetPassword")
+            {
+                <div class="DivRow">
+                    <p class="ThankMessage">
+                        Password Changed Successfully...
+                    </p>
+                    <p>
+                        Please click&nbsp;@Html.ActionLink("here", "login", "Care")&nbsp;to login your account
+                    </p>
+                </div>
+            }
+            else if (ViewBag.Message == "ForgotPassword")
+            {
+                <div class="DivRow">
+                    <p class="ThankMessage">
+                        Your Password has been sent...
+                    </p>
+                    <p>
+                        Please click&nbsp;@Html.ActionLink("here", "login", "Care")&nbsp;to login your account
+                    </p>
+                </div>
+            }
+            else if (ViewBag.Message == "Reset")
+            {
+                <div class="DivRow">
+                    <p class="ThankMessage">
+                        Password Reset done Successfully...
+                    </p>
+                    <p>
+                        Please click&nbsp;@Html.ActionLink("here", "login", "Care")&nbsp;to login your account using your NEW password
+                    </p>
+                </div>
+            }
+            else if (ViewBag.Message == "Temppwd")
+            {
+                <div class="DivRow">
+                    <p class="ThankMessage">
+                        Password Reset done Successfully...
+                    </p>
+                    <p>
+                        Please click&nbsp;@Html.ActionLink("here", "login", "Care")&nbsp;to login your account using your NEW password
+                    </p>
+                </div>
+            }
+            else if (ViewBag.Message == "vodafone")
+            {
+                <div class="DivRow">
+                    <p class="ThankMessage">
+                        Password Reset done Successfully...
+                    </p>
+                    <p>
+                        Please click&nbsp;<a href="../Care/Login/vodafone">here</a>&nbsp;to login your account using your NEW password
+                    </p>
+                </div>
+            }
+        </div>
+        <div style="clear:both"></div>
+    }
+</div>
+
+<style>
+    .choose_box {
+        width: 100%;
+        float: left;
+        margin: 0px 0 40px 0 !important;
+        box-shadow: 1px 3px 4px #999;
+        padding-bottom: 108px;
+    }
+
+    .choose_box_tet {
+        width: 100%;
+        text-align: center;
+        margin: 37px 0 0;
+    }
+
+        .choose_box_tet h1 {
+            color: #333;
+            font-family: 'PTSansRegular';
+            font-size: 40px;
+        }
+
+        .choose_box_tet p {
+            color: #666;
+            font-family: 'MyriadProRegular';
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+    .remov_padd {
+        padding-bottom: 30px;
+        margin-top: 40px;
+    }
+
+    .DivRow {
+        font-size: 15px;
+        line-height: 22px;
+        color: rgb(0, 0, 0);
+        text-align: justify;
+        margin-bottom: 10px;
+        width: 100%;
+        max-width: 600px;
+    }
+
+        .DivRow a {
+            text-decoration: none;
+        }
+
+            .DivRow a:hover {
+                text-decoration: underline;
+            }
+
+        .ThankMessage {
+            color: green !important;
+            font-weight: bold !important;
+        }
+
+</style>

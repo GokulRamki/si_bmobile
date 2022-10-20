@@ -1,0 +1,293 @@
+﻿@model si_bmobile.Models.RegistrationModel
+
+@{
+    ViewBag.Title = "Update Profile";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+<div class="mid_margin">   
+    <div class="frmwidget">
+                    <article class="col-sm-12 col-md-12 col-lg-10" style="margin-top:20px;">
+
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                            <header>
+                                <span class="widget-icon"><i class="fa fa-user"></i></span>
+                                <h2>Update Profile </h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    @using (Html.BeginForm("EditPro", "Care", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmEditPro", @class = "smart-form", novalidate = "novalidate" }))
+                                    {	    
+                                        @Html.AntiForgeryToken()                             
+                           
+                                        @*if (ViewBag.Message != null)
+                                        {
+                                        <fieldset>
+                                            <div class="alert alert-warning fade in">
+                                                <button class="close" data-dismiss="alert">
+                                                    ×
+                                                </button>
+                                                <i class="fa-fw fa fa-warning"></i>
+                                                <strong>Warning</strong> @ViewBag.Message
+                                            </div>
+                                        </fieldset>
+                                        }                       
+                                        *@<fieldset>
+                                            <section>
+                                                <b>E-mail:&nbsp;</b>
+                                                <label for="Email" class="input">
+                                                    @Html.TextBoxFor(model => model.Email, new { placeholder = "E-mail" })
+                                                    @Html.ValidationMessageFor(model => model.Email)
+                                                </label>
+                                            </section>
+
+                                            <section>
+                                                <b>First Name:&nbsp;</b>
+                                                <label for="FirstName" class="input">
+                                                    @Html.TextBoxFor(model => model.FirstName, new { placeholder = "First Name"})
+                                                    @Html.ValidationMessageFor(model => model.FirstName)
+                                                </label>
+                                            </section> 
+                                            
+                                              <section>
+                                                <b>Middle Name:&nbsp;</b>
+                                                <label for="MiddleName" class="input">
+                                                    @Html.TextBoxFor(model => model.MiddleName, new { placeholder = "Middle Name" })
+                                                    @Html.ValidationMessageFor(model => model.MiddleName)
+                                                </label>
+                                            </section>  
+                                            
+                                              <section>
+                                                <b>Last Name:&nbsp;</b>
+                                                <label for="LastName" class="input">
+                                                    @Html.TextBoxFor(model => model.LastName, new { placeholder = "Last Name" })
+                                                    @Html.ValidationMessageFor(model => model.LastName)
+                                                </label>
+                                            </section>  
+                                             <section>
+                                                <b>Company Name:&nbsp;</b>
+                                                <label for="Company" class="input">
+                                                    @Html.TextBoxFor(model => model.Company, new { placeholder = "Company Name" })
+                                                    @Html.ValidationMessageFor(model => model.Company)
+                                                </label>
+                                            </section>    
+                                             <section>
+                                                <b>Address Line 1:&nbsp;</b>
+                                                <label for="address1" class="input">
+                                                    @Html.TextBoxFor(model => model.Address1, new { placeholder = "Address Line 1" })
+                                                    @Html.ValidationMessageFor(model => model.Address1)
+                                                </label>
+                                            </section>    
+                                             <section>
+                                                <b>Address Line 2:&nbsp;</b>
+                                                <label for="address2" class="input">
+                                                    @Html.TextBoxFor(model => model.Address2, new { placeholder = "Address Line 2" })
+                                                    @Html.ValidationMessageFor(model => model.Address2)
+                                                </label>
+                                            </section> 
+                                             <section>
+                                                <b>Mobile Number:&nbsp;</b>
+                                                <label for="address2" class="input">
+                                                    @Html.DisplayFor(model => model.BroadBandNo, new { placeholder = "Mobile Number" })
+                                                    @Html.ValidationMessageFor(model => model.BroadBandNo)
+                                                </label>
+                                            </section> 
+                                             <section>
+                                                <b>Account Number:&nbsp;(For Postpaid users only)</b>
+                                                <label for="address2" class="input">
+                                                    @Html.TextBoxFor(model => model.account_number, new { placeholder = "Account Number" })
+                                                    @Html.ValidationMessageFor(model => model.account_number)
+                                                    @Html.HiddenFor(model => model.BroadBandNo)
+                                                    @Html.HiddenFor(model => model.account_number)
+                                                    @Html.HiddenFor(model => model._rd_action)
+                                                    @Html.HiddenFor(model => model.UserId)
+                                                    @Html.HiddenFor(model => model.paidType)
+                                                </label>
+                                            </section>                                             
+                                        </fieldset>  
+                                        <footer>  
+                                            <button id="btnCancel" class="btn btn-default" type="button" onclick="window.location='/Care/RefreshACC'">Cancel</button>    
+                                            <button id="btnSubmit" class="btn btn-mini top_btn" type="submit" >Submit</button>                                     
+                                        </footer>
+                                    }
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+                    </article>
+                    <!-- END COL -->             
+        </div>    
+    @Html.Partial("RightNav_PartialView")
+    </div>
+
+
+@*<div class="container">
+    @using (Html.BeginForm("EditPro", "Care", FormMethod.Post, new { id = "frmEditPro", enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+            @Html.AntiForgeryToken()
+
+        <div class="dRow">
+            <div class="DivMant">&nbsp;</div>
+            <div class="dRowlbl">
+                Email:
+            </div>
+            <div class="dRowctrl">
+                @Html.TextBoxFor(model => model.Email, new { @class = "Txtbox" })              
+                 @Html.ValidationMessageFor(model => model.Email)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="dRow">
+            <div class="DivMant">*</div>
+            <div class="dRowlbl">
+                First Name:
+            </div>
+            <div class="dRowctrl">
+                @Html.TextBoxFor(model => model.FirstName, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="dRow">
+            <div class="DivMant">&nbsp;</div>
+            <div class="dRowlbl">
+                Middle Name:
+            </div>
+            <div class="dRowctrl">
+                @Html.TextBoxFor(model => model.MiddleName, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.MiddleName)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="dRow">
+            <div class="DivMant">*</div>
+            <div class="dRowlbl">
+                Last Name:
+            </div>
+            <div class="dRowctrl">
+                @Html.TextBoxFor(model => model.LastName, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="dRow">
+            <div class="DivMant">&nbsp;</div>
+            <div class="dRowlbl">
+                Company:
+            </div>
+            <div class="dRowctrl">
+                @Html.TextBoxFor(model => model.Company, new { @class = "Txtbox" })
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="dRow">
+            <div class="DivMant">*</div>
+            <div class="dRowlbl">
+                Address Line 1:
+            </div>
+            <div class="dRowctrl">
+                @Html.TextBoxFor(model => model.Address1, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.Address1)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="dRow">
+            <div class="DivMant">&nbsp;</div>
+            <div class="dRowlbl">
+                Address Line 2:
+            </div>
+            <div class="dRowctrl">
+                @Html.TextBoxFor(model => model.Address2, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.Address2)
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="dRow">
+            <div class="DivMant">*</div>
+            <div class="dRowlbl">
+                Mobile Number:
+                
+            </div>
+            <div class="dRowctrl">
+                @Html.DisplayFor(model => model.BroadBandNo, new { @style = "width: 223px;height:20px; font-size:14px;" })
+                @Html.HiddenFor(model => model.BroadBandNo)
+                @Html.HiddenFor(model => model.UserId)
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+      
+            <div class="dRow">
+                
+            <div class="DivMant">&nbsp;</div>
+            <div class="dRowlbl">
+                Account Number:
+                
+            </div>
+            <div class="dRowctrl">
+                @Html.DisplayFor(model => model.account_number, new { @style = "width: 223px;height:20px; font-size:14px;" })
+                
+               
+            </div>
+            <div class="clear"></div>
+        </div>
+       
+         @Html.HiddenFor(model => model.account_number)
+         @Html.HiddenFor(model => model._rd_action)
+        <div class="dRow">
+            <div class="dRowlbl">
+                &nbsp;
+                
+            </div>
+            <div class="dRowctrl">
+                <input type="submit" value="Update" />&nbsp; @Html.ActionLink("Cancel", "RefreshACC", "Care")
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="dRow">
+            <div class="DivMant">*</div>
+            Denotes mandatory fields
+        </div>
+       
+    }
+</div>*@
+ <div id="div_dialog" style="display: none;">
+            <p>@ViewBag.Message</p>
+        </div>
+@if (ViewBag.Message != null)
+{ 
+    <script type="text/javascript">
+        $("#div_dialog").dialog({
+            title: "Message",
+            buttons: {
+                Close: function () {
+                    $(this).dialog('close');
+                    var url = "@Url.Action(ViewBag.rdAction, "Care")";
+                    window.location = url;
+                }
+            },
+            width: 300,            
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            modal: true
+        });
+
+    </script>
+}
+
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+}
+

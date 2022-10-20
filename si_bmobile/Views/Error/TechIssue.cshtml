@@ -1,0 +1,15 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "TechIssue";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+}
+
+<h2>Technical Issue</h2>
+  <div class="abt-main">
+    <p class="seMessage">
+        Technical Issues occured, please contact your administrator...
+    </p>
+    <p>
+        Please click&nbsp;@Html.ActionLink("here", "login", "Care")&nbsp;to login your account
+    </p>
+</div>

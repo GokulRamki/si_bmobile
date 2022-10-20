@@ -1,0 +1,754 @@
+﻿@model si_bmobile.Models.NewPurchasePriceModel
+
+@{
+    ViewBag.Title = "Plan Pricing";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";  
+}
+
+<div class="mid_margin">
+<h2>Pricing 
+    @if (Session["subscriber"] != null)
+    {
+        <span style="font-size: 15px; font-weight: 400; padding-left: 20px;">
+            @Html.ActionLink("Back to Summary", "RefreshACC", "Care")
+        </span>
+        <span style="font-size: 15px; font-weight: 400; float: right;">
+            @Html.ActionLink("Logout", "Logout", "Care")
+        </span>
+    }
+</h2>
+<br />
+
+@using (Html.BeginForm("PlanPricing", "Care", FormMethod.Post, new { id = "frmPlanPricing", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(c => c.jsonallmsisdn)
+    @Html.HiddenFor(c => c.jsonSubs)
+  
+   
+    <div>
+        <div class="alert-message success" style="display: none;">
+            <div class="box-icon"></div>
+            <p><span id="success_msg"></span><a href="#" class="close">&times;</a></p>
+        </div>
+    </div>
+       
+    
+    <p style="width: 100%;">
+        You are about to buy the following plans for mobile number&nbsp;
+                 @if (Model.YMSISDNlst != null)
+                 {
+                     if (Model.YMSISDNlst.Count > 0)
+                     {
+                         @Html.DropDownListFor(x => x.purchase_msisdn, Model.YMSISDNlst)
+                         for (int f = 0; f < Model.YMSISDNlst.Count; f++)
+                         {
+                             @Html.HiddenFor(x => x.YMSISDNlst[f].Text)
+                             @Html.HiddenFor(x => x.YMSISDNlst[f].Value)
+                             @Html.HiddenFor(x => x.YMSISDNlst[f].Selected)
+                         }
+                     }
+                 }
+                 else{
+                      @Html.DisplayFor(x => x.purchase_msisdn)
+                 }
+        @Html.HiddenFor(x=>x.purchase_msisdn)
+    </p>      
+    <div class="body-pan">
+        <div class="plans_pan">
+            <div class="left_pan">
+                <div id="div_mobile" class="mobile-icons">
+                    <img src="../images/slider/mobile.png" class="bg" alt="Mobile" />
+                    <br />
+                    <span class="bg"><b>Mobile</b></span>
+                </div>
+                <div id="div_tablet" class="tablet-icons">
+
+                    <br />
+                    <span class="bg"><b>Tablet</b></span>
+                    <div class="bg"></div>
+                </div>
+                @if(ViewBag.ypExpiryDate != null)
+                  {
+                <div class="mobile-icons">
+                   <a href="#" style="text-decoration:none;" onclick="ViewBYP()"> <img src="../images/slider/mobile.png" class="bg" alt="Mobile" />
+                    <br />
+                    <span class="bg"><b>View BYP</b></span></a>
+                    <div class="bg"></div>
+                </div>
+                }
+            </div>
+            <div class="right_pan">
+                   <div class="tit" style="padding-left:5px;font-weight:bold;">Your current Account Balance is: <span style="color: blue;" id="span_ACBal"></span></div>
+                  @if(ViewBag.ypExpiryDate != null)
+                  {
+                  
+                <div style="padding:5px;">
+                    Your current plan has not expired.  It will expire on  @ViewBag.ypExpiryDate.  You can top-up your account with the below options.  Note the expiry for your additional top-up will remain as the expiry of your current plan – @ViewBag.ypExpiryDate.
+                </div>
+                  }
+                <div class="tabs-head">
+                 
+                   @* <div class="cell"><a id="lnkData" href="javascript:void(0)">Data Only</a></div>*@
+                    <div class="cell"><a id="lnkBigTxter" href="javascript:void(0)">SMSBig</a></div>
+                    <div class="cell"><a id="lnkBigTalker" href="javascript:void(0)">TokBig</a></div>
+                    <div class="cell"><a id="lnkPopular" href="javascript:void(0)">Popular</a></div>
+                    <div id="divfavi" class="cell"><a id="lnkFavourite" href="javascript:void(0)">Favourite</a></div>
+                    <div id="divmyplan" class="cell"><a id="lnkMyPlan" onclick="ajaxLoadPlans();" href="javascript:void(0)">My Plan</a></div>
+                </div>
+               
+                @Html.Partial("_bm_yplans", Model)
+             
+            </div>
+
+            <div style="clear: both;" class="clr-fx"></div>
+        </div>
+    </div>
+    <div style="clear: both;" class="clr-fx"></div>   
+       
+    <!-- YPlan Usage Begin -->
+    <div id="yplanusage"></div>
+    <!-- YPlan Usage End -->
+}
+    </div>
+<span id="divyplansShow" style="display:none;">
+                     @Html.Partial("bm_yplans_show", Model)
+                </span>
+<div id="notification_dialog" style="display: none;">
+    <p>@Html.Raw(ViewBag.NotifMsg)</p>
+</div>
+
+@*<div id="confirm_promotions_dialog" style="display: none;">
+    <p><strong>Would you like to add promotional specials to your Plan?</strong></p>
+</div>*@
+
+<div id="loading_dialog_fullpage" style="display: none;">
+    <img src="~/images/slider/301.GIF" alt="Loading.." />
+    <h3>Please Wait..</h3>
+</div>
+
+@if (ViewBag.Valid != null && ViewBag.Valid == "true")
+{
+@*<div class="alert-message warning" >
+            <div class="box-icon"></div>
+            <p><span>@ViewBag.NotifMsg</span><a id="close_warning" href="#" class="close">&times;</a></p>
+        </div>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#notification_dialog").dialog({
+                title: "Confirmation",
+                create: function (event, ui) {
+                    $(".ui-widget-header").css('color', '#0E0E51');
+                },
+                buttons: {
+                    Close: function () {
+                        $(this).dialog('close');
+                        window.location = '/Care/RefreshACC';
+                    }
+                },
+                dialogClass: 'dialog_css',
+                width: 350,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+        });
+    </script>
+}
+@*@if (ViewBag.Valid != null && ViewBag.Valid == "false")
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#confirm_promotions_dialog").dialog({
+                title: "Confirmation",
+                create: function (event, ui) {
+                    $(".ui-widget-header").css('color', '#0E0E51');
+                },
+                buttons: {
+                    SkipAndContinue: function () {
+                        $(this).dialog('close');
+                        $('#loading_dialog_fullpage').dialog('open');
+                        $.post('/Care/SkipAndContinue', function (data) {
+                            if (data.Status == 'true') {
+                                window.location = '/Care/YPlanConfirm';
+                            }
+                            else {
+                                $('#loading_dialog_fullpage').dialog('close');
+                            }
+                        });
+                    },
+                    Promotions: function () {
+                        $(this).dialog('close');
+                        window.location = '/Care/YPlanConfirm';
+                    }
+                },
+                dialogClass: 'dialog_css',
+                width: 350,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+        });
+    </script>
+}*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/ResponsiveStyle.css")" />
+
+   <link rel="stylesheet" media="screen and (max-width: 599px)" href="@Url.Content("~/css/mobile-style.css")" />
+    <link rel="stylesheet" media="screen and (min-width: 600px) and (max-width: 1220px)" href="@Url.Content("~/css/tab-style.css")" />
+    <link rel="stylesheet" media="screen and (min-width: 1224px)" href="@Url.Content("~/css/tab-style.css")" />
+
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/slider/jquery-ui-slider-pips.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Scripts/slider/jquery-ui-slider-pips.css")" rel="stylesheet" type="text/css" />
+    <style>
+        #loading_dialog_fullpage
+{    
+            width:100px !important;
+    text-align:center;
+    color:gray;
+}
+
+ .dialogbox_css {
+    width:auto !important;
+    height:auto !important;
+    border: 0px none !important;
+    /*-moz-box-shadow: 1px 2px 4px 2px rgb(136, 136, 136);
+    -webkit-box-shadow: 1px 2px 4px 2px rgb(136, 136, 136);
+    box-shadow: 3px 6px 8px rgb(136, 136, 136);*/
+}
+select[disabled='disabled']
+{
+    border: solid 1px silver;
+    background:none;
+    color:#000;
+}
+      
+</style>
+
+       
+
+
+
+
+
+    <script type="text/javascript">
+        //<![CDATA[
+        var itypeId = 1;
+        var vselmsisdn = $("#purchase_msisdn").val();
+        if ('@ViewBag.fpn' != null) {
+            $(".tabs-head").css("display", "none");
+        }
+        else {
+            $(".tabs-head").css("display", "none");
+        }
+        function ViewBYP()
+        {
+            $("#divyplansShow").dialog({
+                title: "PLANS",
+
+                buttons: {
+                    Close: function () {
+                        $("#divyplansShow").dialog('close');
+                    }
+                },
+                dialogClass: 'dialog_css',
+                width: 910,
+                top: 439.5,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+        }
+        function ajaxShowPlans() {
+            var vjsonSubs = $("#jsonSubs").val();
+            $.post("/Care/ajax_ShowPlans",
+           { typeid: itypeId, sjsonSubs: vjsonSubs },
+            function (data) {
+                $("#divShowBYPpane").html(data);
+                LoadPlanSlideShow();
+
+            });
+        }
+
+
+
+        function ajaxLoadPlans() {
+          
+            $('#divfavi').css("display", "none");
+            $('#divmyplan').css("display", "none");
+            var vjsonSubs = $("#jsonSubs").val();
+           
+            $.post("/Care/ajax_GetPlans",
+           { typeid: itypeId, sjsonSubs: vjsonSubs, sSelMSISDN: vselmsisdn },
+            function (data) {
+                $("#divSliderpane").html(data);
+                var sFixedbuy = $("#isFixedbuy").val().toLowerCase();
+                if ($("#bfav").val().toLowerCase().toString() == "true") {
+                    $('#divfavi').css("display", "block");
+                    $('#lnkFavourite').parents('.cell').addClass('cell-act');
+                    //$('#lnkPopular').parents('.cell').removeClass('cell-act');
+                    $('#lnkMyPlan').parents('.cell').removeClass('cell-act');
+
+                } else {
+                    $('#divmyplan').css("display", "block");
+                    //$('#lnkPopular').parents('.cell').addClass('cell-act');
+                    $('#lnkFavourite').parents('.cell').removeClass('cell-act');
+                    $('#lnkMyPlan').parents('.cell').addClass('cell-act');
+                }
+                if (sFixedbuy == "true") {
+                    $(".tabs-head").css("display", "none");
+                }
+                else {
+                    $(".tabs-head").css("display", "block");
+                }
+                LoadPlanSlider();
+
+            });
+        }
+
+
+
+        function ajaxLoadPlansbyDenID(DenoIds) {
+
+            var v_allplans = $("#jsonallplans").val();
+            var typeId = 1;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ajax_GetPlansbyDenominations", "Care")',
+                contentType: 'application/json',
+                data: JSON.stringify({ dnoIDs: DenoIds, typeid: typeId, jsonPlans: v_allplans }),
+                success: function (data) {
+
+                    $("#divSliderpane").html(data);
+                    LoadPlanSlider();
+
+                },
+                error: function (response) {
+                    //alert("PlanPrice: " + response.d);
+                }
+            });
+        }
+
+        $('#lnkPopular').click(function () {
+            $('.cell').removeClass('cell-act');
+            $(this).parents('.cell').addClass('cell-act');
+            var popDenoIds = new Array();
+            popDenoIds.push(2);
+            popDenoIds.push(8);
+            popDenoIds.push(12);
+            ajaxLoadPlansbyDenID(popDenoIds);
+        });
+
+        $('#lnkBigTalker').click(function () {
+            $('.cell').removeClass('cell-act');
+            $(this).parents('.cell').addClass('cell-act');
+            var takDenoIds = new Array();
+            takDenoIds.push(5);
+            takDenoIds.push(6);
+            takDenoIds.push(11);
+            ajaxLoadPlansbyDenID(takDenoIds);
+
+        });
+
+        $('#lnkBigTxter').click(function () {
+            $('.cell').removeClass('cell-act');
+            $(this).parents('.cell').addClass('cell-act');
+            var txtDenoIds = new Array();
+            txtDenoIds.push(1);
+            txtDenoIds.push(10);
+            txtDenoIds.push(11);
+            ajaxLoadPlansbyDenID(txtDenoIds);
+
+        });
+
+        $('#lnkData').click(function () {
+            $('.cell').removeClass('cell-act');
+            $(this).parents('.cell').addClass('cell-act');
+            var dtDenoIds = new Array();
+            dtDenoIds.push(0);
+            dtDenoIds.push(0);
+            dtDenoIds.push(15);
+            ajaxLoadPlansbyDenID(dtDenoIds);
+
+        });
+
+        $('#lnkFavourite').click(function () {
+            $('.cell').removeClass('cell-act');
+            $(this).parents('.cell').addClass('cell-act');
+            ajaxLoadPlans();
+        });
+
+
+        $(function () {
+
+            ajaxLoadPlans();
+            ajaxShowPlans();
+
+        });
+
+        $(document).ajaxStart(function () {
+            //$("#head-hide").css({ "display": "block" });
+            $('.ui-slider').slider('disable');
+            $("#div_loading").css({ "display": "block" });
+            $(".btn").css({ 'background-color': 'lightgray', 'background-image': 'none', 'color': 'black' });
+            $('input[type=submit]').attr('disabled', true);
+        });
+        $(document).ajaxComplete(function () {
+            $("#div_loading").css("display", "none");
+            // $("#head-hide").css({ "display": "none" });
+            $('.ui-slider').slider('enable');
+            $('input[type=submit]').attr('disabled', false);
+
+            var cw = $('.img-pan').width();
+            $('.img-pan').css({ 'height': cw + 'px' });
+            HighlightSliderLabel();
+        });
+
+        //plan slider
+        function LoadPlanSlider() {
+            var i = 0;
+
+            var PlanList = new Array();
+            $(".generalplan").each(function () {
+
+                var planid = "#" + $(this).attr('id');
+
+                var plandemoninationid = $(planid + " option:selected").val();
+                PlanList.push(plandemoninationid);
+
+                var ddl = $(planid);
+                var length = $(planid + ' option').length;
+                var sliderVoice = $("#slider_" + i).slider({
+                    min: 0,
+                    max: length - 1,
+                    step: 1,
+                    range: "min",
+                    value: ddl[0].selectedIndex
+
+                });
+
+                $(planid).change(function () {
+                    sliderVoice.slider("value", this.selectedIndex);
+                });
+
+                var labellist = [];
+                $(planid + " option").each(function () {
+                    labellist.push($(this).text());
+                });
+
+                sliderVoice.slider("pips", {
+                    rest: 'label',
+                    labels: labellist
+                });
+
+
+                $("#slider_" + i).on("slidechange", function (event, ui) {
+
+                    //var _ddlId = $(this).attr('class').split(' ');
+                    var _ddlId = $(this).attr('data-');
+
+                    // var planid = "#" + _ddlId[0];
+                    var ddl = $(planid);
+                    ddl[0].selectedIndex = ui.value;
+
+                    if (_ddlId == "ddlPLAN_0" && ui.value == 0)
+                        $("#std_0").html("STANDARD RATE OF 0.55K/min");
+                    else if (_ddlId == "ddlPLAN_0" && ui.value != 0)
+                        $("#std_0").html("");
+
+                    if (_ddlId == "ddlPLAN_1" && ui.value == 0)
+                        $("#std_1").html("STANDARD RATE OF 0.10K/msg");
+                    else if (_ddlId == "ddlPLAN_1" && ui.value != 0)
+                        $("#std_1").html("");
+
+                    if (_ddlId == "ddlPLAN_2" && ui.value == 0)
+                        $("#std_2").html("STANDARD RATE OF 0.115K/mb");
+                    else if (_ddlId == "ddlPLAN_2" && ui.value != 0)
+                        $("#std_2").html("");
+
+                    GetPlanPrice();
+                });
+
+
+                i++;
+            });
+            $("#plan_denominations").val(PlanList.toString());
+        }
+
+        //for plan slide show
+        function LoadPlanSlideShow() {
+            var i = 0;
+
+            var PlanListShow = new Array();
+            $(".generalplanShow").each(function () {
+
+                var vplanid = "#" + $(this).attr('id');
+
+                var plandemoninationid = $(vplanid + " option:selected").val();
+                PlanListShow.push(plandemoninationid);
+
+                var ddl = $(vplanid);
+                var length = $(vplanid + ' option').length;
+                var sliderVoiceShow = $("#slidershow_" + i).slider({
+                    min: 0,
+                    max: length - 1,
+                    step: 1,
+                    range: "min",
+                    value: ddl[0].selectedIndex
+
+                });
+
+                $(vplanid).change(function () {
+                    sliderVoiceShow.slider("value", this.selectedIndex);
+                });
+
+                var labellist = [];
+                $(vplanid + " option").each(function () {
+                    labellist.push($(this).text());
+                });
+
+                sliderVoiceShow.slider("pips", {
+                    rest: 'label',
+                    labels: labellist
+                });
+
+
+                $("#slidershow_" + i).on("slidechange", function (event, ui) {
+
+                    //var _ddlId = $(this).attr('class').split(' ');
+                    var _ddlId = $(this).attr('data-');
+
+                    // var planid = "#" + _ddlId[0];
+                    var ddl = $(vplanid);
+                    ddl[0].selectedIndex = ui.value;
+
+                    if (_ddlId == "ddlPLANShow_0" && ui.value == 0)
+                        $("#stdshow_0").html("STANDARD RATE OF 0.55K/min");
+                    else if (_ddlId == "ddlPLANShow_0" && ui.value != 0)
+                        $("#stdshow_0").html("");
+
+                    if (_ddlId == "ddlPLANShow_1" && ui.value == 0)
+                        $("#stdshow_1").html("STANDARD RATE OF 0.10K/msg");
+                    else if (_ddlId == "ddlPLANShow_1" && ui.value != 0)
+                        $("#stdshow_1").html("");
+
+                    if (_ddlId == "ddlPLANShow_2" && ui.value == 0)
+                        $("#stdshow_2").html("STANDARD RATE OF 0.115K/mb");
+                    else if (_ddlId == "ddlPLANShow_2" && ui.value != 0)
+                        $("#stdshow_2").html("");
+
+                    GetPlanPrice_Show();
+                });
+
+
+                i++;
+            });
+            //$("#plan_denominations").val(PlanListShow.toString());
+        }
+
+        //get price for slide show
+        function GetPlanPrice_Show() {
+
+            var v_allplans = $("#jsonallplans").val();
+            var PlanListShow = new Array();
+            $(".generalplanShow").each(function () {
+                var vplanid = "#" + $(this).attr('id');
+                var plandemoninationid = $(vplanid + " option:selected").val();
+                PlanListShow.push(plandemoninationid);
+
+            });
+           // $("#plan_denominations").val(PlanListShow.toString());
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("aj_GetPlanPrice", "Care")',
+                contentType: 'application/json',
+                data: JSON.stringify({ plan: PlanListShow, typeID: itypeId, jallPlans: v_allplans }),
+                success: function (data) {
+
+
+                    $("#div_loading").css("display", "block");
+                    $("#head-hide").css({ "display": "block" });
+                    $('.ui-slider').slider('disable');
+                   // $("#tot_amt").val(data.TPrice);
+                    
+                    $('input[type=submit]').attr('disabled', true);
+                    if (data.RetVal == 0) {
+                        $(".alert-message.warning").hide();
+                        $('input[type=submit]').attr('disabled', false);
+                        $(".btn").removeAttr('style');
+                        $('.ui-slider-handle').attr('disabled', false);
+                    }
+
+                    else {
+                        $('input[type=submit]').attr('disabled', true);
+                    }
+                    var vtprice = data.TPrice;
+                   // $("#tot_amt").val(vtprice.toFixed(2));
+                    $("#totalpriceShow").html(vtprice.toFixed(2));
+
+                },
+                error: function (response) {
+                    //alert("PlanPrice: " + response.d);
+                }
+            });
+        }
+        //get price 
+        function GetPlanPrice() {
+
+            var v_allplans = $("#jsonallplans").val();
+            var PlanList = new Array();
+            $(".generalplan").each(function () {
+                var planid = "#" + $(this).attr('id');
+                var plandemoninationid = $(planid + " option:selected").val();
+                PlanList.push(plandemoninationid);
+
+            });
+            $("#plan_denominations").val(PlanList.toString());
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("aj_GetPlanPrice", "Care")',
+                contentType: 'application/json',
+                data: JSON.stringify({ plan: PlanList, typeID: itypeId, jallPlans: v_allplans }),
+                success: function (data) {
+                    
+
+                    $("#div_loading").css("display", "block");
+                    $("#head-hide").css({ "display": "block" });
+                    $('.ui-slider').slider('disable');
+                    $("#tot_amt").val(data.TPrice);
+                    // $(".btn").css({ 'background-color': 'lightgray', 'background-image': 'none', 'color': 'black' });
+                    $('input[type=submit]').attr('disabled', true);
+                    if (data.RetVal == 0) {
+                        $(".alert-message.warning").hide();
+                        $('input[type=submit]').attr('disabled', false);
+                        $(".btn").removeAttr('style');
+                        $('.ui-slider-handle').attr('disabled', false);
+                    }
+
+                    else {
+                        $('input[type=submit]').attr('disabled', true);
+                    }
+                    var vtprice = data.TPrice;
+                    $("#tot_amt").val(vtprice.toFixed(2));
+                    $(".span-price").html(vtprice.toFixed(2));
+
+                },
+                error: function (response) {
+                    //alert("PlanPrice: " + response.d);
+                }
+            });
+        }
+
+        function show_warning_notification(msg) {
+            $("#warning_msg").html(msg);
+            $(".alert-message.warning").show();
+        }
+
+
+
+
+        $(document).ready(function () {
+            Bind_MSISDN_Bal();
+            
+        });
+
+        $("#purchase_msisdn").change(function () {
+            Bind_MSISDN_Bal();
+            vselmsisdn = $("#purchase_msisdn").val();
+            ajaxLoadPlans();
+        });
+
+        function Bind_MSISDN_Bal() {
+            var msisdnlist = $.parseJSON($("#jsonallmsisdn").val());
+            var msisdn_no = $("#purchase_msisdn").val();
+
+            $.each(msisdnlist, function () {
+                if (this['msisdn_no'] == msisdn_no) {
+                    $("#span_ACBal").html(this['balance'])
+                }
+            });
+
+            $.post("/Care/ajax_GetYPlanUsage",
+          { msisdn: msisdn_no },
+           function (data) {
+               try
+               {                   
+                   $("#yplanusage").html(data);
+
+                   $(".dbox").each(function () {                     
+                       var stotal = $(this).find('.span_total').text();
+                       var susage = $(this).find('.span_usage').text();
+                       var c = parseInt(susage) / parseInt(stotal);
+                       var d = c * 100;
+                       var divgraph = $(this).find('.graph-fil');
+                       divgraph.css('width', d + '%');
+                   });
+               }
+               catch (err)
+               {
+                   $("#yplanusage").html('');
+               }
+           });
+        }
+
+        //$("#close_warning").live("click", function () {
+        //    var panel = $(this).parents('.alert-message');
+        //    panel.hide();
+        //    panel.remove();
+        //});
+
+        $(document).ready(function () {
+            $("#loading_dialog_fullpage").dialog({
+                title: "",
+                create: function (event, ui) {
+                    $(".dialogbox_css .ui-widget-header").css('display', 'none');
+                },
+                dialogClass: 'dialogbox_css',
+                width: 50,
+                autoOpen: false,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+        });
+
+
+        function HighlightSliderLabel() {
+            try {
+                $(".ui-slider-label").css('font-weight', 'normal');
+
+                $(".div-pn .div-rig").each(function () {
+                    var ddlval = $(this).find('.generalplan option:selected').text();
+
+                    $(this).find(".ui-slider-label").each(function () {
+                        var lbltxt = $(this).text();
+
+                        if (ddlval == lbltxt) {
+                            $(this).css({ 'font-weight': 'bold', 'color': 'black' });
+                        }
+                    });
+                });
+            }
+            catch (err) {
+            }
+
+            return true;
+        }
+        //]]>
+    </script>
+
+
+}
+

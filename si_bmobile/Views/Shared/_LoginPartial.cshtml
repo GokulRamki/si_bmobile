@@ -1,0 +1,12 @@
+﻿<ul>
+    @if (Session["ShoppingUserID"] != null)
+    {        
+        <li>Hello, @Session["UName"].ToString()!</li>
+        @*<li>@Html.ActionLink("MyProfile","UserProfile","Shop")</li>*@
+        <li>@Html.ActionLink("Logout", "Logout", "Shop", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("Log in", "Login", "Shop", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    }
+</ul>

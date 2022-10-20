@@ -1,0 +1,148 @@
+﻿@model si_bmobile.Models.ChangePwdModel
+@{
+    ViewBag.Title = "Change Password";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+
+<div class="mid_margin">
+    <div class="myacc_pan">
+        <div class="lef_pan">
+            <section id="widget-grid" style="margin: 50px auto;">
+                <!-- START ROW -->
+                <div class="row">
+                    <!-- NEW COL START -->
+                    <article class="col-sm-12 col-md-12 col-lg-9">
+
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                            <header>
+                                <span class="widget-icon"><i class="fa fa-user"></i></span>
+                                <h2>Change Password </h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    @using (Html.BeginForm("ChangePwd", "Shop", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmReset", @class = "smart-form", novalidate = "novalidate" }))
+                                    {	    
+                                        @Html.ValidationSummary(true)                                        
+                           
+                                        if (ViewBag.Message != null)
+                                        {
+                                        <fieldset id="msg_pan">
+                                            <div class="alert alert-warning fade in">
+                                                <button class="close" data-dismiss="alert">
+                                                    ×
+                                                </button>
+                                                <i class="fa-fw fa fa-warning"></i>
+                                                <strong>Warning</strong> @ViewBag.Message
+                                            </div>
+                                        </fieldset>
+                                        }                       
+                                        <fieldset>
+                                            <section>
+                                                <b>Old Password:&nbsp;</b>
+                                                <label for="first_name" class="input">
+                                                    @Html.TextBoxFor(model => model.OldPassword, new { placeholder = "Old Password" })
+                                                    @Html.ValidationMessageFor(model => model.OldPassword)
+                                                </label>
+                                            </section>
+
+                                            <section>
+                                                <b>New Password:&nbsp;</b>
+                                                <label for="LastName" class="input">
+                                                    @Html.TextBoxFor(model => model.NewPassword, new { placeholder = "New Password" })
+                                                    @Html.ValidationMessageFor(model => model.NewPassword)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <b>Confirm Password:&nbsp;</b>
+                                                <label for="Password" class="input">
+                                                    @Html.PasswordFor(model => model.ConfirmPassword, new { placeholder = "Confirm Password" })
+                                                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                                                </label>
+                                            </section>
+                                        </fieldset>  
+                                        <footer>
+                                            <button id="btnSubmit" class="btn btn-mini top_btn" type="submit">Submit</button>
+                                        </footer>
+                                    }
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+                    </article>
+                    <!-- END COL -->
+                </div>
+                <!-- END ROW -->
+            </section>
+
+
+
+
+            @* @using (Html.BeginForm("ChangePwd", "Shop", FormMethod.Post, new { id = "frmReset", enctype = "multipart/form-data" }))
+            {        
+                @Html.ValidationSummary(true)
+               <div class="DivRow">
+            <div class="DivLabel">
+                Old Password:
+            </div>
+            <div class="DivTxt">
+                @Html.PasswordFor(model => model.OldPassword, new {maxlength=15, @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.OldPassword)
+
+            </div>
+            
+        </div>
+        <div class="DivRow">
+            <div class="DivLabel">
+                New Password:
+            </div>
+            <div class="DivTxt">
+                @Html.PasswordFor(model => model.NewPassword, new {maxlength=15, @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.NewPassword)
+
+            </div>
+            
+        </div>
+        <div class="DivRow">
+            <div class="DivLabel">
+                Confirm Password:
+            </div>
+            <div class="DivTxt">
+                @Html.PasswordFor(model => model.ConfirmPassword, new {maxlength=15, @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+        </div>
+                <div class="DivRow">
+            <div class="DivLabel">
+                &nbsp;
+            </div>
+            <div class="DivTxt">
+                <input type="submit" value="Confirm" />
+            </div>
+        </div>
+                <div id="LoginFailMeg" class="div-row" style="display: none;">
+                    <p>@ViewBag.Message</p>
+                </div>
+            }*@
+        </div>
+
+        <div class="rig_pan">
+            @Html.Partial("_myacc_navpartial")
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+}
+

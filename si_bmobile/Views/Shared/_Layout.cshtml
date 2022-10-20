@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>:: bmobile :: - @ViewBag.Title</title>
+    @System.Web.Optimization.Styles.Render("~/Content/css")
+    @System.Web.Optimization.Scripts.Render("~/bundles/modernizr")
+    
+    <link href="@Url.Content("~/Content/Site.css?modified=20140807")" rel="stylesheet" type="text/css" />
+     <link href="@Url.Content("~/Content/CSS/BMob_Template.css")" rel="stylesheet" type="text/css" />
+    
+    <script type="text/javascript" src="../Scripts/jquery1.js"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    <script src="../Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    <!--  knockout files   -->
+    <script src="@Url.Content("~/Scripts/knockout-3.0.0.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Twinkle.Knockout.js")" type="text/javascript"></script>
+
+    <style type="text/css">
+        .recentcomments a
+        {
+            display: inline !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    </style>
+
+ <script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#dialog').dialog({
+            autoOpen: false,
+            width: 922,
+            height: 502,
+            resizable: false,
+            title: 'BMobile',
+            dialogClass: 'dialog_css',
+            modal: true,
+            create: function (event, ui) {
+                $(".ui-widget-header").css('font-size', '16px');
+                $(event.target).parent().css('position', 'fixed');
+            },
+            open: function (event, ui) {
+                    var p_id = $(this).data('id');
+                    var url = '@Url.Action("CartPanel", "Shop")';
+                    $(this).load(url, { id: p_id });
+                },
+                close: function (event, ui) {
+                    url = "@Url.Action("Products", "Shop")";
+                    $(this).load(url);
+                    window.location = url;
+                    //$(this).dialog('close');
+                }
+            });
+
+            $(".CartImg").click(function (event) {
+                var tr = $(this).parents('div');
+                var p_id = tr.find('#Prd_id').val();
+                $("#dialog").data('id', p_id).dialog('open');
+                return false;
+            });
+
+            $(".cart_bucket").click(function (event) {
+                $("#dialog").data('id', null).dialog('open');
+                return false;
+
+            });
+
+            $('.delete').live('click', function () {
+                var tr = $(this).parents('tr:first');
+                var PId = parseInt(tr.find("#hdnPId").val());
+                var qty = tr.find(".product_qty").val();
+                $.post("@Url.Action("DeleteProduct", "Shop")/" + PId, function (data) {
+                    if (data.Status == true) {
+                        tr.remove();
+                        CalculateTotPrice();
+                    }
+                });
+            });
+
+            $('.product_qty').live("change", function () {
+
+                var tr = $(this).parents('tr:first');
+                var PId = parseInt(tr.find("#hdnPId").val());
+                var qty = tr.find(".product_qty").val();
+
+                $.post("@Url.Action("UpdateProduct_Qunatity", "Shop")", { PId: PId, qty: qty }, function (data) {
+                    if (data.Status == true) {
+                        if (qty == 0)
+                            tr.find(".product_qty").val(1);
+
+                        tr.find(".product_tot_price").html(data.price.toFixed(2));
+                        CalculateTotPrice();
+                    }
+                });
+
+            });
+
+        });
+
+        function CalculateTotPrice() {
+            var tot = 0;
+            $('.cart-body tr').each(function () {
+                var tr = $(this);
+                var price = tr.find(".product_price").html();
+                var qty = tr.find(".product_qty").val();
+                tot += parseInt(price) * parseFloat(qty);
+            });
+
+            if (tot > 0) {
+                $('#TotalAmt').html(tot.toFixed(2));
+            }
+            else {
+                //$('#gridpan').hide();              
+                //$('#confirmBtnpan').hide();
+                //$('#EmptyMsg').show();
+                $("#dialog").dialog('close');
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#ProductInfodialog').dialog({
+                autoOpen: false,
+                width: 900,
+                height: 500,
+                dialogClass: 'dialog_css',
+                resizable: false,
+                title: 'BMobile',
+                modal: true,
+                create: function (event, ui) {
+                    $(".ui-widget-header").css('font-size', '16px');
+                    $(event.target).parent().css('position', 'fixed');
+                },
+                buttons: {
+                    Close: function () {
+                        $(this).dialog('close');
+                    }
+                },
+                open: function (event, ui) {
+                    var p_id = $(this).data('id');
+                    url = "@Url.Action("ProductInfoPartial", "Shop", new { Id = "xxx" })";
+                    url = url.replace("xxx", p_id);
+                    $(this).load(url);
+                }
+            });
+
+            $(".view_detail").click(function (event) {
+                var tr = $(this).parents('.pbox');
+                var p_id = tr.find('#Prd_id').val();
+                $("#ProductInfodialog").data('id', p_id).dialog('open');
+            });
+        });
+
+        // Call from ProductInfo Partial view
+        function addtocart(id) {
+            $("#ProductInfodialog").dialog('close');
+            $("#dialog").data('id', id).dialog('open');
+        }
+
+        function ViewProductInfo(id) {
+            $("#ProductInfodialog").data('id', id).dialog('open');
+        }
+
+        //Search
+        $(function () {
+            $('.search_container a').click(function () {
+                var id = $('.search_container_textfield').val();
+                if (id != "") {
+                    var url = "@Url.Action("Products", "Shop", new { skey = "xxx" })";
+                     url = url.replace("xxx", id);
+                     $(this).attr('href', url);
+                 }
+             });
+         });
+    </script>  
+   
+    </head>
+<body>
+    @Html.Partial("_HeaderLayout")
+    <div class="mid_bg">
+        <div class="margin1">
+            <div class="e_com">
+                <div class="e_com_bot">
+                    <div class="contain" style="min-height: 350px; height: !important; width: 100%;">
+                        @RenderBody()
+                        <div id="dialog" style="position:absolute"></div>
+                        <div id="ProductInfodialog"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_FooterLayout")
+    @*@System.Web.Optimization.Scripts.Render("~/bundles/jquery")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

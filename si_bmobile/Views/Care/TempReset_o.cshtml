@@ -1,0 +1,169 @@
+﻿@model si_bmobile.Models.TPModel
+
+@{
+    ViewBag.Title = "Reset Password";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+
+<div class="mid_margin">
+    <div class="frmwidget">
+    <article class="col-sm-12 col-md-12 col-lg-10" style="margin-top: 20px;">
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"><i class="fa fa-user"></i></span>
+                <h2>Temporary Password Reset </h2>
+            </header>
+            <!-- widget div-->
+            <div>
+                <!-- widget edit box -->
+                <div class="jarviswidget-editbox">
+                    <!-- This area used as dropdown edit box -->
+                </div>
+                <!-- end widget edit box -->
+
+                <!-- widget content -->
+                <div class="widget-body no-padding">
+                    @using (Html.BeginForm("TempReset", "Care", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmTempReset", @class = "smart-form", novalidate = "novalidate" }))
+                    {	    
+                        @Html.AntiForgeryToken()                             
+                           @Html.HiddenFor(model => model.Id)
+                        @*if (ViewBag.Message != null)
+                        {
+                        <fieldset id="msg_pan">
+                            <div class="alert alert-warning fade in">
+                                <button class="close" type="button" data-dismiss="alert">
+                                    ×
+                                </button>
+                                <i class="fa-fw fa fa-warning"></i>
+                                <strong>Warning</strong> @ViewBag.Message
+                            </div>
+                        </fieldset>
+                        }*@                     
+                        <fieldset>
+                            <section>
+                                <b>Temporary Password:&nbsp;</b>
+                                <label for="OldPassword" class="input">
+                                    @Html.PasswordFor(model => model.TempPwd, new { placeholder = "Temporary Password",autocomplete = "off" })
+                                    @Html.ValidationMessageFor(model => model.TempPwd)
+                                </label>
+                            </section>
+                            <section>
+                                <b>New Password:&nbsp;</b>
+                                <label for="NewPassword" class="input">
+                                    @Html.PasswordFor(model => model.NewPwd, new { placeholder = "New Password" ,autocomplete = "off"})
+                                    @Html.ValidationMessageFor(model => model.NewPwd)
+                                </label>
+                            </section>
+                            <section>
+                                <b>Confirm Password:&nbsp;</b>
+                                <label for="ConfirmPassword" class="input">
+                                    @Html.PasswordFor(model => model.ConfirmPwd, new { placeholder = "Confirm Password",autocomplete = "off" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPwd)
+                                </label>
+                            </section>
+                        </fieldset>  
+                        <footer>
+
+                            <button id="btnCancel" class="btn btn-mini top_btn" type="button" onclick="window.location='/Care/Login'" >Cancel</button>  
+                                            <button id="btnSubmit" class="btn btn-mini top_btn" type="submit" >Submit</button>
+                        </footer>
+                    }
+                </div>
+                <!-- end widget content -->
+            </div>
+            <!-- end widget div -->
+        </div>
+        <!-- end widget -->
+    </article>
+    <!-- END COL -->
+         </div>
+
+
+
+    @*<div class="choose_box remov_padd wrapper">
+    <h2>Temporary Password Reset</h2>
+    @using (Html.BeginForm("TempReset", "Care", FormMethod.Post, new { id = "frmTempReset", enctype = "multipart/form-data" }))
+    {
+        
+  @Html.AntiForgeryToken()        
+        @Html.HiddenFor(model => model.Id)
+        <div class="DivRow">
+            <div class="DivLabel">
+                Temporary Password:
+            </div>
+            <div class="DivTxt">
+                @Html.PasswordFor(model => model.TempPwd, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.TempPwd)
+
+            </div>
+            
+        </div>
+        <div class="DivRow">
+            <div class="DivLabel">
+                New Password:
+            </div>
+            <div class="DivTxt">
+                @Html.PasswordFor(model => model.NewPwd, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.NewPwd)
+
+            </div>
+            
+        </div>
+        <div class="DivRow">
+            <div class="DivLabel">
+                Confirm Password:
+            </div>
+            <div class="DivTxt">
+                @Html.PasswordFor(model => model.ConfirmPwd, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.ConfirmPwd)
+            </div>
+        </div>
+                <div class="DivRow">
+            <div class="DivLabel">
+                &nbsp;
+            </div>
+            <div class="DivTxt">
+                <input type="submit" value="Confirm" />&nbsp;    @Html.ActionLink("Cancel", "Login", "Care")
+            </div>
+        </div>
+        
+    }
+</div>*@
+    @Html.Partial("RightNav_PartialView")
+    </div>
+<div id="div_dialog" style="display: none;">
+            <p>@ViewBag.Message</p>
+        </div>
+@if (ViewBag.Message != null)
+{ 
+    <script type="text/javascript">
+        $("#div_dialog").dialog({
+            title: "Message",
+            buttons: {
+                Close: function () {
+                    $(this).dialog('close');
+                }
+            },
+            width: 300,            
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            modal: true
+        });
+
+    </script>
+}
+
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+
+     <script>
+         $('button.close').click(function () {
+             $(this).parents('#msg_pan').fadeOut('slow');
+         });
+    </script>
+}
+
+
+

@@ -1,0 +1,105 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.all_user_details>
+@*<h2>_Ajax_Users</h2>*@
+@if(Model.Count()>0)
+{
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id
+            </th>
+            <th>Name
+            </th>
+            <th>Email
+            </th>
+            <th>Mobile Number
+            </th>
+             <th>Phone Number
+            </th>
+            <th>Address
+            </th>
+            <th>City
+            </th>
+            <th>Status
+            </th>
+
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.user_contact.user_id
+                </td>
+                <td>
+                    @item.user_contact.first_name &nbsp; @item.user_contact.last_name
+                </td>
+                <td>
+                    @item.user_contact.email
+                </td>
+                <td>
+                    @item.user_contact.mobile_number 
+                </td>
+                 <td>
+                     @item.user_contact.phone_number
+                </td>
+                <td>
+                    @item.user_contact.address1@* @item.user_contact.address2 ,*@ 
+                </td>
+                 <td>
+                     @item.user_contact.city
+                </td>
+                @if (item.user.is_approved == true)
+                {
+                    <td>Approved
+                    </td>
+                }
+                else
+                {
+                    <td>Not Approved
+                    </td>
+                }
+            </tr>
+            }
+
+        }
+    </tbody>
+</table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "Users" }))
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>
+@*<script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>*@
+}
+else
+{
+            <div style="width: 100%; text-align: center; padding: 10px 0px 10px 0px;">Records Not found!</div>   
+
+}

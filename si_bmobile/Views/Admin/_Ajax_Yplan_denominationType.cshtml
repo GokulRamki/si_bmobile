@@ -1,0 +1,99 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.DenominationTypeModel>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id
+            </th>
+           
+            <th>Plan Type</th>
+             <th>Plan Name
+            </th>
+            <th>Denomination Type
+            </th>
+            <th>Units
+            </th>
+            <th>Status
+            </th>
+
+            <th>Edit
+            </th>
+            <th>Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.id
+                </td>
+               
+                 <td>
+                    @item.PlanTypeName
+                </td>
+                 <td>
+                    @item.PlanName
+                </td>
+                <td>
+                    @item.type
+                </td>
+                <td>
+                    @item.unit
+
+                </td>
+
+                @if (item.isActive == true)
+                {<td>Active</td>}
+                else
+                {<td>InActive</td>}
+
+
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit_yplan_denominationType", new { id = @item.id })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete_yplan_denominationType", new { id = @item.id }, new { @onclick = "return confirm('Are you sure, want to delete this plan denomination type?');" })
+                </td>
+            </tr>                
+            }
+        }
+    </tbody>
+</table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "Yplan_denominationType",   ddlPlantype=ViewData["ddlPlantype"] ,ddlPlans=ViewData["ddlPlans"], sPlanDenominationType=ViewData["sPlanDenominationType"],ddlStatus=  ViewData["ddlStatus"] }))
+
+         
+
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>
+

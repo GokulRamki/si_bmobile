@@ -1,0 +1,54 @@
+﻿<div class="active_sim_popup">
+<div id="popup_box">   
+    <div class="div-br">
+    </div>
+    <div class="div-tr">
+        <div class="div-td1">
+            <span>Mobile Number&nbsp;<a href="javascript:void(0)" onclick="ViewSimImage('msdn_no');" title='Mobile Number'>View</a>:</span>
+        </div>
+        <div class="div-td2">
+            <span style="color:black;">677</span>&nbsp;
+            <input type="text" id="txtMSISDNNo" name="msidnno" maxlength="11" style="width:170px;" />
+            <div><span id="spanMSISDNNo" style="color:red;"></span></div>
+        </div>
+    </div>
+    <div class="div-tr">
+        <div class="div-td1">
+            <span>SIM Number&nbsp;<a href="javascript:void(0)" onclick="ViewSimImage('sim_no');" title='SIM Number'>View</a>:</span>
+        </div>
+        <div class="div-td2">
+            <input type="text" id="txtSIMNo" name="simno" maxlength="25" />
+            <div><span id="spanSIMNo" style="color:red;"></span></div>
+        </div>
+    </div>
+    <div class="div-tr">
+        <div class="div-td1">
+            <span>PUK1 Number&nbsp;<a href="javascript:void(0)" onclick="ViewSimImage('puk_no');" title='PUK1 Number'>View</a>:</span>
+        </div>
+        <div class="div-td2">
+            <input type="text" id="txtPUKCode" name="pukcode" maxlength="11" />
+           <div><span id="spanPUKCode" style="color:red;"></span></div>
+        </div>
+    </div>
+    <div class="div-br">
+    </div>
+     <div class="div-tr">
+        <div class="div-td1">
+            &nbsp;
+        </div>
+        <div class="div-td2">
+            <div id="SIMbtnPanel">
+                <input type="button" id="btnActivateSIM" value="Activate" class="btn-submit" />&nbsp;
+                <input type="button" id="btnCloseActivateSIM" value="Close" class="btn-submit" />
+            </div>
+             <div id="divSIMProcess" class="dRowvsmlbl" style="display:none; width:100%; font-weight:bold; color:gray;">                
+                <img src="~/Content/themes/base/images/loading.gif" />Please wait...
+            </div>
+    </div>
+         </div>
+    <div class="div-br">
+    </div>
+</div>
+    <div class="img_box"><img id="img_sim" src="~/images/sim_demo/sim_no.jpg" alt="sim view" /></div>
+    <div style="clear:both;"></div>
+</div> 

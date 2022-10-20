@@ -1,0 +1,181 @@
+﻿@model si_bmobile.Models.order_summary_model
+
+@{
+    ViewBag.Title = "OrderSummary";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+
+    string status = Model.order.order_is_delivery == true ? "Delivered" : "Pending";
+}
+
+<div class="mid_margin">
+    <div class="top_nav_pan">
+        <a href="@Url.Action("Logout", "Shop")">Logout</a>
+    </div>
+
+    <div class="steps_pan">
+        <ul class="steps">
+            <li class="prevDone first"><span></span>Email Login</li>
+            <li class="Done"><span></span>Confirm Order</li>
+            <li class="current last"><span></span>Order Summary</li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+
+    <div id="printdiv" class="cont_pan box_shadow" style="background-color: #FFF !important; margin-top: 30px; padding: 0.5%;">
+        <div class="title">Order Summary</div>
+        <div class="divtr">
+            <div class="editor-label w20">Order No:&nbsp;</div>
+            <div class="editor-field w30">@Model.order.order_number</div>
+            <div class="editor-label w20">Order Date:&nbsp;</div>
+            <div class="editor-field w30">@Model.order.order_datetime.ToString("dd/MM/yyyy hh:mm tt")</div>
+        </div>
+        <div class="divtr">
+            <div class="editor-label w20">Name:&nbsp;</div>
+            <div class="editor-field w30">@Model.ordered_user.first_name&nbsp;@Model.ordered_user.last_name</div>
+            <div class="editor-label w20">Email:&nbsp;</div>
+            <div class="editor-field w30">@Model.ordered_user.email</div>
+        </div>
+
+        <div class="divtr">
+            <div class="editor-label w20">Shipping Address:&nbsp;</div>
+            <div class="editor-field w30">@Model.ordered_user.address1<br />
+                @Model.ordered_user.address2<br />
+                @Model.ordered_user.city&nbsp;-@Model.ordered_user.postcode<br />
+                @Model.ordered_user.country
+            </div>
+        </div>
+        <div class="divtr" style="height: 20px;"></div>
+        <div class="divtr">
+            <table class="webGrid">
+                <thead>
+                    <tr>
+                        <th>&nbsp;
+                        </th>
+                        <th>Product Name
+                        </th>
+                        <th>Model No
+                        </th>
+                        <th style="text-align: right;">Unit Price
+                        </th>
+                        <th style="text-align: center;">Qty
+                        </th>
+                        <th style="text-align: right;">Sub Total
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{decimal total_amount = 0; }
+                    @foreach (var item in Model.order_items)
+                    {        
+                        <tr>
+                            <td>
+                                <div style="width: 100px; min-width: 100px;">
+                                    <a href="@Url.Action("ProductInfo", "Shop", new { Id = item.product_id })">
+                                        @* <img  src="@(ViewBag.imageUrl+item.product_img)" style="max-width:100px; max-height:100px;" border="0" /></a>*@
+                                        <img  src="~/pro_images/@item.product_img" style="max-width:100px; max-height:100px;" border="0" /></a>
+                                </div>
+                            </td>
+                            <td style="text-align: center;">
+                                @item.product_name
+                            </td>
+                            <td style="text-align: left;">
+                                @item.product_model
+                            </td>
+                            <td style="text-align: right;">K&nbsp;@item.product_price.ToString("0.#0")
+                            </td>
+                            <td style="text-align: center;">
+                                @item.product_qty
+                            </td>
+
+                            @{var sub_total = item.product_qty * item.product_price;
+                              total_amount += sub_total;
+                            }
+
+                            <td style="text-align: right;">K&nbsp;@sub_total.ToString("0.#0")
+                            </td>
+                        </tr>
+                         <tr>
+                        <td>
+                            <div style="width: 100px; min-width: 100px;">
+                               &nbsp;
+                            </div>
+                        </td>
+                        <td style="text-align: center;">
+                           Topup
+                        </td>
+                        <td style="text-align: left;">
+                           &nbsp;
+                        </td>
+                        <td style="text-align: right;">K&nbsp;@item.order_topup.topup_amount.ToString("0.#0")
+                        </td>
+                        <td style="text-align: center;">
+                            &nbsp;
+                        </td>
+
+                        <td style="text-align: right;">K&nbsp;@item.order_topup.topup_amount.ToString("0.#0")
+                        </td>
+                    </tr>
+                    }
+
+                   
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td colspan="4" style="text-align: right; font-weight: bold;">Cart Subtotal :&nbsp;</td>
+                        <td style="text-align: right; font-weight: bold;">K&nbsp;@total_amount.ToString("0.#0")</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="4" style="text-align: right; font-weight: bold;">Grand Total :&nbsp;</td>
+                        <td style="text-align: right; font-weight: bold;">K&nbsp;@total_amount.ToString("0.#0")</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="divtr" style="padding: 30px 0px 30px 0px; text-align: center;">
+            <input type="button" value="Back" onclick="window.location.href='@Url.Action("MyOrders", "Shop")'" />&nbsp;
+            <input type="button" value="Print" onclick="printsummary()" />
+        </div>
+        <div class="clr"></div>
+    </div>
+    Thankyou,your transaction has been done successfully..
+    <div style="display: none;">
+        <iframe id="ifrmPrint" src="#" style="width: 0px; height: 0px;"></iframe>
+    </div>
+</div>
+
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        function printsummary() {
+            try {
+                var oIframe = document.getElementById('ifrmPrint');   
+                var oContent = document.getElementById('printdiv').innerHTML;   
+                var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
+                if (oDoc.document) oDoc = oDoc.document;
+                oDoc.write("<head>");
+                oDoc.write("<link href='@Url.Content("~/Content/Site.css")' rel='stylesheet' type='text/css' />");   
+            oDoc.write("<style>");
+            oDoc.write("#divBtn { display: none; }");
+            oDoc.write("</style>");
+            oDoc.write("</head><body onload='this.focus(); this.print();'>");
+            oDoc.write(oContent + "</body>");
+            oDoc.close();
+            var ua = $.browser;
+            if (ua.mozilla) {
+                alert('Printing in progress..');
+            }
+
+            titlediv.style.display = "block";
+        }
+        catch (e) {
+            self.print();
+        }
+    }
+    </script>
+
+}

@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "TestPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    #gallery_01 img
+    {
+        border: 2px solid white;
+        width: 96px;
+    }
+
+    .active img
+    {
+        border: 2px solid #333 !important;
+    }
+</style>
+<h2>TestPage</h2>
+
+<div>
+    <img id="img1" src="../zoom/small/image1.png" data-zoom-image="../zoom/large/image1.jpg" />
+    <div id="gallery_01">
+        <a href="#" class="active" data-image="../zoom/small/image1.png"
+            data-zoom-image="../zoom/large/image1.jpg">
+            <img src="../zoom/small/image1.png" /></a>
+        <a href="#" data-image="../zoom/small/image2.png" data-zoom-image="../zoom/large/image2.jpg">
+            <img src="../zoom/small/image2.png" /></a>
+        <a href="#" data-image="~/zoom/small/small/image3.png" data-zoom-image="~/zoom/small/large/image3.jpg">
+            <img src="~/zoom/small/small/image3.png" /></a>
+        <a href="#" data-image="~/zoom/small/small/image4.png" data-zoom-image="~/zoom/small/large/image4.jpg">
+            <img src="~/zoom/small/small/image4.png" /></a>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<img id="imgXX" src="../zoom/small/image1.png" data-zoom-image="../zoom/large/image1.jpg" />
+
+
+@section scripts{
+
+    <link href="@Url.Content("~/Content/zoom.css")" rel="stylesheet" type="text/css" />
+    <script type='text/javascript' src="@Url.Content("~/Scripts/zoom/jquery.elevatezoom.min.js")"></script>
+    <script type='text/javascript' src="@Url.Content("~/Scripts/zoom/jquery.fancybox.pack.js")"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#img1").elevateZoom({ gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: "active" });
+            $("#img1").bind("click", function (e) {
+                var ez = $('#img1').data('elevateZoom');
+                ez.closeAll();
+                $.fancybox(ez.getGalleryList());
+                return false;
+            });
+
+            //method-2
+            $("#imgXX").elevateZoom({ gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: "active" });
+        });
+    </script>
+}

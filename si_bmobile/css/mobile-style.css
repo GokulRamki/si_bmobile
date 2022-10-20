@@ -1,0 +1,665 @@
+﻿
+@media only screen and (max-width: 480px) {
+    body { font-size:16px !important; }
+}
+@media only screen and (min-width: 560px) {
+   body { font-size:20px !important; }
+}
+
+
+       .div-header
+    {
+        width: 100%;
+    }
+
+        .div-header .logo
+        {
+            width: 100%;
+            text-align:center;
+        }  
+
+ .div-menu
+    {
+        text-align:center;
+    }		
+
+    .div-menu ul
+    {
+	width:auto;
+        margin:0px auto;
+    }
+
+    .div-menu ul li
+    {
+        float: left;
+        display: inline; /*For ignore double margin in IE6*/
+        margin: 0 3px;
+    }
+	
+	 .div-menu ul li a
+            {
+                
+                padding: 5px 4px 5px 4px;
+            }
+
+    .div-topbar .topbar-pan
+    {
+        width: 100%;
+        min-height: 30px;
+    }
+
+	.div-topbar .topbar-pan  h2 { margin:0px; padding:0px; }
+	
+    .body-pan
+    {
+        width: 100%;
+    }
+
+    .plans_pan
+    {
+        width: 98%;
+		margin:0px auto;
+        background-color: #ECF1F3;
+        padding: 5px;
+        border-radius: 7px;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+    }
+
+    .left_pan
+    {
+        width: 100%;
+    }
+
+    .right_pan
+    {
+        width: 100%;
+    }
+
+    .tabs-head
+    {
+        width: 100%;
+    }
+
+        .tabs-head .tit
+        {
+            width: 80px;
+        }
+ /* Slider Panel
+    ----------------------------------------------------------*/
+
+    .plans_pan
+    {
+        width: 98%;
+        background-color: #EEEEEE;
+        padding: 5px;
+        border-radius: 7px;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+    }
+
+    .left_pan
+    {
+        width: 100%;
+        float: left;
+        margin-bottom: 5px;
+        border-right: 0px dashed red;
+        text-align: center;
+    }
+
+        .left_pan .mobile-icons
+        {
+            width: 50%;           
+            float: left;
+            text-align: center;
+            background-position: top center;
+            cursor: pointer;
+            background-repeat: no-repeat;
+        }
+
+        .left_pan .tablet-icons
+        {
+            width: 50%;
+            display: none;
+            float: left;
+            text-align: center;
+            background-position: top center;
+            cursor: pointer;
+            background-repeat: no-repeat;
+        }
+
+        .left_pan .mact
+        {
+            background-image: url('../images/slider/mobile.png');
+        }
+
+        .left_pan .tact
+        {
+            background-image: url('../images/slider/tablet.png');
+        }
+
+        .left_pan .bg
+        {
+            opacity: 0.4;
+            filter: alpha(opacity=40);
+        }
+
+    .right_pan
+    {
+        width: 100%;
+        float: right;
+    }
+
+    .tabs-head
+    {
+        width: 100%;
+        float: right;
+        margin-top: 0px;
+    }
+
+        .tabs-head .tit
+        {
+            min-height: 30px;
+            width: 25px;
+            float: left;
+            font-weight: bold;
+            line-height: 30px;
+			display:none;
+        }
+
+        .tabs-head .cell
+        {
+            min-height: 30%;
+            min-width: 40px;
+            padding: 7px 5px 5px 5px;
+            margin: 0px 0px 0px 3px;
+            background-color: #F4F7F8;
+            float: right;
+            text-align: center;
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+            -moz-border-radius-topleft: 5px;
+            -moz-border-radius-topright: 5px;
+            -webkit-border-top-left-radius: 5px;
+            -webkit-border-top-right-radius: 5px;
+        }
+
+            .tabs-head .cell:hover
+            {
+                background-color: #fff;
+            }
+
+        .tabs-head .cell-act
+        {
+            background-color: #fff;
+        }
+
+        .tabs-head .cell a
+        {
+            color: gray;
+            text-decoration: none;
+        }
+
+            .tabs-head .cell a:hover
+            {
+                text-decoration: underline;
+                background: none;
+            }
+
+    .tabs-container
+    {
+        width: 100%;
+        float: left;
+        padding: 10px 0px 10px 0px;
+        background-color: #fff;
+        border-radius: 7px;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+        border-top-right-radius: 0px;
+        -moz-border-radius-topright: 0px;
+        -webkit-border-top-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        -moz-border-radius-lefbottom: 0px;
+        -webkit-border-bottom-left-radius: 0px;
+    }
+
+    .slider_panel
+    {
+        width: 100%;
+        float: left;
+        border: 0px solid red;
+    }
+
+        .slider_panel .div-pn
+        {
+            width: 100%;
+            padding: 30px 0px 0px 0px;
+            float: left;
+        }
+
+        .slider_panel .div-tr
+        {
+            width: 100%;
+            float: left;
+        }
+
+            .slider_panel .div-tr .div-lef
+            {
+                width: 50%;
+                float: left;
+            }
+
+                .slider_panel .div-tr .div-lef .img-pan
+                {
+                    width: 25%;                   
+                    margin-left: 5px;
+                    float: left;                   
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+                }
+    /* SET PLAN IMAGES HERE*/
+
+.pi_0 {
+    background-image:url('../images/slider/voice-icon.png');
+    background-repeat:no-repeat;
+}
+.pi_1 {
+    background-image:url('../images/slider/sms-icon.png');
+    background-repeat:no-repeat;
+}
+.pi_2 {
+    background-image:url('../images/slider/data-icon.png');
+    background-repeat:no-repeat;
+}
+.pi_3 {
+    background-image:url('../images/slider/voice-icon.png');
+    background-repeat:no-repeat;
+}
+.pi_4 {
+    background-image:url('../images/slider/voice-icon.png');
+    background-repeat:no-repeat;
+}
+.pi_5 {
+    background-image:url('../images/slider/voice-icon.png');
+    background-repeat:no-repeat;
+}
+.pi_6 {
+    background-image:url('../images/slider/voice-icon.png');
+    background-repeat:no-repeat;
+}
+.pi_7 {
+    background-image:url('../images/slider/voice-icon.png');
+    background-repeat:no-repeat;
+}
+.pi_8 {
+    background-image:url('../images/slider/voice-icon.png');
+    background-repeat:no-repeat;
+}
+                .slider_panel .div-tr .div-lef img
+                {
+                    width: 100%;
+                    float: left;
+                }
+
+                .slider_panel .div-tr .div-lef .plan-txt-pan
+                {
+                    width: 70%;
+                    float: right;
+                }
+
+            .slider_panel .div-tr .div-rig
+            {
+                width: 50%;
+                float: left;
+            }
+
+        .slider_panel .div-br
+        {
+            width: 100%;
+            float: left;
+            height: 30px;
+        }
+
+        .slider_panel .clr-fx
+        {
+            clear: both;
+        }
+
+    #ddlvoice, #ddlSMS, #ddlData,select
+    {
+        display: block;
+        width: 90%;
+        height:40px;
+    }
+
+    .sliderContext, #sliderSMS, #sliderData
+    {
+        width: 99%;
+        display: none;
+    }
+     
+
+        .sliderContext .ui-slider-handle
+        {
+            background-color: #fff;
+            background-image: none;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+        }
+
+        .sliderContext .ui-slider-range-min
+        {
+            /*background-color: #FF6C00;*/
+            background-image: none;
+        }
+.sc_0 .ui-slider-range-min {
+    background-color: #FF6C00;
+}
+.sc_1 .ui-slider-range-min {
+     background-color: #00309C;
+}
+.sc_2 .ui-slider-range-min {
+    background-color: #B13294;
+}
+.sc_3 .ui-slider-range-min {
+    background-color: #FF6C00;
+}
+.sc_4 .ui-slider-range-min {
+    background-color: #FF6C00;
+}
+.sc_5 .ui-slider-range-min {
+    background-color: #FF6C00;
+}
+.sc_6 .ui-slider-range-min {
+    background-color: #FF6C00;
+}
+.sc_7 .ui-slider-range-min {
+    background-color: #FF6C00;
+}
+.sc_8 .ui-slider-range-min {
+    background-color: #FF6C00;
+}
+
+        #sliderSMS .ui-slider-handle
+        {
+            background-color: #fff;
+            background-image: none;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+        }
+
+        #sliderSMS .ui-slider-range-min
+        {
+            background-color: #00309C;
+            background-image: none;
+        }
+          
+
+        #sliderData .ui-slider-handle
+        {
+            background-color: #fff;
+            background-image: none;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+        }
+
+        #sliderData .ui-slider-range-min
+        {
+            background-color: #B13294;
+            background-image: none;
+        }
+
+    .result_panel
+    {
+        width: 100%;
+        float: right;
+    }
+
+        .result_panel .div-title
+        {
+            width: 100%;
+            padding: 15px 0px 5px 0px;
+            text-align: center;
+            float: left;            
+            font-weight: bold;
+            color: gray;
+        }
+
+        .result_panel .div-price
+        {
+            width: 100%;
+            float: left;
+            font-size: 20px;
+            text-align: center;
+            padding: 5px 0px 5px 0px;
+            font-weight: bold;
+            color: gray;
+        }
+
+        .result_panel .div-btn
+        {
+            width: 100%;
+            float: left;
+            text-align: center;
+            padding: 15px 0px 5px 0px;
+            font-weight:bold;
+        }
+
+            .result_panel .div-btn .btn
+            {
+                color: #fff;
+                background-color: #0A95F2;
+                border: none;
+                padding: 5px;
+                border-width:0px;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                font-weight:bold;
+            }
+
+                .result_panel .div-btn .btn:hover
+                {
+                    background-color: #1ca013;
+                    font-weight:bold;
+                }
+
+.std_rates
+{
+    width: 100%;
+    float: left;
+}
+
+.std_rates .stit
+{
+     width: 100%;
+    margin-bottom:15px;
+    color:gray;
+    font-size:18px;
+    font-weight:bold;
+    float: left;
+}
+
+    .std_rates .sbox
+    {
+        width: 100%;
+        height:50px;
+        padding:5px;
+        float: left;
+        margin:5px 10px 5px 0px;
+        background-color: #ECF1F3;
+        -webkit-border-radius: 25px;
+        -moz-border-radius: 25px;
+        border-radius: 25px;
+    }
+
+.std_rates .simg-pan
+{
+    width: 25%;
+    float: left;
+}
+.std_rates .stxt-pan
+{
+    width: 73%;
+    float: right;
+}
+
+    .std_rates .stxt-pan .stxt
+    {
+        width: 100%;
+        margin-top: 10px;
+        float: left;
+    }
+
+/* Dialog Css
+   ---------------------------------------------------------------------------*/
+.ui-dialog
+{    
+    width:95% !important;
+    background-color: #F4F7F8 !important; 
+}
+
+#plans_dialog
+{
+    width: 100%;
+    min-height:200px;    
+    border-top:1px solid #ddd;    
+    display:none;
+}
+
+    #plans_dialog .popup-container
+    {
+        width: 98%;
+        max-height:300px;        
+        overflow-x: hidden !important;
+        overflow-y: scroll;
+        background-color: #F4F7F8;
+    }
+
+     #plans_dialog .price-table
+    {
+        width: 100%;    
+    }
+
+     #plans_dialog .price-table td
+    {
+        padding:5px;
+        border-bottom:1px dashed gray;   
+    }
+/* DashBoard Panel
+   -----------------------------------------------------------------------------------------------------*/
+.dashboard_pan
+{
+    width: 97.5%;
+    border: 1px solid #ddd;
+    padding: 0px 1% 10px 1%;   
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.dashboard_pan .stit
+{
+    width: 100%;
+     font-size:16px;
+    font-weight:bold;
+    padding:5px 0px 5px 0px;
+    border-bottom:1px dashed #ddd;
+}
+
+.dashboard_pan .dbox
+{
+    width: 250px;
+    margin:5px 20px 0px 0px;
+    float:left;
+}
+
+.dbox .div-plan
+{
+    width: 40px; 
+    padding-bottom:5px; 
+    text-align:center;
+    font-weight:bold;
+    float:left;
+}
+
+.dbox .div-usage
+{
+    width: 205px; 
+    padding-bottom:5px;   
+    text-align:right;
+    font-weight:bold;
+    float:left;
+}
+
+.dbox .div-img
+{
+    width: 30px;
+    height:30px;
+    float:left;
+}
+
+ .dbox .Voice
+    {
+        background-image: url('../images/slider/voice-icon.png');
+        background-repeat: no-repeat;
+         -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+    }
+
+     .dbox .SMS
+    {
+        background-image: url('../images/slider/sms-icon.png');
+        background-repeat: no-repeat;
+         -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+    }
+
+       .dbox .Data
+    {
+        background-image: url('../images/slider/data-icon.png');
+        background-repeat: no-repeat;
+         -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+    }
+
+.dbox .div-grap
+{
+    width: 215px;
+    height:30px;
+    float:right;
+    background-color:#ddd;
+     -moz-border-radius: 2px;
+                -webkit-border-radius: 2px;
+                border-radius: 2px;
+}
+
+.dbox .div-grap .graph-fil
+{
+    min-width: 30px;
+    height:30px;
+    float:left;   
+      -moz-border-radius: 2px;
+                -webkit-border-radius: 2px;
+                border-radius: 2px;
+}
+
+.dbox .div-grap .Voice
+{    
+    background-color:#FF6C00;
+}
+
+.dbox .div-grap .SMS
+{    
+    background-color:#00309C;
+}
+
+.dbox .div-grap .Data
+{    
+    background-color:#B13294;
+}

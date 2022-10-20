@@ -1,0 +1,13 @@
+﻿@if (Session["subscriber"] != null)
+{
+    <div class="log-reg">
+        <a href="@Url.Action("Logout","Care")"> Logout </a>
+    </div>
+}
+else
+{
+    <div class="log-reg">
+        <a href="@Url.Action("Login","Care")"><img src="~/Content/bmobile/images/cart_img.png"></a>
+        <a href="@Url.Action("Login","Care")"> Log in </a>  |  <a href="http://selfcare.bmobile.com.sb/Care/Register" target="_blank"> Register </a>
+    </div>
+}

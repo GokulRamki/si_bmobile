@@ -1,0 +1,39 @@
+﻿ #ezytrans-box
+        {       
+            clear:both;     
+            width: 900px;
+            padding: 10px;           
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            margin-left: -450px;
+            background: white;
+            z-index: 1002;
+            /*overflow: hidden;*/
+            z-index: 1200;
+        }
+
+        #ezytranspanel
+        {
+            display:none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            z-index: 1001;
+            /*background-color: #666666;
+            -khtml-opacity: 0.8;
+            -moz-opacity: 0.8;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+            filter: alpha(opacity=80);
+            opacity: .80;*/
+            /* Fallback for web browsers that doesn't support RGBa */
+            background: rgb(0, 0, 0);
+            /* RGBa with 0.6 opacity */
+            background: rgba(0, 0, 0, 0.6);
+            /* For IE 5.5 - 7*/
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+            /* For IE 8*/
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+        }

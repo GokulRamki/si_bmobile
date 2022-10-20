@@ -1,0 +1,133 @@
+﻿@model IEnumerable<si_bmobile.Models.cartpanel_model>
+<style type="text/css">
+    thead td {
+        height: 40px;
+        line-height: 40px;
+        font-weight: bold;
+    }
+
+    tbody td {
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px dotted #DDD;
+    }
+</style>
+
+@if (Model.Count() > 0)
+{
+    <div style="margin-bottom: 15px;">
+        <div style="float: left; font-size: 25px;">
+            CART
+        </div>
+        <div style="float: right">
+            @*            <a href="@Url.Action("Products","Shop")" id="closeCartDialog" >
+                <img src="~/images/Close-2-icon.png" style="width: 25px;" />
+            </a>*@
+
+            @*            @{
+    string Req_URL = Request.UrlReferrer.ToString(); }
+
+            @if (Req_URL.Contains("Confirm"))
+            {
+                <a href="@Request.UrlReferrer;" id=>
+                    <img src="~/images/Close-2-icon.png" style="width: 25px;" />
+                </a>
+            }
+            else
+            {}
+                *@
+
+            <a href="@Request.UrlReferrer" id="closeCartDialog2"  >
+                <img src="~/images/Close-2-icon.png" style="width: 25px;" />
+            </a>
+
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+    <div id="gridpan">
+        <table class="webGrid" cellspacing="0" cellpadding="0">
+            <thead class="bmob-uppercase cart-head">
+                <tr>
+                    <td style="width: 50%; padding-left: 10px;">Item
+                    </td>
+                    <td style="width: 15%;">Qty
+                    </td>
+                    <td style="width: 15%; text-align: right;">Price
+                    </td>
+                    <td style="width: 15%; text-align: right;">Subtotal
+                    </td>
+                    <td style="width: 5%;"></td>
+                </tr>
+            </thead>
+            <tbody class="cart-body" style="overflow-y: auto;">
+                @{ decimal tot = 0; }
+                @foreach (var items in Model)
+                {
+                    tot += items.product_price * items.product_qty;
+                    <tr>
+                        <td style="padding-left: 10px;">
+                            <span>@items.product_name</span>
+                            <input id="hdnPId" value="@items.product_id" type="hidden" />
+                        </td>
+                        <td>
+                            <input value="@items.product_qty" class="product_qty" style="width: 30px;" type="text" title="Name" />
+                        </td>
+                        <td style="text-align: right;">K&nbsp;<span class="product_price">@items.product_price</span>
+                        </td>
+                        @{ var sub_total = items.product_price * items.product_qty; }
+
+                        <td style="text-align: right;">K&nbsp;<span class="product_tot_price">@sub_total</span>
+                        </td>
+                        <td><a class="delete" title="Remove Item">
+                            <div class="remove-icon"></div>
+                        </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" style="text-align: right; font-weight: bold;">Total:&nbsp;K&nbsp;<span id="TotalAmt" class="bmob-font-26">
+                        @tot
+                    </span>
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>    
+}
+else
+{
+    <div id="EmptyMsg" style="display: none;">
+        <h2>Your cart is empty</h2>
+    </div>
+}
+<div id="EmptyMsg2" style="display: none;">
+    <h2>Your cart is empty</h2>
+</div>
+
+<div style="margin-top: 10px; width: 100%;">
+    <input type="button" value="Continue Shopping" onclick="window.location ='@Url.Action("Products", "Shop")    '" style="float: left;" />
+    @if (Model.Count() > 0)
+    {
+        <span id="confirmBtnpan" data-bind="visible: Products().length > 0" style="float: right;">
+            <input type="button" value="Confirm" onclick="window.location ='@Url.Action("Confirm", "Shop")    '" />
+        </span>
+    }
+</div>
+<script type="text/javascript">
+    //var jq = $.noConflict();
+    //jq(document).ready(function () {
+    //    $(".productinfo_pan").clear();
+    //});
+
+    $(document).ready(function () {
+
+        $("#closeCartDialog").click(function(){
+            $('#Cartdialog').popup('hide');
+        });      
+    });
+
+
+</script>

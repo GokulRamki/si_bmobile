@@ -1,0 +1,164 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.DokuCareModel>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+
+                <th>Name
+                </th>
+                <th>TransactionID
+                </th>
+                <th>Transaction&nbsp;Date
+                </th>
+                <th>Amount
+                </th>
+                <th>Mobile&nbsp;No
+                </th>
+                <th>Payment&nbsp;Status
+                </th>
+                <th>Topup&nbsp;Status
+                </th>
+                <th>Email
+                </th>
+                <th>DokuLogs
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count > 0)
+            {
+
+                foreach (var item in Model)
+                {
+                    var @vColor = "";
+                    if (@item.doku.resultmsg == "FAILED")
+                        @vColor = "background-color:#FE642E;";
+                    else if (@item.doku.resultmsg == "SUCCESS" && @item.orderpayment.payment_status == "APPROVED")
+                        @vColor = "background-color:#82FA58;";
+                    else if (@item.doku.resultmsg == "SUCCESS" && @item.orderpayment.payment_status == "PENDING")
+                        @vColor = "background-color:#F7FE2E;";
+                <tr style="@vColor">
+                    <td>
+                        @item.order.cust_fname&nbsp;@item.order.cust_lname
+                    </td>
+                    <td>
+                        @item.order.order_number
+                    </td>
+                    <td>
+                        @item.order.order_datetime
+                    </td>
+                    <td>
+                        @item.order.order_product_total
+                    </td>
+                    <td>
+                        @item.order.purchase_msisdn
+                    </td>
+                    <td>
+                        @item.doku.resultmsg
+                    </td>
+                    <td>
+                        @item.orderpayment.payment_status
+                    </td>
+                    <td>
+                        @item.order.cust_email
+                    </td>
+                    <td>
+                        <a  id="@item.order.order_id" onclick="showlogdetails('@item.order.order_id');" class="showalllog" style="cursor: pointer;">dokuLog</a>
+                    </td>
+                </tr>
+                <tr id="indtranslog_@item.order.order_id"  class="AllTranslog alllogsblock">
+
+                    <td colspan="10">
+
+                        <div style="color: #8B3778; float: right; font-weight: bold; font-style: italic;">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>CustomerId</th>
+                                        <th>StatusType</th>
+                                        <th>ApprovalCode</th>
+                                        <th>Payment Date</th>
+                                        <th>PaymentChannel</th>
+                                        <th>DokuStatus</th>
+                                        <th>MobileNumber</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@item.doku.customer_id</td>
+                                        <td>@item.doku.statustype</td>
+                                        <td>@item.doku.approvalcode</td>
+                                        <td>@item.doku.created_on</td>
+                                        <td>@item.doku.payment_channel</td>
+                                        <td>@item.doku.resultmsg</td>
+                                        <td>@item.order.purchase_msisdn</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+
+                </tr>     
+                }
+
+            }
+        </tbody>
+    </table>
+    <div class="pager1">
+        @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "CugTransactions", transmerchantid = ViewData["transmerchantid"], mobile_no = ViewData["mobile_no"], ddlDokuStatus = ViewData["ddlDokuStatus"], ddlOrderstatus = ViewData["ddlOrderstatus"], sFrom = ViewData["sFrom"], sTo = ViewData["sTo"] }))
+
+
+        <div class="well">
+            Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+            of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+        </div>
+    </div>
+    
+}
+else
+{
+    <div style="width: 100%; text-align: center; padding: 10px 0px 10px 0px;">Records Not found!</div>   
+}
+<script type="text/javascript">
+
+    function showlogdetails(id) {
+
+        var logid = "#indtranslog_" + id;
+
+        $(".AllTranslog").removeClass("alllogsblock");
+        $(".AllTranslog").addClass("alllogsblock");
+        $(logid).removeClass("alllogsblock");
+    }
+
+</script>
+
+<style type="text/css">
+    .alllogsblock {
+        display: none;
+    }
+</style>
+

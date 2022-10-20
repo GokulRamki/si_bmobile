@@ -1,0 +1,418 @@
+﻿@model si_bmobile.Models.RegistrationModel
+@{
+    ViewBag.Title = "Confirm";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+
+}
+
+
+<div class="abt-main">
+    @using (Html.BeginForm("Confirm", "Care", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmConfirm", @class = "smart-form", novalidate = "novalidate" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Email)
+        @Html.HiddenFor(model => model.FirstName)
+        @Html.HiddenFor(model => model.MiddleName)
+        @Html.HiddenFor(model => model.LastName)
+        @Html.HiddenFor(model => model.Company)
+        @Html.HiddenFor(model => model.Address1)
+        @Html.HiddenFor(model => model.Address2)
+
+        @Html.HiddenFor(model => model.BroadBandNo)
+        @Html.HiddenFor(model => model.dPassword)
+        @Html.HiddenFor(model => model.account_number)
+        @Html.HiddenFor(model=>model.mother_maiden_name)
+        @Html.HiddenFor(model=>model.favourite_color)
+        @Html.HiddenFor(model=>model.pets_name)
+        
+        
+        @*if (ViewBag.Message != null)
+            {
+            <fieldset>
+                <div class="alert alert-warning fade in">
+                    <button class="close" data-dismiss="alert">
+                        ×
+                    </button>
+                    <i class="fa-fw fa fa-warning"></i>
+                    <strong>Warning</strong> @ViewBag.Message
+                </div>
+            </fieldset>
+            }*@
+        @*<fieldset>
+                <div class="row">
+                    <section class="col col-4">
+                        <b>E-mail:&nbsp;</b>
+                    </section>
+                    <section class="col col-4">
+                        <label for="Email" class="input">
+                            @Html.DisplayFor(model => model.Email)
+                        </label>
+                    </section>
+                </div>
+
+                <div class="row">
+                    <section class="col col-4">
+                        <b>First Name:&nbsp;</b>
+                    </section>
+                    <section class="col col-4">
+                        <label for="FirstName" class="input">
+                            @Html.DisplayFor(model => model.FirstName)
+                        </label>
+                    </section>
+                </div>
+
+                <div class="row">
+                    <section class="col col-4">
+                        <b>Middle Name:&nbsp;</b>
+                    </section>
+                    <section class="col col-4">
+                        <label for="MiddleName" class="input">
+                            @Html.DisplayFor(model => model.MiddleName)
+                        </label>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-4">
+                        <b>Last Name:&nbsp;</b>
+                    </section>
+                    <section class="col col-4">
+                        <label for="LastName" class="input">
+                            @Html.DisplayFor(model => model.LastName)
+                        </label>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-4">
+                        <b>Company Name:&nbsp;</b>
+                    </section>
+                    <section class="col col-4">
+                        <label for="Company" class="input">
+                            @Html.DisplayFor(model => model.Company)
+                        </label>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-4">
+                        <b>Address Line 1:&nbsp;</b>
+                    </section>
+                    <section class="col col-4">
+                        <label for="Address1" class="input">
+                            @Html.DisplayFor(model => model.Address1)
+                        </label>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-4">
+                        <b>Address Line 2:&nbsp;</b>
+                    </section>
+                    <section class="col col-4">
+                        <label for="Address2" class="input">
+                            @Html.DisplayFor(model => model.Address2)
+                        </label>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-4">
+                        <b>Mobile Number:&nbsp;</b>
+                    </section>
+                    <section class="col col-4">
+                        <label for="BroadBandNo" class="input">
+                            @Html.DisplayFor(model => model.BroadBandNo)
+                        </label>
+                    </section>
+                </div>
+            </fieldset>
+            <footer>
+                <button id="btnCancel" class="btn btn-mini top_btn" type="button" onclick="window.location='/Care/Register'">Back</button>
+                <button id="btnSubmit" class="btn btn-mini top_btn" type="submit">Submit</button>
+            </footer>*@
+
+
+        <div class="login-main">
+            <div class="log-inn">
+                <div class="log-hed"> Confirm </div>
+                @*@if (ViewBag.Message != null)
+                    {
+                        <div style="clear:both;"></div>
+                        <div class="alert-box warning">
+                            @ViewBag.Message
+                        </div>
+                    }*@
+                <div class="conf-mn">
+                    <div class="conf-lbl"> E-Mail: </div>
+                    <div class="conf-txt">
+                        @Html.DisplayFor(model => model.Email)
+                    </div>
+                </div>
+                <div class="conf-mn">
+                    <div class="conf-lbl"> First Name: </div>
+                    <div class="conf-txt">
+                        @Html.DisplayFor(model => model.FirstName)
+                    </div>
+                </div>
+                <div class="conf-mn">
+                    <div class="conf-lbl"> Middle Name: </div>
+                    <div class="conf-txt">
+                        @Html.DisplayFor(model => model.MiddleName)
+                    </div>
+                </div>
+                <div class="conf-mn">
+                    <div class="conf-lbl"> Last Name: </div>
+                    <div class="conf-txt">
+                        @Html.DisplayFor(model => model.LastName)
+                    </div>
+                </div>
+                <div class="conf-mn">
+                    <div class="conf-lbl"> Company Name: </div>
+                    <div class="conf-txt">
+                        @Html.DisplayFor(model => model.Company)
+                    </div>
+                </div>
+                <div class="conf-mn">
+                    <div class="conf-lbl"> Address Line 1: </div>
+                    <div class="conf-txt">
+                        @Html.DisplayFor(model => model.Address1)
+                    </div>
+                </div>
+                <div class="conf-mn">
+                    <div class="conf-lbl"> Address Line 2: </div>
+                    <div class="conf-txt">
+                        @Html.DisplayFor(model => model.Address2)
+                    </div>
+                </div>
+                <div class="conf-mn">
+                    <div class="conf-lbl"> Mobile Number: </div>
+                    <div class="conf-txt">
+                        <span> 677 </span> @Html.DisplayFor(model => model.BroadBandNo)
+                    </div>
+                </div>
+                <div class="log-mn">
+                    <h5>Account Verification Questions</h5>
+                </div>
+                <div class="conf-mn">
+                    <div class="conf-lbl"> What is your mother’s maiden name: </div>
+                    <div class="conf-txt">
+                        @Html.DisplayFor(model => model.mother_maiden_name)
+                    </div>
+                </div>
+                <div class="conf-mn">
+                    <div class="conf-lbl"> What is your favourite colour: </div>
+                    <div class="conf-txt">
+                         @Html.DisplayFor(model => model.favourite_color)
+                    </div>
+                </div>
+                <div class="conf-mn">
+                    <div class="conf-lbl"> What is your pets name: </div>
+                    <div class="conf-txt">
+                         @Html.DisplayFor(model => model.pets_name)
+                    </div>
+                </div>
+                <div class="conf-mn" style="text-align:right;">
+                    <button id="btnCancel" class="btn-sbmt" type="button" onclick="window.location='/Care/Register'">Back</button>&nbsp;
+                    <input id="btnSubmit" type="submit" class="btn-sbmt" value="Submit">
+                </div>
+                <div class="conf-clr"></div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+
+
+
+@*<div class="DivLeft">
+        <h2>Confirm </h2>
+        @using (Html.BeginForm("Confirm", "Care", FormMethod.Post, new { id = "frmReg", enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
+                @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.Email)
+            @Html.HiddenFor(model => model.FirstName)
+            @Html.HiddenFor(model => model.MiddleName)
+            @Html.HiddenFor(model => model.LastName)
+            @Html.HiddenFor(model => model.Company)
+            @Html.HiddenFor(model => model.Address1)
+            @Html.HiddenFor(model => model.Address2)
+
+            @Html.HiddenFor(model => model.BroadBandNo)
+            @Html.HiddenFor(model=>model.dPassword)
+            @Html.HiddenFor(model=>model.account_number)
+            <div class="dRow">
+                <div class="dRowlbl">
+                    Email:
+                </div>
+                <div class="dRowctrl">
+                    @Html.DisplayFor(model => model.Email, null, new { @class = "Txtbox" })
+
+                </div><div class="clear"></div>
+            </div>
+            <div class="dRow">
+                <div class="dRowlbl">
+                    First Name:
+                </div>
+                <div class="dRowctrl">
+                    @Html.DisplayFor(model => model.FirstName, new { @class = "Txtbox" })
+
+                </div><div class="clear"></div>
+            </div>
+            <div class="dRow">
+                <div class="dRowlbl">
+                    Middle Name:
+                </div>
+                <div class="dRowctrl">
+                    @Html.DisplayFor(model => model.MiddleName, new { @class = "Txtbox" })&nbsp;
+
+                </div><div class="clear"></div>
+            </div>
+            <div class="dRow">
+                <div class="dRowlbl">
+                    Last Name:
+                </div>
+                <div class="dRowctrl">
+                    @Html.DisplayFor(model => model.LastName, new { @class = "Txtbox" })&nbsp;
+
+                </div><div class="clear"></div>
+            </div>
+            <div class="dRow">
+                <div class="dRowlbl">
+                    Company:
+                </div>
+                <div class="dRowctrl">
+                    @Html.DisplayFor(model => model.Company, new { @class = "Txtbox" })
+
+                </div><div class="clear"></div>
+            </div>
+            <div class="dRow">
+                <div class="dRowlbl">
+                    Address Line 1:
+                </div>
+                <div class="dRowctrl">
+                    @Html.DisplayFor(model => model.Address1, new { @class = "Txtbox" })
+
+                </div><div class="clear"></div>
+            </div>
+            <div class="dRow">
+                <div class="dRowlbl">
+                    Address Line 2:
+                </div>
+                <div class="dRowctrl">
+                    @Html.DisplayFor(model => model.Address2, new { @class = "Txtbox" })&nbsp;
+
+                </div><div class="clear"></div>
+            </div>
+            <div class="dRow">
+                <div class="dRowlbl">
+                    Mobile Number:
+                </div>
+                <div class="dRowctrl">
+                    677 @Html.DisplayFor(model => model.BroadBandNo, new { @style = "width: 205px;height:20px; font-size:14px;" })
+                </div><div class="clear"></div>
+            </div>
+            <div class="dRow" style="display:none;">
+                <div class="dRowlbl">
+                    Account Number:
+                </div>
+                <div class="dRowctrl">
+                    @Html.DisplayFor(model => model.account_number, new { @style = "width: 205px;height:20px; font-size:14px;" })
+                </div><div class="clear"></div>
+            </div>
+            <div class="dRow">
+                <div class="dRowlbl">
+                    &nbsp;
+                </div>
+                <div class="dRowctrl">
+                    <input type="button" id="backbtn" value="Back" name="back" />&nbsp;
+                    <input type="submit" value="Confirm" />
+                </div><div class="clear"></div>
+            </div>
+        }
+    </div>*@
+</div>
+<div id="div_dialog" style="display: none;">
+    <p>@ViewBag.Message</p>
+</div>
+@if (ViewBag.Message != null && ViewBag.Message!="")
+{
+    <script type="text/javascript">
+        $("#div_dialog").dialog({
+            title: "Message",
+            buttons: {
+                Close: function () {
+                    $(this).dialog('close');
+                }
+            },
+            dialogClass: 'dialog_css',
+            width: 350,
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            modal: true
+        });
+
+    </script>
+}
+
+<style>
+    .conf-mn {
+        width: 99%;
+        float: left;
+        padding: 5px 0px 5px 0px;
+    }
+
+    .conf-lbl {
+        width: 49%;
+        padding-left: 5px;
+        font-weight: bold;
+        float: left;
+    }
+
+    .conf-txt {
+        width: 49.5%;
+        float: left;
+    }
+
+    .conf-clr {
+        clear: both;
+    }
+</style>
+
+<style media="screen and (max-width:500px)">
+    .conf-lbl {
+        width: 99%;
+        padding-left: 5px;
+    }
+
+    .conf-txt {
+        width: 99%;
+        padding-left: 5px;
+    }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('button.close').click(function () {
+            $(this).parents('#msg_pan').fadeOut('slow');
+        });
+
+        $('#backbtn').click(function () {
+            window.location.href = ("/Care/Register");
+        });
+    </script>
+
+    <script>
+        $('#btnSubmit').on('click', function () {
+            debugger;
+            $("#btnSubmit").hide();
+            //$("#btnSubmit").prop("disabled", true);
+        });
+    </script>
+}
+

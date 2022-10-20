@@ -1,0 +1,188 @@
+﻿@using si_bmobile;
+
+@{ 
+    string action = ViewContext.Controller.ValueProvider
+       .GetValue("action").RawValue.ToString();
+
+    if (action == "Bundles" || action == "CreateBundle" || action == "EditBundle")
+    {
+        action = "Bundles";
+    }
+
+    if (action == "CreatePromotion" || action == "EditPromotion" || action == "Promotions")
+    {
+        action = "Promotions";
+    }
+
+    if (action == "Yplans" || action == "Yplan_denomination" || action == "Yplan_denominationType" || action == "Yplan_price" || action == "Create_yplan" || action == "Create_yplan_denomination" || action == "Create_yplan_denominationType" || action == "Create_yplan_price" || action == "Edit_yplan" || action == "Edit_yplan_denomination" || action == "Edit_yplan_denominationType" || action == "Edit_yplan_price")
+    {
+        action = "YPlans";
+    }
+
+    if (action == "TopupTransactions" || action == "GetPowerTransactions" || action == "PostpaidTransactions" || action == "BYPTransactions" || action == "AppTransactionLogs" || action == "PlanPurchaseHistory" || action == "YPlanTransactionLogs" || action == "CugTransactions" || action == "SITopupTransactions" || action == "FB_Vouchers" || action == "Registration" || action == "MobileTopupTransaction" || action == "SF_PlanPurchaseTransHistory")
+    {
+        action = "Reports";
+    }
+
+    if (action == "Products" || action == "Brands" || action == "Category" || action == "AddBrand" || action == "AddCategory" || action == "AddProduct" || action == "EditBrand" || action == "EditCategory" || action == "EditProduct")
+    {
+        action = "shoppingitems";
+    }
+
+    if (action == "Orders" || action == "OrderSummary" || action == "Users")
+    {
+        action = "userorder";
+    }
+
+    if (action == "CreateUser" || action == "EditUser" || action == "CareUsers")
+    {
+        action = "Users";
+    }
+
+    if (action == "ImportStaffsTopup" || action == "Staffs_msisdn" || action == "staff_process" || action == "staffs_transactions")
+    {
+        action = "Staffs";
+    }
+    if (action == "KYC" || action == "kyc_customers_list" || action == "Update_Kyc_customer")
+    {
+        action = "KYC";
+    }
+    if (action == "TOPKAD" || action == "VerifyTOPKAD" || action == "TOPKADHistory")
+    {
+        action = "TOPKAD";
+    }          
+}
+
+@if (Session["beadmin"] != null && Session["role_id"].ToString() == "1")
+{
+    <div class="bs-docs-example">
+        <ul class="nav nav-pills">
+
+            <li  class="@("Bundles".Equals(action) ? "active" : "")" >@Html.ActionLink("Bundles", "Bundles", "Admin")</li>
+
+            <li  class="@("Promotions".Equals(action) ? "active" : "")" >@Html.ActionLink("Promotions", "Promotions", "Admin")</li>
+
+            @*<li id="bypli" class="dropdown @("YPlans".Equals(action) ? "active" : "")" >
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">BYP <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Your Plans", "Yplans", "Admin")</li>
+                    <li>@Html.ActionLink("Your Plan Denomination", "Yplan_denomination", "Admin")</li>
+                    <li>@Html.ActionLink("Your Plan Denomination Type", "Yplan_denominationType", "Admin")</li>
+                    <li>@Html.ActionLink("Your Plan Price", "Yplan_price", "Admin")</li>
+                </ul>
+            </li>*@
+
+            <li class="dropdown @("Reports".Equals(action) ? "active" : "")" >
+                <a class="dropdown-toggle" data-toggle="dropdown" onclick=" reportli();" href="#">Reports <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Topup Transactions", "TopupTransactions", "Admin", new { target = "_blank" })</li>
+                    @*<li>@Html.ActionLink("GetPower Transactions", "GetPowerTransactions", "Admin")</li>
+                    <li>@Html.ActionLink("Postpaid Transactions", "PostpaidTransactions", "Admin")</li>
+                    <li>@Html.ActionLink("BYP Transactions", "BYPTransactions", "Admin")</li>*@
+                    <li>@Html.ActionLink("Transaction Logs", "AppTransactionLogs", "Admin")</li>
+                    @*<li>@Html.ActionLink("Plan Purchase History", "PlanPurchaseHistory", "Admin")</li>*@
+                    @*<li>@Html.ActionLink("Your Plan Transaction Logs", "YPlanTransactionLogs", "Admin")</li>*@
+                    @*<li>@Html.ActionLink("CUG Transactions", "CugTransactions", "Admin")</li>*@
+                    @*<li>@Html.ActionLink("SI Topup Transactions", "SITopupTransactions", "Admin")</li>*@
+                    @*<li>@Html.ActionLink("FB Vouchers", "FB_Vouchers", "Admin")</li>*@
+                    <li>@Html.ActionLink("Registration Report", "Registration", "Admin")</li>
+                    @*<li>@Html.ActionLink("SI Subscription Plans", "SISubscriptionplan","Admin")</li>*@
+                    <li>@Html.ActionLink("Mobile Topup Transactions", "MobileTopupTransaction", "Admin", new { target = "_blank" })</li>
+                    <li>@Html.ActionLink("Selfcare Plan Purchase History", "SF_PlanPurchaseTransHistory", "Admin")</li>
+                </ul>
+            </li>
+
+            @*<li class="dropdown @("shoppingitems".Equals(action) ? "active" : "")" >
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Shopping Items<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Category", "Category", "Admin")</li>
+                    <li>@Html.ActionLink("Brands", "Brands", "Admin")</li>
+                    <li>@Html.ActionLink("Products", "Products", "Admin")</li>
+                </ul>
+            </li>*@
+
+            @*<li class="dropdown @("userorder".Equals(action) ? "active" : "")" >
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Shopping Orders/Users<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Orders", "Orders", "Admin")</li>
+                    <li>@Html.ActionLink("Users", "Users", "Admin")</li>
+
+                </ul>
+            </li>*@
+
+            <li  class="@("Users".Equals(action) ? "active" : "")" >@Html.ActionLink("CareUsers", "CareUsers", "Admin")</li>
+
+            <li  class="dropdown @("Staffs".Equals(action) ? "active" : "")" >
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Staffs Topup<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Import Staffs MSISDN", "ImportStaffsTopup", "Admin")</li>
+                    <li>@Html.ActionLink("Staffs MSISDN", "Staffs_msisdn", "Admin")</li>
+                    <li>@Html.ActionLink("Staffs Process", "staff_process", "Admin")</li>
+                    <li>@Html.ActionLink("Staffs Transactions", "staffs_transactions", "Admin")</li>
+                    <li>@Html.ActionLink("Deduct Staffs MSISDN", "DeductStaffsTopup", "Admin")</li>
+                </ul>
+            </li>
+            @*<li id="KYC" class="dropdown @("KYC".Equals(action) ? "active" : "")" >
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">KYC <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("KYC Customers List", "kyc_customers_list", "Admin")</li>
+                    <li>@Html.ActionLink("KYC SIM Activation Log", "KYC_SIM_Activation_Log", "Admin")</li>
+                    <li>@Html.ActionLink("KYC Version List", "KYC_Version_List", "Admin")</li>
+                    <li>@Html.ActionLink("Special Promotion", "SpecialPromotion", "Admin")</li>
+                </ul>
+            </li>*@
+            @*<li id="topKad" class="dropdown @("TOPKAD".Equals(action) ? "active" : "")" >
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">TOPKAD<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Verify TOPKAD Serial", "VerifyTOPKAD", "Admin")</li>
+                    <li>@Html.ActionLink("TOPKAD Log", "TOPKADHistory", "Admin")</li>  
+                </ul>
+            </li>*@            
+
+            <li class="@("Check_Msisdn".Equals(action) ? "active" : "")">@Html.ActionLink("Check Msisdn", "Check_Msisdn", "Admin")</li>
+@*            <li  class="@("menus".Equals(action) ? "active" : "")" >@Html.ActionLink("menus", "menus", "Admin")</li>*@
+            <li style="float: right;">
+                @Html.ActionLink("Logout", "Logout", "Admin")
+            </li>
+        </ul>
+        <ul class="breadcrumb">
+            <li><a href="#">You are here </a><span class="divider">: </span></li>
+            <li class="active">@ViewBag.Title</li>
+        </ul>
+    </div>    
+   
+}
+else if (Session["beadmin"] != null)
+{
+    <div class="bs-docs-example">
+        <ul class="nav nav-pills">
+            @if (ViewBag.Menus_val != null)
+            {
+                foreach (var M in ViewBag.Menus_val)
+                {
+                <li  class="dropdown @(M.title.Equals(action) ? "active" : "")" >
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">@M.title<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        @foreach (var P in M.menus)
+                        {
+
+                            if (P.page_name != "TopupTransactions" && P.page_name != "MobileTopupTransaction")
+                            {
+                                <li><a href="@Url.Action(P.page_name, "Admin")">@P.menu_name</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action(P.page_name, "Admin")" target="_blank">@P.menu_name</a></li>
+                            }
+                        }
+                    </ul>
+
+                </li>
+                }
+            }
+            <li style="float: right;">
+                @Html.ActionLink("Logout", "Logout", "Admin")
+            </li>
+        </ul>
+    </div>
+}

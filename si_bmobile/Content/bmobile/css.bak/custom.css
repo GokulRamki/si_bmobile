@@ -1,0 +1,30 @@
+﻿    li{
+        font-size:15px;
+    }
+    table {
+        width: 75%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: linear-gradient(rgb(224, 76, 2) 1%, rgb(193, 24, 31) 100%);
+        text-align: center;
+        padding: 2%;
+        color: white;
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+        padding: 2%;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    table th td {
+        border: 1px medium black;
+    }
+
+    .w3-card-4 {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+    }

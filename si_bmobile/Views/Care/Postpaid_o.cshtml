@@ -1,0 +1,744 @@
+﻿@model si_bmobile.Models.AccountModel
+
+@{
+    ViewBag.Title = "Postpaid : Summary";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.accordion.css")" rel="stylesheet" type="text/css" />
+    <script>
+        $(function () {
+            //$("#accordion").accordion();
+            $("#accordion").accordion({ autoHeight: false, icons: { "header": "ui_icon_plusthick", "headerSelected": "ui_icon_minusthick" } });
+        });
+    </script>
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function () {
+
+            $('#divPostpaid_dialog').dialog({
+                autoOpen: false,
+                width: 410,
+                //height: 150,
+                dialogClass: 'dialog_css',
+                resizable: false,
+                title: 'Postpaid Payment',
+                modal: true
+            });
+
+
+            //Search
+
+        });
+
+        function ViewPayPP() {
+            debugger;
+            $("#divPostpaid_dialog").dialog('open');
+
+            $("#txtAmount").val('@ViewBag.postpaidBal');
+            $("#hdninvoiceno").val('@ViewBag.pptransno');
+
+        }
+        function clPPpay() {
+            $("#divPostpaid_dialog").dialog('close');
+        }
+
+        //]]>
+    </script>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function () {
+
+            $('#divPayConfirm_dialog').dialog({
+                autoOpen: false,
+                width: 410,
+                //height: 150,
+                dialogClass: 'dialog_css',
+                resizable: false,
+                title: 'Payment Confirmation',
+                modal: true
+            });
+
+
+            //Search
+
+        });
+
+        function ViewPayContinue() {
+
+            if ($("#txtAmount").val() != "0") {
+                $("#spValMsg").html("");
+                $("#divPostpaid_dialog").dialog('close');
+                $("#divPayConfirm_dialog").dialog('open');
+
+            }
+            else {
+                $("#spValMsg").html("Amount Required!");
+                return false;
+            }
+        }
+        function clPPCancel() {
+            $("#divPostpaid_dialog").dialog('close');
+            $("#divPayConfirm_dialog").dialog('close');
+        }
+        function DisplayProgress() {
+            $("#divPaymentProcess").css("display", "block");
+            $("#divPayContinue").css("display", "none");
+        }
+
+        function HideProgressPanel() {
+            $("#divPaymentProcess").css("display", "none");
+            $("#divPayContinue").css("display", "block");
+        }
+
+        function postpaidBill(msisdn,account_no) {
+
+            DisplayProgress();
+            var v_invoiceno = $("#hdninvoiceno").val();
+            var vbillamount = $("#txtAmount").val();
+            var vPtype = $("#rbCreditCard").val();
+            if (v_invoiceno != null && vbillamount != null) {
+                $.ajax({
+                    url: "@Url.Action("PostpaidBillpay", "Care")",
+                    data: { sAmount: vbillamount, sPaymentType: vPtype, invoiceno: v_invoiceno, paid_msisdn: msisdn,ac_no:account_no },
+                    type: "POST",
+                    success: function (response) {
+
+                        HideProgressPanel();
+                        if (response.rmsg == "success") {
+                            window.location = response.rurl;
+                        }
+                        else {
+                            $("#spValMsg").html(response.res);
+                            return false;
+                        }
+
+                    },
+                    error: function (response) {
+                        //alert("ppbill " + response.d);
+                    }
+                });
+            }
+            else {
+                HideProgressPanel();
+                $("#spValMsg").html("failed to proceed further!");
+                return false;
+            }
+        }
+
+
+        //]]>
+    </script>
+
+}
+<style type="text/css">
+    .postsumdiv {
+        min-width: 250px;
+        float: left;
+    }
+
+    .postsumdivleft {
+        float: left;
+        margin-bottom: 10px;
+    }
+</style>
+<div class="mid_margin">
+    @using (Html.BeginForm("Postpaid", "Care", FormMethod.Post, new { id = "frmPostpaid", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+      
+        <div class="lef-pan">
+            <div class="dRow">
+                <strong>Welcome </strong>@Html.DisplayFor(a => a.Reg.FirstName)&nbsp;@Html.DisplayFor(a => a.Reg.LastName),
+
+            </div>
+            <div class="dRow">
+                <h2>Account Summary</h2>
+            </div>
+            <div class="dRowlg">
+                <div id="accordion">
+
+                    <!-- summary start -->
+                    @if (Model.Subr.Count > 0)
+                    {
+                        for (int i = 0; i < Model.Subr.Count; i++)
+                        {
+
+
+                        <h3>Mobile Number : &nbsp;@Html.DisplayFor(a => a.Subr[i]._MSISDNNumber)</h3>
+
+                        <div>
+                             
+                             @if (Model.Subr[i].paidtype == "502")
+                             {
+
+                              <div id="divPostpaid_dialog" style="display: none;">
+    <div class="dRowvsm">
+
+        <div class="dRowvsmlbl" style="width: 175px;">
+            Postpaid Mobile Number :
+        </div>
+        <div class="dRowvsmctrl">
+         
+                @Html.DisplayFor(a => a.Subr[i]._MSISDNNumber)
+            
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="dRowvsm">
+
+        <div class="dRowvsmlbl" style="width: 175px;">
+            Amount (in Kina) :
+        </div>
+        <div class="dRowvsmctrl">
+            <input type="text" id="txtAmount" maxlength="5" />
+            <input type="hidden" id="hdninvoiceno" />
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="dRowvsm">
+
+        <div class="dRowvsmlbl" style="width: 175px;">
+            Pay by :
+        </div>
+        <div class="dRowvsmctrl">
+            @Html.RadioButton("rbCreditCard", "CREDITCARD", true)
+            <label for="CreditCard">CreditCard</label>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="dRowvsm">
+        <div class="dRowvsmlbl" style="width: 175px;">
+            &nbsp;
+        </div>
+        <div class="dRowvsmctrl">
+            <div><span id="spValMsg" style="color: red;"></span></div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+
+
+    <div class="dRowvsm">
+        <div class="dRowvsmlbl" style="width: 175px;">
+            &nbsp;
+        </div>
+        <div class="dRowvsmctrl">
+            <input type="button" id="btnPaybill" onclick="ViewPayContinue();" value="Pay" />&nbsp;<input type="button" onclick="    clPPpay();" value="Cancel" />
+        </div>
+
+        <div id="divMProcess" class="dRowvsmlbl" style="display: none;">
+
+            <img src="~/Content/themes/base/images/loading.gif" />please wait...
+
+        </div>
+        <div class="clear">
+        </div>
+
+    </div>
+
+</div>
+
+                            <div id="divPayConfirm_dialog" style="display: none;">
+
+    <div class="dRowvsm">
+        <span>Would you like to Continue with Payment?
+        </span>
+    </div>
+
+    <div class="dRowvsm">
+        <div class="dRowvsmlbl" id="divPayContinue">
+            <input type="button" id="btnPayContinue" onclick="postpaidBill('@Model.Subr[i]._MSISDNNumber    ','@Model.Subr[i].accountNo    ');" value="Continue" />&nbsp;<input type="button" onclick="    clPPCancel();" value="Cancel" />
+        </div>
+
+        <div id="divPaymentProcess" class="dRowvsmlbl" style="display: none;">
+
+            <img src="~/Content/themes/base/images/loading.gif" />please wait...
+
+        </div>
+
+
+    </div>
+
+</div>
+                             }
+
+                            @if (Model.Subr[i].isPrimary == true)
+                            {
+                               
+                                <div style="@ViewBag.Disp_postpaid">
+
+                                    <div class="dRow">
+                                        <div class="dRowlbl">Current Account Details</div>
+                                        <div class="dRowctrl">
+                                            <div>
+                                                <div class="postsumdiv">Account No:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].accountNo</div>
+                                            </div>
+                                            <div>
+                                                <div class="postsumdiv">Invoice No:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].transactionNo</div>
+                                            </div>
+                                            <div>
+                                                <div class="postsumdiv">Statement Date:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].statementDate.ToString("dd-MMM-yyyy")</div>
+                                            </div>
+                                            <div>
+                                                <div class="postsumdiv">Total Current Charges Date:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].paymentDueDate.ToString("dd-MMM-yyyy")</div>
+                                            </div>
+                                            <div>
+                                                <div class="postsumdiv">Invoice Amount:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].totalAmount</div>
+                                            </div>
+                                            <div>
+                                                <div class="postsumdiv">Payment Due:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].PaymentDue</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+
+
+
+                                      
+
+
+
+
+
+
+                                    <div class="dRow" style="margin-bottom: 10px;">
+                                        <div class="dRowlbl">&nbsp;</div>
+                                        <div class="dRowctrl">
+                                            <input type="button" id="btnPayPP" value="Pay Now" onclick="ViewPayPP();" />
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    @if (Model.Subr[i].isExistAccountNo == false)
+                                    {
+                                        <div class="dRow" style="@Model.Subr[i].Disp_pbillStatus">
+
+                                            <div class="dRowlblsm">Postpaid&nbsp;bills</div>
+                                            <div class="dRowctrl">
+                                                <div class="dRowctrlmd dbgtitle">View&nbsp;Bills</div>
+                                                <div class="dRowctrlmd dItems">
+                                                    @if (Model.Subr[i]._ppbills != null)
+                                                    {
+                                                        if (Model.Subr[i]._ppbills.Count > 0)
+                                                        {
+                                                            foreach (var @item in Model.Subr[i]._ppbills)
+                                                            {
+                                                        <div>
+
+                                                            @Html.ActionLink(@item._doc_name, "Dwnld_bill", "Care", new { id = @item._file_name }, new { @style = "text-decoration:none;", @title = "Click to download" })
+
+                                                        </div>
+                                                        <br />
+
+                                                            }
+                                                        }
+
+                                                    }
+
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            <div class="dRowlbl">&nbsp;</div>
+                                            <div class="dRowctrl" style="margin-bottom: 10px;">
+                                                "For Postpaid bill(s) please refer above"
+                                            </div>
+                                        </div>
+
+                                        <div class="dRow">
+
+                                            @if (Model.Subr[i].isPrimary == false)
+                                            {
+                                                <input type="hidden" id="hdnURL" value="@ViewBag.reURL" />
+                                                <div style="float: right; padding-right: 20px;">
+                                                    <a id="@Model.Subr[i]._MSISDNNumber" href="#" onclick="return RemoveSim(this.id);">Remove Mobile Number</a>
+
+                                                </div>
+                                            }
+
+                                        </div>
+                                    }
+
+                                    <div class="dRow" style="@Model.Subr[i].Disp_nbillStatus">
+                                        <div class="dRowlbl">Postpaid&nbsp;bills</div>
+                                        <div class="dRowctrl">None</div>
+                                        <div class="clear"></div>
+                                    </div>
+
+
+                                </div>
+
+                            }
+
+
+
+
+
+
+
+
+                      
+
+
+
+
+                            @if (Model.Subr[i].isPrimary == false)
+                            {
+
+                                if (Model.Subr[i].paidtype == "502")
+                                {
+
+                                <div style="@ViewBag.Disp_postpaid">
+
+                                    <div class="dRow">
+                                        <div class="dRowlbl">Current Account Details</div>
+                                        <div class="dRowctrl">
+                                            <div>
+                                                <div class="postsumdiv">Account No:</div>
+                                                <div class="postsumdivleft">@Model.Reg.account_number</div>
+                                            </div>
+                                            <div>
+                                                <div class="postsumdiv">Invoice No:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].transactionNo</div>
+                                            </div>
+                                            <div>
+                                                <div class="postsumdiv">Statement Date:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].statementDate.ToString("dd-MMM-yyyy")</div>
+                                            </div>
+                                            <div>
+                                                <div class="postsumdiv">Total Current Charges Date:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].paymentDueDate.ToString("dd-MMM-yyyy")</div>
+                                            </div>
+                                            <div>
+                                                <div class="postsumdiv">Invoice Amount:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].totalAmount</div>
+                                            </div>
+                                            <div>
+                                                <div class="postsumdiv">Payment Due:</div>
+                                                <div class="postsumdivleft">@Model.Subr[i].PaymentDue</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    @*<div class="dRow" style="margin-bottom: 10px;">
+                                        <div class="dRowlbl">&nbsp;</div>
+                                        <div class="dRowctrl">
+                                            <input type="button" id="btnPayPP" value="Pay Now" onclick="ViewPayPP();" />
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+                                    @if (Model.Subr[i].isExistAccountNo == false)
+                                    {
+                                        <div class="dRow" style="@Model.Subr[i].Disp_pbillStatus">
+
+                                            <div class="dRowlblsm">Postpaid&nbsp;bills</div>
+                                            <div class="dRowctrl">
+                                                <div class="dRowctrlmd dbgtitle">View&nbsp;Bills</div>
+                                                <div class="dRowctrlmd dItems">
+                                                    @if (Model.Subr[i]._ppbills != null)
+                                                    {
+                                                        if (Model.Subr[i]._ppbills.Count > 0)
+                                                        {
+                                                            foreach (var @item in Model.Subr[i]._ppbills)
+                                                            {
+                                                        <div>
+
+                                                            @Html.ActionLink(@item._doc_name, "Dwnld_bill", "Care", new { id = @item._file_name }, new { @style = "text-decoration:none;", @title = "Click to download" })
+
+                                                        </div>
+                                                        <br />
+
+                                                            }
+                                                        }
+
+                                                    }
+
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            <div class="dRowlbl">&nbsp;</div>
+                                            <div class="dRowctrl" style="margin-bottom: 10px;">
+                                                "For Postpaid bill(s) please refer above"
+                                            </div>
+                                        </div>
+
+                                        <div class="dRow">
+
+                                            @if (Model.Subr[i].isPrimary == false)
+                                            {
+                                                <input type="hidden" id="hdnURL" value="@ViewBag.reURL" />
+                                                <div style="float: right; padding-right: 20px;">
+                                                    <a id="@Model.Subr[i]._MSISDNNumber" href="#" onclick="return RemoveSim(this.id);">Remove Mobile Number</a>
+
+                                                </div>
+                                            }
+
+                                        </div>
+                                    }
+
+                                    <div class="dRow" style="@Model.Subr[i].Disp_nbillStatus">
+                                        <div class="dRowlbl">Postpaid&nbsp;bills</div>
+                                        <div class="dRowctrl">None</div>
+                                        <div class="clear"></div>
+                                    </div>
+
+
+                                </div>
+
+                                }
+
+                                if (Model.Subr[i].paidtype == "501")
+                                {
+
+                                <div style="@ViewBag.Disp_prepaid">
+
+                                    <div class="dRow">
+                                        <div class="dRowlbl">Credit&nbsp;Balance</div>
+                                        <div class="dRowctrl">@Html.DisplayFor(a => a.Subr[i]._sbalance)</div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="dRow">
+                                        <div class="dRowlbl">Credit Balance Expiry</div>
+                                        <div class="dRowctrl">@Html.DisplayFor(a => a.Subr[i].sCreditExpirydate)</div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div style="@Model.Subr[i].dPlans">
+                                        @if (Model.Subr[i].planDetails != null)
+                                        {
+                                            <div class="dRow">
+                                                <div class="dRowlbl dbd">Prepaid Promotions</div>
+                                                <div class="dRowctrl">
+                                                    <div class="dColhead dborder">Plan Name</div>
+                                                    <div class="dColhead dborder">Subscription Date</div>
+                                                    <div class="dColhead dborder">Expiry Date</div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="dRow2" style="@Model.Subr[i].dataPlans">
+                                                    <div class="dRowlbl">Data Plan(s)</div>
+                                                    <div class="dRowctrl">
+                                                        @if (Model.Subr[i].DataplanDetails.Count > 0)
+                                                        {
+                                                            foreach (var item in Model.Subr[i].DataplanDetails)
+                                                            {
+                                                            <div class="dColhead dItems">@item.planName</div>
+                                                            <div class="dColhead dItems">@item.effectiveDate</div>
+                                                            <div class="dColhead dItems">@item.expiryDate</div>
+                                                            <div class="clear"></div>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="dRow2" style="@Model.Subr[i].voicePlans">
+                                                    <div class="dRowlbl">Voice Plan(s)</div>
+                                                    <div class="dRowctrl">
+                                                        @if (Model.Subr[i].VoiceplanDetails.Count > 0)
+                                                        {
+                                                            foreach (var item in Model.Subr[i].VoiceplanDetails)
+                                                            {
+                                                            <div class="dColhead dItems">@item.planName</div>
+                                                            <div class="dColhead dItems">@item.effectiveDate</div>
+                                                            <div class="dColhead dItems">@item.expiryDate</div>
+                                                            <div class="clear"></div>
+                                                            }
+                                                        }
+
+                                                    </div>
+                                                </div>
+
+                                               
+                                                <div class="clear"></div>
+
+
+
+
+                                            </div>
+                                            <div class="dRow" style="@Model.Subr[i].dDataBal">
+                                                <div class="dRowlbl">Total Data Balance</div>
+                                                <div class="dRowctrl">@Html.DisplayFor(a => a.Subr[i]._sdataBalance)</div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            
+                                        }
+                                    </div>
+                                            
+                                            <div  class="dRow">
+                                            
+                                             @if (!string.IsNullOrEmpty(@Model.Subr[i].IDDBalance))
+                                             {
+                                                    <div class="dRow2">
+                                                        <div class="dRowlbl">IDD Balance</div>
+                                                        <div class="dRowctrl">
+                                                            @Model.Subr[i].IDDBalance
+
+                                                        </div>
+                                                    </div>
+                                             }
+                                                @if (!string.IsNullOrEmpty(@Model.Subr[i].sVoicebalance))
+                                                {
+                                                    <div class="dRow2">
+                                                        <div class="dRowlbl">Voice Balance</div>
+                                                        <div class="dRowctrl">
+                                                            @Model.Subr[i].sVoicebalance
+
+                                                        </div>
+                                                    </div>
+                                                }
+                                                @if (!string.IsNullOrEmpty(@Model.Subr[i].sSMSbalance))
+                                                {
+                                                    <div class="dRow2">
+                                                        <div class="dRowlbl">SMS Balance</div>
+                                                        <div class="dRowctrl">
+                                                            @Model.Subr[i].sSMSbalance
+
+                                                        </div>
+                                                    </div>
+                                                }
+                                                @if (Model.Subr[i].ulDataBalance != "0" && Model.Subr[i].ulDataBalance != null)
+                                                {
+                                            <div class="dRow">
+                                                <div class="dRowlbl">Unlimited Data Balance</div>
+                                                <div class="dRowctrl">@Html.DisplayFor(a => a.Subr[i].ulDataBalance)</div>
+                                                <div class="clear"></div>
+                                            </div>
+                                                }
+                                                
+                                                @if (Model.Subr[i].NightPlanDataBalance != "0" && Model.Subr[i].NightPlanDataBalance != null)
+                                                {
+                                            <div class="dRow">
+                                                <div class="dRowlbl">Night Plan Data Balance</div>
+                                                <div class="dRowctrl">@Html.DisplayFor(a => a.Subr[i].NightPlanDataBalance)</div>
+                                                <div class="clear"></div>
+                                            </div>
+                                                }
+
+                                                </div>
+
+                                      
+
+
+                                    <div style="@Model.Subr[i].yDisp">
+
+                                        <div class="dRow">
+                                            <div class="dRowlbl dbd">Your BYPlans</div>
+                                            <div class="dRowctrl">
+                                                <div class="dColhead dborder">Plan Name</div>
+                                                <div class="dColhead dborder">Balance</div>
+                                                <div class="dColhead dborder">Expiry Date</div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="dRow2">
+                                                <div class="dRowlbl">&nbsp;</div>
+                                                <div class="dRowctrl">
+                                                    @if (Model.Subr[i].YPlans != null)
+                                                    {
+                                                        if (Model.Subr[i].YPlans.Count > 0)
+                                                        {
+                                                            foreach (var item in Model.Subr[i].YPlans)
+                                                            {
+                                                        <div class="dColhead dItems">@item.planName</div>
+                                                        <div class="dColhead dItems">@item.balance</div>
+                                                        <div class="dColhead dItems">@item.expiry</div>
+                                                        <div class="clear"></div>
+                                                            }
+                                                        }
+                                                    }
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="dRow" style="@Model.Subr[i].dNoPlans">
+                                        <div class="dRowlbl">Data Plan</div>
+                                        <div class="dRowctrl">None</div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="dRow dRowred" style="@Model.Subr[i].dplanexp">
+                                        Your plan has expired,&nbsp;@Html.ActionLink("Please click here to purchase a new plan", "Plans", "Care", new { @style = "font-weight:bold;" })
+                                    </div>
+                                    <div class="dRow" style="@Model.Subr[i].dtopup">
+                                        Your Account has expired,&nbsp;@Html.ActionLink("Please click here to Top Up your Account", "Topup", "Care", new { @style = "font-weight:bold;" })
+                                    </div>
+                                    @*                                <div class="dRow">
+                                                    @Html.ActionLink("Click here to purchase a new plan", "Plans", new { id = @Model.Subr[i]._MSISDNNumber }, new { @style = "font-weight:bold;" })
+                                                </div>*@
+
+                                    <div class="dRow">
+                                        @Html.ActionLink("Refresh", "RefreshACC", "Care", new { @style = "font-weight:bold;" })
+
+                                        @if (Model.Subr[i].isPrimary == false)
+                                        {
+                                            <input type="hidden" id="hdnURL" value="@ViewBag.reURL" />
+                                            <div style="float: right; padding-right: 20px;">
+                                                <a id="@Model.Subr[i]._MSISDNNumber" href="#" onclick="return RemoveSim(this.id);">Remove Mobile Number</a>
+
+                                            </div>
+                                        }
+
+                                    </div>
+                                    <div class="dRow" style="@Model.Subr[i].dCC">
+                                        Please contact customer care for further....<br />
+                                    </div>
+                                </div>
+
+                                }
+                            }
+
+                        </div>
+
+
+                        }
+                    }
+
+
+
+
+                    <!-- summary end -->
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    }
+    @Html.Partial("RightNav_PartialView")
+</div>
+

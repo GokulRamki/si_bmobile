@@ -1,0 +1,2053 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bemobileselfcareModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="accountprofile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Created_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="AccountStatus" Type="bool" Nullable="false" />
+          <Property Name="TotCreditAvail" Type="float" Nullable="false" />
+          <Property Name="ServiceNumber" Type="float" Nullable="false" />
+          <Property Name="PlanExpDate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="PlanId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="api_logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="input" Type="text" />
+          <Property Name="output" Type="text" />
+          <Property Name="data" Type="varchar" MaxLength="30" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="application_transaction">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="msisdn" Type="varchar" MaxLength="20" />
+          <Property Name="status" Type="varchar" MaxLength="32" />
+          <Property Name="reference" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="application_transaction_log">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="app_tx_id" Type="bigint" Nullable="false" />
+          <Property Name="date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="details" Type="text" />
+        </EntityType>
+        <EntityType Name="bundle_tarrif">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bundle_id" Type="bigint" />
+          <Property Name="bundle_rate_per_plan" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="bundleprice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Created_at" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="Price" Type="double" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="BundleId" Type="bigint" Nullable="false" />
+          <Property Name="size" Type="varchar" MaxLength="20" />
+          <Property Name="ExpDate" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bundles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Created_at" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="PlanName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Price" Type="double" Nullable="false" />
+          <Property Name="Size" Type="varchar" MaxLength="20" />
+          <Property Name="Validity" Type="int" />
+          <Property Name="isPostpaid" Type="bool" />
+          <Property Name="isActive" Type="bool" />
+          <Property Name="Modified_on" Type="timestamp" Precision="0" />
+          <Property Name="orderby" Type="int" />
+          <Property Name="isVoice" Type="bool" Nullable="false" />
+          <Property Name="isDelete" Type="bool" />
+          <Property Name="AccountType" Type="varchar" MaxLength="20" />
+          <Property Name="SmsAccountType" Type="varchar" MaxLength="20" />
+          <Property Name="VoiceAccountType" Type="varchar" MaxLength="20" />
+          <Property Name="IddAccountType" Type="varchar" MaxLength="20" />
+          <Property Name="UlAccountType" Type="varchar" MaxLength="20" />
+          <Property Name="voiceSize" Type="varchar" MaxLength="20" />
+          <Property Name="smsCount" Type="varchar" MaxLength="20" />
+          <Property Name="isOnlyData" Type="bool" />
+          <Property Name="voice_desc" Type="text" />
+          <Property Name="sms_desc" Type="text" />
+          <Property Name="validity_txt" Type="varchar" MaxLength="100" />
+          <Property Name="isCorporate" Type="bool" />
+          <Property Name="ussddesc" Type="varchar" MaxLength="100" />
+          <Property Name="isUssd" Type="bool" />
+          <Property Name="menu" Type="varchar" MaxLength="10" />
+          <Property Name="roamingVoiceAccountType" Type="varchar" MaxLength="20" />
+          <Property Name="roamingSmsAccountType" Type="varchar" MaxLength="20" />
+          <Property Name="romingDataAccountType" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="datacard_bundles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="plan_id" Type="bigint" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="account_type" Type="varchar" MaxLength="50" />
+          <Property Name="Size" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="denomination_type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="plan_id" Type="bigint" Nullable="false" />
+          <Property Name="unit" Type="bigint" />
+          <Property Name="isActive" Type="bool" />
+          <Property Name="isDeleted" Type="bool" />
+        </EntityType>
+        <EntityType Name="errormessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Precision="0" />
+          <Property Name="Error_Message" Type="varchar" MaxLength="250" />
+          <Property Name="Processor" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="favorite_plans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="user" Type="bigint" />
+          <Property Name="denom_id" Type="bigint" />
+          <Property Name="plan_id" Type="bigint" />
+          <Property Name="isActive" Type="bool" />
+          <Property Name="isDelete" Type="bool" />
+          <Property Name="plan_type_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="gprs_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CALLING_PARTY_NUMBER" Type="varchar" MaxLength="255" />
+          <Property Name="ACTUAL_USAGE" Type="varchar" MaxLength="255" />
+          <Property Name="USAGEFROMDATABUNDLE" Type="varchar" MaxLength="255" />
+          <Property Name="CHARGEFROMPREPAID" Type="varchar" MaxLength="255" />
+          <Property Name="CHARGETIME" Type="varchar" MaxLength="255" />
+          <Property Name="CALLINGCELLID" Type="varchar" MaxLength="255" />
+          <Property Name="ROAMSTATE" Type="varchar" MaxLength="255" />
+          <Property Name="ACCOUNTTYPE1" Type="varchar" MaxLength="255" />
+          <Property Name="CURRENTBALANCEACNT" Type="varchar" MaxLength="255" />
+          <Property Name="FREEACCOUNTTYPE1" Type="varchar" MaxLength="255" />
+          <Property Name="CURRENTBALANCEFREEACNT1" Type="varchar" MaxLength="255" />
+          <Property Name="FREEACCOUNTTYPE2" Type="varchar" MaxLength="255" />
+          <Property Name="CURRENTBALANCEFREEACNT2" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="mon_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CALLING_PARTY_NUMBER" Type="varchar" MaxLength="255" />
+          <Property Name="CHARGEFROMPREPAID" Type="varchar" MaxLength="255" />
+          <Property Name="SUBSCRIPTIONTIME" Type="varchar" MaxLength="255" />
+          <Property Name="SUBSCRIPTIONSTARTTIME" Type="varchar" MaxLength="255" />
+          <Property Name="SUBSCRIPTIONEXPIRYTIME" Type="varchar" MaxLength="255" />
+          <Property Name="PRODUCTID" Type="varchar" MaxLength="255" />
+          <Property Name="ACCOUNTTYPE1" Type="varchar" MaxLength="255" />
+          <Property Name="CURRENTBALANCEACNT1" Type="varchar" MaxLength="255" />
+          <Property Name="FREEACCOUNTTYPE1" Type="varchar" MaxLength="255" />
+          <Property Name="CURRENTBALANCEFREEACNT1" Type="varchar" MaxLength="255" />
+          <Property Name="BONUSBALANCETOFREEACNT1" Type="varchar" MaxLength="255" />
+          <Property Name="FREEACCOUNTTYPE2" Type="varchar" MaxLength="255" />
+          <Property Name="BONUSBALANCETOFREEACNT2" Type="varchar" MaxLength="255" />
+          <Property Name="CURRENTBALANCEFREEACNT2" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="multiplesim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationId" Type="bigint" Nullable="false" />
+          <Property Name="MsisdnNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="isDeleted" Type="bool" />
+          <Property Name="description" Type="text" />
+        </EntityType>
+        <EntityType Name="plan_denomination">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="plan_id" Type="bigint" Nullable="false" />
+          <Property Name="denomination" Type="varchar" MaxLength="20" />
+          <Property Name="isActive" Type="bool" Nullable="false" />
+          <Property Name="isDeleted" Type="bool" Nullable="false" />
+          <Property Name="units" Type="bigint" />
+          <Property Name="denomination_type_id" Type="bigint" />
+          <Property Name="plan_type_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="plan_price">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="plan_id" Type="bigint" Nullable="false" />
+          <Property Name="denom_id" Type="bigint" Nullable="false" />
+          <Property Name="price" Type="bigint" Nullable="false" />
+          <Property Name="isActive" Type="bool" Nullable="false" />
+          <Property Name="isDeleted" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="plan_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="plandetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Created_at" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="PlanName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="plans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="account_type" Type="bigint" Nullable="false" />
+          <Property Name="isActive" Type="bool" Nullable="false" />
+          <Property Name="isDeleted" Type="bool" Nullable="false" />
+          <Property Name="minmeasureid" Type="int" />
+          <Property Name="plan_type_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="qlinks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="TitleURL" Type="varchar" MaxLength="250" />
+          <Property Name="FileName" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="recharge_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RECHARGENUMBER" Type="varchar" MaxLength="255" />
+          <Property Name="RECHARGEAMOUNT" Type="varchar" MaxLength="255" />
+          <Property Name="RECHARGETIME" Type="varchar" MaxLength="255" />
+          <Property Name="ACCOUNTTYPE1" Type="varchar" MaxLength="255" />
+          <Property Name="RECHARGETYPE" Type="varchar" MaxLength="255" />
+          <Property Name="RECHARGE" Type="varchar" MaxLength="255" />
+          <Property Name="VOUCHERCARDSEQ" Type="varchar" MaxLength="255" />
+          <Property Name="BALANCEAFTERRECHARGE" Type="varchar" MaxLength="255" />
+          <Property Name="ACTUALRECHARGEAMT" Type="varchar" MaxLength="255" />
+          <Property Name="FREEACCOUNTTYP" Type="varchar" MaxLength="255" />
+          <Property Name="BONUSBALAN" Type="varchar" MaxLength="255" />
+          <Property Name="CURRENTBAL" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="recommends">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="TitleURL" Type="varchar" MaxLength="250" />
+          <Property Name="FileName" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Created_at" Type="datetime" Precision="0" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="company" Type="varchar" MaxLength="50" />
+          <Property Name="addr1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="addr2" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Parish" Type="varchar" MaxLength="20" />
+          <Property Name="HomeNumber" Type="varchar" MaxLength="20" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="20" />
+          <Property Name="MsisdnNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Credit" Type="double" />
+          <Property Name="Modified_on" Type="datetime" Precision="0" />
+          <Property Name="isActive" Type="bool" />
+          <Property Name="isSelfCare" Type="bool" />
+          <Property Name="verification_code" Type="varchar" MaxLength="50" />
+          <Property Name="temppas" Type="varchar" MaxLength="50" />
+          <Property Name="temppascreatedat" Type="datetime" Precision="0" />
+          <Property Name="encryptedid" Type="varchar" MaxLength="50" />
+          <Property Name="mobileverification" Type="varchar" MaxLength="50" />
+          <Property Name="isShopping" Type="bool" />
+          <Property Name="account_number" Type="varchar" MaxLength="50" />
+          <Property Name="mother_maiden_name" Type="varchar" MaxLength="55" />
+          <Property Name="favourite_colour" Type="varchar" MaxLength="55" />
+          <Property Name="pet_name" Type="varchar" MaxLength="55" />
+          <Property Name="FFNumber" Type="varchar" MaxLength="25" />
+          <Property Name="isMobileAccess" Type="bool" />
+        </EntityType>
+        <EntityType Name="responses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="responseCode" Type="bigint" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Created_at" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="ServiceName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SetupFee" Type="float" Nullable="false" />
+          <Property Name="PerPeriodFee" Type="float" Nullable="false" />
+          <Property Name="Compulsory" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="planId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sim_activation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="msisdn" Type="varchar" MaxLength="25" />
+          <Property Name="puk_no" Type="varchar" MaxLength="25" />
+          <Property Name="sim_no" Type="text" />
+          <Property Name="ref_no" Type="varchar" MaxLength="20" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
+          <Property Name="details" Type="text" />
+          <Property Name="activated_by" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="simverificationcode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="msisdn" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="verificationcode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="createdAt" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sms_app_tx">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ctime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="mtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="msisdn" Type="varchar" MaxLength="16" />
+          <Property Name="message" Type="text" />
+          <Property Name="reference" Type="bigint" />
+          <Property Name="status" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="sms_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CALLING_PARTY_NUMBER" Type="varchar" MaxLength="255" />
+          <Property Name="CALLED_PARTY_NUMBER" Type="varchar" MaxLength="255" />
+          <Property Name="SERVICEFLOW" Type="varchar" MaxLength="255" />
+          <Property Name="ACTUAL_USAGE" Type="varchar" MaxLength="255" />
+          <Property Name="USAGEFROMSMSBUNDLE" Type="varchar" MaxLength="255" />
+          <Property Name="CHARGEFROMPREPAID" Type="varchar" MaxLength="255" />
+          <Property Name="CHARGETIME" Type="varchar" MaxLength="255" />
+          <Property Name="CALLFORWARDI" Type="varchar" MaxLength="255" />
+          <Property Name="SMSTYPE" Type="varchar" MaxLength="255" />
+          <Property Name="ROAMSTATE" Type="varchar" MaxLength="255" />
+          <Property Name="CALLEDHOMENETWORKCOD" Type="varchar" MaxLength="255" />
+          <Property Name="ACCOUNTTYPE1" Type="varchar" MaxLength="255" />
+          <Property Name="CURRENTBALANCEACNT1" Type="varchar" MaxLength="255" />
+          <Property Name="FREEACCOUNTTYPE1" Type="varchar" MaxLength="255" />
+          <Property Name="CURRENTBALANCEFREEACNT1" Type="varchar" MaxLength="255" />
+          <Property Name="FREEACCOUNTTYPE2" Type="varchar" MaxLength="255" />
+          <Property Name="CURRENTBALANCEFREEACNT2" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sms_in_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="from_msisdn" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="to_msisdn" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="sms_out_log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="msg_to" Type="varchar" MaxLength="22" Nullable="false" />
+          <Property Name="message_text" Type="varchar" MaxLength="200" />
+          <Property Name="status" Type="bool" />
+          <Property Name="Ctime" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="smsout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="topup_transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="msisdn" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="amount" Type="bigint" Nullable="false" />
+          <Property Name="reference" Type="varchar" MaxLength="50" />
+          <Property Name="details" Type="text" />
+          <Property Name="reg_id" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="topupplans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="double" Nullable="false" />
+          <Property Name="Size" Type="varchar" MaxLength="20" />
+          <Property Name="Validity" Type="varchar" MaxLength="20" />
+          <Property Name="Price" Type="double" Nullable="false" />
+          <Property Name="isActive" Type="bool" />
+          <Property Name="Name" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceNo" Type="bigint" Nullable="false" />
+          <Property Name="Created_at" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="BillDate" Type="date" Nullable="false" />
+          <Property Name="CallUnits" Type="float" Nullable="false" />
+          <Property Name="CallCharges" Type="float" Nullable="false" />
+          <Property Name="DataUsage" Type="float" Nullable="false" />
+          <Property Name="DataCharges" Type="float" Nullable="false" />
+          <Property Name="MonthlyRent" Type="float" Nullable="false" />
+          <Property Name="Total" Type="float" Nullable="false" />
+          <Property Name="PaidStatus" Type="bool" Nullable="false" />
+          <Property Name="PaidAmount" Type="float" Nullable="false" />
+          <Property Name="Balance" Type="float" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="PlanId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transfer_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CHARGINGPARTYNUMBER" Type="varchar" MaxLength="255" />
+          <Property Name="TRANSFEREDAMOUNT" Type="varchar" MaxLength="255" />
+          <Property Name="HANDLINGFEE" Type="varchar" MaxLength="255" />
+          <Property Name="TRANSFERTIME" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="userhistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="PlanId" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="IsDeleted" Type="bool" Nullable="false" />
+          <Property Name="expiryDate" Type="datetime" Precision="0" />
+          <Property Name="toMsisdn" Type="varchar" MaxLength="25" />
+          <Property Name="isExpired" Type="bool" />
+          <Property Name="isTopup" Type="bool" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Created_at" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="100" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="ResetStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="validity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PlanId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ExpiryDate" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="voice_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CALL_DATE" Type="datetime" Precision="0" />
+          <Property Name="CALLED_NUMBER" Type="varchar" MaxLength="15" />
+          <Property Name="CALLTYPE" Type="varchar" MaxLength="15" />
+          <Property Name="DURATION" Type="varchar" MaxLength="15" />
+          <Property Name="BALANCE_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="CHARGE_AMOUNT" Type="varchar" MaxLength="10" />
+          <Property Name="BALANCE_AFTER_CALL" Type="varchar" MaxLength="10" />
+          <Property Name="ACCOUNT_TYPE_ID_1" Type="varchar" MaxLength="50" />
+          <Property Name="CHARGE_FROM_FREE_UNIT_1" Type="varchar" MaxLength="15" />
+          <Property Name="BAL_OF_ACNT1_AFTER_CALL" Type="varchar" MaxLength="15" />
+          <Property Name="PLAN_NAME" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="voucher_blocklist">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user" Type="bigint" Nullable="false" />
+          <Property Name="datetime" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="your_plan_transaction_denominations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="your_plan_id" Type="bigint" Nullable="false" />
+          <Property Name="denomination_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="your_plan_transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Precision="0" />
+          <Property Name="from_msisdn" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="to_msisdn" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="total_amt" Type="double" />
+          <Property Name="expiry_date" Type="datetime" Precision="0" />
+          <Property Name="isExpired" Type="bool" />
+        </EntityType>
+        <Association Name="denom_fkey">
+          <End Role="plan_denomination" Type="Self.plan_denomination" Multiplicity="0..1" />
+          <End Role="favorite_plans" Type="Self.favorite_plans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plan_denomination">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="favorite_plans">
+              <PropertyRef Name="denom_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="plan_denom_fkey">
+          <End Role="plan_denomination" Type="Self.plan_denomination" Multiplicity="1" />
+          <End Role="plan_price" Type="Self.plan_price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plan_denomination">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan_price">
+              <PropertyRef Name="denom_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="plan_fkey">
+          <End Role="plans" Type="Self.plans" Multiplicity="1" />
+          <End Role="plan_denomination" Type="Self.plan_denomination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="plan_denomination">
+              <PropertyRef Name="plan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="plan_id_fkey">
+          <End Role="plans" Type="Self.plans" Multiplicity="1" />
+          <End Role="plan_price" Type="Self.plan_price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="plan_price">
+              <PropertyRef Name="plan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reg_fkey">
+          <End Role="registration" Type="Self.registration" Multiplicity="0..1" />
+          <End Role="favorite_plans" Type="Self.favorite_plans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favorite_plans">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reg_fkeyd">
+          <End Role="registration" Type="Self.registration" Multiplicity="1" />
+          <End Role="voucher_blocklist" Type="Self.voucher_blocklist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="voucher_blocklist">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bemobileselfcareModelStoreContainer">
+          <EntitySet Name="accountprofile" EntityType="Self.accountprofile" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="api_logs" EntityType="Self.api_logs" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="application_transaction" EntityType="Self.application_transaction" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="application_transaction_log" EntityType="Self.application_transaction_log" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="bundle_tarrif" EntityType="Self.bundle_tarrif" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="bundleprice" EntityType="Self.bundleprice" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="bundles" EntityType="Self.bundles" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="datacard_bundles" EntityType="Self.datacard_bundles" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="denomination_type" EntityType="Self.denomination_type" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="errormessage" EntityType="Self.errormessage" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="favorite_plans" EntityType="Self.favorite_plans" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="gprs_det" EntityType="Self.gprs_det" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="mon_det" EntityType="Self.mon_det" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="multiplesim" EntityType="Self.multiplesim" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="plan_denomination" EntityType="Self.plan_denomination" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="plan_price" EntityType="Self.plan_price" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="plan_type" EntityType="Self.plan_type" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="plandetails" EntityType="Self.plandetails" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="plans" EntityType="Self.plans" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="qlinks" EntityType="Self.qlinks" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="recharge_det" EntityType="Self.recharge_det" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="recommends" EntityType="Self.recommends" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="registration" EntityType="Self.registration" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="responses" EntityType="Self.responses" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="services" EntityType="Self.services" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="sim_activation" EntityType="Self.sim_activation" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="simverificationcode" EntityType="Self.simverificationcode" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="sms_app_tx" EntityType="Self.sms_app_tx" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="sms_det" EntityType="Self.sms_det" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="sms_in_log" EntityType="Self.sms_in_log" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="sms_out_log" EntityType="Self.sms_out_log" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="smsout" EntityType="Self.smsout" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="topup_transactions" EntityType="Self.topup_transactions" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="topupplans" EntityType="Self.topupplans" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="transaction" EntityType="Self.transaction" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="transfer_det" EntityType="Self.transfer_det" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="userhistory" EntityType="Self.userhistory" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="validity" EntityType="Self.validity" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="voice_det" EntityType="Self.voice_det" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="voucher_blocklist" EntityType="Self.voucher_blocklist" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="your_plan_transaction_denominations" EntityType="Self.your_plan_transaction_denominations" Schema="selfcare_si" store:Type="Tables" />
+          <EntitySet Name="your_plan_transactions" EntityType="Self.your_plan_transactions" Schema="selfcare_si" store:Type="Tables" />
+          <AssociationSet Name="denom_fkey" Association="Self.denom_fkey">
+            <End Role="plan_denomination" EntitySet="plan_denomination" />
+            <End Role="favorite_plans" EntitySet="favorite_plans" />
+          </AssociationSet>
+          <AssociationSet Name="plan_denom_fkey" Association="Self.plan_denom_fkey">
+            <End Role="plan_denomination" EntitySet="plan_denomination" />
+            <End Role="plan_price" EntitySet="plan_price" />
+          </AssociationSet>
+          <AssociationSet Name="plan_fkey" Association="Self.plan_fkey">
+            <End Role="plans" EntitySet="plans" />
+            <End Role="plan_denomination" EntitySet="plan_denomination" />
+          </AssociationSet>
+          <AssociationSet Name="plan_id_fkey" Association="Self.plan_id_fkey">
+            <End Role="plans" EntitySet="plans" />
+            <End Role="plan_price" EntitySet="plan_price" />
+          </AssociationSet>
+          <AssociationSet Name="reg_fkey" Association="Self.reg_fkey">
+            <End Role="registration" EntitySet="registration" />
+            <End Role="favorite_plans" EntitySet="favorite_plans" />
+          </AssociationSet>
+          <AssociationSet Name="reg_fkeyd" Association="Self.reg_fkeyd">
+            <End Role="registration" EntitySet="registration" />
+            <End Role="voucher_blocklist" EntitySet="voucher_blocklist" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bemobileselfcareModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="bemobileselfcareEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accountprofiles" EntityType="bemobileselfcareModel.accountprofile" />
+          <EntitySet Name="api_logs" EntityType="bemobileselfcareModel.api_logs" />
+          <EntitySet Name="application_transaction" EntityType="bemobileselfcareModel.application_transaction" />
+          <EntitySet Name="application_transaction_log" EntityType="bemobileselfcareModel.application_transaction_log" />
+          <EntitySet Name="bundle_tarrif" EntityType="bemobileselfcareModel.bundle_tarrif" />
+          <EntitySet Name="bundleprices" EntityType="bemobileselfcareModel.bundleprice" />
+          <EntitySet Name="bundles" EntityType="bemobileselfcareModel.bundle" />
+          <EntitySet Name="datacard_bundles" EntityType="bemobileselfcareModel.datacard_bundles" />
+          <EntitySet Name="denomination_type" EntityType="bemobileselfcareModel.denomination_type" />
+          <EntitySet Name="errormessages" EntityType="bemobileselfcareModel.errormessage" />
+          <EntitySet Name="favorite_plans" EntityType="bemobileselfcareModel.favorite_plans" />
+          <EntitySet Name="gprs_det" EntityType="bemobileselfcareModel.gprs_det" />
+          <EntitySet Name="mon_det" EntityType="bemobileselfcareModel.mon_det" />
+          <EntitySet Name="multiplesims" EntityType="bemobileselfcareModel.multiplesim" />
+          <EntitySet Name="plan_denomination" EntityType="bemobileselfcareModel.plan_denomination" />
+          <EntitySet Name="plan_price" EntityType="bemobileselfcareModel.plan_price" />
+          <EntitySet Name="plan_type" EntityType="bemobileselfcareModel.plan_type" />
+          <EntitySet Name="plandetails" EntityType="bemobileselfcareModel.plandetail" />
+          <EntitySet Name="plans" EntityType="bemobileselfcareModel.plan" />
+          <EntitySet Name="qlinks" EntityType="bemobileselfcareModel.qlink" />
+          <EntitySet Name="recharge_det" EntityType="bemobileselfcareModel.recharge_det" />
+          <EntitySet Name="recommends" EntityType="bemobileselfcareModel.recommend" />
+          <EntitySet Name="registrations" EntityType="bemobileselfcareModel.registration" />
+          <EntitySet Name="responses" EntityType="bemobileselfcareModel.respons" />
+          <EntitySet Name="services" EntityType="bemobileselfcareModel.service" />
+          <EntitySet Name="sim_activation" EntityType="bemobileselfcareModel.sim_activation" />
+          <EntitySet Name="simverificationcodes" EntityType="bemobileselfcareModel.simverificationcode" />
+          <EntitySet Name="sms_app_tx" EntityType="bemobileselfcareModel.sms_app_tx" />
+          <EntitySet Name="sms_det" EntityType="bemobileselfcareModel.sms_det" />
+          <EntitySet Name="sms_in_log" EntityType="bemobileselfcareModel.sms_in_log" />
+          <EntitySet Name="sms_out_log" EntityType="bemobileselfcareModel.sms_out_log" />
+          <EntitySet Name="smsouts" EntityType="bemobileselfcareModel.smsout" />
+          <EntitySet Name="topup_transactions" EntityType="bemobileselfcareModel.topup_transactions" />
+          <EntitySet Name="topupplans" EntityType="bemobileselfcareModel.topupplan" />
+          <EntitySet Name="transactions" EntityType="bemobileselfcareModel.transaction" />
+          <EntitySet Name="transfer_det" EntityType="bemobileselfcareModel.transfer_det" />
+          <EntitySet Name="userhistories" EntityType="bemobileselfcareModel.userhistory" />
+          <EntitySet Name="users" EntityType="bemobileselfcareModel.user" />
+          <EntitySet Name="validities" EntityType="bemobileselfcareModel.validity" />
+          <EntitySet Name="voice_det" EntityType="bemobileselfcareModel.voice_det" />
+          <EntitySet Name="voucher_blocklist" EntityType="bemobileselfcareModel.voucher_blocklist" />
+          <EntitySet Name="your_plan_transaction_denominations" EntityType="bemobileselfcareModel.your_plan_transaction_denominations" />
+          <EntitySet Name="your_plan_transactions" EntityType="bemobileselfcareModel.your_plan_transactions" />
+          <AssociationSet Name="denom_fkey" Association="bemobileselfcareModel.denom_fkey">
+            <End Role="plan_denomination" EntitySet="plan_denomination" />
+            <End Role="favorite_plans" EntitySet="favorite_plans" />
+          </AssociationSet>
+          <AssociationSet Name="reg_fkey" Association="bemobileselfcareModel.reg_fkey">
+            <End Role="registration" EntitySet="registrations" />
+            <End Role="favorite_plans" EntitySet="favorite_plans" />
+          </AssociationSet>
+          <AssociationSet Name="plan_denom_fkey" Association="bemobileselfcareModel.plan_denom_fkey">
+            <End Role="plan_denomination" EntitySet="plan_denomination" />
+            <End Role="plan_price" EntitySet="plan_price" />
+          </AssociationSet>
+          <AssociationSet Name="plan_fkey" Association="bemobileselfcareModel.plan_fkey">
+            <End Role="plan" EntitySet="plans" />
+            <End Role="plan_denomination" EntitySet="plan_denomination" />
+          </AssociationSet>
+          <AssociationSet Name="plan_id_fkey" Association="bemobileselfcareModel.plan_id_fkey">
+            <End Role="plan" EntitySet="plans" />
+            <End Role="plan_price" EntitySet="plan_price" />
+          </AssociationSet>
+          <AssociationSet Name="reg_fkeyd" Association="bemobileselfcareModel.reg_fkeyd">
+            <End Role="registration" EntitySet="registrations" />
+            <End Role="voucher_blocklist" EntitySet="voucher_blocklist" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="accountprofile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Created_at" Type="DateTime" Nullable="false" />
+          <Property Name="AccountStatus" Type="Boolean" Nullable="false" />
+          <Property Name="TotCreditAvail" Type="Single" Nullable="false" />
+          <Property Name="ServiceNumber" Type="Single" Nullable="false" />
+          <Property Name="PlanExpDate" Type="DateTime" Nullable="false" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="PlanId" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="api_logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="input" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="output" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="data" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="application_transaction">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="msisdn" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="reference" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="application_transaction_log">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="app_tx_id" Type="Int64" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="details" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="bundle_tarrif">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bundle_id" Type="Int64" />
+          <Property Name="bundle_rate_per_plan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="bundleprice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Created_at" Type="DateTime" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BundleId" Type="Int64" Nullable="false" />
+          <Property Name="size" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ExpDate" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="bundle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Created_at" Type="DateTime" Nullable="false" />
+          <Property Name="PlanName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Size" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Validity" Type="Int32" />
+          <Property Name="isPostpaid" Type="Boolean" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="Modified_on" Type="DateTime" />
+          <Property Name="orderby" Type="Int32" />
+          <Property Name="isVoice" Type="Boolean" Nullable="false" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="AccountType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SmsAccountType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="VoiceAccountType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IddAccountType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UlAccountType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="voiceSize" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="smsCount" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="isOnlyData" Type="Boolean" />
+          <Property Name="voice_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="sms_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="validity_txt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="isCorporate" Type="Boolean" />
+          <Property Name="ussddesc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="isUssd" Type="Boolean" />
+          <Property Name="menu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="roamingVoiceAccountType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="roamingSmsAccountType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="romingDataAccountType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="datacard_bundles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="plan_id" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="account_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Size" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="denomination_type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="plan_id" Type="Int64" Nullable="false" />
+          <Property Name="unit" Type="Int64" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="isDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="errormessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedAt" Type="DateTime" />
+          <Property Name="Error_Message" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Processor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="favorite_plans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="user" Type="Int64" />
+          <Property Name="denom_id" Type="Int64" />
+          <Property Name="plan_id" Type="Int64" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="plan_type_id" Type="Int64" />
+          <NavigationProperty Name="plan_denomination" Relationship="bemobileselfcareModel.denom_fkey" FromRole="favorite_plans" ToRole="plan_denomination" />
+          <NavigationProperty Name="registration" Relationship="bemobileselfcareModel.reg_fkey" FromRole="favorite_plans" ToRole="registration" />
+        </EntityType>
+        <EntityType Name="gprs_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CALLING_PARTY_NUMBER" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACTUAL_USAGE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="USAGEFROMDATABUNDLE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CHARGEFROMPREPAID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CHARGETIME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CALLINGCELLID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ROAMSTATE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACCOUNTTYPE1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENTBALANCEACNT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FREEACCOUNTTYPE1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENTBALANCEFREEACNT1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FREEACCOUNTTYPE2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENTBALANCEFREEACNT2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="mon_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CALLING_PARTY_NUMBER" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CHARGEFROMPREPAID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SUBSCRIPTIONTIME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SUBSCRIPTIONSTARTTIME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SUBSCRIPTIONEXPIRYTIME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCTID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACCOUNTTYPE1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENTBALANCEACNT1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FREEACCOUNTTYPE1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENTBALANCEFREEACNT1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BONUSBALANCETOFREEACNT1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FREEACCOUNTTYPE2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BONUSBALANCETOFREEACNT2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENTBALANCEFREEACNT2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="multiplesim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationId" Type="Int64" Nullable="false" />
+          <Property Name="MsisdnNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="plan_denomination">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="plan_id" Type="Int64" Nullable="false" />
+          <Property Name="denomination" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="units" Type="Int64" />
+          <Property Name="denomination_type_id" Type="Int64" />
+          <Property Name="plan_type_id" Type="Int64" />
+          <NavigationProperty Name="favorite_plans" Relationship="bemobileselfcareModel.denom_fkey" FromRole="plan_denomination" ToRole="favorite_plans" />
+          <NavigationProperty Name="plan_price" Relationship="bemobileselfcareModel.plan_denom_fkey" FromRole="plan_denomination" ToRole="plan_price" />
+          <NavigationProperty Name="plan" Relationship="bemobileselfcareModel.plan_fkey" FromRole="plan_denomination" ToRole="plan" />
+        </EntityType>
+        <EntityType Name="plan_price">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="plan_id" Type="Int64" Nullable="false" />
+          <Property Name="denom_id" Type="Int64" Nullable="false" />
+          <Property Name="price" Type="Int64" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="plan_denomination" Relationship="bemobileselfcareModel.plan_denom_fkey" FromRole="plan_price" ToRole="plan_denomination" />
+          <NavigationProperty Name="plan" Relationship="bemobileselfcareModel.plan_id_fkey" FromRole="plan_price" ToRole="plan" />
+        </EntityType>
+        <EntityType Name="plan_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="plandetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Created_at" Type="DateTime" Nullable="false" />
+          <Property Name="PlanName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="plan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="account_type" Type="Int64" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="minmeasureid" Type="Int32" />
+          <Property Name="plan_type_id" Type="Int64" />
+          <NavigationProperty Name="plan_denomination" Relationship="bemobileselfcareModel.plan_fkey" FromRole="plan" ToRole="plan_denomination" />
+          <NavigationProperty Name="plan_price" Relationship="bemobileselfcareModel.plan_id_fkey" FromRole="plan" ToRole="plan_price" />
+        </EntityType>
+        <EntityType Name="qlink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TitleURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="SByte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="recharge_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RECHARGENUMBER" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RECHARGEAMOUNT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RECHARGETIME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACCOUNTTYPE1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RECHARGETYPE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RECHARGE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="VOUCHERCARDSEQ" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BALANCEAFTERRECHARGE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACTUALRECHARGEAMT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FREEACCOUNTTYP" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BONUSBALAN" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENTBAL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="recommend">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TitleURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Created_at" Type="DateTime" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="addr1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="addr2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Parish" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HomeNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MsisdnNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Credit" Type="Double" />
+          <Property Name="Modified_on" Type="DateTime" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="isSelfCare" Type="Boolean" />
+          <Property Name="verification_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="temppas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="temppascreatedat" Type="DateTime" />
+          <Property Name="encryptedid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mobileverification" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isShopping" Type="Boolean" />
+          <Property Name="account_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mother_maiden_name" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="favourite_colour" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="pet_name" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="FFNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="isMobileAccess" Type="Boolean" />
+          <NavigationProperty Name="favorite_plans" Relationship="bemobileselfcareModel.reg_fkey" FromRole="registration" ToRole="favorite_plans" />
+          <NavigationProperty Name="voucher_blocklist" Relationship="bemobileselfcareModel.reg_fkeyd" FromRole="registration" ToRole="voucher_blocklist" />
+        </EntityType>
+        <EntityType Name="respons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="responseCode" Type="Int64" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Created_at" Type="DateTime" Nullable="false" />
+          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SetupFee" Type="Single" Nullable="false" />
+          <Property Name="PerPeriodFee" Type="Single" Nullable="false" />
+          <Property Name="Compulsory" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="planId" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sim_activation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="msisdn" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="puk_no" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="sim_no" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="ref_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="details" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="activated_by" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="simverificationcode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="msisdn" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="verificationcode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sms_app_tx">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ctime" Type="DateTime" Nullable="false" />
+          <Property Name="mtime" Type="DateTime" Nullable="false" />
+          <Property Name="msisdn" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="message" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="reference" Type="Int64" />
+          <Property Name="status" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sms_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CALLING_PARTY_NUMBER" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CALLED_PARTY_NUMBER" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SERVICEFLOW" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACTUAL_USAGE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="USAGEFROMSMSBUNDLE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CHARGEFROMPREPAID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CHARGETIME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CALLFORWARDI" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SMSTYPE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ROAMSTATE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CALLEDHOMENETWORKCOD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACCOUNTTYPE1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENTBALANCEACNT1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FREEACCOUNTTYPE1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENTBALANCEFREEACNT1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FREEACCOUNTTYPE2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENTBALANCEFREEACNT2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sms_in_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="from_msisdn" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="to_msisdn" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="text" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sms_out_log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="msg_to" Type="String" Nullable="false" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Name="message_text" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="Ctime" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="smsout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="topup_transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="msisdn" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Int64" Nullable="false" />
+          <Property Name="reference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="details" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="reg_id" Type="Int64" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="topupplan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Double" Nullable="false" />
+          <Property Name="Size" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Validity" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceNo" Type="Int64" Nullable="false" />
+          <Property Name="Created_at" Type="DateTime" Nullable="false" />
+          <Property Name="BillDate" Type="DateTime" Nullable="false" />
+          <Property Name="CallUnits" Type="Single" Nullable="false" />
+          <Property Name="CallCharges" Type="Single" Nullable="false" />
+          <Property Name="DataUsage" Type="Single" Nullable="false" />
+          <Property Name="DataCharges" Type="Single" Nullable="false" />
+          <Property Name="MonthlyRent" Type="Single" Nullable="false" />
+          <Property Name="Total" Type="Single" Nullable="false" />
+          <Property Name="PaidStatus" Type="Boolean" Nullable="false" />
+          <Property Name="PaidAmount" Type="Single" Nullable="false" />
+          <Property Name="Balance" Type="Single" Nullable="false" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="PlanId" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transfer_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CHARGINGPARTYNUMBER" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TRANSFEREDAMOUNT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HANDLINGFEE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TRANSFERTIME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="userhistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" />
+          <Property Name="PlanId" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="expiryDate" Type="DateTime" />
+          <Property Name="toMsisdn" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="isExpired" Type="Boolean" />
+          <Property Name="isTopup" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Created_at" Type="DateTime" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="ResetStatus" Type="Int32" />
+        </EntityType>
+        <EntityType Name="validity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PlanId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="voice_det">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CALL_DATE" Type="DateTime" />
+          <Property Name="CALLED_NUMBER" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CALLTYPE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DURATION" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="BALANCE_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CHARGE_AMOUNT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BALANCE_AFTER_CALL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ACCOUNT_TYPE_ID_1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CHARGE_FROM_FREE_UNIT_1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="BAL_OF_ACNT1_AFTER_CALL" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PLAN_NAME" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="voucher_blocklist">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user" Type="Int64" Nullable="false" />
+          <Property Name="datetime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="registration" Relationship="bemobileselfcareModel.reg_fkeyd" FromRole="voucher_blocklist" ToRole="registration" />
+        </EntityType>
+        <EntityType Name="your_plan_transaction_denominations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="your_plan_id" Type="Int64" Nullable="false" />
+          <Property Name="denomination_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="your_plan_transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" />
+          <Property Name="from_msisdn" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="to_msisdn" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="total_amt" Type="Double" />
+          <Property Name="expiry_date" Type="DateTime" />
+          <Property Name="isExpired" Type="Boolean" />
+        </EntityType>
+        <Association Name="denom_fkey">
+          <End Type="bemobileselfcareModel.plan_denomination" Role="plan_denomination" Multiplicity="0..1" />
+          <End Type="bemobileselfcareModel.favorite_plans" Role="favorite_plans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plan_denomination">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="favorite_plans">
+              <PropertyRef Name="denom_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reg_fkey">
+          <End Type="bemobileselfcareModel.registration" Role="registration" Multiplicity="0..1" />
+          <End Type="bemobileselfcareModel.favorite_plans" Role="favorite_plans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favorite_plans">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="plan_denom_fkey">
+          <End Type="bemobileselfcareModel.plan_denomination" Role="plan_denomination" Multiplicity="1" />
+          <End Type="bemobileselfcareModel.plan_price" Role="plan_price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plan_denomination">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan_price">
+              <PropertyRef Name="denom_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="plan_fkey">
+          <End Type="bemobileselfcareModel.plan" Role="plan" Multiplicity="1" />
+          <End Type="bemobileselfcareModel.plan_denomination" Role="plan_denomination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="plan_denomination">
+              <PropertyRef Name="plan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="plan_id_fkey">
+          <End Type="bemobileselfcareModel.plan" Role="plan" Multiplicity="1" />
+          <End Type="bemobileselfcareModel.plan_price" Role="plan_price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="plan_price">
+              <PropertyRef Name="plan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reg_fkeyd">
+          <End Type="bemobileselfcareModel.registration" Role="registration" Multiplicity="1" />
+          <End Type="bemobileselfcareModel.voucher_blocklist" Role="voucher_blocklist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="voucher_blocklist">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bemobileselfcareModelStoreContainer" CdmEntityContainer="bemobileselfcareEntities">
+          <EntitySetMapping Name="accountprofiles">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.accountprofile">
+              <MappingFragment StoreEntitySet="accountprofile">
+                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PlanExpDate" ColumnName="PlanExpDate" />
+                <ScalarProperty Name="ServiceNumber" ColumnName="ServiceNumber" />
+                <ScalarProperty Name="TotCreditAvail" ColumnName="TotCreditAvail" />
+                <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="api_logs">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.api_logs">
+              <MappingFragment StoreEntitySet="api_logs">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="output" ColumnName="output" />
+                <ScalarProperty Name="input" ColumnName="input" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="application_transaction">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.application_transaction">
+              <MappingFragment StoreEntitySet="application_transaction">
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="msisdn" ColumnName="msisdn" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="application_transaction_log">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.application_transaction_log">
+              <MappingFragment StoreEntitySet="application_transaction_log">
+                <ScalarProperty Name="details" ColumnName="details" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="app_tx_id" ColumnName="app_tx_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bundle_tarrif">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.bundle_tarrif">
+              <MappingFragment StoreEntitySet="bundle_tarrif">
+                <ScalarProperty Name="bundle_rate_per_plan" ColumnName="bundle_rate_per_plan" />
+                <ScalarProperty Name="bundle_id" ColumnName="bundle_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bundleprices">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.bundleprice">
+              <MappingFragment StoreEntitySet="bundleprice">
+                <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="BundleId" ColumnName="BundleId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bundles">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.bundle">
+              <MappingFragment StoreEntitySet="bundles">
+                <ScalarProperty Name="romingDataAccountType" ColumnName="romingDataAccountType" />
+                <ScalarProperty Name="roamingSmsAccountType" ColumnName="roamingSmsAccountType" />
+                <ScalarProperty Name="roamingVoiceAccountType" ColumnName="roamingVoiceAccountType" />
+                <ScalarProperty Name="menu" ColumnName="menu" />
+                <ScalarProperty Name="isUssd" ColumnName="isUssd" />
+                <ScalarProperty Name="ussddesc" ColumnName="ussddesc" />
+                <ScalarProperty Name="isCorporate" ColumnName="isCorporate" />
+                <ScalarProperty Name="validity_txt" ColumnName="validity_txt" />
+                <ScalarProperty Name="sms_desc" ColumnName="sms_desc" />
+                <ScalarProperty Name="voice_desc" ColumnName="voice_desc" />
+                <ScalarProperty Name="isOnlyData" ColumnName="isOnlyData" />
+                <ScalarProperty Name="smsCount" ColumnName="smsCount" />
+                <ScalarProperty Name="voiceSize" ColumnName="voiceSize" />
+                <ScalarProperty Name="UlAccountType" ColumnName="UlAccountType" />
+                <ScalarProperty Name="IddAccountType" ColumnName="IddAccountType" />
+                <ScalarProperty Name="VoiceAccountType" ColumnName="VoiceAccountType" />
+                <ScalarProperty Name="SmsAccountType" ColumnName="SmsAccountType" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="isVoice" ColumnName="isVoice" />
+                <ScalarProperty Name="orderby" ColumnName="orderby" />
+                <ScalarProperty Name="Modified_on" ColumnName="Modified_on" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="isPostpaid" ColumnName="isPostpaid" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="datacard_bundles">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.datacard_bundles">
+              <MappingFragment StoreEntitySet="datacard_bundles">
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="account_type" ColumnName="account_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="plan_id" ColumnName="plan_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="denomination_type">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.denomination_type">
+              <MappingFragment StoreEntitySet="denomination_type">
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="plan_id" ColumnName="plan_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="errormessages">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.errormessage">
+              <MappingFragment StoreEntitySet="errormessage">
+                <ScalarProperty Name="Processor" ColumnName="Processor" />
+                <ScalarProperty Name="Error_Message" ColumnName="Error_Message" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="favorite_plans">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.favorite_plans">
+              <MappingFragment StoreEntitySet="favorite_plans">
+                <ScalarProperty Name="plan_type_id" ColumnName="plan_type_id" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="plan_id" ColumnName="plan_id" />
+                <ScalarProperty Name="denom_id" ColumnName="denom_id" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gprs_det">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.gprs_det">
+              <MappingFragment StoreEntitySet="gprs_det">
+                <ScalarProperty Name="CURRENTBALANCEFREEACNT2" ColumnName="CURRENTBALANCEFREEACNT2" />
+                <ScalarProperty Name="FREEACCOUNTTYPE2" ColumnName="FREEACCOUNTTYPE2" />
+                <ScalarProperty Name="CURRENTBALANCEFREEACNT1" ColumnName="CURRENTBALANCEFREEACNT1" />
+                <ScalarProperty Name="FREEACCOUNTTYPE1" ColumnName="FREEACCOUNTTYPE1" />
+                <ScalarProperty Name="CURRENTBALANCEACNT" ColumnName="CURRENTBALANCEACNT" />
+                <ScalarProperty Name="ACCOUNTTYPE1" ColumnName="ACCOUNTTYPE1" />
+                <ScalarProperty Name="ROAMSTATE" ColumnName="ROAMSTATE" />
+                <ScalarProperty Name="CALLINGCELLID" ColumnName="CALLINGCELLID" />
+                <ScalarProperty Name="CHARGETIME" ColumnName="CHARGETIME" />
+                <ScalarProperty Name="CHARGEFROMPREPAID" ColumnName="CHARGEFROMPREPAID" />
+                <ScalarProperty Name="USAGEFROMDATABUNDLE" ColumnName="USAGEFROMDATABUNDLE" />
+                <ScalarProperty Name="ACTUAL_USAGE" ColumnName="ACTUAL_USAGE" />
+                <ScalarProperty Name="CALLING_PARTY_NUMBER" ColumnName="CALLING_PARTY_NUMBER" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mon_det">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.mon_det">
+              <MappingFragment StoreEntitySet="mon_det">
+                <ScalarProperty Name="CURRENTBALANCEFREEACNT2" ColumnName="CURRENTBALANCEFREEACNT2" />
+                <ScalarProperty Name="BONUSBALANCETOFREEACNT2" ColumnName="BONUSBALANCETOFREEACNT2" />
+                <ScalarProperty Name="FREEACCOUNTTYPE2" ColumnName="FREEACCOUNTTYPE2" />
+                <ScalarProperty Name="BONUSBALANCETOFREEACNT1" ColumnName="BONUSBALANCETOFREEACNT1" />
+                <ScalarProperty Name="CURRENTBALANCEFREEACNT1" ColumnName="CURRENTBALANCEFREEACNT1" />
+                <ScalarProperty Name="FREEACCOUNTTYPE1" ColumnName="FREEACCOUNTTYPE1" />
+                <ScalarProperty Name="CURRENTBALANCEACNT1" ColumnName="CURRENTBALANCEACNT1" />
+                <ScalarProperty Name="ACCOUNTTYPE1" ColumnName="ACCOUNTTYPE1" />
+                <ScalarProperty Name="PRODUCTID" ColumnName="PRODUCTID" />
+                <ScalarProperty Name="SUBSCRIPTIONEXPIRYTIME" ColumnName="SUBSCRIPTIONEXPIRYTIME" />
+                <ScalarProperty Name="SUBSCRIPTIONSTARTTIME" ColumnName="SUBSCRIPTIONSTARTTIME" />
+                <ScalarProperty Name="SUBSCRIPTIONTIME" ColumnName="SUBSCRIPTIONTIME" />
+                <ScalarProperty Name="CHARGEFROMPREPAID" ColumnName="CHARGEFROMPREPAID" />
+                <ScalarProperty Name="CALLING_PARTY_NUMBER" ColumnName="CALLING_PARTY_NUMBER" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="multiplesims">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.multiplesim">
+              <MappingFragment StoreEntitySet="multiplesim">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="MsisdnNumber" ColumnName="MsisdnNumber" />
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plan_denomination">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.plan_denomination">
+              <MappingFragment StoreEntitySet="plan_denomination">
+                <ScalarProperty Name="plan_type_id" ColumnName="plan_type_id" />
+                <ScalarProperty Name="denomination_type_id" ColumnName="denomination_type_id" />
+                <ScalarProperty Name="units" ColumnName="units" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="denomination" ColumnName="denomination" />
+                <ScalarProperty Name="plan_id" ColumnName="plan_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plan_price">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.plan_price">
+              <MappingFragment StoreEntitySet="plan_price">
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="denom_id" ColumnName="denom_id" />
+                <ScalarProperty Name="plan_id" ColumnName="plan_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plan_type">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.plan_type">
+              <MappingFragment StoreEntitySet="plan_type">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plandetails">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.plandetail">
+              <MappingFragment StoreEntitySet="plandetails">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plans">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.plan">
+              <MappingFragment StoreEntitySet="plans">
+                <ScalarProperty Name="plan_type_id" ColumnName="plan_type_id" />
+                <ScalarProperty Name="minmeasureid" ColumnName="minmeasureid" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="account_type" ColumnName="account_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="qlinks">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.qlink">
+              <MappingFragment StoreEntitySet="qlinks">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="TitleURL" ColumnName="TitleURL" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="recharge_det">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.recharge_det">
+              <MappingFragment StoreEntitySet="recharge_det">
+                <ScalarProperty Name="CURRENTBAL" ColumnName="CURRENTBAL" />
+                <ScalarProperty Name="BONUSBALAN" ColumnName="BONUSBALAN" />
+                <ScalarProperty Name="FREEACCOUNTTYP" ColumnName="FREEACCOUNTTYP" />
+                <ScalarProperty Name="ACTUALRECHARGEAMT" ColumnName="ACTUALRECHARGEAMT" />
+                <ScalarProperty Name="BALANCEAFTERRECHARGE" ColumnName="BALANCEAFTERRECHARGE" />
+                <ScalarProperty Name="VOUCHERCARDSEQ" ColumnName="VOUCHERCARDSEQ" />
+                <ScalarProperty Name="RECHARGE" ColumnName="RECHARGE" />
+                <ScalarProperty Name="RECHARGETYPE" ColumnName="RECHARGETYPE" />
+                <ScalarProperty Name="ACCOUNTTYPE1" ColumnName="ACCOUNTTYPE1" />
+                <ScalarProperty Name="RECHARGETIME" ColumnName="RECHARGETIME" />
+                <ScalarProperty Name="RECHARGEAMOUNT" ColumnName="RECHARGEAMOUNT" />
+                <ScalarProperty Name="RECHARGENUMBER" ColumnName="RECHARGENUMBER" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="recommends">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.recommend">
+              <MappingFragment StoreEntitySet="recommends">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="TitleURL" ColumnName="TitleURL" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="registrations">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.registration">
+              <MappingFragment StoreEntitySet="registration">
+                <ScalarProperty Name="isMobileAccess" ColumnName="isMobileAccess" />
+                <ScalarProperty Name="FFNumber" ColumnName="FFNumber" />
+                <ScalarProperty Name="pet_name" ColumnName="pet_name" />
+                <ScalarProperty Name="favourite_colour" ColumnName="favourite_colour" />
+                <ScalarProperty Name="mother_maiden_name" ColumnName="mother_maiden_name" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="isShopping" ColumnName="isShopping" />
+                <ScalarProperty Name="mobileverification" ColumnName="mobileverification" />
+                <ScalarProperty Name="encryptedid" ColumnName="encryptedid" />
+                <ScalarProperty Name="temppascreatedat" ColumnName="temppascreatedat" />
+                <ScalarProperty Name="temppas" ColumnName="temppas" />
+                <ScalarProperty Name="verification_code" ColumnName="verification_code" />
+                <ScalarProperty Name="isSelfCare" ColumnName="isSelfCare" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Modified_on" ColumnName="Modified_on" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="MsisdnNumber" ColumnName="MsisdnNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
+                <ScalarProperty Name="Parish" ColumnName="Parish" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="addr2" ColumnName="addr2" />
+                <ScalarProperty Name="addr1" ColumnName="addr1" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="responses">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.respons">
+              <MappingFragment StoreEntitySet="responses">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="responseCode" ColumnName="responseCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="services">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.service">
+              <MappingFragment StoreEntitySet="services">
+                <ScalarProperty Name="planId" ColumnName="planId" />
+                <ScalarProperty Name="Compulsory" ColumnName="Compulsory" />
+                <ScalarProperty Name="PerPeriodFee" ColumnName="PerPeriodFee" />
+                <ScalarProperty Name="SetupFee" ColumnName="SetupFee" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sim_activation">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.sim_activation">
+              <MappingFragment StoreEntitySet="sim_activation">
+                <ScalarProperty Name="activated_by" ColumnName="activated_by" />
+                <ScalarProperty Name="details" ColumnName="details" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="ref_no" ColumnName="ref_no" />
+                <ScalarProperty Name="sim_no" ColumnName="sim_no" />
+                <ScalarProperty Name="puk_no" ColumnName="puk_no" />
+                <ScalarProperty Name="msisdn" ColumnName="msisdn" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="simverificationcodes">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.simverificationcode">
+              <MappingFragment StoreEntitySet="simverificationcode">
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="verificationcode" ColumnName="verificationcode" />
+                <ScalarProperty Name="msisdn" ColumnName="msisdn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sms_app_tx">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.sms_app_tx">
+              <MappingFragment StoreEntitySet="sms_app_tx">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="msisdn" ColumnName="msisdn" />
+                <ScalarProperty Name="mtime" ColumnName="mtime" />
+                <ScalarProperty Name="ctime" ColumnName="ctime" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sms_det">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.sms_det">
+              <MappingFragment StoreEntitySet="sms_det">
+                <ScalarProperty Name="CURRENTBALANCEFREEACNT2" ColumnName="CURRENTBALANCEFREEACNT2" />
+                <ScalarProperty Name="FREEACCOUNTTYPE2" ColumnName="FREEACCOUNTTYPE2" />
+                <ScalarProperty Name="CURRENTBALANCEFREEACNT1" ColumnName="CURRENTBALANCEFREEACNT1" />
+                <ScalarProperty Name="FREEACCOUNTTYPE1" ColumnName="FREEACCOUNTTYPE1" />
+                <ScalarProperty Name="CURRENTBALANCEACNT1" ColumnName="CURRENTBALANCEACNT1" />
+                <ScalarProperty Name="ACCOUNTTYPE1" ColumnName="ACCOUNTTYPE1" />
+                <ScalarProperty Name="CALLEDHOMENETWORKCOD" ColumnName="CALLEDHOMENETWORKCOD" />
+                <ScalarProperty Name="ROAMSTATE" ColumnName="ROAMSTATE" />
+                <ScalarProperty Name="SMSTYPE" ColumnName="SMSTYPE" />
+                <ScalarProperty Name="CALLFORWARDI" ColumnName="CALLFORWARDI" />
+                <ScalarProperty Name="CHARGETIME" ColumnName="CHARGETIME" />
+                <ScalarProperty Name="CHARGEFROMPREPAID" ColumnName="CHARGEFROMPREPAID" />
+                <ScalarProperty Name="USAGEFROMSMSBUNDLE" ColumnName="USAGEFROMSMSBUNDLE" />
+                <ScalarProperty Name="ACTUAL_USAGE" ColumnName="ACTUAL_USAGE" />
+                <ScalarProperty Name="SERVICEFLOW" ColumnName="SERVICEFLOW" />
+                <ScalarProperty Name="CALLED_PARTY_NUMBER" ColumnName="CALLED_PARTY_NUMBER" />
+                <ScalarProperty Name="CALLING_PARTY_NUMBER" ColumnName="CALLING_PARTY_NUMBER" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sms_in_log">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.sms_in_log">
+              <MappingFragment StoreEntitySet="sms_in_log">
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="to_msisdn" ColumnName="to_msisdn" />
+                <ScalarProperty Name="from_msisdn" ColumnName="from_msisdn" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sms_out_log">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.sms_out_log">
+              <MappingFragment StoreEntitySet="sms_out_log">
+                <ScalarProperty Name="Ctime" ColumnName="Ctime" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="message_text" ColumnName="message_text" />
+                <ScalarProperty Name="msg_to" ColumnName="msg_to" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="smsouts">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.smsout">
+              <MappingFragment StoreEntitySet="smsout">
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="topup_transactions">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.topup_transactions">
+              <MappingFragment StoreEntitySet="topup_transactions">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+                <ScalarProperty Name="details" ColumnName="details" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="msisdn" ColumnName="msisdn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="topupplans">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.topupplan">
+              <MappingFragment StoreEntitySet="topupplans">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transactions">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.transaction">
+              <MappingFragment StoreEntitySet="transaction">
+                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="PaidStatus" ColumnName="PaidStatus" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="MonthlyRent" ColumnName="MonthlyRent" />
+                <ScalarProperty Name="DataCharges" ColumnName="DataCharges" />
+                <ScalarProperty Name="DataUsage" ColumnName="DataUsage" />
+                <ScalarProperty Name="CallCharges" ColumnName="CallCharges" />
+                <ScalarProperty Name="CallUnits" ColumnName="CallUnits" />
+                <ScalarProperty Name="BillDate" ColumnName="BillDate" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transfer_det">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.transfer_det">
+              <MappingFragment StoreEntitySet="transfer_det">
+                <ScalarProperty Name="TRANSFERTIME" ColumnName="TRANSFERTIME" />
+                <ScalarProperty Name="HANDLINGFEE" ColumnName="HANDLINGFEE" />
+                <ScalarProperty Name="TRANSFEREDAMOUNT" ColumnName="TRANSFEREDAMOUNT" />
+                <ScalarProperty Name="CHARGINGPARTYNUMBER" ColumnName="CHARGINGPARTYNUMBER" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userhistories">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.userhistory">
+              <MappingFragment StoreEntitySet="userhistory">
+                <ScalarProperty Name="isTopup" ColumnName="isTopup" />
+                <ScalarProperty Name="isExpired" ColumnName="isExpired" />
+                <ScalarProperty Name="toMsisdn" ColumnName="toMsisdn" />
+                <ScalarProperty Name="expiryDate" ColumnName="expiryDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="ResetStatus" ColumnName="ResetStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="validities">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.validity">
+              <MappingFragment StoreEntitySet="validity">
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="voice_det">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.voice_det">
+              <MappingFragment StoreEntitySet="voice_det">
+                <ScalarProperty Name="PLAN_NAME" ColumnName="PLAN_NAME" />
+                <ScalarProperty Name="BAL_OF_ACNT1_AFTER_CALL" ColumnName="BAL_OF_ACNT1_AFTER_CALL" />
+                <ScalarProperty Name="CHARGE_FROM_FREE_UNIT_1" ColumnName="CHARGE_FROM_FREE_UNIT_1" />
+                <ScalarProperty Name="ACCOUNT_TYPE_ID_1" ColumnName="ACCOUNT_TYPE_ID_1" />
+                <ScalarProperty Name="BALANCE_AFTER_CALL" ColumnName="BALANCE_AFTER_CALL" />
+                <ScalarProperty Name="CHARGE_AMOUNT" ColumnName="CHARGE_AMOUNT" />
+                <ScalarProperty Name="BALANCE_TYPE" ColumnName="BALANCE_TYPE" />
+                <ScalarProperty Name="DURATION" ColumnName="DURATION" />
+                <ScalarProperty Name="CALLTYPE" ColumnName="CALLTYPE" />
+                <ScalarProperty Name="CALLED_NUMBER" ColumnName="CALLED_NUMBER" />
+                <ScalarProperty Name="CALL_DATE" ColumnName="CALL_DATE" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="voucher_blocklist">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.voucher_blocklist">
+              <MappingFragment StoreEntitySet="voucher_blocklist">
+                <ScalarProperty Name="datetime" ColumnName="datetime" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="your_plan_transaction_denominations">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.your_plan_transaction_denominations">
+              <MappingFragment StoreEntitySet="your_plan_transaction_denominations">
+                <ScalarProperty Name="denomination_id" ColumnName="denomination_id" />
+                <ScalarProperty Name="your_plan_id" ColumnName="your_plan_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="your_plan_transactions">
+            <EntityTypeMapping TypeName="bemobileselfcareModel.your_plan_transactions">
+              <MappingFragment StoreEntitySet="your_plan_transactions">
+                <ScalarProperty Name="isExpired" ColumnName="isExpired" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="total_amt" ColumnName="total_amt" />
+                <ScalarProperty Name="to_msisdn" ColumnName="to_msisdn" />
+                <ScalarProperty Name="from_msisdn" ColumnName="from_msisdn" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

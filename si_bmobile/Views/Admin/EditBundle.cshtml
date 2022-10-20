@@ -1,0 +1,337 @@
+﻿@model si_bmobile.Models.BundleModel
+
+@{
+    ViewBag.Title = "EditBundle";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+
+    List<SelectListItem> bundle_Type = new List<SelectListItem>();
+
+
+    bundle_Type.Add(new SelectListItem { Text = "VOICE", Value = "1" });
+    bundle_Type.Add(new SelectListItem { Text = "SMS", Value = "2" });
+    bundle_Type.Add(new SelectListItem { Text = "DATA", Value = "3" });
+    bundle_Type.Add(new SelectListItem { Text = "VOICE+DATA+SMS", Value = "4" });
+    bundle_Type.Add(new SelectListItem { Text = "IDD", Value = "5" });
+}
+
+@*<h2>Edit Bundle</h2>*@
+
+@using (Html.BeginForm("EditBundle", "Admin", FormMethod.Post, new { id = "frmEditBundle", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(m => m.isDeleted)
+    
+    <div class="divheader">
+        EDIT BUNDLE
+    </div>
+    <div class="maindivlayout">
+
+
+        <div>
+            <div class="divlabel" style="padding-bottom: 10px;">
+                Bundle Id
+            </div>
+            <div class="divtxt">
+                @Html.DisplayFor(model => model.Id)
+            @*    @Html.ValidationMessageFor(model => model.Id)*@
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Plan Name<span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.PlanName)
+                @Html.ValidationMessageFor(model => model.PlanName)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Description<span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Price<span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.Price)
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Size<span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.Size)
+                @Html.ValidationMessageFor(model => model.Size)
+            </div>
+            <div class="clear"></div>
+        </div>
+        @*<div>
+            <div class="divlabel">
+                Validity<span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.Validity)
+                @Html.ValidationMessageFor(model => model.Validity)
+            </div>
+            <div class="clear"></div>
+        </div>*@
+        <div>
+            <div class="divlabel">
+                Validity<span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.validity_txt)
+                @Html.ValidationMessageFor(model => model.validity_txt)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Account Type
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.AccountType)
+           
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                IsPostpaid
+            </div>
+            <div class="divtxt">
+                @Html.CheckBoxFor(m=>m.isPostpaid)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                IsActive
+            </div>
+            <div class="divtxt">
+                @Html.CheckBoxFor(m=>m.isActive)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div style="padding-top:10px;">
+            <div class="divlabel">
+                OrderBy
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.orderby)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Voice
+            </div>
+            <div class="divtxt">
+                @Html.CheckBoxFor(m=>m.isVoice)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Is Corporate
+            </div>
+            <div class="divtxt">
+                @Html.CheckBoxFor(model => model.isCorporate)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="divCctopupPan" style="display:none;margin-top:5px;">
+            <div class="divlabel">
+                Bundle Type<span class="mandiv">*</span>
+            </div>
+            <div class="divtxt">
+                @Html.DropDownListFor(model => model.bundle_type_id, new SelectList(bundle_Type, "Value", "Text"), "--Select--")
+                @Html.ValidationMessageFor(model => model.bundle_type_id)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                SMS Account Type
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.SmsAccountType)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Voice Account Type
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.VoiceAccountType)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                IDD Account Type
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.IddAccountType)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Voice Size
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.voiceSize)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                SMS Count
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.smsCount)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Is Only Data
+            </div>
+            <div class="divtxt">
+                @Html.CheckBoxFor(model => model.isOnlyData)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div style="margin:5px 0px 0px 0px">
+            <div class="divlabel">
+                Roaming Data Account Type
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.romingDataAccountType)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Roaming Voice Account Type
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.roamingVoiceAccountType)
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div>
+            <div class="divlabel">
+                Roaming Sms Account Type
+            </div>
+            <div class="divtxt">
+                @Html.TextBoxFor(model => model.roamingSmsAccountType)
+            </div>
+            <div class="clear"></div>
+        </div>
+       
+        <div style="padding-top:10px;">
+            <div class="divlabel">&nbsp;</div>
+            <div class="divtxt">
+                <input type="submit" value="Save" />&nbsp;<input type="button" onclick="window.location.href = '@Url.Action("Bundles", "Admin")    '" value="Cancel" />
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+}
+<div style="clear: both;"></div>
+
+<div id="div_bundle_dialog" style="display: none;">
+    <p>@ViewBag.Msg</p>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    @if (ViewBag.Msg != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {       
+                $("#div_bundle_dialog").dialog({
+                    title: "Message",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            window.location.href ='@Url.Action("Bundles", "Admin")';
+                        }
+                    },
+                    dialogClass: 'dialog_css',
+                    width: 350,                   
+                    autoOpen: true,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });
+            });
+        </script>   
+   
+    }
+<script type="text/javascript">
+
+                $(document).ready(function () {
+                    showSelfcarePan();
+                });
+
+                $('#isCorporate').on('click', function () {
+                    showSelfcarePan();
+                });
+
+                function showSelfcarePan() {
+                    var sVal = $('#isCorporate').is(':checked');
+                    if (sVal) {
+                        $('#divCctopupPan').show();
+                    }
+                    else {
+                        $('#divCctopupPan').hide();
+                    }
+                }
+</script>
+}

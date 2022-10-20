@@ -1,0 +1,70 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.BundleModel>
+@{
+    ViewBag.Title = "Bundles";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+
+  
+    
+}
+
+<div class="divheader">
+    BUNDLES
+</div>
+
+@using (Ajax.BeginForm("Bundles", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmbundles" }))
+{
+    <div class="dRowvlg dtopmenu">
+        <span>@Html.ActionLink("Add New Bundle", "CreateBundle")</span>
+
+    </div>
+    <div class="dRowvlg">
+
+        <div class="input-append">
+
+            @Html.TextBox("bundle_id", "", new { placeholder = "Bundle ID" })
+
+            @Html.TextBox("plan_name", "", new { placeholder = "Plan Name" })
+
+            @Html.DropDownList("ddlStatus", (IEnumerable<SelectListItem>)ViewBag.statuslist, "--Status--")
+
+            @Html.DropDownList("ddlType", (IEnumerable<SelectListItem>)ViewBag.typeslist, "--Type--")
+
+
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search</button>
+            <button class="btn" type="button" onclick="window.location.href='/Admin/Bundles';">
+                     <i class="icon-search"></i>&nbsp;Reset</button>
+        </div>
+
+    </div>
+
+    
+    <div id="grid-list">
+        @{ Html.RenderPartial("_Ajax_Bundles", Model); }
+    </div>
+}
+  
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        $("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+

@@ -1,0 +1,83 @@
+﻿@using MvcPaging
+@model List<si_bmobile.Models.tbl_kyc_simactivation_log>
+@{
+    ViewBag.Title = "KYC_SIM_Activation_Log";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+@{
+    List<SelectListItem> Sim_Status = new List<SelectListItem>();
+    Sim_Status.Add(new SelectListItem { Value = "Active" });
+    Sim_Status.Add(new SelectListItem { Value = "Inactive" });
+    
+}
+
+
+<h2>KYC SIM Activation Log</h2>
+@using (Ajax.BeginForm("KYC_SIM_Activation_Log", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmKYCSimActivationLog" }))
+{
+     <div class="dRowvlg">
+
+        <div class="input-append">
+    @Html.TextBox("MSISDN", "", new { placeholder = "MSISDN Number" }) 
+
+    @Html.TextBox("PUK", "", new { placeholder = "PUK Code" })  
+                                                                
+    @Html.TextBox("SIM_No", "", new { placeholder = "SIM Number" })    
+   
+ 
+
+            @Html.DropDownList("SimStatus", new SelectList(Sim_Status, "Value", "Value"));
+    <button class="btn" type="submit">
+        <i class="icon-search"></i>&nbsp;Search</button>
+    <button class="btn" type="button" onclick="window.location.href='@Url.Action("KYC_SIM_Activation_Log", "Admin")';">
+        <i class="icon-search"></i>&nbsp;Reset</button>  
+
+             <a href="@Url.Action("KYC_SIM_Activation_Log_to_List", "Admin")" style="margin-left:20px">
+                    <img src="~/images/Csv-icon.png" alt="Export to csv" border="0" /></a>      
+            </div>
+
+     </div>           
+                                                           
+     if (Model.Count > 0)
+     {
+    <div id="grid-list">
+        @{ Html.RenderPartial("_Ajax_KYC_SimActivation_Log", Model); }
+    </div>
+     }     
+      else
+     {
+    
+       
+    <div style="margin-left: 35%">
+        <h3>No Record Found</h3>
+    </div>   
+           
+    
+          
+        
+      
+     }                                                                       
+}
+
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        //$("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        // $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>

@@ -1,0 +1,109 @@
+﻿@using MvcPaging
+@model List<si_bmobile.Models.UserHistoryLogs>
+
+@{
+    ViewBag.Title = "Plan Purchase History";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+<div class="divheader">
+    Plan Purchase History
+</div>
+@using (Ajax.BeginForm("PlanPurchaseHistory", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmPlanPurchaseHistory" }))
+{
+    <div class="dRowvlg">
+        <div class="input-append">
+            @Html.TextBox("user_name", null, new { @placeholder = "User Name", @style = "width:150px" })
+            @Html.DropDownList("ddlBundles", new List<SelectListItem>(ViewBag.bundleList), "--Select Plan--")
+            @Html.TextBox("sFrom", null, new { @placeholder = "Purchase Date From", @class = "sdate", @style = "width:100px" })
+            @Html.TextBox("sTo", null, new { @placeholder = "Date To", @class = "edate", @style = "width:100px" })
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search
+            </button>&nbsp;
+            <button class="btn" type="button" onclick="window.location.href='/Admin/UserHistory';">
+                <i class="icon-search"></i>&nbsp;Reset
+            </button>
+        </div>
+    </div>
+
+
+    <div id="div_loading" class="div-btn" style="top: 50%;">
+        <img src="~/images/slider/301.GIF" alt="Loading..." /><br />
+        <span style="font-weight: bold; color: gray;">Please Wait...</span>
+    </div>
+
+    <div id="grid-list">
+        @if (Model.Count > 0)
+        {
+            @{ Html.RenderPartial("_Ajax_PlanPurchaseHistory", Model); }
+        }
+    </div>
+
+
+}
+<style type="text/css">
+    .ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {
+        display: block;
+        position: absolute;
+        left: 22%;
+        margin-left: -8px;
+        top: 50%;
+        margin-top: -8px;
+    }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#sFrom").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-104:+0",
+                beforeShow: function () {
+                    jQuery(this).datepicker('option', 'maxDate', jQuery('#sTo').val(), 'dd/mm/yy');
+                }
+            });
+
+            $("#sTo").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-104:+0",
+                beforeShow: function () {
+                    jQuery(this).datepicker('option', 'minDate', jQuery('#sFrom').val());
+                }
+            });
+        });
+
+    </script>
+}
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        $("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+
+

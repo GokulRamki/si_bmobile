@@ -1,0 +1,148 @@
+﻿@model si_bmobile.Models.RegistrationModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+}
+
+<div class="abt-main">
+    @using (Html.BeginForm("Register", "Care", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmReg", @class = "smart-form", novalidate = "novalidate" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="login-main">
+            <div class="log-inn">
+                <div class="log-hed"> Registration </div>
+                @*@if (ViewBag.Message != null)
+                {
+                    <div style="clear:both;"></div>
+                    <div class="alert-box warning">
+                        @ViewBag.Message
+                    </div>
+                }*@
+                <div class="log-mn">
+                    <div class="log-nm"> E-Mail:<span style="color:red">&nbsp;*</span> </div>
+                    <div class="log-txt">
+                        @Html.TextBoxFor(model => model.Email, new { placeholder = "E-mail" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm"> First Name:<span style="color:red">&nbsp;*</span> </div>
+                    <div class="log-txt">
+                        @Html.TextBoxFor(model => model.FirstName, new { placeholder = "First Name" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm"> Middle Name: </div>
+                    <div class="log-txt">
+                        @Html.TextBoxFor(model => model.MiddleName, new { placeholder = "Middle Name" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.MiddleName)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm"> Last Name:<span style="color:red">&nbsp;*</span> </div>
+                    <div class="log-txt">
+                        @Html.TextBoxFor(model => model.LastName, new { placeholder = "Last Name" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.LastName)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm"> Company Name: </div>
+                    <div class="log-txt">
+                        @Html.TextBoxFor(model => model.Company, new { placeholder = "Company Name", maxlength = "50" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Company)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm"> Address Line 1:<span style="color:red">&nbsp;*</span> </div>
+                    <div class="log-txt">
+                        @Html.TextBoxFor(model => model.Address1, new { placeholder = "Address Line 1" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Address1)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm"> Address Line 2: </div>
+                    <div class="log-txt">
+                        @Html.TextBoxFor(model => model.Address2, new { placeholder = "Address Line 2" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Address2)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm"> Mobile Number:<span style="color:red">&nbsp;*</span> </div>
+                    <div class="log-txt">
+                        <span> 677 </span> @Html.TextBoxFor(model => model.BroadBandNo, new { placeholder = "Mobile Number", maxlength = "15", style="max-width:80%;" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.BroadBandNo)
+                </div>
+                <div class="log-mn">
+                    <h5>Account Verification Questions</h5>
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm">What is your mother’s maiden name?<span style="color:red">&nbsp;*</span> </div>
+                    <div class="log-txt">
+                        @Html.TextBoxFor(model => model.mother_maiden_name, new { placeholder = "Your mother’s maiden name", maxlength = "50" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.mother_maiden_name)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm">What is your favourite colour?<span style="color:red">&nbsp;*</span> </div>
+                    <div class="log-txt">
+                        @Html.TextBoxFor(model => model.favourite_color, new { placeholder = "Your favourite colour", maxlength = "50" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.favourite_color)
+                </div>
+                <div class="log-mn">
+                    <div class="log-nm">What is your pets name?<span style="color:red">&nbsp;*</span> </div>
+                    <div class="log-txt">
+                        @Html.TextBoxFor(model => model.pets_name, new { placeholder = "Your pets name", maxlength = "50" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.pets_name)
+                </div>
+                <div class="log-sbmt"><span style="float:left"><span id="tc"  onclick="window.location = 'http://bmobile.com.sb/home/pg/TermsConditions'">By registering you have agreed to the Terms & Conditions</span></span><input type="submit" class="btn-sbmt" value="Submit"></div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    #tc { cursor:pointer; font-size:14px; }
+    #tc:hover {
+        text-decoration:underline;
+    }
+    
+</style>
+
+
+<div id="div_dialog" style="display: none;">
+    <p>@ViewBag.Message</p>
+</div>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        $("#div_dialog").dialog({
+            title: "Message",
+            buttons: {
+                Close: function () {
+                    $(this).dialog('close');
+                    var url = "@Url.Action(ViewBag.rdAction, "Care")";
+                    window.location = url;
+                }
+            },
+            width: 300,
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            modal: true
+        });
+
+    </script>
+}
+
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('button.close').click(function () {
+            $(this).parents('#msg_pan').fadeOut('slow');
+        });
+    </script>
+}

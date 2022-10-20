@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CreateorEdit_BunldePlanSICc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sUname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sData" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateorEdit_BunldePlanSICcResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateorEdit_BunldePlanSICcResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteBunldePlanSICc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sUname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sData" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteBunldePlanSICcResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteBunldePlanSICcResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBundleType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sUname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sData" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBundleTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetBundleTypeResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

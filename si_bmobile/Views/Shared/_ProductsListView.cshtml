@@ -1,0 +1,39 @@
+﻿@model PagedList.IPagedList<si_bmobile.Models.ProductModel>
+@using PagedList;
+@using PagedList.Mvc;
+
+<div class="list_pan">
+    @foreach (var item in Model)
+    {
+        <div class="pbox box_shadow">
+            <div class="divimg">
+                <a href="@Url.Action("ProductInfo", "Shop", new { id = item.Product_ID })" class="view_detail_xxx">
+                    <img class="imgicon"  src="@ViewBag.imageUrl@item.img_medium" border="0" /></a>
+            </div>
+            <div class="subtitle">
+                <label>@item.Product_Name</label>
+            </div>
+            <br />
+            <div class="divlnk">
+                <b><a href="@Url.Action("ProductInfo", "Shop", new { id = item.Product_ID })" class="view_detail_xxx">More Info</a></b>
+            </div>
+            <div class="subtitle">
+                <label>K&nbsp;@item.Product_Price</label>
+            </div>
+            <div class="divbtn">
+                <span id="opener" class="CartImage" style="display: none;"></span>
+                <img src="~/images/addtocart.gif" class="CartImg" style="display: none;" />
+                <input type="hidden" id="Prd_id" value="@item.Product_ID" />
+            </div>
+        </div>
+    }
+    <div class="clr"></div>
+    @if (Model.PageCount > 1)
+    {
+        <div class="paging_info">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+        <div class="paging_pan">
+            @Html.PagedListPager(Model, page => Url.Action("Products", new { page = page }))
+        </div>
+    }
+</div>
+

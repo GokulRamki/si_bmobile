@@ -1,0 +1,172 @@
+﻿@using MvcPaging
+@model List<si_bmobile.Models.Payment_Transaction_model>
+@{
+    ViewBag.Title = "Mobile TopUp Transactions";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+
+
+    //List<SelectListItem> site_id = new List<SelectListItem>();
+    //site_id.Add(new SelectListItem { Text = "Android", Value = "5", Selected = true });
+    //site_id.Add(new SelectListItem { Text = "IPhone", Value = "6" });
+
+}
+@{             List<SelectListItem> pgw = new List<SelectListItem>();
+    pgw.Add(new SelectListItem { Text = "WIRECARD", Value = "WIRECARD", Selected = true });
+    pgw.Add(new SelectListItem { Text = "DOKU", Value = "DOKU" });
+
+}
+
+
+@*<h2>TopUp Transactions</h2>*@
+<div class="divheader">
+    MOBILE TOPUP TRANSACTIONS
+    <span id="frm_to" style="color:red"></span>
+    <span id="sFrm" style="color:red"></span>
+    <span id="sTodt" style="color:red"></span>
+</div>
+@Html.Partial("_bm_Admin_Color_Hint")
+
+@using (Ajax.BeginForm("MobileTopupTransaction", "Admin",
+                                                    new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                                                    new { id = "frmTopupTransactions" }))
+{
+
+    <div id="LoadingDialog" class="modal" style="display:none;">
+        <!-- Modal content -->
+        <div class="modal-content" style="max-width:250px !important;">
+            <div class="modal-body" style="text-align:center;">
+                <img style="margin:25px auto;" src="~/images/ajax-loader.gif" />
+            </div>
+        </div>
+    </div>
+
+    <div class="dRowvlg">
+
+        <div class="input-append">
+
+            @Html.TextBox("transmerchantid", "", new { @placeholder = "TransactionID", @style = "width:100px;" })
+
+            @Html.TextBox("mobile_no", "", new { @placeholder = "Mobile Number", @style = "width:100px;" })
+
+            @Html.TextBox("sFrom", "", new { @placeholder = "Date From", @style = "width:100px;" })
+            @Html.TextBox("sTo", "", new { @placeholder = "Date To", @style = "width:100px;" })
+
+            @Html.DropDownList("ddlDokuStatus", (IEnumerable<SelectListItem>)ViewBag.Dokustatuslist, "--Payment Status--")
+
+            @Html.DropDownList("ddlOrderstatus", (IEnumerable<SelectListItem>)ViewBag.Orderstatuslist, "--TopUp Status--")
+
+            @Html.DropDownList("siteId", new SelectList((IEnumerable<si_bmobile.Models.mobileModel>)ViewBag.mobileType, "Value", "Type"));
+            @Html.DropDownList("sptype", (IEnumerable<SelectListItem>)pgw)
+            <button class="btn submit" type="submit">
+                <i class="icon-search"></i>&nbsp;Search
+            </button>
+            <button class="btn" type="button" onclick="window.location.href = '/Admin/MobileTopupTransaction';">
+                <i class="icon-search"></i>&nbsp;Reset
+            </button>
+            <button class="btn" type="button" onclick="window.location.href = '/Admin/MobileTopupTransactionCSVList';">
+                <i class="icon-search"></i>&nbsp;Export CSV
+            </button>
+        </div>
+
+
+    </div>
+
+
+    <div id="grid-list">
+        @{ Html.RenderPartial("_Ajax_MobileTopupTransaction", Model); }
+    </div>
+            }
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var date = new Date();
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+
+
+
+            $("#sFrom").datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-104:+0",
+                beforeShow: function () {
+                    jQuery(this).datepicker('option', 'maxDate', jQuery('#sTo').val(), 'mm/dd/yy');
+                }
+            });
+
+            $("#sTo").datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-104:+0",
+                beforeShow: function () {
+                    jQuery(this).datepicker('option', 'minDate', jQuery('#sFrom').val(), 'mm/dd/yy');
+                }
+            });
+
+            $("#sFrom").datepicker().datepicker("setDate", firstDay);
+            $("#sTo").datepicker().datepicker("setDate", new Date());
+        });
+
+    </script>
+
+    <script>
+
+        $(".submit").live("click", function () {
+
+
+            var sfromdate = $('#sFrom').val();
+            var stodate = $('#sTo').val();
+
+            if (sfromdate == '' && stodate == '') {
+                $('#frm_to').text('please select From date and To date');
+                return false;
+            }
+            else if (sfromdate == '') {
+                $('#sFrm').text('please select From date');
+                $('#frm_to').hide();
+                $('#sTodt').hide();
+                return false;
+            }
+            else if (stodate == '') {
+                $('#sTodt').text('please select To date');
+                $('#frm_to').hide();
+                $('#sFrm').hide();
+                return false;
+            }
+            else {
+                $('#frm_to').text('');
+                $('#sFrm').text('');
+                $('#sTodt').text('');
+            }
+
+        });
+
+    </script>
+}
+
+<script type="text/javascript">
+
+        function beginPaging(args) {
+            // Animate
+            // $('#grid-list').fadeOut('normal');
+            $("#LoadingDialog").css("display", "block");
+        }
+
+        function successPaging() {
+            // Animate
+            //   $('#grid-list').fadeIn('normal');
+            $("#LoadingDialog").css("display", "none");
+            //   $('a').tooltip();
+        }
+
+        function failurePaging() {
+            alert("Could not retrieve list.");
+        }
+
+</script>

@@ -1,0 +1,84 @@
+﻿@model si_bmobile.Models.AccountModel
+
+@{
+    ViewBag.Title = "Prepaid : Account Summary";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/bmobile/css/SpryTabbedPanels-2.css")" rel="stylesheet" type="text/css" />
+
+@if (Model != null)
+{
+    <div class="dt-main">
+        <div class="prm-wlcm"> Welcome<span>&nbsp; @(Model.Reg.FirstName + " " + Model.Reg.MiddleName + " " + Model.Reg.LastName) </span> </div>
+        <div class="prm-slc-no">
+            <span class="prm-slc"> Select Number </span>
+            @if (Model.Subr != null && Model.Subr.Count > 0)
+            {
+                <input id="hdn_msisdn_all" type="hidden" value="@ViewBag.MSISDN_Details" />
+                @Html.DropDownList("msisdn_no", new SelectList(Model.Subr, "_MSISDNNumber", "_MSISDNNumber"), new { @id = "ddlMsisdn", @class = "prm-slc-bx" })
+                if (Session["subscriber"] != null)
+                {
+                    <span class="prm-slc"> <a href="#" onclick="ViewAddMSISDN()"> Add and manage numbers </a> </span>
+                }
+            }
+        </div>
+        <div id="pnl_Progress" class="prm-slc-no" style="display:none;">
+            <div style="text-align: center; font-weight:bold;">
+                please wait...<br />
+                <img src="~/Content/themes/base/images/loading.gif" />
+
+            </div>
+        </div>
+        <div id="div_msisdn_details" >
+            @Html.Partial("_cms_MSISDN_Details", Model)
+        </div>
+        @Html.Partial("_cms_RightNav_Menu")
+        <div style="clear:both;"></div>
+    </div>
+    <div style="clear:both;"></div>
+    <div id="alert_dialog" style="display:none;"></div>
+}
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        // <![CDATA[
+
+        $(function () {
+
+            //  LoadPlans();
+        });
+
+        $('#ddlMsisdn').change(function () {
+            var msdn_no = $(this).val();
+            bind_details(msdn_no);
+        });
+
+        function bind_details(msdnno) {
+            DisplayProgress();
+            var msdnno_all = $("#hdn_msisdn_all").val();
+
+            $.post("/Care/getMSISDN_Details",
+              { sdata: msdnno_all, msisdn_no: msdnno },
+               function (data) {
+                   HideProgressPanel();
+                   $("#div_msisdn_details").html(data);
+
+               });
+        }
+
+        function DisplayProgress() {
+
+            $("#pnl_Progress").css("display", "block");
+            $("#div_msisdn_details").hide();
+        }
+
+        function HideProgressPanel() {
+            $("#pnl_Progress").css("display", "none");
+            $("#div_msisdn_details").show();
+        }
+        // ]]>
+    </script>
+}

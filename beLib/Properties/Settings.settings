@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="beLib.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="beLib_beRef_SelfCare" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://cc.bmobile.com.sb:8800/devTest/services/SelfCare?wsdl</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

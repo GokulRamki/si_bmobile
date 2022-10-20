@@ -1,0 +1,4 @@
+﻿@if (Session["mainbreadcrumb"] != null)
+{
+   <label> You are here:</label><a href="#">Home ></a><a href="@Url.Action("Products","Shop")">@Session["mainbreadcrumb"].ToString() ></a><a href="#">@Session["breadcrumb"].ToString()</a>
+}

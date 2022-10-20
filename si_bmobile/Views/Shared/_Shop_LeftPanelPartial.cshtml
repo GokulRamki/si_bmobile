@@ -1,0 +1,103 @@
+﻿@{
+    
+}
+<aside id="left-panel">
+
+    <!-- User info -->
+    <div class="login-info">
+        <span>
+            <!-- User image size is adjusted inside CSS, it should stay as it -->
+
+            <a href="javascript:void(0);" id="show-shortcut_2">
+                <img src="@Url.Content("~/img/avatars/empty-profile.png")" alt="me" class="online" />
+                <span>
+                    @if (Session["username"] != null)
+                    {
+                        @Html.Raw(Session["username"].ToString())
+                    }
+                </span>
+                <!-- <i class="fa fa-angle-down"></i> -->
+            </a>
+        </span>
+    </div>
+    <!-- end user info -->
+
+    <!-- NAVIGATION : This navigation is also responsive
+
+			To make this navigation dynamic please make sure to link the node
+			(the reference to the nav > ul) after page load. Or the navigation
+			will not initialize.
+			-->
+    <nav>
+        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+				Please note that these links work a bit different than
+				traditional hre="" links. See documentation for details.
+				-->
+       
+            <ul>
+               
+                    <li class="active">
+                        <a href="#" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i><span class="menu-item-parent">Category</span></a>
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Category", "ShopAdmin")">All Category</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("CreateCategory", "ShopAdmin")">Add Category</a>
+                            </li>
+                        </ul>
+                    </li>                 
+                @if (!string.IsNullOrEmpty(ViewBag.Topup))
+                {       
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-adjust"></i><span class="menu-item-parent">Topup</span></a>
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Topup", "Admin")">All Topup</a>
+                                <a href="@Url.Action("TopupMerchant", "Admin")">Topup Merchant</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.TransReport) || !string.IsNullOrEmpty(ViewBag.FinancialReport))
+                {  
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-table"></i><span class="menu-item-parent">Report</span></a>
+                        <ul>
+                            @if (!string.IsNullOrEmpty(ViewBag.TransReport))
+                            {
+                                <li>
+                                    <a href="@Url.Action("TransactionReport", "Admin")">Transaction Report </a>
+                                </li>
+                            }
+                            @if (!string.IsNullOrEmpty(ViewBag.FinancialReport))
+                            { 
+                                <li>
+                                    <a href="@Url.Action("FinancialReport", "Admin")">Financial Report</a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+
+
+                
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-group"></i><span class="menu-item-parent">Users</span></a>
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Users", "ShopAdmin")">Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("CreateUser", "ShopAdmin")">Add User</a>
+                            </li>
+                        </ul>
+                    </li>
+                  
+
+            </ul>       
+
+    </nav>
+    <span class="minifyme"><i class="fa fa-arrow-circle-left hit"></i></span>
+
+</aside>

@@ -1,0 +1,163 @@
+﻿@model si_bmobile.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+
+<div class="mid_margin">   
+
+<div class="steps_pan" style="@ViewBag.StepsView">
+    <ul class="steps">
+        <li class="start first"><span></span><a href="#">Email Login</a></li>
+        <li class="next"><span></span>Confirm Order</li>        
+        <li class="empty last"><span></span>Order Summary</li>
+    </ul>
+    <div class="clear"></div>
+</div>
+
+    <div class="choose_box remov_padd wrapper">       
+        <section class="content-wrapper content-pan clear-fix">
+            <section id="widget-grid" style="margin: 50px auto;">
+                <!-- START ROW -->
+                <div class="row">
+
+                    <!-- NEW COL START -->
+                    <article class="col-sm-12 col-md-12 col-lg-5" style="float:none; margin: 5px auto;">
+
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                            <header>
+                                <span class="widget-icon"><i class="fa fa-user"></i></span>
+                                <h2>Login </h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    @using (Html.BeginForm("Login", "Shop", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmLogin", @class = "smart-form", novalidate = "novalidate" }))
+                                    {	    
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)                               
+                           
+                                        if (ViewBag.Message != null)
+                                        {
+                                        <fieldset id="msg_pan">
+                                            <div class="alert alert-warning fade in">
+                                                <button class="close" data-dismiss="alert">
+                                                    ×
+                                                </button>
+                                                <i class="fa-fw fa fa-warning"></i>
+                                                <strong>Warning</strong> @ViewBag.Message
+                                            </div>
+                                        </fieldset>
+                                        }                       
+                                        <fieldset>                                            
+                                            <section>
+                                                <b>User Name:&nbsp;</b>
+                                                <label for="Email" class="input">
+                                                   @Html.TextBoxFor(model => model.Email, new { placeholder = "E-mail", maxlength = 50 })
+                                                    @Html.ValidationMessageFor(model => model.Email)
+                                                </label>
+                                            </section>                                               
+                                            <section>
+                                                <b>Password:&nbsp;</b>
+                                                <label for="Pwd" class="input">
+                                                    @Html.PasswordFor(model => model.Pwd, new { placeholder = "Password", maxlength = 15 })
+                                                    @Html.ValidationMessageFor(model => model.Pwd)
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <label><b>Note:&nbsp;</b>You must login to our online shop to continue with your purchase.If you are not a registered online shop customer please select register for new user andcomplete the registration process before continuing with your purchase.</label>
+                                            </section>
+                                            <div class="row">
+                                                <section class="col col-6">
+                                                    <a style="color: #512C52; text-decoration: underline; font-size: 12px;" href="/Shop/Register">Register for new user</a>
+
+                                                </section>
+                                                <section class="col col-5">
+                                                    <a style="color: #512C52; text-decoration: underline; font-size: 12px;" id="ShowPopup" href="/Shop/ForgotPassword">Forgot your Password?</a>
+                                                </section>
+                                            </div>
+                                        </fieldset>  
+                                        <footer>
+                                            <button id="btnSubmit" class="btn btn-mini top_btn" type="submit" style="width: 100px;">Submit</button>
+                                        </footer>
+                                    }
+                                </div>
+                                <!-- end widget content -->
+
+                            </div>
+                            <!-- end widget div -->
+
+                        </div>
+                        <!-- end widget -->
+                    </article>
+                    <!-- END COL -->
+                </div>
+                <!-- END ROW -->
+            </section>
+        </section>  
+    </div>
+
+@*@using (Html.BeginForm("Login", "Shop", FormMethod.Post, new { id = "frmShopLogin", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="login_pan box_shadow">
+
+        <div class="title">Login</div>
+        <div class="div-row">
+            <div class="editor-label">
+                <label>Email:</label>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Email, new { maxlength = 50, @class = "Txtbox" })&nbsp;
+                <br />@Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="div-row">
+            <div class="editor-label">
+                <label>Password:</label>
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.Pwd, new { maxlength = 20, @class = "Txtbox"  })&nbsp;
+                <br />@Html.ValidationMessageFor(model => model.Pwd)
+            </div>
+        </div>
+        <div class="div-row">
+            <div class="editor-label">
+                &nbsp;
+            </div>
+            <div class="editor-field">
+                <input type="submit" value="Login" />&nbsp;             
+         New User?Click&nbsp;@Html.ActionLink("here", "Register", "Shop")
+            </div>
+        </div>
+        <div class="div-row">
+            <div id="LoginFailMeg" style="display: none;">
+                <p>@ViewBag.Message</p>
+            </div>  
+        </div>
+         <div class="div-row" style="text-align: right;">
+                @Html.ActionLink("Forgot Password", "ForgotPassword", "Shop")
+            </div>
+        <div class="clr"></div>
+    </div>
+}*@
+</div>
+@*<div style="float:left;">Please note that prepaid data bundles (WEEK/MONTH) will not work if you are using a blackberry handset.</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")    
+   
+}
+
+

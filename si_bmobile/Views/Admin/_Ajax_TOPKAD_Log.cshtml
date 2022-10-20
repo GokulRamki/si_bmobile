@@ -1,0 +1,87 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.tbl_top_kad_log>
+@if (Model != null)
+{
+    if (Model.Count() > 0)
+    {
+    <table class="table table-bordered table-hover">
+
+        <thead>
+            <tr>
+                <th>MSISDN Number</th>
+                <th>Serial Number</th>
+                <th>Invoice Number</th>
+                <th>Verify Date</th>
+                <th>Server Description</th>
+                <th>Amount</th>
+                <th>Recharge Status</th>
+               <th>User Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.msisdn</td>
+                    <td>@item.serial_number</td>
+                    <td>@item.invoice</td>
+                    <td>@item.created_on</td>
+                    <td>@item.sever_desc</td>
+                    <td>@(String.Format("{0}{1}", "k", item.recharge_amount))</td>
+                    @if(item.is_recharged==true)
+                    {
+                        <td>Success</td>
+                    }
+                    else
+                    {
+                        <td>Failure</td>
+                    }
+                    <td>@item.updated_by</td>
+                  
+                  
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+    <div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "TopKadHistory", serialno = ViewData["serialno"], msisdn = ViewData["msisdn"], invoice = ViewData["invoice"],recharge_status=ViewData["recharge_status"] })) 
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>
+    }
+      else
+{
+    
+       
+          <div style="margin-left:35%"><h3>No Record Found</h3> </div>   
+           
+    
+          
+        
+      
+}
+}

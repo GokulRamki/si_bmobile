@@ -1,0 +1,59 @@
+﻿@using MvcPaging
+@model List<si_bmobile.Models.Application_Transaction>
+
+@{
+    ViewBag.Title = "Application Transaction Logs";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+
+}
+<div class="divheader">
+    APPLICATION TRANSACTION LOGS
+</div>
+
+@using (Ajax.BeginForm("AppTransactionLogs", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmAppTransactionLogs" }))
+{
+    
+    <div class="dRowvlg">
+        <div class="input-append">
+            @Html.TextBox("ref_no", null, new { @placeholder = "Reference Number", @style = "width:150px" })
+            @Html.TextBox("mobile_no", "", new { @placeholder = "Mobile Number", @style = "width:150px" })
+            @Html.DropDownList("status", new List<SelectListItem>(ViewBag.Logstatus), "-- Status --", new { @style = "width:150px"})
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search</button>&nbsp;
+                 <button class="btn" type="button"  onclick="window.location.href='@Url.Action("AppTransactionLogs", "Admin")'" >
+                     <i class="icon-search"></i>&nbsp;Reset</button>
+        </div>
+    </div>
+    
+    <div id="div_loading" class="div-btn" style="top: 50%;">
+        <img src="~/images/slider/301.GIF" alt="Loading..." /><br />
+        <span style="font-weight: bold; color: gray;">Please Wait...</span>
+    </div>
+    
+    
+    <div id="grid-list">
+        @{ Html.RenderPartial("_Ajax_AppTransactionLogs", Model); }
+    </div>  
+}
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        $("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>

@@ -1,0 +1,77 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.RegistrationReportModel>
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+
+    var listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem { Text = "All", Value = "" });
+    listItems.Add(new SelectListItem { Text = "Active", Value = "1" });
+    listItems.Add(new SelectListItem { Text = "Inactive", Value = "2" });
+
+}
+
+<div class="divheader">
+    Registration
+</div>
+
+@using (Ajax.BeginForm("Registration", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmRegistration" }))
+{
+    <div class="bs-docs-example form-horizontal">
+        <div class="control-group">
+            <div class="input-append">
+                @Html.TextBox("fname", "", new { placeholder = "First Name" })
+            </div>
+            <div class="input-append">
+                @Html.TextBox("lname", "", new { placeholder = "Last Name" })
+            </div>
+            <span style="font-weight:bold;">677</span>
+            <div class="input-append">
+               @Html.TextBox("msisdn", "", new { placeholder = "MSISDN No", @style="width:100px;" })
+            </div>
+            <div class="input-append">
+                @Html.TextBox("email", "", new { placeholder = "E-mail" })
+            </div>
+            <div class="input-append">    
+                @Html.DropDownList("status", (listItems), new { @style="width:100px;" })
+
+                <button class="btn" type="submit">
+                    <i class="icon-search"></i>&nbsp;Search
+                </button>
+                <button class="btn" type="button" onclick="window.location.href = '/Admin/Registration';">
+                    <i class="icon-search"></i>&nbsp;Reset
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="grid-list" style="max-width:1200px; width:100%; margin:0px auto;">
+        @*@{ Html.RenderPartial("_Ajax_Registration", Model); }*@
+        @{ Html.RenderPartial("_Ajax_Registration1", Model); }
+    </div>
+}
+
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        $("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+

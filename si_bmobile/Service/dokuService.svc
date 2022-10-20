@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="bemobile.Service.dokuService" CodeBehind="dokuService.svc.cs" %>

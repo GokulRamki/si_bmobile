@@ -1,0 +1,86 @@
+﻿@model si_bmobile.Models.NewPurchasePriceModel
+    @{
+        <style>
+            .ui-dialog {
+    width: 800px !important;
+    background-color: #F4F7F8 !important;
+}
+        </style>
+        }
+<div id="divShowBYPpane">
+
+    <div class="tabs-container">
+
+        <div id="sliderpane_complete">
+            <div class="slider_panel">
+
+                <div id="div_loading" class="div-btn">
+                    <img src="~/images/slider/301.GIF" alt="Loading..." /><br />
+                    <span style="font-weight: bold; color: gray;">Please Wait...</span>
+                </div>
+
+                @if (Model.denomination_ids != null)
+                {
+                    int i = 0;
+                    foreach (var plan in Model.denomination_ids)
+                    {   
+                        <div id="div_plan_pan" class="div-pn">
+                            <div class="div-tr">
+                                <div class="div-lef">
+                                    <div class="img-pan pi_@i">
+                                        &nbsp;
+                                    </div>
+                                    <div class="plan-txt-pan">
+                                        <b>@plan.plan_name Pack</b><br />
+                                    </div>
+                                </div>
+                                @{ViewBag.planshow = (SelectList)ViewData["ddlPLANShow_" + i];}
+                                @if (ViewBag.planshow != null)
+                                {
+                                    <div class="div-rig">
+                                        
+                                       @Html.DropDownList("planshow", null, new { @id = "ddlPLANShow_" + i, @class = "generalplanShow", @name = "ddlPLANShow_" + i })
+                                       <div style="font-size:10px;font-weight:bold;" id="stdShow_@i"></div>
+                                        <div id='slidershow_@i' data-="ddlPLANShow_@i"  class="sliderContext sc_@i"></div>
+                                        <div class="clr-fx"></div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="div-br"></div>
+                      
+                    </div>
+                                i++;
+                    }
+                }
+                <div class="clr-fx"></div>
+
+            </div>
+
+
+            <div class="result_panel">
+                <div class="div-title">Your Plan</div>
+                <div class="div-price"><span style="font-size: 18px; color: #0000E0;">K</span>&nbsp;<span class="span-price" id="totalpriceShow" style="font-size: 18px; color: #0000E0;">@Model.tot_amt.ToString("#0.00")</span>/30days</div>
+                <div id="valid-message">
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+
+        </div>
+
+
+
+        <div style="color: gray; margin: 10px 0px 0px 10px;">
+            <span style="font-weight: 900; color: gray;">How it works :</span>Simply choose your Packs based on what you prefer to use each month. Select Buy to continue with payment using your credit/debit card, your prepaid credit or voucher.<br />
+            <b>Don’t forget to renew your plan every 30 days</b>
+        </div>
+
+    </div>
+    <div style="clear: both;" class="clr-fx"></div>
+  
+
+
+    
+
+
+</div>
+

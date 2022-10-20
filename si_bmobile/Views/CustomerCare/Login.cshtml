@@ -1,0 +1,50 @@
+﻿@model bemobile.Models.web_tbl_care_user
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/bm_Layout_SCareUser.cshtml";
+}
+
+<h2>Customer Care Login</h2>
+@using (Html.BeginForm("Login", "CustomerCare", FormMethod.Post, new { id = "frmCustLogin", enctype = "multipart/form-data" }))
+{
+  
+    <div class="container">
+          @Html.AntiForgeryToken()
+         @Html.ValidationSummary(true)
+        <div class="DivRow">
+            <div class="DivLabel">
+                UserName :
+            </div>
+            <div class="DivTxt">
+                @Html.TextBoxFor(model => model.user_name, null, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.user_name)
+            </div>
+        </div>
+        <div class="DivRow">
+            <div class="DivLabel">
+                Password :
+            </div>
+            <div class="DivTxt">
+                @Html.PasswordFor(model => model.user_pwd, new { @class = "Txtbox" })
+                @Html.ValidationMessageFor(model => model.user_pwd)
+            </div>
+        </div>
+        <div class="DivRow">
+            <div class="DivLabel">
+                &nbsp;
+            </div>
+            <div class="DivTxt">
+                <div style="color:red;">@ViewBag.Message</div>
+            </div>
+        </div>   
+         <div class="DivRow">
+            <div class="DivLabel">
+                &nbsp;
+            </div>
+            <div class="DivTxt">
+                <input type="submit" value="Login" />
+            </div>
+        </div>     
+    </div>
+}

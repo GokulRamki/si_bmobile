@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title> Bmobile | @ViewBag.Title</title>
+
+    <link rel="stylesheet" type="text/css" href="~/Content/bmobile/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bmobile/css/modernizr.css">
+
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="description" content="bmobile-Vodafone’s vision is to be the leading provider of mobile voice and data services in Papua New Guinea and the Solomon Islands and now offers high-speed data, reliable voice and SMS in all major towns in PNG and the Solomon Islands." />
+    <meta name="keywords" content="bmobile app, bmobile-vodafone, bmobile png, bmobile si, bmobile." />
+    <meta charset="utf-8">
+    <!--[if lt IE 8]>
+        <div style=' clear: both; text-align:center; position: relative;'>
+            <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+            <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+            </a>
+        </div>
+        <![endif]-->
+    <!--[if lt IE 9]>
+            <script src="js/html5.js"></script>
+        <![endif]-->
+    <!--[if lt IE 7]>
+        <link rel="stylesheet" href="ie6.css" type="text/css" />
+    <![endif]-->
+
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bmobile-script.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bm-care-script.js")"></script>
+    <script src="@Url.Content("~/Scripts/redeem-fb-voucher.js")"></script>
+    <script src="@Url.Content("~/Scripts/get-power-script.js")"></script>
+    <script src="@Url.Content("~/Scripts/active-sim-script.js")"></script>
+    <script src="@Url.Content("~/Scripts/voicecall-act-deact.js")"></script>
+
+    @*<script src="~/Content/bmobile/js/jquery.js"></script>*@
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            /* prepend menu icon */
+            $('#nav-wrap').prepend('<div id="menu-icon"></div>');
+
+            /* toggle nav */
+            $("#menu-icon").on("click", function () {
+                $("#nav").slideToggle();
+                $(this).toggleClass("active");
+            });
+        });
+
+    </script>
+
+    <!-- Slider -->
+
+    <link type="text/css" href="~/Content/bmobile/css/component.css" rel="stylesheet" />
+    <!--<link type="text/css" href="~/Content/bmobile/css/default.css" rel="stylesheet" />-->
+    <!-- sprytab -->
+
+    <script src="~/Content/bmobile/js/SpryTabbedPanels.js"></script>
+    <link type="text/css" href="~/Content/bmobile/css/SpryTabbedPanels.css" rel="stylesheet" />
+
+    <style type="text/css">
+        .slides {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .alert-box {
+            color: #555;
+            border-radius: 10px;
+            /*font-size: 12px;*/
+            padding: 10px 36px;
+            margin: 10px;
+        }
+
+            .alert-box span {
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+        .error {
+            background: #ffecec url('../images/error.png') no-repeat 10px 50%;
+            border: 1px solid #f5aca6;
+        }
+
+        .success {
+            background: #e9ffd9 url('../images/success.png') no-repeat 10px 50%;
+            border: 1px solid #a6ca8a;
+        }
+
+        .warning {
+            background: #fff8c4 url('../images/warning.png') no-repeat 10px 50%;
+            border: 1px solid #f2c779;
+        }
+
+        .notice {
+            background: #e3f7fc url('../images/notice.png') no-repeat 10px 50%;
+            border: 1px solid #8ed9f6;
+        }
+
+        .log-valid-msg {
+            color: red;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .btn-sbmt, .ui-dialog-buttonset > button {
+            width: auto;
+            display: inline-block;
+            padding: 8px 20px 8px 20px;
+            border-radius: 8px;
+            color: #fff;
+            background: #ED1C24;
+            /*font-family: 'VodafoneRg';*/
+            font-size: 18px;
+            line-height: 22px;
+            border: 0px !important;
+        }
+
+        .ui-button-text {
+            padding:0px !important;
+        }
+
+        .dialog_css {
+            border: 0px none !important;
+            -moz-box-shadow: 1px 2px 4px 2px rgb(136, 136, 136);
+            -webkit-box-shadow: 1px 2px 4px 2px rgb(136, 136, 136);
+            box-shadow: 3px 6px 8px rgb(136, 136, 136);
+        }
+
+        .ui-dialog {
+          top: 200px !important;
+        }
+
+        .ui-dialog-titlebar {
+            background-color: #ed1c24 !important;
+            border: 0px !important;
+            color: #FFFFFF !important;
+        }
+
+
+        .ui-dialog .ui-button {
+            width: auto;
+            color: #fff !important;
+            background: #ED1C24 !important;
+            font-size: 18px;
+            border: 0px !important;
+        }
+    </style>
+    <style media="screen and (max-width:450px)">
+        .ui-dialog {
+            width:auto !important;
+            left: 0px !important;
+        }
+
+        .btn-sbmt, .ui-dialog-buttonset > button {
+            padding: 8px 15px;
+            font-size:16px;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+            <div class="main">
+
+                <div class="main-inn">
+                    <header>
+                        <div class="margin">
+
+                            @*<div class="rohumbus"> <img src="~/Content/bmobile/images/rohumbus.png"> </a> </div>*@
+                            <div class="head">
+                                <div class="head-logo"> <a href="@Url.Action("index","home")"> <img src="~/Content/bmobile/images/logo.png"></a> </div>
+                                <div class="head-rgt">
+                                    @Html.Partial("_cms_LoginPartial")
+                                    <div class="nav-srch">
+                                        <div class="nav-mn">
+                                            @Html.Partial("_cms_HeaderMenu")
+                                        </div>
+                                        <!-- <span><img src="images/srch_img.png"></span> -->
+                                        @*<div class="srch">
+
+                                            <div class="srch-inn"> <input type="text" placeholder="Search"> </div>
+                                            <span><a href="#"> <img src="~/Content/bmobile/images/srch-go.png"> </a></span>
+
+                                        </div>*@
+                                    </div>
+                                </div>
+
+                                @*<div class="brd-crm">
+                                    <ul>
+                                        <li> <a href="@Url.Action("Index","home")"> Home </a> </li>
+                                        @if (@ViewBag.CurrentPage != null)
+                                        {
+                                            <li> <span> > </span> <a href="javascript:void(0);"> @ViewBag.CurrentPage </a> </li>
+                                        }
+                                        <li> <span> > </span> <a href="javascript:void(0);"> @ViewBag.Title </a> </li>
+
+                                    </ul>
+                                </div>*@
+                                <div class="brd-crm">
+                                    <ul>
+                                        <li> <a href="@Url.Action("Index","home")"> Home </a> </li>
+                                        @if (ViewBag.CurrentPage != null)
+                                        {
+                                            <li> <span> > </span> <a href="javascript:void(0);"> @ViewBag.CurrentPage </a> </li>
+                                        }
+                                        @if (ViewBag.CurrentSubPage != null)
+                                        {
+                                            <li> <span> > </span> <a href="javascript:void(0);"> @ViewBag.CurrentSubPage </a> </li>
+                                        }
+                                        <li> <span> > </span> <a href="javascript:void(0);"> @ViewBag.Title </a> </li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </header>
+                    <div class="margin">
+                        @*<div class="rohumbus"> <img src="~/Content/bmobile/images/rohumbus.png" /> </div>*@
+                        @RenderBody()
+
+                        <!-- Popup dialog Begin-->
+                        <div id="dialog"></div>
+                        <div id="BuyPowerdialog" style="display: none; overflow: hidden;">
+                            <div style="text-align: center; padding: 50px 0px 50px 0px;">
+                                <img src="~/Content/themes/base/images/loading.gif" />
+                            </div>
+                        </div>
+
+                        <div id="GetPower_Confirm_dialog" style="display: none;">
+                            <div id="GetPower_Confirm_msg"></div>
+                            <div id="GetPower_Confirm_img" style="display: none; text-align: center; padding-top: 10px;">
+                                <img src="~/Content/themes/base/images/loading.gif" alt="Loading" />&nbsp;please wait...
+                            </div>
+                        </div>
+                        <div id="AddMsisdndialog" style="display: none; overflow: hidden;">
+                            <div style="text-align: center; padding: 50px 0px 50px 0px;">
+                                <img src="~/Content/themes/base/images/loading.gif" />
+                            </div>
+                        </div>
+                        <div id="VerifyMsisdndialog"></div>
+                        <div id="bm_yplans_showdialog" style="display: none;"></div>
+                        <div id="alert_dialog" style="display: none;"></div>
+                        <div id="Activate_SIM" style="display: none;">
+                            <div id="Cartdialog" style="display: none;"></div>
+                            <div id="ProductInfodialog" style="display: none;"></div>
+                            @Html.Partial("_ActivateSIM_Partial", "Care")
+                        </div>
+                        <div id="Redeem_FB_Voucher" style="display: none; overflow: hidden;">
+                            <div style="text-align: center; padding: 50px 0px 50px 0px;">
+                                <img src="~/Content/themes/base/images/loading.gif" />
+                            </div>
+                        </div>
+                        <div id="VoiceCall_ActDeactPopup" style="display: none; overflow: hidden;">
+                            <div style="text-align: center; padding: 50px 0px 50px 0px;">
+                                <img src="~/Content/themes/base/images/loading.gif" />
+                            </div>
+                        </div>
+                        <div id="CreditMe" style="display: none;">
+                            @Html.Partial("_CreditMe_Partial", "Care")
+                        </div>
+                        <!-- Popup dialog End-->
+                    </div>
+
+                    <footer>
+                        @Html.Partial("_cms_FooterMenu")
+                    </footer>
+                </div>
+            </div>
+
+
+    @RenderSection("scripts", required: false)
+
+    @*<script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-49393057-1', 'auto');
+          ga('send', 'pageview');
+
+        </script>*@
+
+<script> var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1"); </script>
+    <script>
+
+        $('.mn-dvs-trgr').click(function () {
+            $('.mn-dvs').slideToggle(300).delay(500).fade(400);
+        });
+
+        $('#bundle_menu').click(function () {
+
+            $('#bundle_menu').parent('li').find('ul').slideToggle();
+        });
+
+        $('.mn-dvs-trgr-1').click(function () {
+            $('.mn-trgr-2').hide();
+            $('.mn-trgr-3').hide();
+            $('.mn-trgr-4').hide();
+            $('.mn-trgr-5').hide();
+            $('.mn-trgr-1').slideToggle(300).delay(500).fade(400);
+        });
+
+        $('.mn-dvs-trgr-2').click(function () {
+            $('.mn-trgr-1').hide();
+            $('.mn-trgr-3').hide();
+            $('.mn-trgr-4').hide();
+            $('.mn-trgr-5').hide();
+            $('.mn-trgr-2').slideToggle(300).delay(500).fade(400);
+        });
+
+        $('.mn-dvs-trgr-3').click(function () {
+            $('.mn-trgr-1').hide();
+            $('.mn-trgr-2').hide();
+            $('.mn-trgr-4').hide();
+            $('.mn-trgr-5').hide();
+            $('.mn-trgr-3').slideToggle(300).delay(500).fade(400);
+        });
+
+        $('.mn-dvs-trgr-4').click(function () {
+            $('.mn-trgr-1').hide();
+            $('.mn-trgr-2').hide();
+            $('.mn-trgr-3').hide();
+            $('.mn-trgr-5').hide();
+            $('.mn-trgr-4').slideToggle(300).delay(500).fade(400);
+        });
+
+        $('.mn-dvs-trgr-5').click(function () {
+            $('.mn-trgr-1').hide();
+            $('.mn-trgr-2').hide();
+            $('.mn-trgr-3').hide();
+            $('.mn-trgr-4').hide();
+            $('.mn-trgr-5').slideToggle(300).delay(500).fade(400);
+        });
+    </script>
+
+</body>
+</html>

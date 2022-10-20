@@ -1,0 +1,116 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.all_orders_model>
+@*<h2>_Ajax_Orders</h2>*@
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Order Date
+            </th>
+            <th>Order No
+            </th>
+            <th>Name
+            </th>
+            <th>Payment Mode
+            </th>
+            <th>Payment Status
+            </th>
+            <th>Deliver Status
+            </th>
+            <th>Receipt No
+            </th>
+            <th>Amount
+            </th>
+            <th>View
+            </th>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.order.order_datetime.ToShortDateString()
+                </td>
+                <td>
+                    @item.order.order_number
+                </td>
+                @if(item.ordered_user != null)
+                {
+                <td>
+                    @item.ordered_user.first_name @item.ordered_user.last_name
+                </td>
+                }
+                else
+                {
+                    <td>
+                        -NA-
+                    </td>
+                }
+                <td>
+                    @item.order_pay.payment_type
+                </td>
+                <td>
+                    @item.order_pay.payment_status
+                </td>
+                 @if(item.order.order_is_delivery==true)
+                 {
+                  <td>
+                   Delivered
+                </td>
+                 }else
+                 {
+                   <td>
+                   Not Delivered
+                </td>
+                 }
+            
+                <td>
+                    @item.order_pay.payment_receipt_no
+                </td>
+
+                <td>$ @item.order.order_total.ToString("0.#0")
+                </td>
+
+                <td>@Html.ActionLink("View", "OrderSummary", new { id = @item.order.order_id })
+                </td>
+
+            </tr>
+            }
+
+        }
+    </tbody>
+</table>
+<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "Orders",sOrderNo=ViewData["sOrderNo"],sPayGateway=ViewData["sPayGateway"] ,sEmail=ViewData["sEmail"], sCity=ViewData["sCity"],sFromOrder=ViewData["sFromOrder"],sToOrder= ViewData["sToOrder"]}))
+
+
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>
+

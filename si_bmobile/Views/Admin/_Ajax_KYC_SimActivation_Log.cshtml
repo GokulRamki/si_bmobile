@@ -1,0 +1,90 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.tbl_kyc_simactivation_log>
+@if (Model != null)
+{
+    if (Model.Count() > 0)
+    {
+    <table class="table table-bordered table-hover">
+
+        <thead>
+            <tr>
+                <th>MSISDN Number </th>
+                <th>PUK Code  </th>
+                <th>SIM Number</th>
+
+                <th>Reference Number </th>
+                <th>SIM Status  </th>
+                <th>Recorded on</th>
+                <th>Activation Date   </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.msisdn_no</td>
+                    <td>@item.puk_code</td>
+                    <td>@item.sim_no</td>
+
+                    <td>@item.ref_no</td>
+                    @if (@item.is_sim_active == true)
+                    {
+                        <td>Active</td>
+                    }
+                    else
+                    {
+                        <td>Inactive</td>
+                    }
+                    <td>@item.created_on</td>
+                    <td>@item.activated_on</td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <div class="pager1">
+        @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "KYC_SIM_Activation_Log", MSISDN = ViewData["MSISDN"], PUK = ViewData["PUK"], SIM_No = ViewData["PUK"], SimStatus = ViewData["SimStatus"] })) @* Mobile_no = ViewData["Mobile_no"], ddlProvince = ViewData["ddlProvince"], ddlDistrict = ViewData["ddlDistrict"] *@
+        <div class="well">
+            Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+            of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+        </div>
+    </div>
+    
+    }
+    else
+    {
+    
+       
+    <div style="margin-left: 35%">
+        <h3>No Record Found</h3>
+    </div>   
+           
+    
+          
+        
+      
+    }
+}

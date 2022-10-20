@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <title>:: bmobile :: - @ViewBag.Title</title>
+    <link href="@Url.Content("~/images/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--[if lt IE 8]>
+       <div style=' clear: both; text-align:center; position: relative;'>
+         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+        </a>
+      </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+		<script src="js/html5.js"></script>
+	<![endif]-->
+    <!--[if lt IE 7]>
+	<link rel="stylesheet" href="ie6.css" type="text/css" />
+<![endif]-->
+
+    <link href="@Url.Content("~/Content/Site.css?modified=20140807")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/style-new.css")" rel="stylesheet" type="text/css" />
+    @* <link href="@Url.Content("~/css/screen.css")" rel="stylesheet" type="text/css" />*@
+
+    <script src="@Url.Content("~/js/jquery-latest.js")"></script>
+    <script src="@Url.Content("~/js/stepcarousel.js")"></script>
+    <script src="@Url.Content("~/js/stepcarousel_002.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/jquery.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/modernizr.custom.js")"></script>
+
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bmobile-script.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/redeem-fb-voucher.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/jquery.form.min.js")" type="text/javascript"></script>
+    <!--  knockout files   -->
+    <script src="@Url.Content("~/Scripts/knockout-3.0.0.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/knockout-jqueryui.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Twinkle.Knockout.js")" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/font-awesome.min.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/smartadmin-production.css")">
+
+    <script src="@Url.Content("~/Scripts/get-power-script.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/popupoverlay/jquery.popupoverlay.js")" type="text/javascript"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/popupoverlay/css-overlaybox.css")" type="text/css" media="screen" />
+
+    <style type="text/css">
+        .recentcomments a {
+            display: inline !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    </style>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        jQuery(document).ready(function ($) {
+            /* prepend menu icon */
+            $('#nav-wrap').prepend('<div id="menu-icon">BROWSE</div>');
+
+            /* toggle nav */
+            $("#menu-icon").on("click", function () {
+                $("#nav").slideToggle();
+                $(this).toggleClass("active");
+            });
+        });
+        //]]>
+    </script>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        //window.onload = BindCallRate;
+        function BindCallRate() {
+            var divid = document.getElementById("showintdiv");
+            if (divid.style.display == 'none') {
+                divid.style.display = 'block';
+            }
+            var e = document.getElementById("ddlCountry");
+            var country_plan = e.options[e.selectedIndex].value;
+
+            var country = e.options[e.selectedIndex].text;
+            document.getElementById("tdCountry").innerHTML = country;
+
+            var plans = country_plan.split('|');
+            document.getElementById("tdVoice").innerHTML = plans[0];
+            document.getElementById("tdSMS").innerHTML = plans[1];
+        }
+        //]]>
+    </script>
+    <script type="text/javascript">
+        //<![CDATA[
+        $(".support")
+        .mouseenter(function () {
+            $(".support_ul").slideDown(1000);
+        })
+        .mouseleave(function () {
+            $(".support_ul").slideUp(1000);
+        });
+        //]]>
+    </script>
+    
+
+
+
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function () {
+
+            //$(function () {
+            //    setTimeout(function () {
+            //        $(".alert-success").fadeOut(function (event) {
+            //            $(".alert-success").remove();
+            //        });
+            //    }, 1500)
+            //});
+
+            $('#AddMsisdndialog').dialog({
+                autoOpen: false,
+                width: 400,
+                //height: 150,
+                dialogClass: 'dialog_css',
+                resizable: false,
+                title: 'ADD ADDITIONAL MOBILE NUMBER',
+                modal: true,
+                create: function (event, ui) {
+                    $(".ui-widget-header").css('font-size', '16px');
+                    $(event.target).parent().css('position', 'fixed');
+                },
+                open: function (event, ui) {
+                    var p_id = $(this).data('id');
+                    url = "@Url.Action("AddMsisdn", "Care")";
+                    $(this).load(url);
+                }
+            });
+
+
+            //Search
+
+        });
+
+        function ViewAddMSISDN() {
+            $("#AddMsisdndialog").dialog('open');
+        }
+        function clmsisdn() {
+            $("#AddMsisdndialog").dialog('close');
+        }
+        function clvcode() {
+            $("#VerifyMsisdndialog").dialog('close');
+        }
+        //]]>
+    </script>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function () {
+
+            $('#VerifyMsisdndialog').dialog({
+                autoOpen: false,
+                width: 400,
+                height: 200,
+                dialogClass: 'dialog_css',
+                resizable: false,
+                title: 'CODE VERIFICATION',
+                modal: true,
+                create: function (event, ui) {
+                    $(".ui-widget-header").css('font-size', '16px');
+                    $(event.target).parent().css('position', 'fixed');
+                },
+                open: function (event, ui) {
+                    var p_id = $(this).data('id');
+                    url = '@Url.Action("VerifyMsisdn", "Care")';
+                    $(this).load(url);
+                }
+            });
+
+        });
+
+
+        function ViewVCode() {
+            $("#AddMsisdndialog").dialog('close');
+            $("#VerifyMsisdndialog").dialog('open');
+        }
+        //]]>
+    </script>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        function DisplayProgress() {
+            $("#divMProcess").css("display", "block");
+            $("#divMSubmit").css("display", "none");
+        }
+
+        function HideProgressPanel() {
+            $("#divMProcess").css("display", "none");
+            $("#divMSubmit").css("display", "block");
+        }
+
+        function SendVerif() {
+            DisplayProgress();
+            var msdnno = $("#txtMSISDN").val();
+            $.ajax({
+                url: "@Url.Action("SendSMSVerficationCode", "Care")",
+                data: { sMsisdn: msdnno },
+                type: "POST",
+                success: function (response) {
+                    HideProgressPanel();
+                    if (response == "116")
+                        ShowAlert('Message', 'Postpaid number not allowed!');
+                    else if (response == "1")
+                        ShowAlert('Message', 'Failed to Process!');
+                    else if (response == "114")
+                        ShowAlert('Message', 'Failed to send verification code!');
+                    else if (response == "0")
+                        ViewVCode();
+                    else if (response == "902")
+                        ShowAlert('Message', 'Mobile Number Already Exists!');
+                    else {
+                        $("#AddMsisdndialog").dialog('close');
+                        ShowAlert('Message', 'Failed to Process!');
+                    }
+                },
+                error: function (response) {
+                    alert("SendVerification: " + response.d);
+                }
+            });
+        }
+
+        //AddMultiSIM(string sMsisdn,string sVCode)
+
+        function DisplayProgressV() {
+            $("#divVProcess").css("display", "block");
+            $("#divVSubmit").css("display", "none");
+        }
+
+        function HideProgressPanelV() {
+            $("#divVProcess").css("display", "none");
+            $("#divVSubmit").css("display", "block");
+        }
+
+        function Multisim() {
+            DisplayProgressV();
+            var msdnno = "677" + $("#txtMSISDN").val();
+            var vcode = $("#txtVCode").val();
+
+            $.ajax({
+                url: "@Url.Action("AddMultiSIM", "Care")",
+                data: { sMsisdn: msdnno, sVCode: vcode },
+                type: "POST",
+                success: function (response) {
+                    HideProgressPanelV();
+
+                    var result = $.parseJSON(response);
+
+
+                    if (result.rcode == "116")
+                        ShowAlert('Message', 'Postpaid number not allowed!');
+                    else if (result.rcode == "901")
+                        ShowAlert('Message', 'Invalid Request!');
+                    else if (result.rcode == "903")
+                        ShowAlert('Message', 'Invalid Verification Code!');
+                    else if (result.rcode == "904")
+                        ShowAlert('Message', 'Verification Code Expired!');
+                    else if (result.rcode == "0") {
+                        $("#VerifyMsisdndialog").dialog('close');
+                        var surl = "../Care/" + result.rURL;
+                        ShowAlertAndRedirect('Message', 'Mobile Number Successfully Added', surl);
+
+                    }
+                    else {
+                        ShowAlert('Message', 'Failed to Proceed!');
+                        $("#VerifyMsisdndialog").dialog('close');
+                    }
+                },
+                error: function (response) {
+                    alert("MultiSim: " + response.d);
+                }
+            });
+        }
+
+        function RemoveSim(msdnno) {
+            var msg = 'Are you sure, want to Remove ' + msdnno;
+
+            $("#alert_dialog").html(msg);
+            $("#alert_dialog").dialog({
+                title: "Confirmation",
+                buttons: {
+                    Continue: function () {
+                        $(this).dialog('close');
+                        $.ajax({
+                            url: "@Url.Action("RemoveSIM", "Care")",
+                            data: { sMsisdn: msdnno },
+                            type: "POST",
+                            success: function (response) {
+                                var result = $.parseJSON(response);
+
+                                if (result.rcode == "905")
+                                    ShowAlert('Message', 'Cannot delete primary number!');
+                                else if (result.rcode == "1")
+                                    ShowAlert('Message', 'Process Failed!');
+                                else if (result.rcode == "0") {
+                                    var msg = msdnno + " Mobile Number Successfully Removed";
+                                    var surl = "../Care/" + result.rURL;
+                                    ShowAlertAndRedirect('Message', msg, surl);
+                                }
+                                else {
+                                    ShowAlert('Message', 'Failed to Proceed!');
+                                }
+                            },
+                            error: function (response) {
+                                alert("RemoveSim: " + response.d);
+                            }
+                        });
+                    },
+                    Close: function () {
+                        $(this).dialog('close');
+                        return false;
+                    }
+                },
+                dialogClass: 'dialog_css',
+                width: 350,
+                autoOpen: true,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+
+            return false;
+        }
+
+        //]]>
+    </script>
+
+    <!-- Shop Scripts Begin -->
+
+    <script type="text/javascript">
+        $('button.close').live("click", function () {
+            $(this).parents('#msg_pan').fadeOut('slow');
+        });
+
+        $(document).ready(function () {
+
+            $(".CartImg").live('click', function (event) {
+                var tr = $(this).parents('div');
+                var p_id = tr.find('#Prd_id').val();
+
+                var loginuser = '@Session["ShoppingUserID"]';
+
+                if (loginuser != '') {
+                    //$("#Cartdialog").data('id', p_id).dialog('open');
+                    ShowCartDialog(p_id);
+                }
+                else {
+
+                    var url = "@Url.Action("CartPanel", "Shop", new { id = "xxx" })";
+                    url = url.replace("xxx", p_id);
+                    $.post(url, function (data) {  //Post to action                    
+                        window.location.href = '@Url.Action("Login", "Shop")';
+                        return true;
+                    });
+
+                    }
+            });
+
+            $(".cart_bucket").click(function (event) {
+                //$("#Cartdialog").data('id', null).dialog('open');
+                ShowCartDialog(null);
+                return false;
+
+            });
+
+            $('.delete').live('click', function () {
+                var tr = $(this).parents('tr:first');
+                var PId = parseInt(tr.find("#hdnPId").val());
+                var qty = tr.find(".product_qty").val();
+                $.post("@Url.Action("DeleteProduct", "Shop")/" + PId, function (data) {
+                    if (data.Status == true) {
+                        tr.remove();
+                        CalculateTotPrice();
+                    }
+                });
+            });
+
+            $('.product_qty').live("change", function () {
+
+                var tr = $(this).parents('tr:first');
+                var PId = parseInt(tr.find("#hdnPId").val());
+                var qty = tr.find(".product_qty").val();
+
+                $.post("@Url.Action("UpdateProduct_Qunatity", "Shop")", { PId: PId, qty: qty }, function (data) {
+                    if (data.Status == true) {
+                        if (qty == 0)
+                            tr.find(".product_qty").val(1);
+
+                        tr.find(".product_tot_price").html(data.price.toFixed(2));
+                        CalculateTotPrice();
+                    }
+                });
+
+            });
+
+        });
+
+        function ShowCartDialog(pid) {
+            var url = "@Url.Action("CartPanel", "Shop", new { id = "xxx" })";
+            url = url.replace("xxx", pid);
+            $.post(url, function (data) {  //Post to action   
+                $('#Cartdialog').html(data);
+
+                $('#Cartdialog').popup('show');
+            });
+        }
+
+        function CalculateTotPrice() {
+            var tot = 0;
+            $('.cart-body tr').each(function () {
+                var tr = $(this);
+                var price = tr.find(".product_price").html();
+                var qty = tr.find(".product_qty").val();
+                tot += parseInt(price) * parseFloat(qty);
+            });
+
+            if (tot > 0) {
+                $('#TotalAmt').html(tot.toFixed(2));
+                $('#EmptyMsg2').css({ 'display': 'none' });
+            }
+            else {
+                $('#gridpan').hide();
+                $('#confirmBtnpan').hide();
+                //$('#EmptyMsg').show();
+                $('#EmptyMsg2').css({ 'display': 'block' });
+                $("#Cartdialog").dialog('hide');
+                //$("#closeCartDialog").css({ 'display': 'none' });
+                //$("#closeCartDialog2").css({ 'display': 'block' });
+            }
+        }
+
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".view_detail").live('click', function (event) {
+                var tr = $(this).parents('.pbox');
+                var p_id = tr.find('#Prd_id').val();
+                //$("#ProductInfodialog").data('id', p_id).dialog('open');
+
+                var url = "@Url.Action("ProductInfoPartial", "Shop", new { Id = "xxx" })";
+                url = url.replace("xxx", p_id);
+                $.post(url, function (data) {  //Post to action
+                    $('#ProductInfodialog').html(data);
+
+                    $('#ProductInfodialog').popup('show');
+                });
+
+            });
+
+            //Search
+            $(".search_txt a").click(function () {
+                var sdata = $('#search').val();
+                if (sdata != "") {
+                    var url = "@Url.Action("Products", "Shop", new { skey = "xxx" })";
+                    url = url.replace("xxx", sdata);
+                    $(this).attr('href', url);
+                }
+            });
+        });
+
+        function HideProductInfoPopup() {
+            $('#ProductInfodialog').popup('hide');
+        }
+
+        // Call from ProductInfo Partial view
+        function addtocart(id) {
+            //$("#ProductInfodialog").dialog('close');
+            $('#ProductInfodialog').popup('hide');
+
+            var loginuser = '@Session["ShoppingUserID"]';
+
+            if (loginuser != '') {
+                //$("#Cartdialog").data('id', id).dialog('open');
+                ShowCartDialog(id)
+            }
+            else {
+                window.location.href = '@Url.Action("Login", "Shop")';
+                return true;
+            }
+        }
+
+        function ViewProductInfo(id) {
+            $("#ProductInfodialog").data('id', id).dialog('open');
+        }
+
+    </script>
+
+    <!-- Shop Scripts End -->
+</head>
+
+<body style="height: auto;">
+    @Html.Partial("bm_HeaderLayout_Care")
+    <div class="mid">
+        @RenderBody()
+        <div class="clr" style="height: 30px;"></div>
+        <div id="dialog"></div>
+        <div id="BuyPowerdialog" style="display: none; overflow: hidden;"></div>
+
+        <div id="GetPower_Confirm_dialog" style="display: none;">
+            <div id="GetPower_Confirm_msg"></div>
+            <div id="GetPower_Confirm_img" style="display: none; text-align: center; padding-top: 10px;">
+                <img src="~/Content/themes/base/images/loading.gif" alt="Loading" />&nbsp;please wait...
+            </div>
+        </div>
+        <div id="AddMsisdndialog" style="display: none; overflow: hidden;"></div>
+        <div id="VerifyMsisdndialog"></div>
+        <div id="bm_yplans_showdialog" style="display: none;"></div>
+        <div id="alert_dialog" style="display: none;"></div>
+        <div id="Activate_SIM" style="display: none;">
+            <div id="Cartdialog" style="display: none;"></div>
+            <div id="ProductInfodialog" style="display: none;"></div>
+            @Html.Partial("_ActivateSIM_Partial", "Care")
+        </div>
+        <div id="Redeem_FB_Voucher" style="display: none; overflow: hidden;">
+            <div style="text-align: center; padding: 50px 0px 50px 0px;">
+                <img src="~/Content/themes/base/images/loading.gif" />
+            </div>
+        </div>
+        <div id="CreditMe" style="display: none;">
+            @Html.Partial("_CreditMe_Partial", "Care")
+        </div>
+    </div>
+    @Html.Partial("bm_FooterLayout")
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+}
+
+<div class="mid_margin">
+    <div class="slider">
+      <div class="flexslider">
+        <ul class="slides">
+          <li><img src="~/images/slides.jpg" title="" alt="" /></li>
+          <li><img src="~/images/slides.jpg" title="" alt="" /></li>
+          <li><img src="~/images/slides.jpg" title="" alt="" /></li>
+          <li><img src="~/images/slides.jpg" title="" alt="" /></li>
+        </ul>
+      </div>
+    </div>
+    <div class="choose_box">
+      <div class="choose_box_tet">
+        <h1>Why choose bmobile?</h1>
+        <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer <br>
+          took a galley of type and scrambled it to make a type specimen book</p>
+      </div>
+      <div class="value_box">
+        <div class="value_box_img"><img src="~/images/value_added_services.png" title="" alt=""></div>
+        <div class="value_box_text">Value Added Services</div>
+        <div class="value_box_more"><a href="#"><img src="~/images/more.png" title="" alt=""></a></div>
+      </div>
+      <div class="value_box">
+        <div class="value_box_img"><img src="~/images/my_bmobile_app.png" title="" alt=""></div>
+        <div class="value_box_text">My bmobile app</div>
+        <div class="value_box_more"><a href="#"><img src="~/images/more.png" title="" alt="" /></a></div>
+      </div>
+      <div class="value_box">
+        <div class="value_box_img"><img src="~/images/customer_care.png" title="" alt=""></div>
+        <div class="value_box_text">Customer Care</div>
+        <div class="value_box_more"><a href="#"><img src="~/images/more.png" title="" alt=""></a></div>
+      </div>
+    </div>
+    <div class="bmobile_mid">
+      <div class="bmobile_mid_text">
+        <h1><img src="~/images/text.png" title="" alt=""></h1>
+      </div>
+      <div class="bmobile_mid_box">
+        <div class="bmobile_mid_box_main">
+            <div class="bmo_mid_box">
+              <div class="bmo_mid_box_img"><img src="~/images/postpay.png" title="" align=""></div>
+              <div class="bmo_mid_boxtext"><a href="#">PostPay</a></div>
+            </div>
+            <div class="bmo_mid_box">
+              <div class="bmo_mid_box_img"><img src="~/images/choose.png" title="" align=""></div>
+              <div class="bmo_mid_boxtext"><a href="#" class="arro_bg">Choose your plan</a></div>
+            </div>
+            <div class="bmo_mid_box">
+              <div class="bmo_mid_box_img"><img src="~/images/cug.png" title="" align=""></div>
+              <div class="bmo_mid_boxtext"><a href="#" class="arro_bg1">CUG</a></div>
+            </div>
+            <div class="bmo_mid_box bmo_man ">
+              <div class="bmo_mid_box_img"><img src="~/images/prepay.png" title="" align=""></div>
+              <div class="bmo_mid_boxtext"><a href="#" class="arro_bg2">Prepay</a></div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="our_com">
+      <div class="our_com_text">
+        <h1>Our company’s vision is to be the leading provider of mobile Voice and
+          Data services in PNG and the Solomon Islands in terms of market share, 
+          profitability and customer satisfaction. </h1>
+        <p>Our business is driven by processes we constantly measure as the basis of on going improvement and to benchmark our <br>
+          performance against other leading companies. <a href="#">Read More</a></p>
+      </div>
+    </div>
+  </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<link rel="stylesheet" href="@Url.Content("~/css/flexslider.css")" type="text/css" media="screen" />
+<script defer src="@Url.Content("~/js/jquery.flexslider.js")"></script>
+<script type="text/javascript">
+	$(function(){
+		SyntaxHighlighter.all();
+	});
+	$(window).load(function(){
+		$('.flexslider').flexslider({
+			animation: "slide",
+			slideshow: true,
+			start: function(slider){
+				$('body').removeClass('loading');
+			}
+		});
+	});
+</script>
+
+    }

@@ -1,0 +1,89 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.web_tbl_fb_promotions>
+
+@{
+    ViewBag.Title = "FB Vouchers";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+
+    List<SelectListItem> FBStatus = new List<SelectListItem>();
+    FBStatus.Add(new SelectListItem { Value = "true", Text = "Active" });
+    FBStatus.Add(new SelectListItem { Value = "false", Text = "Inactive" });
+}
+
+<div class="divheader">
+    FB Vouchers
+</div>
+
+@using (Html.BeginForm("FB_Vouchers", "Admin", FormMethod.Post, new { id = "frmFB_Vouchers", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="dRowvlg dtopmenu">
+        <span>@Html.ActionLink("Download FB Vouchers(CSV)", "FB_VouchersCsvList")</span>
+        <span>@Html.ActionLink("Import FB Vouchers", "Import_FB_Vouchers")</span>
+    </div>
+    <div class="clear"></div>
+    @*<div class="dRowvlg">
+        <div style="text-align: center;">
+            @if (ViewBag.Message != null)
+            {
+                @ViewBag.Message
+            }
+        </div>
+        </div>*@
+
+    <div class="dRowvlg">
+        <div class="input-append">
+            @Html.TextBox("sl_no", "", new { @placeholder = "Serial No" })&nbsp;
+            @Html.TextBox("pin_no", "", new { @placeholder = "Pin No" })&nbsp;
+            @Html.TextBox("fb_voucher", "", new { @placeholder = "FB Voucher No" })&nbsp;
+            @Html.DropDownList("ddlStatus", (IEnumerable<SelectListItem>)FBStatus, "--Status--")
+
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search
+            </button>&nbsp;
+            <button class="btn" type="button" onclick="window.location.href='@Url.Action("FB_Vouchers", "Admin")'">
+                <i class="icon-search"></i>&nbsp;Reset
+            </button>
+        </div>
+    </div>
+    <div style="color:green; padding:5px; width:100%; font-weight:bold; text-align:center;">
+        @TempData["fb_del_msg"]
+    </div>
+    <div id="grid-list">
+        @if (Model.Count > 0)
+        {
+            { Html.RenderPartial("_Ajax_FB_Vouchers", Model); }
+        }
+        else
+        {
+            <div style="width: 100%; text-align: center; padding: 10px 0px 10px 0px;">Records Not found!</div>
+        }
+    </div>
+}
+<div id="#delete-dialog" style="display:none;"></div>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        $("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+
+    
+</script>

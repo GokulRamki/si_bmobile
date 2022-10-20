@@ -1,0 +1,226 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.Payment_Transaction_model>
+
+@if (Model != null)
+{
+    if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        TransactionID
+                    </th>
+                    <th>
+                        Transaction&nbsp;Date
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Mobile&nbsp;Number
+                    </th>
+                    <th>
+                        Payment&nbsp;Status
+                    </th>
+                    <th>
+                        TopUp&nbsp;Status
+                    </th>
+                    <th>
+                        Paid&nbsp;Type
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Logs
+                    </th>
+            </thead>
+            <tbody>
+                @if (Model.Count > 0)
+                {
+
+                    foreach (var item in Model)
+                    {
+                        var @vColor = "";
+                        if (item.resultmsg == "FAILED" || item.transaction_state == "failed")
+                            vColor = "background-color:#FE642E;";
+                        else if ((item.resultmsg == "SUCCESS" || item.transaction_state == "success") && item.payment_status == "APPROVED")
+                            vColor = "background-color:#82FA58;";
+                        else if ((item.resultmsg == "SUCCESS" || item.transaction_state == "success") && item.payment_status == "PENDING")
+                            vColor = "background-color:#F7FE2E;";
+
+                        <tr style="@vColor">
+                            <td>
+                                @item.cust_fname&nbsp;@item.cust_lname
+                            </td>
+                            <td>
+                                @item.order_number
+                            </td>
+                            <td>
+                                @item.order_datetime
+                            </td>
+                            <td>
+                                @item.order_product_total
+                            </td>
+                            <td>
+                                @item.purchase_msisdn
+                            </td>
+                            @if (item.payment_gateway == "DOKU")
+                            {
+                                <td>
+                                    @item.resultmsg
+
+                                </td>
+                            }
+                            else if (item.payment_gateway == "WIRECARD")
+                            {
+                                <td>
+                                    @item.transaction_state
+
+                                </td>
+                            }
+                            <td>
+                                @item.payment_status
+
+                            </td>
+                            <td>
+                                @item.payment_type
+                            </td>
+                            <td>
+                                @item.cust_email
+                            </td>
+                            @if (item.payment_gateway == "DOKU")
+                            {
+                                <td>
+
+                                    <a id="@item.order_id" onclick="showlogdetails('@item.order_id');" class="showalllog" style="cursor: pointer;">dokuLog</a>
+                                </td>
+                            }
+                            else if (item.payment_gateway == "WIRECARD")
+                            {
+                                <td>
+
+                                    <a id="@item.order_id" onclick="showlogdetails('@item.order_id');" class="showalllog" style="cursor: pointer;">wcLog</a>
+                                </td>
+                            }
+                        </tr>
+                        <tr id="indtranslog_@item.order_id" class="AllTranslog alllogsblock">
+
+                            <td colspan="10">
+
+                                @if (item.payment_gateway == "DOKU")
+                                {
+                                    <div style="color: #8B3778; float: right; font-weight: bold; font-style: italic;">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>CustomerId</th>
+
+                                                    <th>DokuStatus</th>
+                                                    <th>MobileNumber</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>@item.customer_id</td>
+
+                                                    <td>@item.resultmsg</td>
+                                                    <td>@item.purchase_msisdn</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                                else if (item.payment_gateway == "WIRECARD")
+                                {
+                                    <div style="color: #8B3778; float: right; font-weight: bold; font-style: italic;">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>CustomerId</th>
+                                                    <th>AuthorisationCode</th>
+                                                    <th>WCStatus</th>
+                                                    <th>MobileNumber</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>@item.customer_id</td>
+                                                    <td>@item.authorization_code</td>
+                                                    <td>@item.transaction_state</td>
+                                                    <td>@item.purchase_msisdn</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+        <div class="pager1">
+            @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "MobileTopupTransaction", transmerchantid = ViewData["transmerchantid"], mobile_no = ViewData["mobile_no"], ddlDokuStatus = ViewData["ddlDokuStatus"], ddlOrderstatus = ViewData["ddlOrderstatus"], sFrom = ViewData["sFrom"], sTo = ViewData["sTo"], siteId = ViewData["siteId"], sptype = ViewData["sptype"] }))
+
+
+            <div class="well">
+                Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+                of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+            </div>
+        </div>
+    }
+    else
+    {
+        <div style="margin-left: 35%">
+            <h3>No Record Found</h3>
+        </div>
+    }
+}
+<script type="text/javascript">
+
+    function showlogdetails(id) {
+
+        var logid = "#indtranslog_" + id;
+
+        $(".AllTranslog").removeClass("alllogsblock");
+        $(".AllTranslog").addClass("alllogsblock");
+        $(logid).removeClass("alllogsblock");
+    }
+
+</script>
+
+<style type="text/css">
+    .alllogsblock {
+        display: none;
+    }
+</style>
+

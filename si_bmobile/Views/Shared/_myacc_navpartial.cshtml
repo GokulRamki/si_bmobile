@@ -1,0 +1,18 @@
+﻿
+@{ string action = ViewContext.Controller.ValueProvider
+       .GetValue("action").RawValue.ToString(); }
+
+<div class="DivRight">
+    <div>
+        <div class="dNavTitle">User Profile</div>       
+             <div class="dSubNav"><span class="@("UserProfile".Equals(action) ? "act" : "" )">@Html.ActionLink("My Profile", "UserProfile", "Shop")</span></div>        
+             <div class="dSubNav last"><span class="@("ChangePwd".Equals(action) ? "act" : "" )">@Html.ActionLink("Change Password", "ChangePwd", "Shop")</span></div>       
+    </div>
+    <div>
+        <div class="dNavTitle">Orders</div>   
+        <div class="dSubNav"><span class="@("MyOrders".Equals(action) ? "act" : "" )">@Html.ActionLink("My Orders", "MyOrders", "Shop")</span></div>      
+    </div>
+    <div>
+        <div class="dSubNav"><span><a href="@Url.Action("Logout", "Shop")">Logout</a></span></div>
+    </div>
+</div>

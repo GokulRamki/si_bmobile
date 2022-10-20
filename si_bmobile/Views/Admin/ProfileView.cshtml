@@ -1,0 +1,83 @@
+﻿@model si_bmobile.Models.profilemodel
+
+@{
+    ViewBag.Title = "ProfileView";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+
+@using (Html.BeginForm("ProfileView", "Admin", FormMethod.Post, new { id = "frmProview", enctype = "multipart/form-data" }))
+{
+    <div class="divheader">
+        My Profile
+    </div>
+
+    <div class="maindivlayout">
+        <div class="row">
+            <div>
+                <div class="divlabel">
+                    Role:
+                    <div class="divtxt">
+                        @Html.DisplayFor(model => model.rolename)
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div>
+                <div class="divlabel">
+                    First Name:
+                    <div class="divtxt">
+                        @Html.DisplayFor(model => model.first_name)
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div>
+                <div class="divlabel">
+                    Last Name:
+
+                    <div class="divtxt">
+                        @Html.DisplayFor(model => model.last_name)
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div>
+                <div class="divlabel">
+                    Email Id:
+                    <div class="divtxt">
+                        @Html.DisplayFor(model => model.email_id)
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div>
+                <div class="divlabel">
+                    Contact Number:
+                    <div class="divtxt">
+                        @Html.DisplayFor(model => model.contact_number)
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>           
+            <div>
+                <div class="divlabel">
+                    Status:
+                    <div class="divtxt">
+                        @Html.DisplayFor(model => model.status)
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+

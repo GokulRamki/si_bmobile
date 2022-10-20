@@ -1,0 +1,110 @@
+﻿@model si_bmobile.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+    
+    
+    }
+
+
+<div class="mid_margin">
+    <div class="choose_box remov_padd wrapper">       
+        <section class="content-wrapper content-pan clear-fix">
+            <section id="widget-grid" style="margin: 50px auto;">
+                <!-- START ROW -->
+                <div class="row">
+
+                    <!-- NEW COL START -->
+                    <article class="col-sm-12 col-md-12 col-lg-8" style="float:none; margin: 5px auto; max-width:430px;">
+
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                            <header>
+                                <span class="widget-icon"><i class="fa fa-user"></i></span>
+                                <h2>Login </h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    @using (Html.BeginForm("Login", "Care", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmLogin", @class = "smart-form", novalidate = "novalidate" }))
+                                    {	    
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)                               
+                           
+                                        if (ViewBag.Message != null)
+                                        {
+                                        <fieldset id="msg_pan">
+                                            <div class="alert alert-warning fade in">
+                                                <button class="close" data-dismiss="alert">
+                                                    ×
+                                                </button>
+                                                <i class="fa-fw fa fa-warning"></i>
+                                                <strong>Warning</strong> @ViewBag.Message
+                                            </div>
+                                        </fieldset>
+                                        }                       
+                                        <fieldset>                                            
+                                            <section>
+                                                <b>Mobile Number:&nbsp;</b>
+                                                <label for="MSISDN" class="input" >
+                                                   <div style="float:left; line-height:30px; width:9%; font-weight:bold;">677&nbsp;</div>@Html.TextBoxFor(model => model.MSISDN, new { placeholder = "Mobile Number", maxlength = 15, @style="width:90%;" })
+                                                    @Html.ValidationMessageFor(model => model.MSISDN)
+                                                </label>
+                                            </section>                                               
+                                            <section>
+                                                <b>Password:&nbsp;</b>
+                                                <label for="Pwd" class="input" >
+                                                    <div style="float:left; line-height:30px; width:9%;">&nbsp;</div>@Html.PasswordFor(model => model.Pwd, new { placeholder = "Password", maxlength = 15, @style="width:90%;" })
+                                                    @Html.ValidationMessageFor(model => model.Pwd)
+                                                </label>
+                                            </section>
+                                            <div class="row">
+                                                <section class="col col-6">
+                                                    <a style="color: #512C52; text-decoration: underline; font-size: 12px;" href="/Care/Register">Register for new account</a>
+
+                                                </section>
+                                                <section class="col col-5">
+                                                    <a style="color: #512C52; text-decoration: underline; font-size: 12px;" id="ShowPopup" href="/Care/ForgotPassword">Forgot your Password?</a>
+                                                </section>
+                                            </div>
+                                        </fieldset>  
+                                        <footer>
+                                            <button id="btnSubmit" class="btn btn-mini top_btn" type="submit" style="width: 100px;">Submit</button>
+                                        </footer>
+                                    }
+                                </div>
+                                <!-- end widget content -->
+
+                            </div>
+                            <!-- end widget div -->
+
+                        </div>
+                        <!-- end widget -->
+                    </article>
+                    <!-- END COL -->
+                </div>
+                <!-- END ROW -->
+            </section>
+        </section>  
+    </div>   
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script>
+        $('button.close').click(function () {
+            $(this).parents('#msg_pan').fadeOut('slow');
+        });
+    </script>
+}

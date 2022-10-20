@@ -1,0 +1,630 @@
+﻿@model si_bmobile.Models.TopupModel
+
+@{
+    ViewBag.Title = "Topup";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+    <link href="@Url.Content("~/css/ezytrans-popup.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+
+    <script type="text/javascript">
+
+        function ChkmyTab(vtabid) {
+            $("#img_Loading").css("display", "none");
+            $("#btn_panel").css("display", "none");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChkMyNumber", "Care")',
+                contentType: 'application/json',
+                data: JSON.stringify({ id: vtabid }),
+                success: function (data) {
+                    if (data == true)
+                        $('#isMyNumber').val(true);
+                    else
+                        $('#isMyNumber').val(false);
+                },
+                error: function (response) {
+                    //alert("PlanPrice: " + response.d);
+                }
+            });
+        }
+
+        function showdg() {
+            $("#div_dialogcc").dialog({
+                title: "Message",
+                buttons: {
+                    Close: function () {
+                        $(this).dialog('close');
+
+                    }
+                },
+                width: 250,
+                autoOpen: true,
+                closeOnEscape: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+        }
+
+
+    </script>
+    var currDate = DateTime.Now;
+    string sTime = currDate.ToString("HH");
+    int lTime = Convert.ToInt32(sTime);
+}
+
+<div class="mid_margin">
+    @using (Html.BeginForm("Topup", "Care", FormMethod.Post, new { id = "frmTopup", enctype = "multipart/form-data", @class = "frmwidget" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(c => c.pay.fname)
+        @Html.HiddenFor(c => c.pay.lname)
+        @Html.HiddenFor(c => c.pay.email)
+        @Html.HiddenFor(c => c.pay.primary_msisdn)
+        @Html.HiddenFor(c => c.pay.paid_amount)
+        @Html.HiddenFor(c => c.pay.paid_userid)
+        @Html.HiddenFor(c => c.pay.paid_for_msisdn)
+        @Html.HiddenFor(c => c.isTOPUP);
+        @Html.HiddenFor(c => c.isMyNumber)
+        @Html.HiddenFor(c => c.tpPaidType)
+
+
+        <article class="col-sm-12 col-md-12 col-lg-10" style="margin-top: 20px;">
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <header>
+                    <span class="widget-icon"><i class="fa fa-user"></i></span>
+                    <h2>Top Up your Account using a Voucher</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="smart-form">
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-4">
+                                        <b>Mobile Number(s):&nbsp;</b>
+                                    </section>
+                                    <section class="col col-4">
+                                        @if (Model.MsisdnLst != null)
+                                        {
+                                            if (Model.MsisdnLst.Count > 0)
+                                            {
+                                                if (Model.MsisdnLst.Count > 1)
+                                                {
+                                                    @Html.DropDownListFor(x => x.MSISDN_Number, Model.MsisdnLst, new { @id = "ddlMsisdn" })<span id="span_msisdn" style="color: red;"></span>
+                                                    for (int f = 0; f < Model.MsisdnLst.Count; f++)
+                                                    {
+                                                        @Html.HiddenFor(x => x.MsisdnLst[f].Text)
+                                                        @Html.HiddenFor(x => x.MsisdnLst[f].Value)
+                                                        @Html.HiddenFor(x => x.MsisdnLst[f].Selected)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @Html.DisplayFor(x => x.MSISDN_Number)
+                                        }
+
+                                        @Html.ValidationMessageFor(t => t.MSISDN_Number)
+                                        @Html.HiddenFor(t => t.UserId)
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-4">
+                                        &nbsp;
+                                    </section>
+                                    <section id="div_voucherlist" class="col col-8"></section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-4">
+                                        <b>Voucher Number:&nbsp;</b>
+                                    </section>
+                                    <section class="col col-4">
+                                        <label for="VoucherNumber" class="input">
+                                            @Html.TextBoxFor(model => model.VoucherNumber, new { placeholder = "Voucher Number" })
+                                            @Html.ValidationMessageFor(model => model.VoucherNumber)
+                                            <img id="img_Loading" style="display: none;" src="~/images/zoomloader.gif" alt="Loading.." />
+                                            <br />
+                                            <span id="span_voucher" style="color: red;"></span>
+                                            @Html.HiddenFor(t => t.MSISDN_Number)
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <a id="lnk_addvoucher" href="javascript:void(0);" onclick="add_voucher();">Add</a>
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <footer>
+                                @if (Session["purchase_plan"] != null)
+                                {
+                                    <button id="btnCancel" class="btn btn-mini top_btn" type="button" onclick="window.location='/Care/RefreshACC'" style="width: auto;">Cancel</button>
+                                    <button id="btnNext" class="btn btn-mini top_btn" type="submit" value="Next" name="Command" style="width: auto;">Next</button>
+
+                                }
+                            </footer>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+            @if (Model.isTOPUP == true)
+            {
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+
+
+                    <header>
+                        <span class="widget-icon"><i class="fa fa-user"></i></span>
+                        <h2>Top Up your Account using Credit/Debit Card/Internet Banking</h2>
+                    </header>
+
+                    <ul class="nav nav-tabs bordered" id="myTab1">
+                        <li class="active">
+                            <a href="#s1" onclick="ChkmyTab($(this).attr('href'));" data-toggle="tab">My Number(s)</a>
+
+                        </li>
+                        <li>
+                            <a href="#s2" onclick="ChkmyTab($(this).attr('href'));" data-toggle="tab">Other Mobile Number</a>
+
+                        </li>
+                    </ul>
+
+
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="smart-form">
+                                <fieldset>
+
+                                    <div id="myTabContent1" class="tab-content padding-10">
+                                        <div class="tab-pane in active" id="s1">
+
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <b>Mobile Number(s):&nbsp;</b>
+                                                </section>
+                                                <section class="col col-4">
+                                                    @if (Model.MsisdnLst_temp != null)
+                                                    {
+                                                        if (Model.MsisdnLst_temp.Count > 0)
+                                                        {
+                                                            if (Model.MsisdnLst_temp.Count > 1)
+                                                            {
+                                                                @Html.DropDownListFor(x => x.MSISDN_Number_temp, Model.MsisdnLst_temp, new { @id = "ddlMsisdn_cc" })<span id="span_msisdn_cc" style="color: red;"></span>
+                                                                for (int f = 0; f < Model.MsisdnLst_temp.Count; f++)
+                                                                {
+                                                                    @Html.HiddenFor(x => x.MsisdnLst_temp[f].Text)
+                                                                    @Html.HiddenFor(x => x.MsisdnLst_temp[f].Value)
+                                                                    @Html.HiddenFor(x => x.MsisdnLst_temp[f].Selected)
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.DisplayFor(x => x.MSISDN_Number_temp)
+                                                        @Html.HiddenFor(t => t.MSISDN_Number_temp)
+                                                    }
+
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <b>Amount(in Kina):&nbsp;</b>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label for="tpAmountMy" class="input">
+
+
+
+                                                        @if (Model.lstTopupVals != null)
+                                                        {
+                                                            if (Model.lstTopupVals.Count > 0)
+                                                            {
+                                                                @Html.DropDownListFor(x => x.tpAmountMy, Model.lstTopupVals)
+
+                                                                for (int t = 0; t < Model.lstTopupVals.Count; t++)
+                                                                {
+                                                                    @Html.HiddenFor(x => x.lstTopupVals[t].Text)
+                                                                    @Html.HiddenFor(x => x.lstTopupVals[t].Value)
+
+                                                                }
+                                                            }
+                                                        }
+
+                                                    </label>
+                                                </section>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="tab-pane" id="s2">
+
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <b>Other Mobile Number:&nbsp;</b>
+                                                </section>
+                                                <section class="col col-4">
+
+                                                    <label for="MSISDN_Number_other" class="input">
+                                                        @Html.TextBoxFor(model => model.MSISDN_Number_other, "", new { placeholder = "Mobile Number" })
+                                                        @Html.ValidationMessageFor(t => t.MSISDN_Number_other)
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <b>Amount(in Kina):&nbsp;</b>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label for="tpAmountMy" class="input">
+
+
+
+                                                        @if (Model.lstOtherTopupVals != null)
+                                                        {
+                                                            if (Model.lstOtherTopupVals.Count > 0)
+                                                            {
+                                                                @Html.DropDownListFor(x => x.tpAmountOther, Model.lstOtherTopupVals)
+
+                                                                for (int t = 0; t < Model.lstOtherTopupVals.Count; t++)
+                                                                {
+                                                                    @Html.HiddenFor(x => x.lstOtherTopupVals[t].Text)
+                                                                    @Html.HiddenFor(x => x.lstOtherTopupVals[t].Value)
+
+                                                                }
+                                                            }
+                                                        }
+
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            @*   <div class="row">
+                                                    <section class="col col-4">
+                                                        <b>Payment type : &nbsp;</b>
+                                                    </section>
+                                                    <section class="col col-4">
+                                                        <label for="paymentypeOther">
+
+                                                             <div>
+                                                           @Html.RadioButtonFor(x => x.pay.payment_mode, 2, new { @checked="checked" })
+                                                          CreditCard<br />
+                                                           @Html.RadioButtonFor(x=>x.pay.payment_mode,3,false)
+                                                          Internet Banking<br />
+                                                            @Html.HiddenFor(x=>x.pay.payment_mode)
+
+                                                                </div>
+
+                                                        </label>
+                                                    </section>
+                                                </div>*@
+                                        </div>
+
+                                        <div class="row">
+                                            <section class="col col-4">
+                                                <b>Payment type : &nbsp;</b>
+                                            </section>
+                                            <section class="col col-4">
+                                                <label for="paymentype">
+                                                    <div style="width:400px;">
+                                                        @Html.RadioButtonFor(x => x.pay.payment_mode, 2, new { @checked = "checked" })
+                                                        CreditCard<br />
+
+                                                        @if (lTime <= 22 && lTime >= 5)
+                                                        {
+                                                            @Html.RadioButtonFor(x => x.pay.payment_mode, 3, false)
+                                                            <span>Internet Banking &nbsp;<a href="#" id="ancIB" title="Click to know more">what is this?</a></span><br />
+                                                        }
+
+
+                                                        @Html.HiddenFor(x => x.pay.payment_mode)
+
+                                                    </div>
+
+                                                </label>
+                                            </section>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </fieldset>
+                                <footer>
+                                    <button id="btnCancel2" class="btn btn-mini top_btn" type="button" onclick="window.location='/Care/RefreshACC';" style="width: auto;">Cancel</button>
+                                    <button id="btnPay" class="btn btn-mini top_btn" type="submit" value="Pay" name="Command" style="width: auto;">Pay</button>
+
+                                </footer>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+
+            }
+        </article>
+
+
+    }
+    <!--Ezytrans popup -->
+    <div id="ezytranspanel">
+        <div id="ezytrans-box">
+            <img src="~/images/popup-close-2.png" alt="Close" style="float: right; z-index: 2200; margin: -30px -30px 0px 0px; cursor: pointer;" width="40px" height="40px" onclick="return closepopup();" />
+            <iframe id="frame1" width="900px" height="560px" frameborder="0" style="margin-top: -10px;"></iframe>
+        </div>
+    </div>
+    <div id="div_dialog" style="display: none;">
+        <p>@ViewBag.Message</p>
+    </div>
+    <div id="div_dialogcc" style="display: none;">
+    </div>
+    @Html.Partial("RightNav_PartialView")
+
+    <div id="divIB" style="display: none;">
+        @Html.Partial("_InternetBanking_Partial")
+    </div>
+</div>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        $("#div_dialog").dialog({
+            title: "Message",
+            buttons: {
+                Close: function () {
+                    $(this).dialog('close');
+
+                }
+            },
+            width: 250,
+            top: 450,
+            left: 10,
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            modal: true
+        });
+    </script>
+}
+@if (@ViewBag.reURL != null)
+{
+    <script type="text/javascript">
+        /* <![CDATA[ */
+
+        $(function () {
+            document.getElementById('frame1').src = '@Url.Action("ShopEzy", "Ezy")';
+
+            $('#ezytranspanel').fadeIn('slow');
+
+        });
+
+
+        function closepopup() {
+            var answer = confirm("Are you sure want to close this transaction ?")
+            if (answer) {
+                $('#ezytranspanel').fadeOut('slow');
+                return true;
+            }
+            return false;
+        }
+        /* ]]> */
+    </script>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <style>
+        .nav-tabs > li.active > a {
+            font-family: "Open Sans",Arial,Helvetica,Sans-Serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #FFF;
+            background: #e04c02;
+            background: -moz-linear-gradient(top, #e04c02 1%, #c1181f 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#e04c02), color-stop(100%,#c1181f)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, #e04c02 1%,#c1181f 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, #e04c02 1%,#c1181f 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, #e04c02 1%,#c1181f 100%); /* IE10+ */
+            background: linear-gradient(to bottom, #e04c02 1%,#c1181f 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e04c02', endColorstr='#c1181f',GradientType=0 ); /* IE6-9 */
+            border-width: 3px;
+            border-style: solid;
+            border-color: #57889C #57889C transparent;
+            -moz-border-top-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            border-image: none;
+            cursor: default;
+            border-bottom: 1px solid #C41D1C;
+        }
+
+            .nav-tabs > li.active > a:focus {
+                font-family: "Open Sans",Arial,Helvetica,Sans-Serif;
+                font-size: 14px;
+                font-weight: 400;
+                color: #FFF;
+                background-color: #FFF;
+                border-width: 3px;
+                border-style: solid;
+                border-color: #57889C #57889C transparent;
+                -moz-border-top-colors: none;
+                -moz-border-right-colors: none;
+                -moz-border-bottom-colors: none;
+                -moz-border-left-colors: none;
+                border-image: none;
+                cursor: default;
+                border-bottom: 1px solid #C41D1C;
+            }
+
+        nav-tabs > li > a {
+            margin-right: 0px;
+        }
+
+
+        .nav-tabs.bordered {
+            border-bottom: 3px solid #57889C;
+            background-color: #D3D3D3;
+        }
+
+        .nav-tabs > li {
+            margin-bottom: -3px;
+        }
+
+
+        .voucher_item {
+            width: 150px;
+            padding: 3px;
+            margin: 2px;
+            font-weight: bold;
+            background-color: #ddd;
+            border: 1px solid #c6c5c5;
+            background-position: right center;
+            background-repeat: no-repeat;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        .vsuccess {
+            background-image: url('../images/success-icon.png');
+        }
+
+        .vfail {
+            background-image: url('../images/failure-icon.gif');
+        }
+
+        ul li {
+            list-style-type: circle;
+        }
+    </style>
+    <script type="text/javascript">
+
+        $('#VoucherNumber').keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                return false;
+            }
+        });
+
+        function add_voucher() {
+
+            var msisdnno = $('#ddlMsisdn').val();
+            if (msisdnno == null)
+                msisdnno = $("#MSISDN_Number").val();
+
+            var voucherno = $('#VoucherNumber').val();
+            $('#span_msisdn').text('');
+            $('#span_voucher').text('');
+
+            var res = false;
+            if (msisdnno == '') {
+                $('#span_msisdn').text('The Mobile Number field is required!');
+                res = true;
+            }
+
+            if (voucherno == '') {
+                $('#span_voucher').text('The Voucher Number field is required!');
+                res = true;
+            }
+
+            if (res) {
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ajax_AddTopup", "Care")',
+                contentType: 'application/json',
+                data: JSON.stringify({ msisdn_no: msisdnno, voucher_no: voucherno }),
+                success: function (data) {
+                    var voucherslist = $.parseJSON(data);
+
+                    if (voucherslist['Message'] == 'success') {
+                        $('#div_voucherlist').append("<div style='margin-bottom: 15px;'>" + voucherslist['VoucherNumber'] + " Amount: " + voucherslist['tpAmount'] + "<span class='voucher_item vsuccess'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>");
+                    }
+                    else if (voucherslist['Message'] == 'fail') {
+                        $('#div_voucherlist').append("<div style='margin-bottom: 15px;'>" + voucherslist['VoucherNumber'] + "<span class='voucher_item vfail'>&nbsp;&nbsp;&nbsp;&nbsp;</span></div>");
+                    }
+                    else if (voucherslist['Message'] == 'attempt_failed') {
+                        window.location = '/Care/LockAccount';
+                    }
+                    else if (voucherslist['Message'] == 'session_expired') {
+                        window.location = '/Care/Login';
+                    }
+                    else {
+
+                    }
+
+                    $('#VoucherNumber').val('')
+                },
+                error: function (response) {
+                    //alert("PlanPrice: " + response.d);
+                }
+            });
+        }
+
+        $(document).ajaxStart(function () {
+
+            $("#img_Loading").css("display", "block");
+            $("#btn_panel").css("display", "none");
+        });
+        $(document).ajaxComplete(function () {
+            $("#img_Loading").css("display", "none");
+            $("#btn_panel").css("display", "block");
+        });
+
+        $(document).ready(function () {
+            $('#ancIB').click(function () {
+
+
+                $('#divIB').dialog({
+                    autoOpen: true,
+                    width: 650,
+                    dialogClass: 'dialog_css',
+                    resizable: true,
+                    title: 'Internet Banking',
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            return false;
+                        }
+                    },
+                    closeOnEscape: true,
+                    draggable: true,
+                    modal: true
+
+                });
+            });
+
+
+
+
+        });
+
+
+
+
+
+    </script>
+
+
+}

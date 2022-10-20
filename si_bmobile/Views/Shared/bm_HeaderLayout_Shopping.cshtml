@@ -1,0 +1,80 @@
+﻿<div class="header">
+  <div class="header_next">
+    <div class="margin">
+      <div class="head_top">
+          <div class="logo">
+            <div class="logo_img"><a href="/Care"><img src="@Url.Content("~/images/logo_new.jpg")" title="logo" alt="" /></a></div>
+          </div>
+          <div class="header_right">
+            <div class="header_top_menu">
+              <!--<div class="hed_logo"><img src="images/hed_logo.png" title="" alt=""></div>-->
+              <div class="hed_menu">
+                <div class="hed_menu_box ext_width">                   
+                        @if (Session["ShoppingUserID"] != null)
+                        {
+                         <div class="hed_login"><a href="/Shop/Logout" class="bor_rght">Logout</a></div>
+                            <div class="hed_login"><a href="/Shop/UserProfile">My Account</a></div>
+                        }
+                        else                        
+                        {
+                            <div class="hed_login"><a href="/Shop/Login" class="bor_rght">Login</a></div>
+                             <div class="hed_login"><a href="/Shop/Register">Register</a></div>
+                        }                  
+                   
+                     <div class="hed_login">@{Html.RenderAction("_CartSummaryPartial", "Shop");}</div>
+                </div>                 
+                      <div class="hed_menu_box">
+                          <div class="hed_menu_box_img">
+                              <img src="@Url.Content("~/images/pay_your_bill.png")" title="" alt="pay_your_bill" />
+                          </div>
+                          <div class="hed_menu_box_text"><a href="/Care/Login">Pay Your Bill</a></div>
+                      </div>                 
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><img src="@Url.Content("~/images/check_bill.png")" title="" alt="check_bill" /></div>
+                  <div class="hed_menu_box_text"><a href="/Care/Postpaid">Check Bill</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><img src="@Url.Content("~/images/recharge_now.png")" title="" alt="recharge_now"></div>
+                  <div class="hed_menu_box_text"><a href="/Care/Topup">Recharge Now</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><img src="@Url.Content("~/images/check_usage.png")" title="" alt="check_usage"></div>
+                  <div class="hed_menu_box_text"><a href="#">Check Usage</a></div>
+                </div>
+                <div class="hed_menu_box">
+                  <div class="hed_menu_box_img"><img src="@Url.Content("~/images/activate_a_sim.png")" title="" alt="activate_a_sim"></div>
+                  <div class="hed_menu_box_text"><a href="#">Activate A Sim</a></div>
+                </div>
+              </div>
+              <div class="social_icon"><a href="#"><img src="@Url.Content("~/images/fb_icon.png")" alt="fb_icon" /></a><a href="#"><img src="@Url.Content("~/images/twitt_icon.png")" alt="twitt_icon" /></a></div>
+            </div>
+            <div class="nav_menu">
+              <nav id="nav-wrap">
+                <ul style="display: none;" id="nav">
+                  <li class="first"><a href="#" >Home</a></li>
+                  <li><a href="#">Price Plans</a></li>
+                  <li><a href="/Shop/Products">Products</a></li>
+                  <li><a href="#">Value Added Services</a></li>
+                  <li><a href="#">Promotions</a></li>
+                  <li><a href="#" >Support</a></li>
+                  <li class="last last_bg"><a href="#" >News</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="header_top">
+    <div class="margin">
+      <div class="header_top_text">
+        <div class="top_bo"><img src="@Url.Content("~/images/top_bo.png")" title="" alt="top_bmobile" /></div>
+        <p>Post Paid customers can now view invoices online….login or register on self-care to view details</p>
+      </div>
+      <div class="header_top_text">
+        <div class="top_bo"><img src="@Url.Content("~/images/top_bo.png")" title="" alt="top_bmobile" /></div>
+        <p>Download the bmobile</p>
+      </div>
+    </div>
+  </div>
+</div>

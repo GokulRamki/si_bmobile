@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Check_Msisdn";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+
+
+
+<div class="divheader">
+    Check MSISDN
+</div>
+
+<div class="maindivlayout" style="width:100%; max-width:600px; margin:40px auto;">
+
+    <div>
+        <div class="divlabel">
+            MSISDN Number <span class="mandiv">*</span>
+        </div>
+        <div class="divtxt">
+            <span style="font-size:16px; font-weight:bold;">677</span>&nbsp;@Html.TextBox("msisdn_no", null, new { maxlength = 15 })
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="div_msg" style="padding:3px; font-weight:bold; text-align:center;">
+    </div>   
+    <div>
+        <div class="divlabel">&nbsp;</div>
+        <div class="divtxt">
+            <input type="button" id="btnSubmit" value="Submit" />
+            <span id="span_loading" style="padding:3px; font-weight:bold; text-align:center; display:none; color:#808080;">
+                <img src="~/images/zoomloader.gif" alt="Loading.." />&nbsp;Please Wait..
+            </span>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $("#msisdn_no").keypress(function (event) {
+
+            if (event.which == 45 || event.which == 189) {
+                event.preventDefault();
+            }
+        });
+
+        $('#msisdn_no').bind("paste", function (e) {
+            e.preventDefault();
+        });
+
+        $("#btnSubmit").on("click", function () {            
+            
+            $('#div_msg').html('');
+
+            var msisdn = $("#msisdn_no").val();
+            if (msisdn != '') {
+
+                loading_show();
+
+                $.ajax({
+                    url: "/Admin/Check_MsisdnNo",
+                    data: { msisdn_no: msisdn },
+                    type: "POST",
+                    success: function (data) {
+                        
+                        if (data.msisdn_status == 503) {
+                            $('#div_msg').html('Msisdn number is available.');
+                            $('#div_msg').css('color', 'green');                            
+                        }
+                        else if (data.msisdn_status == -1) {
+                            $('#div_msg').html('Failed to process. Please try later.');
+                            $('#div_msg').css('color', 'red');
+                        }
+                        else {
+                            $('#div_msg').html('Msisdn number in use!');
+                            $('#div_msg').css('color', 'red');
+                        }
+                        
+
+                        loading_hide();
+                    },
+                    error: function (response) {
+                        $('#div_msg').html('Failed to process. Please try later.');
+                        $('#div_msg').css('color', 'red');
+                        loading_hide();
+                    }
+                });
+            }
+            else {
+                $('#div_msg').html('Please enter msisdn number!');
+                $('#div_msg').css('color', 'red');
+            }
+        });
+
+        function loading_show() {
+            $('#span_loading').show();
+            $('#btnSubmit').hide();
+        }
+
+        function loading_hide() {
+            $('#span_loading').hide();
+            $('#btnSubmit').show();
+        }
+
+        $(document).ready(function () {
+            @*$("#div_dialog").dialog({
+                    title: "Message",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                            window.location.href = '@Url.Action("Brands", "Admin")';
+                        }
+                    },
+                    width: 350,
+                    dialogClass: 'dialog_css',
+                    autoOpen: true,
+                    closeOnEscape: false,
+                    draggable: false,
+                    resizable: false,
+                    modal: true
+                });*@
+        });
+    </script>
+    
+}

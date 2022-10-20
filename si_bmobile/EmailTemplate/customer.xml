@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<suprima>
+  <thin-client>
+    <consumer-chk type="response" format-by="client">
+      <success>1</success>
+      <token>
+        <tk1>MR</tk1>
+        <tk2>MARTIN TUKAI</tk2>
+        <tk3>BONOU</tk3>
+        <tk4>P.O. BOX 1507 BOROKO</tk4>
+        <tk5>NCD</tk5>
+        <tk6>GAHUNA GAUDI CRESS</tk6>
+        <tk7>GEREHU</tk7>
+        <tk8></tk8>
+        <tk9>600215477</tk9>
+        <tk10>DEPT OF PRTROLEUM & ENERGY</tk10>
+        <tk20>60156935</tk20>
+        <tk21>SEC 272 LOT 17</tk21>
+        <tk22>Section 272, Lot 17, SECTION 272 ALLOTMENT 17, GEREHU, PT MORESB</tk22>
+        <tk23>NCD</tk23>
+        <tk24></tk24>
+        <tk25>PT MORESBY</tk25>
+        <tk26>KOROBOSEA</tk26>
+        <tk30>K0.08</tk30>
+        <tk31>K0.00</tk31>
+        <tk51>0</tk51>
+
+
+      </token>
+      <token-count>1</token-count>
+    </consumer-chk>
+  </thin-client>
+</suprima>

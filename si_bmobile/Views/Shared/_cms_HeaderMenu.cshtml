@@ -1,0 +1,321 @@
+﻿@{
+    string bm_url = "http://bmobile.com.sb";    
+    string self_url = "http://selfcare.bmobile.com.sb";
+}
+<nav id="nav-wrap">
+    <ul id="nav">
+        <li class="fst-nv mn-li-a-2"><a href="@bm_url/home">Home</a></li>
+        <li class="mn-li-a-2">
+            <a class="mn-dvs-trgr-1 mn-li-a" href="#">Buy</a>
+            <div class="mn-dvs mn-trgr-1">
+                <div class="mn-bx-rws">
+                    <ul class="sub-mnu">
+                        <li>
+                            <a href="#" class="has-sub"> Devices </a>
+                            <ul class="sub-sub-mnu">
+                                <li> <a href="@bm_url/devices/1"> Mobile Phones </a> </li>
+                                <li> <a href="@bm_url/devices/4"> Tablets </a> </li>
+                                    <li> <a href="@bm_url/devices/14"> Mi Fi </a> </li>
+                                <li> <a href="@bm_url/home/devices"> All </a> </li>
+                            </ul>
+                        </li>                       
+                        <li>
+                            <a href="#" class="has-sub"> Prepaid </a>
+                            <ul class="sub-sub-mnu">
+                                <li> <a href="@bm_url/prepaid"> Voice and SMS </a> </li>    
+                                <li> <a href="@bm_url/data"> Data </a> </li>
+                                @*<li> <a href="@bm_url/PrepaidDataSMSVoiceBundles"> Bundles </a> </li>*@
+                                <li> <a href="@bm_url/uni"> Bundles </a> </li>
+                                <li> <a href="@bm_url/PrepaidInternationalCallingplans"> International Plans </a> </li>
+                                <li> <a href="@bm_url/PrepaidInternationalRoaming"> International Roaming </a> </li>                               
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="has-sub"> Corporate </a>
+                            <ul class="sub-sub-mnu">
+                                <li> <a href="@bm_url/PostPaidBundles"> Bundles </a> </li>                                
+                            </ul>
+                        </li>
+                    </ul>
+
+                    @*<div class="dv-strt-buy">
+                            <button>Start buying</button>
+                        </div>*@
+                </div>
+            </div>
+        </li>
+        <li class="mn-li-a-2">
+            <a href="#" class="mn-dvs-trgr-2 mn-li-a">Services</a>
+            <div class="mn-dvs mn-trgr-2">
+                <div class="mn-bx-rws">
+                    @*<div class="mn-dvs-col-3">
+                        <div class="mn-dvs-hed"> Popular </div>
+                        <div class="mn-dvs-wrap">
+                            <div class="mn-dvs-conts"> <a href="@bm_url/home/sb/beatz"> BEATZ </a> </div>
+                            <div class="mn-dvs-conts"> <a href="@bm_url/home/getpawa"> Get Pawa </a> </div>
+                        </div>
+                    </div>
+                    <div class="mn-dvs-col-3">
+                        <div class="mn-dvs-hed"> Financial Services </div>
+                        <div class="mn-dvs-wrap">
+                            <div class="mn-dvs-conts"> <a href="@bm_url/home/sb/SuperBalanceChecks"> Superfund Balance Checks </a> </div>                           
+                        </div>
+                    </div>*@
+                    <div class="mn-dvs-col-3">
+                        <div class="mn-dvs-hed"> bmobile App </div>
+                        <div class="mn-dvs-wrap">
+                            <div class="mn-dvs-conts"> <a href="@bm_url/bmobile_app_about"> About </a> </div>
+                            <div class="mn-dvs-conts"> <a href="https://play.google.com/store/apps/details?id=org.twinkle.bemobile.si&hl=en" target="_blank"> Download </a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="mn-li-a-2">
+            <a href="#" class="mn-dvs-trgr-3 mn-li-a">Help</a>
+            <div class="mn-dvs mn-trgr-3">
+                <div class="mn-bx-rws">
+                    <div class="mn-dvs-col-3">
+                        <div class="mn-dvs-hed"> Popular </div>
+                        <div class="mn-dvs-wrap">
+                            <div class="mn-dvs-conts"> <a href="/care/login/devicesettings"> Device Settings </a> </div>
+                            <div class="mn-dvs-conts"> <a href="@bm_url/reseller"> Become a Reseller </a> </div>                            
+                        </div>
+                    </div>
+                    @*<div class="mn-dvs-col-4">
+                            <div class="mn-dvs-hed"> Device Support </div>
+                            <div class="mn-dvs-wrap">
+                                <div class="mn-dvs-conts"> <a href="@Url.Action("faq", "home")"> FAQs </a> </div>
+                            </div>
+                        </div>*@
+                    <div class="mn-dvs-col-3">
+                        <div class="mn-dvs-hed"> Basics </div>
+                        <div class="mn-dvs-wrap">
+                            <div class="mn-dvs-conts"> <a href="@bm_url/faq"> FAQs </a> </div>
+                            <div class="mn-dvs-conts"> <a href="@self_url/Care/login"> Self Service </a> </div>
+                            <div class="mn-dvs-conts"> <a href="@self_url/Care/login"> Activate SIM </a> </div>
+                            <div class="mn-dvs-conts"> <a href="@self_url/Care/login"> SIM Registration </a> </div>
+                        </div>
+                    </div>
+                    <div class="mn-dvs-col-3">
+                        <div class="mn-dvs-hed"> Find us </div>
+                        <div class="mn-dvs-wrap">
+                            @*<div class="mn-dvs-conts"> <a href="@bm_url/home/store_Locations"> Stores </a> </div>*@
+                            <div class="mn-dvs-conts"> <a href="@bm_url/contactus"> Contact us </a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="mn-li-a-2">
+            <a class="mn-dvs-trgr-4 mn-li-a" href="#">My Account</a>
+            <div class="mn-dvs mn-trgr-4">
+                <div class="mn-bx-rws">
+                    <div class="mn-dvs-col-fluid">
+                        <div class="mn-dvs-hed"> My Account </div>
+                        <div class="mn-dvs-wrap">
+                            <div class="mn-dvs-conts"> <a href="@self_url/Care/login"> Login or Register </a> </div>
+                            <div class="mn-dvs-conts"> <a href="@self_url/Care/login"> Check Usage </a> </div>
+                            <div class="mn-dvs-conts"> <a href="@self_url/Care/login"> Buy Credits </a> </div>
+                            <div class="mn-dvs-conts"> <a href="@self_url/Care/login"> Activate SIM </a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="mn-li-a-2">
+            <a href="#" class="mn-dvs-trgr-5 mn-li-a">About Us</a>
+            <div class="mn-dvs mn-trgr-5">
+                <div class="mn-bx-rws">
+                    <div class="mn-dvs-col-3">
+                        <div class="mn-dvs-hed"> bmobile-Vodafone </div>
+                        <div class="mn-dvs-wrap">
+                            <div class="mn-dvs-conts"><a href="@bm_url/about"> bmobile-Vodafone </a></div>
+                            <div class="mn-dvs-conts"> <a href="@bm_url/board_of_directors"> Board of Directors </a></div>
+                            <div class="mn-dvs-conts"><a href="@bm_url/senior_management"> Senior Management </a> </div>
+                        </div>
+                    </div>
+                    <div class="mn-dvs-col-3">
+                        <div class="mn-dvs-hed"> Careers </div>
+                        <div class="mn-dvs-wrap">
+                            <div class="mn-dvs-conts"> <a href="@bm_url/careers"> Careers </a> </div>
+                        </div>
+                    </div>
+                    <div class="mn-dvs-col-3">
+                        <div class="mn-dvs-hed"> Media </div>
+                        <div class="mn-dvs-wrap">
+                            <div class="mn-dvs-conts"> <a href="@bm_url/MediaRelease"> Media Release </a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </li>
+
+    </ul>
+</nav>
+
+@*<nav id="nav-wrap">
+        <ul id="nav">
+            <li class="fst-nv mn-li-a-2"><a href="@Url.Action("index","home")">Home</a></li>
+
+            <li class="mn-li-a-2">
+                <a class="mn-dvs-trgr mn-li-a" href="#">Buy</a>
+                <div class="mn-dvs mn-trgr-1">
+                    <div class="mn-bx-rws">
+                        <ul class="sub-mnu">
+                            <li>
+                                <a href="#" class="has-sub"> Devices </a>
+                                <ul class="sub-sub-mnu">
+                                    <li> <a href="#"> Tablets </a> </li>
+                                    <li> <a href="#"> Mi Fi </a> </li>
+                                    <li> <a href="#"> Mobile Phones </a> </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="has-sub"> Post Paid </a>
+                                <ul class="sub-sub-mnu">
+                                    <li> <a href="#"> Voice and SMS </a> </li>
+                                    <li> <a href="@Url.Action("pg", "Home", new { id="postpaid"})"> Data </a> </li>
+                                    <li> <a href="#"> International Roaming </a> </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="has-sub"> Prepaid </a>
+                                <ul class="sub-sub-mnu">
+                                    <li> <a href="#"> Voice and SMS </a> </li>
+                                    <li>
+                                        <a href="#" class="has-sub"> Bundles </a>
+                                        <ul class="sub-sub-sub-mnu">
+                                            <li> <a href="#"> Voice+SMS+Data </a> </li>
+                                            <li> <a href="#"> International Calling </a> </li>
+                                        </ul>
+                                    </li>
+                                    <li> <a href="@Url.Action("data", "home")"> Data </a> </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <div class="dv-strt-buy">
+                            <button>Start buying</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="mn-li-a-2">
+                <a href="#" class="mn-dvs-trgr mn-li-a">Services</a>
+                <div class="mn-dvs mn-trgr-2">
+                    <div class="mn-bx-rws">
+                        <div class="mn-dvs-col-3">
+                            <div class="mn-dvs-hed"> Popular </div>
+                            <div class="mn-dvs-wrap">
+                                <div class="mn-dvs-conts"> <a href="#"> BEATZ </a> </div>
+                                <div class="mn-dvs-conts"> <a href="#"> Buy Pawa </a> </div>
+                            </div>
+                        </div>
+                        <div class="mn-dvs-col-3">
+                            <div class="mn-dvs-hed"> Financial Services </div>
+                            <div class="mn-dvs-wrap">
+                                <div class="mn-dvs-conts"> <a href="#"> Nasfund </a> </div>
+                                <div class="mn-dvs-conts"> <a href="#"> Insurance </a> </div>
+                            </div>
+                        </div>
+                        <div class="mn-dvs-col-3">
+                            <div class="mn-dvs-hed"> bmobile App </div>
+                            <div class="mn-dvs-wrap">
+                                <div class="mn-dvs-conts"> <a href="#"> About </a> </div>
+                                <div class="mn-dvs-conts"> <a href="#"> Download </a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+            <li class="mn-li-a-2">
+                <a href="#" class="mn-dvs-trgr mn-li-a">Help</a>
+                <div class="mn-dvs mn-trgr-3">
+                    <div class="mn-bx-rws">
+                        <div class="mn-bx-rws">
+                            <div class="mn-dvs-col-4">
+                                <div class="mn-dvs-hed"> Popular </div>
+                                <div class="mn-dvs-wrap">
+                                    <div class="mn-dvs-conts"> <a href="#"> Internet Settings </a> </div>
+                                    <div class="mn-dvs-conts"> <a href="#"> Usage Tips </a> </div>
+                                </div>
+                            </div>
+                            <div class="mn-dvs-col-4">
+                                <div class="mn-dvs-hed"> Device Support </div>
+                                <div class="mn-dvs-wrap">
+                                    <div class="mn-dvs-conts"> <a href="#"> FAQs </a> </div>
+                                </div>
+                            </div>
+                            <div class="mn-dvs-col-4">
+                                <div class="mn-dvs-hed"> Basics </div>
+                                <div class="mn-dvs-wrap">
+                                    <div class="mn-dvs-conts"> <a href="#"> Self Service </a> </div>
+                                    <div class="mn-dvs-conts"> <a href="#"> Activate SIM </a> </div>
+                                    <div class="mn-dvs-conts"> <a href="#"> SIM Registration </a> </div>
+                                </div>
+                            </div>
+                            <div class="mn-dvs-col-4">
+                                <div class="mn-dvs-hed"> Find us </div>
+                                <div class="mn-dvs-wrap">
+                                    <div class="mn-dvs-conts"> <a href="#"> Our Stores </a> </div>
+                                    <div class="mn-dvs-conts"> <a href="#"> Contact us </a> </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </li>
+
+            <li class="mn-li-a-2">
+                <a class="mn-dvs-trgr mn-li-a" href="#">My Account</a>
+                <div class="mn-dvs mn-trgr-4">
+                    <div class="mn-bx-rws">
+                        <div class="mn-dvs-col-fluid">
+                            <div class="mn-dvs-hed"> My Account </div>
+                            <div class="mn-dvs-wrap">
+                                <div class="mn-dvs-conts"> <a href="#"> Login or Register </a> </div>
+                                <div class="mn-dvs-conts"> <a href="#"> Check Usage </a> </div>
+                                <div class="mn-dvs-conts"> <a href="#"> Buy Credits </a> </div>
+                                <div class="mn-dvs-conts"> <a href="#"> Activate SIM </a> </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </li>
+
+            <li class="mn-li-a-2">
+                <a href="#" class="mn-dvs-trgr mn-li-a">About Us</a>
+                <div class="mn-dvs mn-trgr-5">
+
+
+                    <div class="mn-bx-rws">
+                        <div class="mn-dvs-col-2">
+                            <div class="mn-dvs-hed"> bmobile-Vodafone </div>
+                            <div class="mn-dvs-wrap">
+                                <div class="mn-dvs-conts"> <a href="@Url.Action("pg", "home", new { id="about"})"> bmobile </a> </div>
+                                <div class="mn-dvs-conts"> <a href="#"> Vodafone </a> </div>
+                                <div class="mn-dvs-conts"> <a href="@Url.Action("board_of_directors","home")"> Board of Directors </a> </div>
+                                <div class="mn-dvs-conts"> <a href="@Url.Action("senior_management","home")"> Senior Management </a> </div>
+                            </div>
+                        </div>
+                        <div class="mn-dvs-col-2">
+                            <div class="mn-dvs-hed"> Careers </div>
+                            <div class="mn-dvs-wrap">
+                                <div class="mn-dvs-conts"> <a href="#">  </a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>*@

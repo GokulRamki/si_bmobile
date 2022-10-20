@@ -1,0 +1,68 @@
+﻿@using MvcPaging
+@model List<si_bmobile.Models.tbl_top_kad_log>
+@{
+    ViewBag.Title = "ShowTopKadHistory";
+    Layout = "~/Views/Shared/bm_Layout_Admin.cshtml";
+}
+@{
+    List<SelectListItem> recharge_status = new List<SelectListItem>();
+    recharge_status.Add(new SelectListItem { Value = "true",Text="Success" });
+    recharge_status.Add(new SelectListItem { Value = "false", Text = "Failure" });
+    
+}
+<h2>TOPKAD History</h2>
+@using (Ajax.BeginForm("TopKadHistory", "Admin",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frmShowTopKadLogList" }))
+{
+    <div class="dRowvlg">
+
+        <div class="input-append">
+            @Html.TextBox("serialno", "", new { placeholder = "Serial Number" })
+
+            @Html.TextBox("msisdn", "", new { placeholder = "MSISDN Number" })
+            @Html.TextBox("invoice", "", new { placeholder = "Invoice Number" })
+
+             @Html.DropDownList("recharge_status", new SelectList(recharge_status, "Value", "Text"),"--All--");
+            <button class="btn" type="submit">
+                <i class="icon-search"></i>&nbsp;Search</button>
+            <button class="btn" type="button" onclick="window.location.href='@Url.Action("ShowTopKadHistory", "Admin")';">
+                <i class="icon-search"></i>&nbsp;Reset</button>
+
+              <a href="@Url.Action("Top_Kad_Log_to_CSV", "Admin")" style="margin-left:20px">
+                    <img src="~/images/Csv-icon.png" alt="Export to csv" border="0" /></a>
+        </div>
+    </div>
+}
+@if (Model != null && Model.Count > 0)
+{
+    <div id="grid-list">
+        @{ Html.RenderPartial("_Ajax_TOPKAD_Log", Model); }
+    </div>
+}
+else
+{
+    <div>
+        <h4>No Record Found.</h4>
+    </div>   
+}
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+        //$("#div_loading").css("display", "block");
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        // $("#div_loading").css("display", "none");
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>

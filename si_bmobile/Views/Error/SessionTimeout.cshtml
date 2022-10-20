@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Session Timeout";
+    Layout = "~/Views/Shared/_cms_Layout.cshtml";
+}
+
+<div class="abt-main">
+    <div class="choose_box remov_padd wrapper" style="padding: 10px;">
+        <h1>Timed out!</h1>
+        <div class="DivRow">
+            <p class="seMessage">
+                Your Login Session has Expired..
+            </p>
+            <p>
+
+                Please click&nbsp;@Html.ActionLink("here", "login", "Care")&nbsp;to re-login your account
+            </p>
+        </div>
+    </div>
+</div>

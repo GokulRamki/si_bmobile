@@ -1,0 +1,79 @@
+﻿@using MvcPaging
+@model IPagedList<si_bmobile.Models.StaffsTopupModel>
+@*<h2>_Ajax_Brands</h2>*@
+
+@if (Model.Count > 0)
+                {
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Staff Name
+            </th>
+            <th>MSISDN Number
+            </th>
+            <th>Amount
+            </th>
+            <th>E-mail
+            </th>
+            <th>Description
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.staff_name
+                </td>
+                <td>
+                    @item.msisdn_number
+                </td>
+
+                <td>
+                    @item.amount
+                </td>
+                <td>
+                    @item.email
+                </td>
+                <td>
+                    @item.description
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+@*<div class="pager1">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Admin", action = "Brands", sBrandName = ViewData["sBrandName"] }))
+    <div class="well">
+        Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+        of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+    </div>
+</div>*@
+}
+else
+{
+    <div style="text-align:center; font-weight:bold; padding:10px;">Records Not Found!</div>
+}

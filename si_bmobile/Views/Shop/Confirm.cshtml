@@ -1,0 +1,406 @@
+﻿@model si_bmobile.Models.ConfirmModel
+
+@{
+    ViewBag.Title = "Shopping Comfirm";
+    Layout = "~/Views/Shared/bm_Layout_Care.cshtml";
+    <link href="@Url.Content("~/css/ezytrans-popup.css")" rel="stylesheet" type="text/css" />
+    decimal total_amount = 0;
+}
+
+<div class="mid_margin">
+    @if (Session["ShoppingUserID"] != null)
+    {
+        <div class="head_login_cart" style="float: right; margin-top: 10px; margin-right: 21px;">
+
+            @{Html.RenderAction("_CartSummaryPartial", "Shop");}
+            <div id="login">
+                <ul style="float: right; margin-bottom: 10px;">
+                    <li>Hello, @Session["UName"].ToString()!</li>
+                    <li>@Html.ActionLink("My Orders", "MyOrders", "Shop")</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Shop", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                </ul>
+            </div>
+        </div>
+    }
+    <div class="clear"></div>
+    <div class="steps_pan">
+        <ul class="steps">
+            <li class="prevDone first"><span></span><a href="#">Email Login</a></li>
+            <li class="current"><span></span>Confirm Order</li>
+            <li class="next last"><span></span>Order Summary</li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+
+    @using (Html.BeginForm("Confirm", "Shop", FormMethod.Post, new { id = "frmConfirm", enctype = "multipart/form-data" }))
+    {
+        <div class="cont_pan box_shadow" style="padding: 0.5%;">
+            <div class="title">Confirm Order</div>
+            <div class="divtr">
+                <table class="webGrid">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Product Name
+                            </th>
+                            <th>Model No
+                            </th>
+                            <th>Unit Price
+                            </th>
+                            <th>Qty
+                            </th>
+                            <th>Sub Total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Order_Items.Count > 0)
+                        {
+                            foreach (var item in Model.Order_Items)
+                            {
+
+                                total_amount += item.sub_product_price;
+                            <tr>
+
+                                <td>
+                                    <div style="width: 150px; min-width: 150px;">
+                                        <a href="javascript:void(0)" onclick="ViewProductInfo(@item.product_id)">
+                                            <img  src="~/pro_images/@item.product_image" style="max-width:150px;" border="0" /></a>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.product_name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.product_model)
+                                </td>
+
+                                <td>K&nbsp;@item.product_price.ToString("#0.00")
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.product_qty)
+                                </td>
+
+                                <td>K&nbsp;@item.sub_product_price.ToString("0.#0")
+                                </td>
+
+                            </tr>
+                            
+                                if (item.is_topup == true && item.TopupAmtlist.Count > 0)
+                                {
+                            <tr style="margin-top: 10px;">
+                                <td>
+                                    <div style="width: 150px; min-width: 150px;">
+                                        SIM Topup charges : 
+                                    </div>
+                                </td>
+                                <td style="width: 200px; min-width: 200px;">
+                                    @Html.DropDownList("topupAmt" + item.product_id, (IEnumerable<SelectListItem>)item.TopupAmtlist, "-- Select Topup --", new { @id = item.product_id, @class = "topupAmtAllProduct", @style = "margin-top:10px;margin-bottom:10px;" })
+                                    <br />
+                                    <span style="color: #D03111;" id="Validation_@item.product_id">@Html.ValidationMessageFor(m => m.topupAmt)</span>
+
+                                </td>
+
+                                @if (item.topup_amt > 0)
+                                {
+                                    total_amount += item.sub_topup_price;
+                                    
+                                    <td>&nbsp;
+                                    </td>
+                                    <td class="topupUnitAmount_@item.product_id">K&nbsp;@item.topup_amt.ToString("#0.00")
+                                    </td>
+                                    <td class="topupQuantity_@item.product_id" id="@item.product_qty">@item.product_qty
+                                    </td>
+                                    <td class="topupAmount_@item.product_id">K&nbsp;@item.sub_topup_price.ToString("#0.00")</td>
+                                    
+                                    @Html.Hidden("HiddenIndAmt" + item.product_id, item.sub_topup_price);
+                                }
+                                else
+                                {
+                                    <td>&nbsp;
+                                    </td>
+                                    <td class="topupUnitAmount_@item.product_id">&nbsp;
+                                    </td>
+                                    <td class="topupQuantity_@item.product_id" id="@item.product_qty">@item.product_qty
+                                    </td>
+                                    <td class="topupAmount_@item.product_id">&nbsp;</td>
+                                    @Html.Hidden("HiddenIndAmt" + item.product_id);
+                                }
+
+
+
+                            </tr>
+                                }
+                            }
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td colspan="4" style="text-align: right; font-weight: bold;">Cart Subtotal :&nbsp;</td>
+                            <td id="CartTotal">K&nbsp;@total_amount</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="4" style="text-align: right; font-weight: bold;">Grand Total :&nbsp;</td>
+                            <td id="GrandTotal">K&nbsp;@total_amount</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="divtr" style="height: 30px;"></div>
+            <div class="divtr">
+                <div class="l-pan">
+                    <div class="cell">
+                        <input type="submit" value="Continue Shopping" id="shopping_cont" class="BtnSubmit" name="cmd" />&nbsp;&nbsp;
+                        <input type="button" value="Cancel Order" name="Cmd" onclick="window.location = '/Shop/CancelOrder'" />
+                    </div>
+                </div>
+
+                <div class="r-pan">
+                    @if (Model.PaymentModes.Count > 0)
+                    {
+                        <div class="cell">
+                            <b>Payment By :</b>&nbsp;
+                            @for (int p = 0; p < (Model.PaymentModes.Count); p++)
+                            {
+                                @Html.RadioButtonFor(x => x.PayModeId, Model.PaymentModes[p].ID)
+                                @Html.DisplayFor(x => x.PaymentModes[p].Payment_Mode)
+                                @Html.HiddenFor(x => x.PaymentModes[p].Payment_Mode) 
+                                @Html.HiddenFor(x => x.PaymentModes[p].ID)
+                                @Html.HiddenFor(x => x.PaymentModes[p].IsActive)
+                            }
+                            <br />
+                            <span style="color: #D03111;" id="validationPayModeId">@Html.ValidationMessageFor(model => model.PayModeId)</span>
+                        </div>
+                    }
+                    <div class="cell">
+                        @Html.CheckBoxFor(x => x.Terms)&nbsp;Accept terms and Conditions<br />
+                        @*@Html.ValidationMessageFor(model => model.Terms)<br />*@
+                        <span style="color: #D03111;" id="validationTerms">@ViewBag.TermsMsg</span>
+                    </div>
+                    <div class="cell">
+                        <input type="submit" value="Pay Now" name="cmd" id="BtnSubmit" />
+                    </div>
+                </div>
+            </div>
+            <div class="clr"></div>
+            @Html.Hidden("HiddenTotalAmt", total_amount)
+
+            @Html.CheckBox("ContShopping", false, new { @style = "display:none;" })
+
+            @if (ViewBag.FailMessage != null)
+            {
+                <div class="alert alert-danger fade in" style="margin-top: 10px;">
+                    <button class="close" data-dismiss="alert">
+                        ×
+                    </button>
+                    <i class="fa-fw fa fa-check"></i>
+                    <strong>Failed</strong>  @ViewBag.FailMessage.
+                </div>
+            }
+
+            <!--Ezytrans popup -->
+            <div id="ezytranspanel">
+                <div id="ezytrans-box">
+                    <img src="~/images/popup-close-2.png" alt="Close" style="float: right; z-index: 2200; margin: -30px -30px 0px 0px; cursor: pointer;" width="40px" height="40px" onclick="return closepopup();" />
+                    <iframe id="frame1" width="900px" height="560px" frameborder="0" style="margin-top: -10px;"></iframe>
+                </div>
+            </div>
+
+
+        </div>   
+   
+                <div id="Cartdialog" style="display: none;"></div>
+    }
+
+</div>
+@if (@ViewBag.reURL != null)
+{
+    <script type="text/javascript">
+        /* <![CDATA[ */
+
+        $(function () {
+            document.getElementById('frame1').src = '@Url.Action("ShopEzy", "Ezy")';
+            $('#ezytranspanel').fadeIn('slow');
+
+        });
+
+
+        function closepopup() {
+            var answer = confirm("Are you sure want to close this transaction ?")
+            if (answer) {
+                $('#ezytranspanel').fadeOut('slow');
+                return true;
+            }
+            return false;
+        }
+        /* ]]> */
+    </script>
+}
+
+@*<style type="text/css">
+    .webGrid span {
+        color: #D03111;
+    }
+</style>*@
+
+
+@section scripts{
+
+@*    <script src="~/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>*@
+
+    <script type="text/javascript">
+        //Custom jQuery validation unobtrusive script and adapters
+        jQuery.validator.unobtrusive.adapters.add("checkboxtrue", function (options) {
+            if (options.element.tagName.toUpperCase() == "INPUT" && options.element.type.toUpperCase() == "CHECKBOX") {
+                options.rules["required"] = true;
+                if (options.message) {
+                    options.messages["required"] = options.message;
+                }
+            }
+        });
+
+
+        $(".topupAmtAllProduct").on("change", function () {
+
+            var product_id = $(this).attr("id");
+
+            var selectedTopup = $(this).val();
+
+            var ProductQuantity = $(".topupQuantity_" + product_id).attr("id");
+
+            if (selectedTopup != "") {
+
+                var cart_oldtotal = $("#HiddenTotalAmt").val();
+
+                $(".topupUnitAmount_" + product_id).html("$ " + parseFloat(selectedTopup).toFixed(2));
+
+                selectedTopup = (parseFloat(selectedTopup) * parseFloat(ProductQuantity));
+
+                var previousSelectAmt = $("#HiddenIndAmt" + product_id).val();
+
+                if (previousSelectAmt == '') {
+                    previousSelectAmt = 0;
+                }
+
+                var finaltotal = parseFloat(cart_oldtotal) - parseFloat(previousSelectAmt) + parseFloat(selectedTopup);
+
+                $("#HiddenIndAmt" + product_id).val(selectedTopup);
+
+                $("#HiddenTotalAmt").val(finaltotal);
+
+                $(".topupAmount_" + product_id).html("$ " + parseFloat(selectedTopup).toFixed(2));
+
+                $("#CartTotal").html("");
+                $("#CartTotal").html("$ " + parseFloat(finaltotal).toFixed(2));
+
+                $("#GrandTotal").html("");
+                $("#GrandTotal").html("$ " + parseFloat(finaltotal).toFixed(2));
+
+            } else {
+
+                var cart_finaltotal = $("#HiddenTotalAmt").val();
+                var ReducedTopupAmt = $("#HiddenIndAmt" + product_id).val();
+                var finaltotal = parseFloat(cart_finaltotal) - parseFloat(ReducedTopupAmt);
+
+                $(".topupAmount_" + product_id).html("");
+
+                $("#HiddenTotalAmt").val(finaltotal);
+
+                $("#CartTotal").html("");
+                $("#CartTotal").html("$ " + parseFloat(finaltotal).toFixed(2));
+
+                $("#GrandTotal").html("");
+                $("#GrandTotal").html("$ " + parseFloat(finaltotal).toFixed(2));
+
+                $("#HiddenIndAmt" + product_id).val('');
+            }
+
+            if ($("#HiddenIndAmt" + product_id).val() == '') {
+                $("#Validation_" + product_id).html("Please select topup amount");
+
+            } else {
+                $("#Validation_" + product_id).html("");
+            }
+
+        });
+
+
+
+        $(":submit").click(function () {
+
+            var bRet = false;
+
+            var selectedBtn = $(this).val();
+
+            if (selectedBtn == "Continue Shopping") {
+
+                $("#PayModeId").prop("checked", true);
+
+                $("#Terms").prop("checked", true);
+
+                bRet = true;
+            } else if (selectedBtn == "Pay Now") {
+
+                var count = 0;
+                var sucess_count = 0;
+                $(".topupAmtAllProduct").each(function () {
+
+                    count++;
+                    var product_id = $(this).attr("id");
+                    if ($("#HiddenIndAmt" + product_id).val() == '') {
+                        $("#Validation_" + product_id).html("Please select topup amount");
+                    } else {
+                        $("#Validation_" + product_id).html("");
+                        sucess_count++;
+                    }
+
+                });
+
+                if (count == sucess_count) {
+                    bRet = true;
+                }
+
+                if ($("#Terms").is(":Checked")) {
+                    $("#validationTerms").html("");
+
+                } else {
+                    $("#validationTerms").html("you must accept terms and conditions");
+                    bRet = false;
+                }
+
+                if ($("#PayModeId").is(":Checked")) {
+                    $("#validationPayModeId").html("");
+
+                } else {
+                    $("#validationPayModeId").html("please choose your payment mode");
+                    bRet = false;
+                }
+
+            }
+
+            return bRet;
+        });
+
+
+        $("#Terms").click(function () {
+
+            if ($(this).is(":Checked")) {
+                $("#validationTerms").html("");
+
+            } else {
+                $("#validationTerms").html("you must accept terms and conditions");
+            }
+
+        });
+
+
+    </script>
+}

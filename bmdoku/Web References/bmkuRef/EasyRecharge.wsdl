@@ -1,0 +1,1765 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:ax27="http://service.apptx.medation.bmobile.com/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax219="http://util.java/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ax223="http://stat.hibernate.org/xsd" xmlns:ax221="http://classic.hibernate.org/xsd" xmlns:ax28="http://hibernate.mediation.bmobile.com/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:ax29="http://support.hibernate3.orm.springframework.org/xsd" xmlns:ns="http://service.evd.mediation.bmobile.com" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ax213="http://factory.beans.springframework.org/xsd" xmlns:ax212="http://hibernate3.orm.springframework.org/xsd" xmlns:ax210="http://support.dao.springframework.org/xsd" xmlns:ax217="http://hibernate.org/xsd" xmlns:ax231="http://service.evd.mediation.bmobile.com/xsd" xmlns:ax215="http://support.jdbc.springframework.org/xsd" targetNamespace="http://service.evd.mediation.bmobile.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://classic.hibernate.org/xsd">
+      <xs:complexType name="Session">
+        <xs:sequence />
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax227="http://hibernate.org/xsd" xmlns:ax226="http://hibernate3.orm.springframework.org/xsd" xmlns:ax211="http://support.dao.springframework.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://support.hibernate3.orm.springframework.org/xsd">
+      <xs:import namespace="http://support.dao.springframework.org/xsd" />
+      <xs:import namespace="http://hibernate3.orm.springframework.org/xsd" />
+      <xs:import namespace="http://hibernate.org/xsd" />
+      <xs:complexType name="HibernateDaoSupport">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ax211:DaoSupport">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="hibernateTemplate" nillable="true" type="ax226:HibernateTemplate" />
+              <xs:element minOccurs="0" name="session" nillable="true" type="ax227:Session" />
+              <xs:element minOccurs="0" name="sessionFactory" nillable="true" type="ax227:SessionFactory" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://support.dao.springframework.org/xsd">
+      <xs:complexType name="DaoSupport">
+        <xs:sequence />
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax228="http://support.hibernate3.orm.springframework.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://hibernate.mediation.bmobile.com/xsd">
+      <xs:import namespace="http://support.hibernate3.orm.springframework.org/xsd" />
+      <xs:complexType name="AppTxDAO">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ax228:HibernateDaoSupport">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="AbstractVouchers">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="date" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="id" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="isActive" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="serialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Vouchers">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ax28:AbstractVouchers">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://factory.beans.springframework.org/xsd">
+      <xs:complexType name="BeanFactory">
+        <xs:sequence />
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax232="http://hibernate.mediation.bmobile.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.evd.mediation.bmobile.com/xsd">
+      <xs:import namespace="http://hibernate.mediation.bmobile.com/xsd" />
+      <xs:complexType name="EvdService">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="isActive" nillable="true" type="ax232:Vouchers" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax225="http://util.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://stat.hibernate.org/xsd">
+      <xs:import namespace="http://util.java/xsd" />
+      <xs:complexType name="Statistics">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="closeStatementCount" type="xs:long" />
+          <xs:element minOccurs="0" name="collectionFetchCount" type="xs:long" />
+          <xs:element minOccurs="0" name="collectionLoadCount" type="xs:long" />
+          <xs:element minOccurs="0" name="collectionRecreateCount" type="xs:long" />
+          <xs:element minOccurs="0" name="collectionRemoveCount" type="xs:long" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="collectionRoleNames" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="collectionUpdateCount" type="xs:long" />
+          <xs:element minOccurs="0" name="connectCount" type="xs:long" />
+          <xs:element minOccurs="0" name="entityDeleteCount" type="xs:long" />
+          <xs:element minOccurs="0" name="entityFetchCount" type="xs:long" />
+          <xs:element minOccurs="0" name="entityInsertCount" type="xs:long" />
+          <xs:element minOccurs="0" name="entityLoadCount" type="xs:long" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="entityNames" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="entityUpdateCount" type="xs:long" />
+          <xs:element minOccurs="0" name="flushCount" type="xs:long" />
+          <xs:element minOccurs="0" name="optimisticFailureCount" type="xs:long" />
+          <xs:element minOccurs="0" name="prepareStatementCount" type="xs:long" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="queries" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="queryCacheHitCount" type="xs:long" />
+          <xs:element minOccurs="0" name="queryCacheMissCount" type="xs:long" />
+          <xs:element minOccurs="0" name="queryCachePutCount" type="xs:long" />
+          <xs:element minOccurs="0" name="queryExecutionCount" type="xs:long" />
+          <xs:element minOccurs="0" name="queryExecutionMaxTime" type="xs:long" />
+          <xs:element minOccurs="0" name="queryExecutionMaxTimeQueryString" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="secondLevelCacheHitCount" type="xs:long" />
+          <xs:element minOccurs="0" name="secondLevelCacheMissCount" type="xs:long" />
+          <xs:element minOccurs="0" name="secondLevelCachePutCount" type="xs:long" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="secondLevelCacheRegionNames" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="sessionCloseCount" type="xs:long" />
+          <xs:element minOccurs="0" name="sessionOpenCount" type="xs:long" />
+          <xs:element minOccurs="0" name="startTime" type="xs:long" />
+          <xs:element minOccurs="0" name="statisticsEnabled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="successfulTransactionCount" type="xs:long" />
+          <xs:element minOccurs="0" name="transactionCount" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SessionStatistics">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="collectionCount" type="xs:int" />
+          <xs:element minOccurs="0" name="collectionKeys" nillable="true" type="ax225:Set" />
+          <xs:element minOccurs="0" name="entityCount" type="xs:int" />
+          <xs:element minOccurs="0" name="entityKeys" nillable="true" type="ax225:Set" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax230="http://service.apptx.medation.bmobile.com/xsd" xmlns:ax233="http://service.evd.mediation.bmobile.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.evd.mediation.bmobile.com">
+      <xs:import namespace="http://service.apptx.medation.bmobile.com/xsd" />
+      <xs:import namespace="http://service.evd.mediation.bmobile.com/xsd" />
+      <xs:element name="isJSONValid">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="isJSONValidResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAppTXStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAppTXStatusResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateDealer">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateDealerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetMsisdnStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetMsisdnStatusResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryDealerBalance">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryDealerBalanceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryDealerInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryDealerInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RechargeDealer">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RechargeDealerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RechargeMsisdn">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RechargeMsisdnResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ValidateMerchant">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ValidateMerchantResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="callApi">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="callApiResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="creditMe">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="creditMeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="customAdd">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="customAddResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="customerUpdate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="customerUpdateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="firstTimeActivation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="firstTimeActivationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getBalance">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getBalanceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getVoucher">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getVoucherResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="manGroupMemberAdd">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="manGroupMemberAddResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="manGroupMemberQuit">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="manGroupMemberQuitResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="oneOffDeduction">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="oneOffDeductionResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="processDUGMember">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="processDUGMemberResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendSMS">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendSMSResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="topKad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="topKadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="topupVoucher">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="topupVoucherResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="validateMaster">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="validateMasterResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="validateVoucher">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="validateVoucherResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="parseXMLtoJson">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="parseXMLtoJsonResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:long" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="customDelete">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="param1" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setApptxService">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="ax230:ApptxService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setPrintTesting">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setTopupTesting">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setTransactionService">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="param0" nillable="true" type="ax233:EvdService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:ax229="http://hibernate.mediation.bmobile.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.apptx.medation.bmobile.com/xsd">
+      <xs:import namespace="http://hibernate.mediation.bmobile.com/xsd" />
+      <xs:complexType name="ApptxService">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="applicationTransactionDAO" nillable="true" type="ax229:AppTxDAO" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax218="http://hibernate.org/xsd" xmlns:ax216="http://support.jdbc.springframework.org/xsd" xmlns:ax214="http://factory.beans.springframework.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://hibernate3.orm.springframework.org/xsd">
+      <xs:import namespace="http://factory.beans.springframework.org/xsd" />
+      <xs:import namespace="http://support.jdbc.springframework.org/xsd" />
+      <xs:import namespace="http://hibernate.org/xsd" />
+      <xs:complexType name="HibernateAccessor">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="beanFactory" nillable="true" type="ax214:BeanFactory" />
+          <xs:element minOccurs="0" name="defaultJdbcExceptionTranslator" nillable="true" type="ax216:SQLExceptionTranslator" />
+          <xs:element minOccurs="0" name="entityInterceptor" nillable="true" type="ax218:Interceptor" />
+          <xs:element minOccurs="0" name="entityInterceptorBeanName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="filterName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="filterNames" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="flushMode" type="xs:int" />
+          <xs:element minOccurs="0" name="flushModeName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="jdbcExceptionTranslator" nillable="true" type="ax216:SQLExceptionTranslator" />
+          <xs:element minOccurs="0" name="sessionFactory" nillable="true" type="ax218:SessionFactory" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="HibernateTemplate">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ax212:HibernateAccessor">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="allowCreate" type="xs:boolean" />
+              <xs:element minOccurs="0" name="alwaysUseNewSession" type="xs:boolean" />
+              <xs:element minOccurs="0" name="cacheQueries" type="xs:boolean" />
+              <xs:element minOccurs="0" name="checkWriteOperations" type="xs:boolean" />
+              <xs:element minOccurs="0" name="exposeNativeSession" type="xs:boolean" />
+              <xs:element minOccurs="0" name="fetchSize" type="xs:int" />
+              <xs:element minOccurs="0" name="maxResults" type="xs:int" />
+              <xs:element minOccurs="0" name="queryCacheRegion" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="session" nillable="true" type="ax218:Session" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://support.jdbc.springframework.org/xsd">
+      <xs:complexType name="SQLExceptionTranslator">
+        <xs:sequence />
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax222="http://classic.hibernate.org/xsd" xmlns:ax220="http://util.java/xsd" xmlns:ax224="http://stat.hibernate.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://hibernate.org/xsd">
+      <xs:import namespace="http://util.java/xsd" />
+      <xs:import namespace="http://classic.hibernate.org/xsd" />
+      <xs:import namespace="http://stat.hibernate.org/xsd" />
+      <xs:complexType name="Interceptor">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="SessionFactory">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="allClassMetadata" nillable="true" type="ax220:Map" />
+          <xs:element minOccurs="0" name="allCollectionMetadata" nillable="true" type="ax220:Map" />
+          <xs:element minOccurs="0" name="closed" type="xs:boolean" />
+          <xs:element minOccurs="0" name="currentSession" nillable="true" type="ax222:Session" />
+          <xs:element minOccurs="0" name="definedFilterNames" nillable="true" type="ax220:Set" />
+          <xs:element minOccurs="0" name="statistics" nillable="true" type="ax224:Statistics" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Session">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cacheMode" nillable="true" type="ax217:CacheMode" />
+          <xs:element minOccurs="0" name="connected" type="xs:boolean" />
+          <xs:element minOccurs="0" name="dirty" type="xs:boolean" />
+          <xs:element minOccurs="0" name="entityMode" nillable="true" type="ax217:EntityMode" />
+          <xs:element minOccurs="0" name="flushMode" nillable="true" type="ax217:FlushMode" />
+          <xs:element minOccurs="0" name="open" type="xs:boolean" />
+          <xs:element minOccurs="0" name="sessionFactory" nillable="true" type="ax217:SessionFactory" />
+          <xs:element minOccurs="0" name="statistics" nillable="true" type="ax224:SessionStatistics" />
+          <xs:element minOccurs="0" name="transaction" nillable="true" type="ax217:Transaction" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CacheMode">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="getEnabled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="putEnabled" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="EntityMode">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="FlushMode">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="Transaction">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="active" type="xs:boolean" />
+          <xs:element minOccurs="0" name="timeout" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://util.java/xsd">
+      <xs:complexType name="Map">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="empty" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Set">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="empty" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="setTransactionServiceRequest">
+    <wsdl:part name="parameters" element="ns:setTransactionService" />
+  </wsdl:message>
+  <wsdl:message name="RechargeDealerRequest">
+    <wsdl:part name="parameters" element="ns:RechargeDealer" />
+  </wsdl:message>
+  <wsdl:message name="RechargeDealerResponse">
+    <wsdl:part name="parameters" element="ns:RechargeDealerResponse" />
+  </wsdl:message>
+  <wsdl:message name="parseXMLtoJsonRequest">
+    <wsdl:part name="parameters" element="ns:parseXMLtoJson" />
+  </wsdl:message>
+  <wsdl:message name="parseXMLtoJsonResponse">
+    <wsdl:part name="parameters" element="ns:parseXMLtoJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="setPrintTestingRequest">
+    <wsdl:part name="parameters" element="ns:setPrintTesting" />
+  </wsdl:message>
+  <wsdl:message name="topupVoucherRequest">
+    <wsdl:part name="parameters" element="ns:topupVoucher" />
+  </wsdl:message>
+  <wsdl:message name="topupVoucherResponse">
+    <wsdl:part name="parameters" element="ns:topupVoucherResponse" />
+  </wsdl:message>
+  <wsdl:message name="firstTimeActivationRequest">
+    <wsdl:part name="parameters" element="ns:firstTimeActivation" />
+  </wsdl:message>
+  <wsdl:message name="firstTimeActivationResponse">
+    <wsdl:part name="parameters" element="ns:firstTimeActivationResponse" />
+  </wsdl:message>
+  <wsdl:message name="validateVoucherRequest">
+    <wsdl:part name="parameters" element="ns:validateVoucher" />
+  </wsdl:message>
+  <wsdl:message name="validateVoucherResponse">
+    <wsdl:part name="parameters" element="ns:validateVoucherResponse" />
+  </wsdl:message>
+  <wsdl:message name="callApiRequest">
+    <wsdl:part name="parameters" element="ns:callApi" />
+  </wsdl:message>
+  <wsdl:message name="callApiResponse">
+    <wsdl:part name="parameters" element="ns:callApiResponse" />
+  </wsdl:message>
+  <wsdl:message name="manGroupMemberQuitRequest">
+    <wsdl:part name="parameters" element="ns:manGroupMemberQuit" />
+  </wsdl:message>
+  <wsdl:message name="manGroupMemberQuitResponse">
+    <wsdl:part name="parameters" element="ns:manGroupMemberQuitResponse" />
+  </wsdl:message>
+  <wsdl:message name="customerUpdateRequest">
+    <wsdl:part name="parameters" element="ns:customerUpdate" />
+  </wsdl:message>
+  <wsdl:message name="customerUpdateResponse">
+    <wsdl:part name="parameters" element="ns:customerUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="oneOffDeductionRequest">
+    <wsdl:part name="parameters" element="ns:oneOffDeduction" />
+  </wsdl:message>
+  <wsdl:message name="oneOffDeductionResponse">
+    <wsdl:part name="parameters" element="ns:oneOffDeductionResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAppTXStatusRequest">
+    <wsdl:part name="parameters" element="ns:getAppTXStatus" />
+  </wsdl:message>
+  <wsdl:message name="getAppTXStatusResponse">
+    <wsdl:part name="parameters" element="ns:getAppTXStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryDealerBalanceRequest">
+    <wsdl:part name="parameters" element="ns:QueryDealerBalance" />
+  </wsdl:message>
+  <wsdl:message name="QueryDealerBalanceResponse">
+    <wsdl:part name="parameters" element="ns:QueryDealerBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="getBalanceRequest">
+    <wsdl:part name="parameters" element="ns:getBalance" />
+  </wsdl:message>
+  <wsdl:message name="getBalanceResponse">
+    <wsdl:part name="parameters" element="ns:getBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateMerchantRequest">
+    <wsdl:part name="parameters" element="ns:ValidateMerchant" />
+  </wsdl:message>
+  <wsdl:message name="ValidateMerchantResponse">
+    <wsdl:part name="parameters" element="ns:ValidateMerchantResponse" />
+  </wsdl:message>
+  <wsdl:message name="customAddRequest">
+    <wsdl:part name="parameters" element="ns:customAdd" />
+  </wsdl:message>
+  <wsdl:message name="customAddResponse">
+    <wsdl:part name="parameters" element="ns:customAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="creditMeRequest">
+    <wsdl:part name="parameters" element="ns:creditMe" />
+  </wsdl:message>
+  <wsdl:message name="creditMeResponse">
+    <wsdl:part name="parameters" element="ns:creditMeResponse" />
+  </wsdl:message>
+  <wsdl:message name="validateMasterRequest">
+    <wsdl:part name="parameters" element="ns:validateMaster" />
+  </wsdl:message>
+  <wsdl:message name="validateMasterResponse">
+    <wsdl:part name="parameters" element="ns:validateMasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="setTopupTestingRequest">
+    <wsdl:part name="parameters" element="ns:setTopupTesting" />
+  </wsdl:message>
+  <wsdl:message name="manGroupMemberAddRequest">
+    <wsdl:part name="parameters" element="ns:manGroupMemberAdd" />
+  </wsdl:message>
+  <wsdl:message name="manGroupMemberAddResponse">
+    <wsdl:part name="parameters" element="ns:manGroupMemberAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMsisdnStatusRequest">
+    <wsdl:part name="parameters" element="ns:GetMsisdnStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetMsisdnStatusResponse">
+    <wsdl:part name="parameters" element="ns:GetMsisdnStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="RechargeMsisdnRequest">
+    <wsdl:part name="parameters" element="ns:RechargeMsisdn" />
+  </wsdl:message>
+  <wsdl:message name="RechargeMsisdnResponse">
+    <wsdl:part name="parameters" element="ns:RechargeMsisdnResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryDealerInfoRequest">
+    <wsdl:part name="parameters" element="ns:QueryDealerInfo" />
+  </wsdl:message>
+  <wsdl:message name="QueryDealerInfoResponse">
+    <wsdl:part name="parameters" element="ns:QueryDealerInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="setApptxServiceRequest">
+    <wsdl:part name="parameters" element="ns:setApptxService" />
+  </wsdl:message>
+  <wsdl:message name="CreateDealerRequest">
+    <wsdl:part name="parameters" element="ns:CreateDealer" />
+  </wsdl:message>
+  <wsdl:message name="CreateDealerResponse">
+    <wsdl:part name="parameters" element="ns:CreateDealerResponse" />
+  </wsdl:message>
+  <wsdl:message name="getVoucherRequest">
+    <wsdl:part name="parameters" element="ns:getVoucher" />
+  </wsdl:message>
+  <wsdl:message name="getVoucherResponse">
+    <wsdl:part name="parameters" element="ns:getVoucherResponse" />
+  </wsdl:message>
+  <wsdl:message name="isJSONValidRequest">
+    <wsdl:part name="parameters" element="ns:isJSONValid" />
+  </wsdl:message>
+  <wsdl:message name="isJSONValidResponse">
+    <wsdl:part name="parameters" element="ns:isJSONValidResponse" />
+  </wsdl:message>
+  <wsdl:message name="customDeleteRequest">
+    <wsdl:part name="parameters" element="ns:customDelete" />
+  </wsdl:message>
+  <wsdl:message name="topKadRequest">
+    <wsdl:part name="parameters" element="ns:topKad" />
+  </wsdl:message>
+  <wsdl:message name="topKadResponse">
+    <wsdl:part name="parameters" element="ns:topKadResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendSMSRequest">
+    <wsdl:part name="parameters" element="ns:sendSMS" />
+  </wsdl:message>
+  <wsdl:message name="sendSMSResponse">
+    <wsdl:part name="parameters" element="ns:sendSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="processDUGMemberRequest">
+    <wsdl:part name="parameters" element="ns:processDUGMember" />
+  </wsdl:message>
+  <wsdl:message name="processDUGMemberResponse">
+    <wsdl:part name="parameters" element="ns:processDUGMemberResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EasyRechargePortType">
+    <wsdl:operation name="setTransactionService">
+      <wsdl:input wsaw:Action="urn:setTransactionService" message="ns:setTransactionServiceRequest" />
+    </wsdl:operation>
+    <wsdl:operation name="RechargeDealer">
+      <wsdl:input wsaw:Action="urn:RechargeDealer" message="ns:RechargeDealerRequest" />
+      <wsdl:output wsaw:Action="urn:RechargeDealerResponse" message="ns:RechargeDealerResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="parseXMLtoJson">
+      <wsdl:input wsaw:Action="urn:parseXMLtoJson" message="ns:parseXMLtoJsonRequest" />
+      <wsdl:output wsaw:Action="urn:parseXMLtoJsonResponse" message="ns:parseXMLtoJsonResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setPrintTesting">
+      <wsdl:input wsaw:Action="urn:setPrintTesting" message="ns:setPrintTestingRequest" />
+    </wsdl:operation>
+    <wsdl:operation name="topupVoucher">
+      <wsdl:input wsaw:Action="urn:topupVoucher" message="ns:topupVoucherRequest" />
+      <wsdl:output wsaw:Action="urn:topupVoucherResponse" message="ns:topupVoucherResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="firstTimeActivation">
+      <wsdl:input wsaw:Action="urn:firstTimeActivation" message="ns:firstTimeActivationRequest" />
+      <wsdl:output wsaw:Action="urn:firstTimeActivationResponse" message="ns:firstTimeActivationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="validateVoucher">
+      <wsdl:input wsaw:Action="urn:validateVoucher" message="ns:validateVoucherRequest" />
+      <wsdl:output wsaw:Action="urn:validateVoucherResponse" message="ns:validateVoucherResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="callApi">
+      <wsdl:input wsaw:Action="urn:callApi" message="ns:callApiRequest" />
+      <wsdl:output wsaw:Action="urn:callApiResponse" message="ns:callApiResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="manGroupMemberQuit">
+      <wsdl:input wsaw:Action="urn:manGroupMemberQuit" message="ns:manGroupMemberQuitRequest" />
+      <wsdl:output wsaw:Action="urn:manGroupMemberQuitResponse" message="ns:manGroupMemberQuitResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="customerUpdate">
+      <wsdl:input wsaw:Action="urn:customerUpdate" message="ns:customerUpdateRequest" />
+      <wsdl:output wsaw:Action="urn:customerUpdateResponse" message="ns:customerUpdateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="oneOffDeduction">
+      <wsdl:input wsaw:Action="urn:oneOffDeduction" message="ns:oneOffDeductionRequest" />
+      <wsdl:output wsaw:Action="urn:oneOffDeductionResponse" message="ns:oneOffDeductionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAppTXStatus">
+      <wsdl:input wsaw:Action="urn:getAppTXStatus" message="ns:getAppTXStatusRequest" />
+      <wsdl:output wsaw:Action="urn:getAppTXStatusResponse" message="ns:getAppTXStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryDealerBalance">
+      <wsdl:input wsaw:Action="urn:QueryDealerBalance" message="ns:QueryDealerBalanceRequest" />
+      <wsdl:output wsaw:Action="urn:QueryDealerBalanceResponse" message="ns:QueryDealerBalanceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getBalance">
+      <wsdl:input wsaw:Action="urn:getBalance" message="ns:getBalanceRequest" />
+      <wsdl:output wsaw:Action="urn:getBalanceResponse" message="ns:getBalanceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateMerchant">
+      <wsdl:input wsaw:Action="urn:ValidateMerchant" message="ns:ValidateMerchantRequest" />
+      <wsdl:output wsaw:Action="urn:ValidateMerchantResponse" message="ns:ValidateMerchantResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="customAdd">
+      <wsdl:input wsaw:Action="urn:customAdd" message="ns:customAddRequest" />
+      <wsdl:output wsaw:Action="urn:customAddResponse" message="ns:customAddResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="creditMe">
+      <wsdl:input wsaw:Action="urn:creditMe" message="ns:creditMeRequest" />
+      <wsdl:output wsaw:Action="urn:creditMeResponse" message="ns:creditMeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="validateMaster">
+      <wsdl:input wsaw:Action="urn:validateMaster" message="ns:validateMasterRequest" />
+      <wsdl:output wsaw:Action="urn:validateMasterResponse" message="ns:validateMasterResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setTopupTesting">
+      <wsdl:input wsaw:Action="urn:setTopupTesting" message="ns:setTopupTestingRequest" />
+    </wsdl:operation>
+    <wsdl:operation name="manGroupMemberAdd">
+      <wsdl:input wsaw:Action="urn:manGroupMemberAdd" message="ns:manGroupMemberAddRequest" />
+      <wsdl:output wsaw:Action="urn:manGroupMemberAddResponse" message="ns:manGroupMemberAddResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMsisdnStatus">
+      <wsdl:input wsaw:Action="urn:GetMsisdnStatus" message="ns:GetMsisdnStatusRequest" />
+      <wsdl:output wsaw:Action="urn:GetMsisdnStatusResponse" message="ns:GetMsisdnStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RechargeMsisdn">
+      <wsdl:input wsaw:Action="urn:RechargeMsisdn" message="ns:RechargeMsisdnRequest" />
+      <wsdl:output wsaw:Action="urn:RechargeMsisdnResponse" message="ns:RechargeMsisdnResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryDealerInfo">
+      <wsdl:input wsaw:Action="urn:QueryDealerInfo" message="ns:QueryDealerInfoRequest" />
+      <wsdl:output wsaw:Action="urn:QueryDealerInfoResponse" message="ns:QueryDealerInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setApptxService">
+      <wsdl:input wsaw:Action="urn:setApptxService" message="ns:setApptxServiceRequest" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDealer">
+      <wsdl:input wsaw:Action="urn:CreateDealer" message="ns:CreateDealerRequest" />
+      <wsdl:output wsaw:Action="urn:CreateDealerResponse" message="ns:CreateDealerResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getVoucher">
+      <wsdl:input wsaw:Action="urn:getVoucher" message="ns:getVoucherRequest" />
+      <wsdl:output wsaw:Action="urn:getVoucherResponse" message="ns:getVoucherResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="isJSONValid">
+      <wsdl:input wsaw:Action="urn:isJSONValid" message="ns:isJSONValidRequest" />
+      <wsdl:output wsaw:Action="urn:isJSONValidResponse" message="ns:isJSONValidResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="customDelete">
+      <wsdl:input wsaw:Action="urn:customDelete" message="ns:customDeleteRequest" />
+    </wsdl:operation>
+    <wsdl:operation name="topKad">
+      <wsdl:input wsaw:Action="urn:topKad" message="ns:topKadRequest" />
+      <wsdl:output wsaw:Action="urn:topKadResponse" message="ns:topKadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendSMS">
+      <wsdl:input wsaw:Action="urn:sendSMS" message="ns:sendSMSRequest" />
+      <wsdl:output wsaw:Action="urn:sendSMSResponse" message="ns:sendSMSResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="processDUGMember">
+      <wsdl:input wsaw:Action="urn:processDUGMember" message="ns:processDUGMemberRequest" />
+      <wsdl:output wsaw:Action="urn:processDUGMemberResponse" message="ns:processDUGMemberResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EasyRechargeSoap11Binding" type="ns:EasyRechargePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RechargeDealer">
+      <soap:operation soapAction="urn:RechargeDealer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTransactionService">
+      <soap:operation soapAction="urn:setTransactionService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="parseXMLtoJson">
+      <soap:operation soapAction="urn:parseXMLtoJson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="topupVoucher">
+      <soap:operation soapAction="urn:topupVoucher" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setPrintTesting">
+      <soap:operation soapAction="urn:setPrintTesting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="validateVoucher">
+      <soap:operation soapAction="urn:validateVoucher" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="firstTimeActivation">
+      <soap:operation soapAction="urn:firstTimeActivation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="callApi">
+      <soap:operation soapAction="urn:callApi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="manGroupMemberQuit">
+      <soap:operation soapAction="urn:manGroupMemberQuit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="customerUpdate">
+      <soap:operation soapAction="urn:customerUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="oneOffDeduction">
+      <soap:operation soapAction="urn:oneOffDeduction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAppTXStatus">
+      <soap:operation soapAction="urn:getAppTXStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDealerBalance">
+      <soap:operation soapAction="urn:QueryDealerBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBalance">
+      <soap:operation soapAction="urn:getBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateMerchant">
+      <soap:operation soapAction="urn:ValidateMerchant" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="customAdd">
+      <soap:operation soapAction="urn:customAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="creditMe">
+      <soap:operation soapAction="urn:creditMe" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validateMaster">
+      <soap:operation soapAction="urn:validateMaster" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTopupTesting">
+      <soap:operation soapAction="urn:setTopupTesting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetMsisdnStatus">
+      <soap:operation soapAction="urn:GetMsisdnStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RechargeMsisdn">
+      <soap:operation soapAction="urn:RechargeMsisdn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="manGroupMemberAdd">
+      <soap:operation soapAction="urn:manGroupMemberAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDealerInfo">
+      <soap:operation soapAction="urn:QueryDealerInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setApptxService">
+      <soap:operation soapAction="urn:setApptxService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDealer">
+      <soap:operation soapAction="urn:CreateDealer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isJSONValid">
+      <soap:operation soapAction="urn:isJSONValid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVoucher">
+      <soap:operation soapAction="urn:getVoucher" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="customDelete">
+      <soap:operation soapAction="urn:customDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="sendSMS">
+      <soap:operation soapAction="urn:sendSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="topKad">
+      <soap:operation soapAction="urn:topKad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processDUGMember">
+      <soap:operation soapAction="urn:processDUGMember" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EasyRechargeSoap12Binding" type="ns:EasyRechargePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RechargeDealer">
+      <soap12:operation soapAction="urn:RechargeDealer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTransactionService">
+      <soap12:operation soapAction="urn:setTransactionService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="parseXMLtoJson">
+      <soap12:operation soapAction="urn:parseXMLtoJson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="topupVoucher">
+      <soap12:operation soapAction="urn:topupVoucher" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setPrintTesting">
+      <soap12:operation soapAction="urn:setPrintTesting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="validateVoucher">
+      <soap12:operation soapAction="urn:validateVoucher" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="firstTimeActivation">
+      <soap12:operation soapAction="urn:firstTimeActivation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="callApi">
+      <soap12:operation soapAction="urn:callApi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="manGroupMemberQuit">
+      <soap12:operation soapAction="urn:manGroupMemberQuit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="customerUpdate">
+      <soap12:operation soapAction="urn:customerUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="oneOffDeduction">
+      <soap12:operation soapAction="urn:oneOffDeduction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAppTXStatus">
+      <soap12:operation soapAction="urn:getAppTXStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDealerBalance">
+      <soap12:operation soapAction="urn:QueryDealerBalance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBalance">
+      <soap12:operation soapAction="urn:getBalance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateMerchant">
+      <soap12:operation soapAction="urn:ValidateMerchant" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="customAdd">
+      <soap12:operation soapAction="urn:customAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="creditMe">
+      <soap12:operation soapAction="urn:creditMe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validateMaster">
+      <soap12:operation soapAction="urn:validateMaster" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTopupTesting">
+      <soap12:operation soapAction="urn:setTopupTesting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetMsisdnStatus">
+      <soap12:operation soapAction="urn:GetMsisdnStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RechargeMsisdn">
+      <soap12:operation soapAction="urn:RechargeMsisdn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="manGroupMemberAdd">
+      <soap12:operation soapAction="urn:manGroupMemberAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDealerInfo">
+      <soap12:operation soapAction="urn:QueryDealerInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setApptxService">
+      <soap12:operation soapAction="urn:setApptxService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDealer">
+      <soap12:operation soapAction="urn:CreateDealer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isJSONValid">
+      <soap12:operation soapAction="urn:isJSONValid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVoucher">
+      <soap12:operation soapAction="urn:getVoucher" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="customDelete">
+      <soap12:operation soapAction="urn:customDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="sendSMS">
+      <soap12:operation soapAction="urn:sendSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="topKad">
+      <soap12:operation soapAction="urn:topKad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processDUGMember">
+      <soap12:operation soapAction="urn:processDUGMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EasyRechargeHttpBinding" type="ns:EasyRechargePortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="RechargeDealer">
+      <http:operation location="EasyRecharge/RechargeDealer" />
+      <wsdl:input>
+        <mime:content part="RechargeDealer" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="RechargeDealer" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTransactionService">
+      <http:operation location="EasyRecharge/setTransactionService" />
+      <wsdl:input>
+        <mime:content part="setTransactionService" type="text/xml" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="parseXMLtoJson">
+      <http:operation location="EasyRecharge/parseXMLtoJson" />
+      <wsdl:input>
+        <mime:content part="parseXMLtoJson" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parseXMLtoJson" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="topupVoucher">
+      <http:operation location="EasyRecharge/topupVoucher" />
+      <wsdl:input>
+        <mime:content part="topupVoucher" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="topupVoucher" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setPrintTesting">
+      <http:operation location="EasyRecharge/setPrintTesting" />
+      <wsdl:input>
+        <mime:content part="setPrintTesting" type="text/xml" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="validateVoucher">
+      <http:operation location="EasyRecharge/validateVoucher" />
+      <wsdl:input>
+        <mime:content part="validateVoucher" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="validateVoucher" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="firstTimeActivation">
+      <http:operation location="EasyRecharge/firstTimeActivation" />
+      <wsdl:input>
+        <mime:content part="firstTimeActivation" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="firstTimeActivation" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="callApi">
+      <http:operation location="EasyRecharge/callApi" />
+      <wsdl:input>
+        <mime:content part="callApi" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="callApi" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="manGroupMemberQuit">
+      <http:operation location="EasyRecharge/manGroupMemberQuit" />
+      <wsdl:input>
+        <mime:content part="manGroupMemberQuit" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="manGroupMemberQuit" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="customerUpdate">
+      <http:operation location="EasyRecharge/customerUpdate" />
+      <wsdl:input>
+        <mime:content part="customerUpdate" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="customerUpdate" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="oneOffDeduction">
+      <http:operation location="EasyRecharge/oneOffDeduction" />
+      <wsdl:input>
+        <mime:content part="oneOffDeduction" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="oneOffDeduction" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAppTXStatus">
+      <http:operation location="EasyRecharge/getAppTXStatus" />
+      <wsdl:input>
+        <mime:content part="getAppTXStatus" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getAppTXStatus" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDealerBalance">
+      <http:operation location="EasyRecharge/QueryDealerBalance" />
+      <wsdl:input>
+        <mime:content part="QueryDealerBalance" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="QueryDealerBalance" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBalance">
+      <http:operation location="EasyRecharge/getBalance" />
+      <wsdl:input>
+        <mime:content part="getBalance" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getBalance" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateMerchant">
+      <http:operation location="EasyRecharge/ValidateMerchant" />
+      <wsdl:input>
+        <mime:content part="ValidateMerchant" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="ValidateMerchant" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="customAdd">
+      <http:operation location="EasyRecharge/customAdd" />
+      <wsdl:input>
+        <mime:content part="customAdd" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="customAdd" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="creditMe">
+      <http:operation location="EasyRecharge/creditMe" />
+      <wsdl:input>
+        <mime:content part="creditMe" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="creditMe" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validateMaster">
+      <http:operation location="EasyRecharge/validateMaster" />
+      <wsdl:input>
+        <mime:content part="validateMaster" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="validateMaster" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTopupTesting">
+      <http:operation location="EasyRecharge/setTopupTesting" />
+      <wsdl:input>
+        <mime:content part="setTopupTesting" type="text/xml" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetMsisdnStatus">
+      <http:operation location="EasyRecharge/GetMsisdnStatus" />
+      <wsdl:input>
+        <mime:content part="GetMsisdnStatus" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="GetMsisdnStatus" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RechargeMsisdn">
+      <http:operation location="EasyRecharge/RechargeMsisdn" />
+      <wsdl:input>
+        <mime:content part="RechargeMsisdn" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="RechargeMsisdn" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="manGroupMemberAdd">
+      <http:operation location="EasyRecharge/manGroupMemberAdd" />
+      <wsdl:input>
+        <mime:content part="manGroupMemberAdd" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="manGroupMemberAdd" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDealerInfo">
+      <http:operation location="EasyRecharge/QueryDealerInfo" />
+      <wsdl:input>
+        <mime:content part="QueryDealerInfo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="QueryDealerInfo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setApptxService">
+      <http:operation location="EasyRecharge/setApptxService" />
+      <wsdl:input>
+        <mime:content part="setApptxService" type="text/xml" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDealer">
+      <http:operation location="EasyRecharge/CreateDealer" />
+      <wsdl:input>
+        <mime:content part="CreateDealer" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="CreateDealer" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isJSONValid">
+      <http:operation location="EasyRecharge/isJSONValid" />
+      <wsdl:input>
+        <mime:content part="isJSONValid" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="isJSONValid" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVoucher">
+      <http:operation location="EasyRecharge/getVoucher" />
+      <wsdl:input>
+        <mime:content part="getVoucher" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getVoucher" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="customDelete">
+      <http:operation location="EasyRecharge/customDelete" />
+      <wsdl:input>
+        <mime:content part="customDelete" type="text/xml" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="sendSMS">
+      <http:operation location="EasyRecharge/sendSMS" />
+      <wsdl:input>
+        <mime:content part="sendSMS" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="sendSMS" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="topKad">
+      <http:operation location="EasyRecharge/topKad" />
+      <wsdl:input>
+        <mime:content part="topKad" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="topKad" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processDUGMember">
+      <http:operation location="EasyRecharge/processDUGMember" />
+      <wsdl:input>
+        <mime:content part="processDUGMember" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="processDUGMember" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EasyRecharge">
+    <wsdl:port name="EasyRechargeHttpSoap11Endpoint" binding="ns:EasyRechargeSoap11Binding">
+      <soap:address location="http://172.16.160.131:8800/CommonOcs/services/EasyRecharge.EasyRechargeHttpSoap11Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="EasyRechargeHttpSoap12Endpoint" binding="ns:EasyRechargeSoap12Binding">
+      <soap12:address location="http://172.16.160.131:8800/CommonOcs/services/EasyRecharge.EasyRechargeHttpSoap12Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="EasyRechargeHttpEndpoint" binding="ns:EasyRechargeHttpBinding">
+      <http:address location="http://172.16.160.131:8800/CommonOcs/services/EasyRecharge.EasyRechargeHttpEndpoint/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

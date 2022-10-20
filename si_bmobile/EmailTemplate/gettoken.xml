@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<suprima>
+<thin-client>
+<vend type="response" format-by="client">
+<success>1</success>
+<token>
+<tk1>PNG POWER LIMITED</tk1>
+<tk4>263</tk4>
+<tk2>15/09/2014</tk2>
+<tk3>2:04:17 PM</tk3>
+<tk10>9207/206</tk10>
+<tk20>1891172</tk20>
+<tk23>Electricity Pre-paid</tk23>
+<tk30>MR BILLY LOWA</tk30>
+<tk31>60150983</tk31>
+<tk32>SEC 203 LOT 45</tk32>
+<tk22>Electricity Credit</tk22>
+<tk11>1</tk11>
+<tk60>2013459805131825</tk60>
+<tk14>130/283</tk14>
+<tk50>1.3</tk50>
+<tk40>K1.00</tk40>
+<tk90>Domestic</tk90>
+<tk41>0.91</tk41>
+<tk71>K0.70</tk71>
+<tk92>VAT</tk92>
+<tk43>0.09</tk43>
+<tk73>10</tk73>
+<tk70>K0.00</tk70>
+<tk12>BMOBILE</tk12>
+<tk15>C A S H P O W E R</tk15> 
+</token>
+<token-count>1</token-count>
+</vend>
+</thin-client>
+</suprima>
+
